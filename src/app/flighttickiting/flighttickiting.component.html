@@ -1,0 +1,49 @@
+<div class="container1">
+    <img class="bgimg" src="/assets/bgflight.jpg" />
+
+    <img class="bgicon" src="/assets/group.PNG"/>
+
+    <div class="container2">
+        <div class=" container4">
+            <div class="co1 ">
+                <div  style="width: 100%;" class="d-flex flex-row flex-wrap justify-content-between">
+                    <div  *ngFor="let item of items">
+                        <label class="checkbox-label">
+                            <input type="checkbox" onchange="handleCheckboxChange(this)">
+                            <span id="labelText">{{item}}</span>
+                          </label>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="co2"></div>
+    
+        </div>
+        
+        <div class="container3">
+            <div class="con1">
+                <img src="/assets/tayara.png"/>
+                <input type="text" placeholder="Where from?" class="input">
+            </div>
+            <div class="con1">
+                <img src="/assets/tayara.png"/>
+                <input type="text" placeholder="Where to?" class="input">
+            </div>
+            <div class="con1">
+                <img src="/assets/🦆 icon _calendar_.png"/>
+                <input type="text" placeholder="Mon, 19 Jun" class="input">
+            </div>
+            <div class="con1">
+                <img src="/assets/🦆 icon _calendar_.png"/>
+                <input type="text" placeholder="Mon, 29 Jun" class="input">
+            </div>
+        </div>
+
+        <div style="margin-top: 6%;" class="d-flex flex-row justify-content-center">
+            <button class="button1">Search</button>
+        </div>
+    </div>
+</div>
+
+
+    

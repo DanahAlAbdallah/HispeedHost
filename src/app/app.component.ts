@@ -13,9 +13,5 @@ export class AppComponent  implements OnInit {
     //  this.router.navigate(['/test']);
   }
   
-  public items:string[] =['Work', 'Permanent Resident', 'Student','Temporary Resident','Other']
 
-  public items2:string[] = ['Yes', 'No'];
-
-  public items3:string[] = ['excellent','Very good','Good', 'Moderate','Low','Very low'];
 }
