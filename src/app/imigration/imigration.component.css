@@ -17,14 +17,14 @@
     max-height: max-content;
   }
   
-  .flex-item-left { 
-    flex-basis: 59%;
+  .flex-item-left {
+    width: 59%;
   }
   
   .flex-item-right {
-    flex-basis: 39%;
-  
+    width: 39%;
   }
+  
   
   
   .input1 {

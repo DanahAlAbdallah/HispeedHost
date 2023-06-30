@@ -4,17 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlighttickitingComponent } from './flighttickiting/flighttickiting.component';
+import { HttpClientModule } from '@angular/common/http';
 import { ImigrationComponent } from './imigration/imigration.component';
+import { FormsModule } from '@angular/forms';
+import { FlightsComponent } from './flights/flights.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlighttickitingComponent,
-    ImigrationComponent
+    ImigrationComponent,
+    FlightsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

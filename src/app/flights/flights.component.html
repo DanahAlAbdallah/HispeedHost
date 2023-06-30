@@ -1,0 +1,8 @@
+<div>
+    <h1>Flight Data</h1>
+    <ul>
+      <li *ngFor="let flight of flights">{{ flight }}</li>
+    </ul>
+    <button (click)="loadFlights()">Load Flights</button>
+  </div>
+  
