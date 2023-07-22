@@ -27,5 +27,16 @@ export class ImmigrationData {
       this.isCompleteEngishTest = false;
       this.doYouHaveOffer = false;
     }
+
+
+    [element: string]: any;
+
+    get(element: string) {
+        return this[element];
+    }
   }
   
+
+  export class ImmigrationResponse{
+    response:string = "";
+  }

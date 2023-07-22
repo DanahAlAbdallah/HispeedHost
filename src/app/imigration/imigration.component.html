@@ -5,11 +5,46 @@
     </div>
   
   
+    <!-- Modal -->
+<!-- Modal -->
+<div
+class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}" role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Immigration Sent</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <ng-container *ngIf="isResponseReceived">
+          <p>{{ response.response }}</p> <!-- Display the response message here -->
+        </ng-container>
+        <ng-container *ngIf="!isResponseReceived">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-custom" role="progressbar" [style.width.%]="100"></div>
+          </div>
+          <p>Loading...</p> <!-- Display a loading message or spinner here -->
+        </ng-container>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button 
+         type="button" class="btn  buttonCloseModal" [disabled]="!isResponseReceived"
+          (click)="reset()" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <div class="flex-container2">
   
             <div class=" flex-item-left">
               <div class="d-flex flex-column">
-                <input  [(ngModel)]="imigration.FullName" placeholder="Full Name" class="input1" type="text" required>
+                <input  [(ngModel)]="imigration.FullName" placeholder="Full Name" class="input1" type="text" required (keyup)="checkFullNameIsEmpty()">
+                <div class=" mb-2" *ngIf="isFullNameEmpty">
+                  <p class="text-danger">* FullName required</p>
+                </div>
                 <div class="d-flex flex-row">
                 <div class=" c11">
                   <div class="flex-container3 ">
@@ -20,8 +55,10 @@
                     </div>
                       
                       <div class=" c1">
-                        <select [(ngModel)]="imigration.passportCountry" class="select1" id="">
-        
+                        <select [(ngModel)]="imigration.passportCountry" class="select1 ps-3" id="">
+                            <option *ngFor="let code of passportCountryCode">
+                              {{code.cca2}}
+                            </option>
                         </select>
                         <span class="select-icon"><img src="/assets/polygon_1.PNG"/></span> 
                       </div>
@@ -38,7 +75,10 @@
   
             <div class="flex-item-right">
               <div class="d-flex flex-column">
-                <input [(ngModel)]="imigration.dateofbirth" placeholder="Date of Birth" class="input2" type="text">
+                <input [(ngModel)]="dateOfBirth" placeholder="Date of Birth" class="input2 pe-3" type="date" (change)="checkDOBIsEmpty()">
+                <div class=" mb-2 " *ngIf="isDOBEmpty">
+                  <p class="text-danger">* DateOfBirth required, Or Your Age Should be At least 18 years </p>
+                </div>
                 <div class=" flex-container4">
                   <div class=" c2">
   
@@ -48,8 +88,10 @@
                   </div>
   
                     <div class= "c2">
-                      <select [(ngModel)]="imigration.CurrentResidence" class="select2" id="">
-                  
+                      <select [(ngModel)]="imigration.CurrentResidence" class="select2 ps-3" id="">
+                        <option *ngFor="let currentResidence of currentResidenceCountries">
+                          {{currentResidence.name.common}}
+                        </option>
                       </select>
                       <span class="select-icon"><img src="/assets/polygon_1.PNG"/></span>
                     </div>
@@ -97,7 +139,10 @@
           </div>
   
           <div class="container5">
-            <input [(ngModel)]="imigration.explainVisaStatus" placeholder="Explain" type="text" class="input3"/>
+            <input [(ngModel)]="imigration.explainVisaStatus" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()"/>
+            <div class=" mb-2" *ngIf="isEVSEmpty">
+              <p class="text-danger">* ExplainVisaStatus required</p>
+            </div>
           </div>
         
     </div>
@@ -125,7 +170,10 @@
       
   
       <div class="container5">
-        <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3"/>
+        <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()"/>
+        <div class=" mb-2" *ngIf="isLTOQEmpty">
+          <p class="text-danger">* ListTypeOfQualification required</p>
+        </div>
       </div>
   
       
@@ -204,14 +252,20 @@
 
   <div  style="margin-bottom: 3%;"  class=""></div>
 
-  <div class=" mb-2" *ngIf="isSomethingEmpty">
+  <!-- <div class=" mb-2" *ngIf="isSomethingEmpty">
     <p class="text-danger">There fields is Empty, Please Check!</p>
-  </div>
+  </div> -->
+
 
   <div class="d-flex flex-column align-items-center mb-5">
-    <button (click)="submit()" class="button7">
+    <button *ngIf="disablebuttonModal" (click)="submit()" class="button7"  type="button">
+      Save
+  </button>
+    <button *ngIf="!disablebuttonModal" (click)="submit()" class="button7"  type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Save
     </button>
   </div>
-  </div>
+
+  
+</div>
   

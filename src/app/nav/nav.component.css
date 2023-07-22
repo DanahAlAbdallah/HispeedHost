@@ -1,0 +1,19 @@
+.navbar-logo {
+    margin-right: auto;
+  }
+
+
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+width: 60%;
+  }
+
+  .navbar-nav .nav-item {
+    margin-left: 10%;
+  }
+
+  .navbar-nav .nav-item:first-child {
+    margin-left: 0;
+  }

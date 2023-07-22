@@ -8,13 +8,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { ImigrationComponent } from './imigration/imigration.component';
 import { FormsModule } from '@angular/forms';
 import { FlightsComponent } from './flights/flights.component';
+import { SearchComponent } from './search/search.component';
+import { NavComponent } from './nav/nav.component';
+import { AftersearchComponent } from './aftersearch/aftersearch.component';
+import { AftersearchitemComponent } from './aftersearchitem/aftersearchitem.component';
+import { ServicesComponent } from './services/services.component';
+import { ServiceComponent } from './service/service.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlighttickitingComponent,
     ImigrationComponent,
-    FlightsComponent
+    FlightsComponent,
+    SearchComponent,
+    NavComponent,
+    AftersearchComponent,
+    AftersearchitemComponent,
+    ServicesComponent,
+    ServiceComponent
   ],
   imports: [
     BrowserModule,

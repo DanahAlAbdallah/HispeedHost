@@ -1,0 +1,17 @@
+<div class="aftersearch">
+
+    <app-nav></app-nav>
+    
+
+<div style="margin-top: 10%;"></div>
+    <app-aftersearchitem *ngFor="let af of Items" 
+    [name]="af.name" 
+    [age]="af.age" 
+    [location]="af.location" 
+    [phonenumber]="af.phonenumber"
+    [email]="af.email"
+    >
+
+    </app-aftersearchitem>
+
+</div>

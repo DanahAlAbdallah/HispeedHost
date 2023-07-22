@@ -145,9 +145,13 @@ bottom: 86.91%;
 }
 
 .button1:hover {
-    background: #E3B900; /* Dark yellow color for hover effect */
-  }
-
+    background: #E3B900; 
+}
+@media (max-width:1600px) {
+    .checkbox-label{
+        margin-bottom: 2%;
+    }
+}
   @media (min-width:1200px) {
     .container3 .co{
         width: 100%;
