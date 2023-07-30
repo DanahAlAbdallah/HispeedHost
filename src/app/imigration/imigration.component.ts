@@ -169,7 +169,10 @@ export class ImigrationComponent implements OnInit {
 
       this.service.addImigration(this.imigration).subscribe({
         next: (v:any) => {this.response = v; console.log(v)},
-        error: (e) => {this.response = e; console.log(e)},
+        error: (e) => {
+            this.response.response = e.error;
+            console.log(e.error)
+        },
         complete: () =>{
           this.isResponseReceived = true;
         } 

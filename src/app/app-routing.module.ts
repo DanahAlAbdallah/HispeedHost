@@ -7,6 +7,7 @@ import { AftersearchComponent } from './aftersearch/aftersearch.component';
 import { ServicesComponent } from './services/services.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/tickiting',pathMatch: 'full'},
   { path: 'tickiting', component: FlighttickitingComponent },
   { path: 'imigration', component: ImigrationComponent },
   { path: 'search', component: SearchComponent },

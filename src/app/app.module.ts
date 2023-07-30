@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlighttickitingComponent } from './flighttickiting/flighttickiting.component';
@@ -14,6 +14,11 @@ import { AftersearchComponent } from './aftersearch/aftersearch.component';
 import { AftersearchitemComponent } from './aftersearchitem/aftersearchitem.component';
 import { ServicesComponent } from './services/services.component';
 import { ServiceComponent } from './service/service.component';
+import { SearchflightResultsComponent } from './searchflight-results/searchflight-results.component';
+import { SearchflightBoxComponent } from './searchflight-box/searchflight-box.component';
+import { ShimmerComponent } from './shimmer/shimmer.component';
+import { FlightComponent } from './flight/flight.component';
+import { InputflightsinfoComponent } from './inputflightsinfo/inputflightsinfo.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +31,19 @@ import { ServiceComponent } from './service/service.component';
     AftersearchComponent,
     AftersearchitemComponent,
     ServicesComponent,
-    ServiceComponent
+    ServiceComponent,
+    SearchflightResultsComponent,
+    SearchflightBoxComponent,
+    ShimmerComponent,
+    FlightComponent,
+    InputflightsinfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

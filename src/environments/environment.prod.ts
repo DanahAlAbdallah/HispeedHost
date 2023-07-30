@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
-  apisBaseUrlNews: "https://newsapi.org/v2/top-headlines",
-  apisBaseUrlWorldCup: "https://world-cup-api-project.herokuapp.com",
-  token: "",
-  apiLocalBaseUrl: "http://localhost:5134"
+
+  apiLocalBaseUrl: "http://localhost:8080",
+  apiPassportCountryCodeBaseUrl: "https://visa-requirements4.p.rapidapi.com",
+  currentResidenceBaseUrl: "https://restcountries.com/v3.1",
+  apiFlightsBaseUrl: "https://booking-com13.p.rapidapi.com/flights"
 };

@@ -16,6 +16,7 @@ export class ImigrationService {
 
   constructor(private httpClient:HttpClient) { }
 
+  error:string = "";
   public addImigration(imigration: ImmigrationData): Observable<ImmigrationResponse> {
     return this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/imigration/add', imigration)
       .pipe(
@@ -30,6 +31,9 @@ export class ImigrationService {
     } else {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
+        // if(error.status === 500){
+        //   this.error = "Internal Server Error , please try again later";
+        // }
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
