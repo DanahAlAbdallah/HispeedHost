@@ -1,8 +1,8 @@
-<div>
-    <h1>Flight Data</h1>
-    <ul>
-      <li *ngFor="let flight of flights">{{ flight }}</li>
-    </ul>
-    <!-- <button (click)="loadFlights()">Load Flights</button> -->
-  </div>
+<div class="d-flex flex-column flex-wrap ">
+
+    <app-flight *ngFor="let flight of flights"> 
+      
+    </app-flight>
+  
+</div>
   

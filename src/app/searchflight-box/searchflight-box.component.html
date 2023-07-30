@@ -1,0 +1,49 @@
+<div [ngClass]="{'container2': hideBack === true, 'container2-aftersearch': hideBack === false}" class="container2">
+    <div class=" container4">
+        <img  *ngIf="!hideBack" class="bgicon me-5" src="/assets/group.PNG"/>
+
+        <div [ngClass]="{' co1-aftersearch': hideBack === false , 'co1': hideBack=== true}">
+            <div  style="width: 100%;" class="d-flex flex-row flex-wrap justify-content-between">
+                <div  *ngFor="let item of items">
+                    <label class="checkbox-label">
+                        <input type="checkbox" onchange="handleCheckboxChange(this)">
+                        <span id="labelText">{{item}}</span>
+                      </label>
+                    </div>
+            </div>
+        </div>
+        
+        <div [ngClass]="{'co2-aftersearch': hideBack === false , 'co2': hideBack=== true}" ></div>
+
+    </div>
+    
+    <div class=" container3">
+
+        <div [ngClass]="{'con1-aftersearch': !hideBack, 'con1': hideBack}"  >
+            <img src="/assets/tayara.png"/>
+            <input type="text" placeholder="Where from?" [(ngModel)]="flight.location_from" class="input">
+        </div>
+        <div [ngClass]="{'con1-aftersearch': !hideBack, 'con1': hideBack}"  >
+            <img src="/assets/tayara.png"/>
+            <input type="text" placeholder="Where to?"  [(ngModel)]="flight.location_to" class="input">
+        </div>
+        <div [ngClass]="{'con1-aftersearch': !hideBack, 'con1': hideBack}" >
+            <img src="/assets/🦆 icon _calendar_.png"/>
+            <input type="text" placeholder="Mon, 19 Jun"  [(ngModel)]="flight.departure_date" class="input">
+        </div>
+        <div [ngClass]="{'con1-aftersearch': !hideBack, 'con1': hideBack}" >
+            <img src="/assets/🦆 icon _calendar_.png"/>
+            <input type="text" placeholder="Mon, 29 Jun"  [(ngModel)]="flight.return_date" class="input">
+        </div>
+
+        <div *ngIf="!hideBack" class="con1">
+            <button class="button1" (click)="search()">Search</button>
+        </div>
+    </div>
+
+    <div *ngIf="hideBack" style="margin-top: 6%;" class="d-flex flex-row justify-content-center">
+        <button class="button1" (click)="search()">Search</button>
+    </div>
+
+
+</div>

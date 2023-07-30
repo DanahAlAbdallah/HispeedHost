@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng deploy  --base-href=/hispeedhosting/"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +28,7 @@
     "rxjs": "~7.8.0",
     "socket.io-client": "^4.7.1",
     "sockjs-client": "^1.6.1",
+    "ssri": "^10.0.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
@@ -35,6 +37,7 @@
     "@angular/cli": "~15.2.4",
     "@angular/compiler-cli": "^15.2.0",
     "@types/jasmine": "~4.3.0",
+    "angular-cli-ghpages": "^1.0.6",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
