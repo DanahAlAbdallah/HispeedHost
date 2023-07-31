@@ -1,7 +1,7 @@
 <div [ngClass]="{'container1-aftersearch':hideBack === false,'container1': hideBack}">
-    <img *ngIf="hideBack" class="bgimg" src="/assets/bgflight.jpg" />
+    <img *ngIf="hideBack" class="bgimg" src="./assets/bgflight.jpg" />
 
-    <img  *ngIf="hideBack" class="bgicon" src="/assets/group.PNG"/>
+    <img  *ngIf="hideBack" class="bgicon" src="./assets/group.PNG"/>
 
     <app-searchflight-box 
         (flightsEvent)="flightsFun($event)"
