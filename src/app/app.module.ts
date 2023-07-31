@@ -19,6 +19,7 @@ import { SearchflightBoxComponent } from './searchflight-box/searchflight-box.co
 import { ShimmerComponent } from './shimmer/shimmer.component';
 import { FlightComponent } from './flight/flight.component';
 import { InputflightsinfoComponent } from './inputflightsinfo/inputflightsinfo.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { InputflightsinfoComponent } from './inputflightsinfo/inputflightsinfo.c
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
