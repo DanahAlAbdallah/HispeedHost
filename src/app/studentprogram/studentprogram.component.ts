@@ -1,25 +1,30 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ImmigrationData, ImmigrationResponse } from '../classes/Immigration';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImigrationService } from '../classes/imigration.service';
+import { ImmigrationData } from '../classes/Immigration';
+import { Student } from '../classes/student';
+import { StudentService } from '../classes/student.service';
 
 @Component({
-  selector: 'app-imigration',
-  templateUrl: './imigration.component.html',
-  styleUrls: ['./imigration.component.css']
+  selector: 'app-studentprogram',
+  templateUrl: './studentprogram.component.html',
+  styleUrls: ['./studentprogram.component.css']
 })
-export class ImigrationComponent implements OnInit {
-
-  public imigration:ImmigrationData;
+export class StudentprogramComponent {
+  public student:Student;
 
   public isSomethingEmpty:boolean = false;
   public isFullNameEmpty:boolean = false;
   public isDOBEmpty = false;
   public isEVSEmpty = false;
   public isLTOQEmpty = false;
-  public isProfessionEmpty = false;
-  public isYearsOfExpEmpty = false;
-  public isEducationEmpty = false;
+  public isPassportCountryEmpty = false;
+  public isCurrentResidenceEmpty = false;
+  public isVisaStatusEmpty = false;
+  public isExamEmpty = false;
+  public isDegreeEmpty = false;
+  public isDesiredCountryEmpty = false;
+
   public isFormSent:boolean = false;
   public response!:any;
   public isShowModal = false;
@@ -33,9 +38,10 @@ export class ImigrationComponent implements OnInit {
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
-    private service:ImigrationService
+    private service:StudentService,
+    private serviceImmi:ImigrationService
     ){
-      this.imigration = new ImmigrationData();
+      this.student = new Student();
   }
   ngOnInit(): void {
     //this.getPassportCountryCode();
@@ -51,6 +57,13 @@ export class ImigrationComponent implements OnInit {
     { label: 'Temporary Resident', value: 'Temporary Resident', checked: false },
     { label: 'Other', value: 'Other', checked: false },
 
+  ];
+
+  public exams = [
+    { label: 'IELTS', value: 'IELTS', checked: false },
+    { label: 'TOEFL', value: 'TOEFL', checked: false },
+    { label: 'TOEIC ', value: 'TOEIC ', checked: false },
+    { label: 'CLEPIP', value: 'CLEPIP', checked: false }
   ];
 
   public items2: { label: string, checked: boolean }[] = [
@@ -80,68 +93,40 @@ export class ImigrationComponent implements OnInit {
     { label: 'Very low', checked: false }
   ];
 
-
-  public handleCheckboxChange(selectedItem: { label: string, checked: boolean }): void {
-    this.items3.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        this.imigration.englishProficiency = item.label;
+  public handleCheckboxChangeExam(selectedItem: { label: string, value:string,checked: boolean }): void {
+    this.exams.forEach(exam => {
+      exam.checked = exam === selectedItem; 
+      if(exam.checked){
+        this.student.exam = exam.label;
+        this.checkExamIsEmpty();
       }
     });
   }
+
+
   
  
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
-        this.imigration.visaStatus = item.value;
+        this.student.visaStatus = item.value;
+        this.checkVisaStatusIsEmpty();
       }
     });
   }
   
 
-  public handleCheckboxChange2(selectedItem: { label: string, checked: boolean }): void {
-    this.items2.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        if(item.label == "Yes"){
-          this.imigration.holdQualification = true;
-        }
-        else{
-          this.imigration.holdQualification = false;
-        }
-      }
-    });
-  }
-
-
-  public handleCheckboxChange3(selectedItem: { label: string, checked: boolean }): void {
-    this.items21.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        if(item.label == "Yes"){
-          this.imigration.isCompleteEngishTest = true;
-          console.log(this.imigration.isCompleteEngishTest)
-        }
-        else{
-          this.imigration.isCompleteEngishTest = false;
-          console.log(item.label)
-
-        }
-      }
-    });
-  }
 
   public handleCheckboxChange4(selectedItem: { label: string, checked: boolean }): void {
     this.items22.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
         if(item.label == "Yes"){
-          this.imigration.doYouHaveOffer = true;
+          this.student.doYouhaveScholarship = true;
         }
         else{
-          this.imigration.doYouHaveOffer = false;
+          this.student.doYouhaveScholarship = false;
         }
       }
     });
@@ -154,26 +139,26 @@ export class ImigrationComponent implements OnInit {
     this.checkingEmpty();
 
 
-    if (!this.imigration.FullName ||
-      !this.imigration.dateofbirth ||
-      !this.imigration.explainVisaStatus ||
-      !this.imigration.listTypeOfQualification ||
-      !this.imigration.visaStatus||
-      !this.imigration.englishProficiency||
-      !this.imigration.education ||
-      !this.imigration.profession ||
-      !this.imigration.yearsOfExperience) {
+    if (!this.student.fullName ||
+      !this.student.dateOfBirth ||
+      !this.student.exam ||
+      !this.student.listOfQualification ||
+      !this.student.currentResidence||
+      !this.student.passportCountry || 
+      !this.student.listOfQualification ||
+      !this.student.explain||
+      !this.student.degree) {
       this.isSomethingEmpty = true;
       this.isShowModal = false; 
       return;
   }
 
 
-  console.log(this.imigration);
+  console.log(this.student);
 
   this.isResponseReceived = false;
 
-      this.service.addImigration(this.imigration).subscribe({
+      this.service.addStudent(this.student).subscribe({
         next: (v:any) => {
           if(v.data.response != null){
             this.response = v.data.response; 
@@ -214,34 +199,54 @@ export class ImigrationComponent implements OnInit {
         }
     };
     
-    const elements = ["FullName", "dateofbirth", "explainVisaStatus", "listTypeOfQualification", "visaStatus", "englishProficiency","profession", "yearsOfExperience","education"];
+
+    const elements = ["fullName", "dateOfBirth", "passportCountry", "currentResidence", "visaStatus","explain", "listOfQualification","exam","degree","desiredCountry"];
     
     let isSomethingEmpty = false;
     
     for (const element of elements) {
-        const value = nullSafeValue(this.imigration.get(element));
+        const value = nullSafeValue(this.student.get(element));
         if (value === "EMPTY") {
             switch (element) {
-                case "FullName":
+                case "fullName":
                     this.isFullNameEmpty = true;
+
                     break;
-                case "dateofbirth":
+                case "dateOfBirth":
                     this.isDOBEmpty = true;
+
                     break;
-                case "explainVisaStatus":
+                case "explain":
                     this.isEVSEmpty = true;
+
                     break;
-                case "listTypeOfQualification":
+                case "listOfQualification":
                     this.isLTOQEmpty = true;
+
                     break;
-                case "profession":
-                  this.isProfessionEmpty = true;
+                case "passportCountry":
+                  this.isPassportCountryEmpty = true;
+
                   break;
-                case "yearsOfExperience":
-                  this.isYearsOfExpEmpty = true;
+                case "currentResidence":
+                  this.isCurrentResidenceEmpty = true;
+
                   break;
-                case "education":
-                  this.isEducationEmpty = true;
+                case "visaStatus":
+                  this.isVisaStatusEmpty = true;
+
+                  break;
+                case "exam":
+                  this.isExamEmpty = true;
+
+                  break;
+                case "degree":
+                  this.isDegreeEmpty = true;
+
+                  break;
+                case "desiredCountry":
+                  this.isDesiredCountryEmpty = true;
+
                   break;
             }
         }
@@ -252,62 +257,71 @@ export class ImigrationComponent implements OnInit {
 
 
   public checkFullNameIsEmpty(){
-     this.isFullNameEmpty = this.imigration.FullName.trim().length === 0;
+     this.isFullNameEmpty = this.student.fullName.trim().length === 0;
      this.buttonDisable();
   }
 
   public checkDOBIsEmpty(){
     const year = new Date().getFullYear() - parseInt(this.dateOfBirth.toLocaleString('en-US', { year: 'numeric' }),10);
     this.isDOBEmpty = this.dateOfBirth.toLocaleString().trim().length === 0 || year < 18;
-    this.imigration.dateofbirth = this.dateOfBirth.toLocaleString();
+    this.student.dateOfBirth = this.dateOfBirth.toLocaleString();
 
     this.buttonDisable();
 
  }
 
  public checkExplainIsEmpty(){
-  this.isEVSEmpty = this.imigration.explainVisaStatus.trim().length === 0;
+  this.isEVSEmpty = this.student.explain.trim().length === 0;
 
   this.buttonDisable();
 
 }
 
 public checkLTQIsEmpty(){
-  this.isLTOQEmpty = this.imigration.listTypeOfQualification.trim().length === 0;
+  this.isLTOQEmpty = this.student.listOfQualification.trim().length === 0;
 
   this.buttonDisable();
 
 }
 
-public checkProfessionIsEmpty(){
-  this.isProfessionEmpty = this.imigration.profession.trim().length === 0;
+public checkCurrentResidenceIsEmpty(){
+  this.isCurrentResidenceEmpty = this.student.currentResidence.trim().length === 0;
 
   this.buttonDisable();
 
 }
 
-public checkYearsOFEIsEmpty(){
-  this.isYearsOfExpEmpty = this.imigration.yearsOfExperience.trim().length === 0;
+public checkDegreeIsEmpty(){
+  this.isDegreeEmpty = this.student.degree.trim().length === 0;
 
   this.buttonDisable();
 }
 
-public checkEducatioIsEmpty(){
-  this.isEducationEmpty = this.imigration.education.trim().length === 0;
+public checkExamIsEmpty(){
+  this.isExamEmpty = this.student.exam.trim().length === 0;
 
   this.buttonDisable();
-
 }
-  // public getPassportCountryCode(){
-  //   this.service.loadPassportCountryCode().subscribe({
-  //       next: (v:any) => {this.passportCountryCode = v.countries;},
-  //       error: (e) => {console.log(e)},
-  //       complete: () =>{console.log("is complete")}
-  //   });
-  // }
+
+public checkPassportCountryIsEmpty(){
+  this.isPassportCountryEmpty = this.student.passportCountry.trim().length === 0;
+
+  this.buttonDisable();
+}
+public checkVisaStatusIsEmpty(){
+  this.isVisaStatusEmpty = this.student.visaStatus.trim().length === 0;
+
+  this.buttonDisable();
+}
+
+public checkDesiredCountryIsEmpty(){
+  this.isDesiredCountryEmpty = this.student.desiredCountry.trim().length === 0;
+
+  this.buttonDisable();
+}
 
   public getCurrentResidenceCountries(){
-    this.service.loadCurrentResidenceCountries().subscribe({
+    this.serviceImmi.loadCurrentResidenceCountries().subscribe({
         next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
         error: (e) => {console.log(e)},
         complete: () =>{console.log("is complete")}
@@ -315,10 +329,16 @@ public checkEducatioIsEmpty(){
   }
 
   public buttonDisable(){
-    if(this.imigration.FullName.length == 0 || 
-      this.imigration.dateofbirth.length == 0 ||
-      this.imigration.explainVisaStatus.length == 0 ||
-      this.imigration.listTypeOfQualification.length == 0 ){
+    if(this.student.fullName.length == 0 || 
+      this.student.dateOfBirth.length == 0 ||
+      this.student.explain.length == 0 ||
+      this.student.listOfQualification.length == 0 ||
+      this.student.exam.length == 0 ||
+      this.student.degree.length == 0 ||
+      this.student.desiredCountry.length == 0 ||
+      this.student.passportCountry.length == 0 ||
+      this.student.currentResidence.length == 0 ||
+      this.student.visaStatus.length == 0){
         this.disablebuttonModal = true;
       }
       else{

@@ -14,6 +14,7 @@ html, body {
     padding-top: 3%;
     padding-left: 8%;
     padding-right: 8%;
+    padding-bottom: 3%;
 
     height: 100%;
 
@@ -22,7 +23,6 @@ html, body {
 }
 
 .container{
-    margin-top: 2%;
     
     display: flex;
     flex-direction: row;

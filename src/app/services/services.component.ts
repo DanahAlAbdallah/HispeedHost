@@ -7,8 +7,6 @@ import { Component } from '@angular/core';
 })
 export class ServicesComponent {
 
-  public title1 = "IMIGRATION PROGRAM";
-  public link1 = "/imigration";
-  public title2 = "BOOK A FLIGHT";
-  public link2 = "/tickiting";
+  public titles:any[] = ["IMIGRATION PROGRAM", "Tourism Visa", "Student Program", "Find an Emlpoyee"];
+  public links:any[] = ["/imigration","/tourism","/student","/find"]
 }

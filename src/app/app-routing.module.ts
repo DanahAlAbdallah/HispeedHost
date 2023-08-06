@@ -5,6 +5,7 @@ import { ImigrationComponent } from './imigration/imigration.component';
 import { SearchComponent } from './search/search.component';
 import { AftersearchComponent } from './aftersearch/aftersearch.component';
 import { ServicesComponent } from './services/services.component';
+import { StudentprogramComponent } from './studentprogram/studentprogram.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/services',pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'imigration', component: ImigrationComponent },
   { path: 'search', component: SearchComponent },
   {path:'aftersearch', component: AftersearchComponent},
-  {path:'services' , component:ServicesComponent}
+  {path:'services' , component:ServicesComponent},
+  {path:'student', component:StudentprogramComponent}
 ];
 
 @NgModule({

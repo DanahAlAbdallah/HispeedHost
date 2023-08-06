@@ -14,6 +14,27 @@ width: 60%;
     margin-left: 10%;
   }
 
+  .navbar-nav .nav-item a {
+    color: #000;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   .navbar-nav .nav-item:first-child {
     margin-left: 0;
   }
+
+
+
+  
+@media (max-width:500px) {
+    
+    .navbar-brand img {
+      width: 50%;
+      height: 70%;
+    }
+  
+}

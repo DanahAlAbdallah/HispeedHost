@@ -11,6 +11,10 @@ export class ImmigrationData {
     englishProficiency: string;
     isCompleteEngishTest: boolean;
     doYouHaveOffer: boolean;
+    profession:string;
+    yearsOfExperience:string;
+    education:string;
+    desiredCountry:string;
 
   
     constructor() {
@@ -26,6 +30,10 @@ export class ImmigrationData {
       this.englishProficiency = '';
       this.isCompleteEngishTest = false;
       this.doYouHaveOffer = false;
+      this.profession = "",
+      this.yearsOfExperience = "";
+      this.education = "";
+      this.desiredCountry = "";
     }
 
 

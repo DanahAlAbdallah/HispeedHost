@@ -20,6 +20,9 @@ import { ShimmerComponent } from './shimmer/shimmer.component';
 import { FlightComponent } from './flight/flight.component';
 import { InputflightsinfoComponent } from './inputflightsinfo/inputflightsinfo.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { FormDataSharedComponent } from './form-data-shared/form-data-shared.component';
+import { TorrismVisaComponent } from './torrism-visa/torrism-visa.component';
+import { StudentprogramComponent } from './studentprogram/studentprogram.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     SearchflightBoxComponent,
     ShimmerComponent,
     FlightComponent,
-    InputflightsinfoComponent
+    InputflightsinfoComponent,
+    FormDataSharedComponent,
+    TorrismVisaComponent,
+    StudentprogramComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ImigrationComponent } from '../imigration/imigration.component';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { ImmigrationData, ImmigrationResponse } from './Immigration';
 import { environment } from 'src/environments/environment';
@@ -16,13 +15,15 @@ export class ImigrationService {
 
   constructor(private httpClient:HttpClient) { }
 
-  error:string = "";
   public addImigration(imigration: ImmigrationData): Observable<ImmigrationResponse> {
-    return this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/imigration/add', imigration)
-      .pipe(
+
+    const observable = this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/imigration/add', imigration);
+    return observable.pipe(
         retry(3),
-        catchError(this.handleError)
-      );
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => new Error('Something bad happened; please try again later.'));
+        })
+    );
   } 
 
   private handleError(error: HttpErrorResponse) {
@@ -31,9 +32,6 @@ export class ImigrationService {
     } else {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
-        // if(error.status === 500){
-        //   this.error = "Internal Server Error , please try again later";
-        // }
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }

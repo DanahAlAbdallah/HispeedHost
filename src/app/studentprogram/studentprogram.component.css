@@ -232,7 +232,7 @@
     line-height: 24px;
     color: #292D32;
     border: none 16px;
-    margin-top: 11px;
+    margin-top: 20px;
   }
   .container5{
     display: flex;
@@ -258,7 +258,6 @@
     padding-left: 2%;
   }
   .checkboxes1 {
-    margin-top: 1%;
     width: 15%;
   }
   .button4 {
@@ -362,7 +361,7 @@
 
   .container6{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;	
     flex-wrap: wrap;
@@ -370,12 +369,17 @@
   }
 
   .container7{
-    width: 26%;
+    width: 70%;
   }
 
   .container8{
     width: 50%;
+    margin-bottom: 3%;
+  }
 
+  .container9{
+    margin-top: 4%;
+    width: 20%;
   }
 
   .input4{
@@ -429,11 +433,6 @@
     font-size: 1rem;
   }
 
-  @media (min-width: 800px) {
-    .container8{
-      justify-content: end;
-    }
-  }
   @media (max-width: 800px) {
     .flex-item-right, .flex-item-left  {
       flex: 100%;
@@ -492,7 +491,13 @@
       width: 50%;
     }
 
-  
+    .container9{
+        width: 100%;
+    }
+
+    .blabla{
+        margin-bottom: 3%;
+    }
   }
 
   @media (max-width:500px) {
