@@ -13,6 +13,9 @@ export class AftersearchitemComponent {
   @Input() location:string = "";
   @Input() phonenumber = "";
   @Input() email:string = "";
+  @Input() contactlink:string = "mailto:pr.alimrad@outlook.com";
+  @Input() resumelink:string = "";
+  @Input() isEmpty: boolean = false;
 
   
   constructor(){

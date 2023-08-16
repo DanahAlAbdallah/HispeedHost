@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ImigrationService } from '../classes/imigration.service';
 import { ImmigrationData } from '../classes/Immigration';
 import { Student } from '../classes/student';
@@ -42,6 +42,14 @@ export class StudentprogramComponent {
     private serviceImmi:ImigrationService
     ){
       this.student = new Student();
+
+
+          this.router.events.subscribe((event) => {
+              if (event instanceof NavigationEnd){
+                 //scroll to top
+                 window.scrollTo(0,0);
+              }
+       });
   }
   ngOnInit(): void {
     //this.getPassportCountryCode();

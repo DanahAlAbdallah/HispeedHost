@@ -1,17 +1,30 @@
-<div class="aftersearch">
+<div class="aftersearch" >
 
-    <app-nav></app-nav>
-    
 
-<div style="margin-top: 10%;"></div>
-    <app-aftersearchitem *ngFor="let af of Items" 
-    [name]="af.name" 
+<div style="margin-top: 10%;" >
+
+</div>
+<div id="searchResults"  *ngIf="!isEmpty">
+    <app-aftersearchitem  *ngFor="let af of Items" 
+    [name]="af.full_name" 
     [age]="af.age" 
-    [location]="af.location" 
-    [phonenumber]="af.phonenumber"
-    [email]="af.email"
+    [location]="af.current_residence" 
+    [contactlink]="af.contactlink"
+    [resumelink]="af.resumelink"
+    [isEmpty]="isEmpty"
     >
 
     </app-aftersearchitem>
+</div>
+
+<div *ngIf="isEmpty">
+
+    <p class="no-data-message">{{message}}</p>
+</div>
+
+
+<div style="margin-bottom: 10%;" >
+
+
 
 </div>

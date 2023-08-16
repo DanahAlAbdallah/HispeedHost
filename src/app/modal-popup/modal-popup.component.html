@@ -1,0 +1,29 @@
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{title}}</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <ng-container *ngIf="isResponseReceived">
+          <p>{{ response }}</p> <!-- Display the response message here -->
+        </ng-container>
+        <ng-container *ngIf="!isResponseReceived">
+          <div style="width: 100%;" class="d-flex align-items-center justify-content-center flex-column">
+            <div style="width: 100%;" class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-custom" role="progressbar" [style.width.%]="100"></div>
+            </div>
+
+          </div>
+         
+          <p>Loading...</p> <!-- Display a loading message or spinner here -->
+
+        </ng-container>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button 
+         type="button" class="btn  buttonCloseModal" [disabled]="!isResponseReceived"
+          (click)="reset()" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>

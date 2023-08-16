@@ -1,22 +1,22 @@
 export class AfterSearch{
 
     id:number = 0;
-    name:string = "";
+    full_name:string = "";
     age:number = 0;
-    location:string = "";
-    phonenumber:string = "";
-    email:string = "";
+    current_residence:string = "";
+    contactlink:string ="";
+    resumelink:string = "";
 
     constructor(id:number,
-        name:string  ,
+        full_name:string  ,
         age:number,
-        location:string ,
-        phonenumber:string,
-        email:string ){
-            this.name = name;
+        current_residence:string ,
+        contactlink:string,
+        resumelink:string ){
+            this.full_name = full_name;
             this.age = age;
-            this.location = location;
-            this.phonenumber = phonenumber;
-            this.email = email;
+            this.current_residence = current_residence;
+            this.contactlink = contactlink;
+            this.resumelink = resumelink;
     }
 }

@@ -1,15 +1,49 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, ViewChild  } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Search } from '../classes/search';
+import { AftersearchComponent } from '../aftersearch/aftersearch.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent {
+export class SearchComponent  {
 
+  @ViewChild('scrollMe') private scrollContainer!: ElementRef;
+  
 
-  constructor(private router:Router){}
+  public search_Data:Search;
+
+  public isMajorEmpty = false;
+  public isYearsEmpty = false;
+  public isdegressEmpty = false;
+  public isGendersEmpty = false;
+  public isDataLoad:boolean = false;
+
+  constructor(private router:Router){
+
+    this.search_Data = new Search();
+
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      setTimeout(() => {
+        if (this.isDataLoad) {
+          this.isDataLoad = false; // Reset the flag after performing the action
+        }
+      }, 2000);
+     
+    });
+      //subscribes every changes of your route
+      this.router.events.subscribe((event) => {
+          if (event instanceof NavigationEnd){
+             //scroll to top
+             window.scrollTo(0,0);
+          }
+   });
+  }
 
   public majors: string[] = [
     "Graphic Desing",
@@ -24,7 +58,10 @@ export class SearchComponent {
 
   selectItemMajor(item: any): void {
     this.majorSelected = item;
-    console.log(this.majorSelected);
+    this.search_Data.major = this.majorSelected;
+    if(this,this.search_Data.major !== ""){
+      this.isMajorEmpty = false;
+    }
   }
   
 
@@ -41,7 +78,12 @@ export class SearchComponent {
 
   selectItemYear(item: any): void {
     this.yearSelected = item;
-    console.log(this.yearSelected);
+    const temp = this.yearSelected.split(" ");
+    this.search_Data.years = temp[0];
+
+    if(this,this.search_Data.years !== ""){
+      this.isYearsEmpty = false;
+    }
   }
 
 
@@ -55,7 +97,10 @@ export class SearchComponent {
 
   selectItemDegree(item: any): void {
     this.degreeSelected = item;
-    console.log(this.degreeSelected);
+    this.search_Data.degree = this.degreeSelected;
+    if(this,this.search_Data.degree !== ""){
+      this.isdegressEmpty = false;
+    }
   }
 
   
@@ -68,10 +113,88 @@ export class SearchComponent {
 
   selectItemGender(item: any): void {
     this.genderSelected = item;
-    console.log(this.genderSelected);
+    this.search_Data.gender = this.genderSelected;
+    if(this,this.search_Data.gender !== ""){
+      this.isGendersEmpty = false;
+    }
   }
 
   search():void{
-    this.router.navigate(['aftersearch']);
+    if(this.checkEmpty()){
+      return;
+    }
+    this.router.navigate(['search'] ,{ queryParams: { 
+      profession:this.search_Data.major, 
+      yearsexp:this.search_Data.years,
+      degree:this.search_Data.degree,
+      gender:this.search_Data.gender
+    } });
+
+    this.isDataLoad = true;
+    this.scrollToBottom()
   }
+
+
+  private checkEmpty(){
+
+    const nullSafeValue = (value: any) => {
+      if (value === null) {
+          return "NULL";
+      } else if (value === "") {
+          return "EMPTY";
+      } else {
+          return value;
+      }
+  };
+
+    const elements = ['major', 'years','degree','gender'];
+
+
+    let isSomethingEmpty = false;
+    
+    for (const element of elements) {
+        const value = nullSafeValue(this.search_Data.get(element));
+        if (value === "EMPTY") {
+            switch (element) {
+                case "major":
+                    this.isMajorEmpty = true;
+                    isSomethingEmpty = true;
+                    break;
+                case "years":
+                    this.isYearsEmpty = true;
+                    isSomethingEmpty = true;
+                    break;
+                case "degree":
+                    this.isdegressEmpty = true;
+                    isSomethingEmpty = true;
+                    break;
+                case "gender":
+                  this.isGendersEmpty = true;
+                  isSomethingEmpty = true;
+                  break;
+            }
+
+        }
+    }
+    
+    return isSomethingEmpty;
+  }
+
+  scrollToBottom(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Scroll to the end of the page
+        window.scrollTo(0, document.documentElement.scrollHeight);
+      }
+    });          
 }
+
+
+   isDataLoaded(isLoadEmit:boolean){
+    this.isDataLoad = isLoadEmit;
+    console.log(isLoadEmit)
+   }
+  
+}
+
+

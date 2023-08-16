@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { ImmigrationData, ImmigrationResponse } from './Immigration';
 import { environment } from 'src/environments/environment';
+import { ImmigrationHrRequest } from './ImmigrationHrRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,15 @@ export class ImigrationService {
 
   constructor(private httpClient:HttpClient) { }
 
-  public addImigration(imigration: ImmigrationData): Observable<ImmigrationResponse> {
+  public addImigration(imigration: ImmigrationData, selectedFile:File | null |undefined): Observable<ImmigrationResponse> {
 
-    const observable = this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/imigration/add', imigration);
+    const formData: FormData = new FormData();
+    if(selectedFile != null){
+      formData.append('cv', selectedFile, selectedFile.name);
+      formData.append('imigration', JSON.stringify(imigration));
+    }
+
+    const observable = this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/immigrations/add',formData);
     return observable.pipe(
         retry(3),
         catchError((error: HttpErrorResponse) => {
@@ -59,4 +66,23 @@ export class ImigrationService {
 
   
 }
+
+
+
+  public getAllHrResults(imiHrReq: ImmigrationHrRequest): Observable<any[]> {
+
+
+    let params = new HttpParams();
+    params = params.set('profession', imiHrReq.profession);
+    params = params.set('education', imiHrReq.education);
+    params = params.set('yearsexp', imiHrReq.yearOfExp)
+    params = params.set('gender', imiHrReq.gender);
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/hr',{params}).pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  } 
 }

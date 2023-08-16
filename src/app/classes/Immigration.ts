@@ -15,7 +15,8 @@ export class ImmigrationData {
     yearsOfExperience:string;
     education:string;
     desiredCountry:string;
-
+    gender:string;
+    filename:string;
   
     constructor() {
       this.id = 0;
@@ -34,6 +35,8 @@ export class ImmigrationData {
       this.yearsOfExperience = "";
       this.education = "";
       this.desiredCountry = "";
+      this.gender = "";
+      this.filename = "";
     }
 
 

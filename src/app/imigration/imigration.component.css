@@ -39,7 +39,13 @@
     border-color: #FFFFFF;
     padding-left: 2%;
     height: 62px;
+
+    box-sizing: border-box;
+
   }
+
+
+
   .flex-container3{
     display: flex;
     flex-direction: row;
@@ -145,7 +151,7 @@
     height: 8px;
     background: #FCD406;
     border-radius: 4px;
-    margin-top: 6%;
+    margin-top: 5%;
   }
   .button3 {
     background: #FCD406;
@@ -170,6 +176,22 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+
+  .container15{
+    width: 100%;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .container11{
+    width: 100%;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .check1{
@@ -232,7 +254,7 @@
     line-height: 24px;
     color: #292D32;
     border: none 16px;
-    margin-top: 11px;
+    margin-top: 20px;
   }
   .container5{
     display: flex;
@@ -340,7 +362,35 @@
     hyphens: auto;
     border: none 16px;
     height: 62px;
+    width: 100%;
+  }
+
+  .button80 {
+    background: #FCD406;
+    border-radius: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 24px;
+    color: #000000;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    border: none 16px;
+    height: 62px;
     width: 30%;
+  }
+
+  .container16{
+    width: 30%;
+  }
+
+  .container17{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40%;
   }
 
   .button9 {
@@ -375,24 +425,30 @@
 
   .container8{
     width: 50%;
-
   }
 
-  .input4{
-    background: #FFFFFF;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
-    border: none 16px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 24px;
-    color: #939598; 
-    height: 62px;
-    width: 100%;
-    padding-left: 5%;
-  }
+.container10{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+}
+
+.input4{
+  background: #FFFFFF;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  border: none 16px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 24px;
+  color: #939598; 
+  height: 62px;
+  width: 100%;
+  padding-left: 5%;
+}
 
 
   .button7:hover {
@@ -404,35 +460,35 @@
   .modal.show {
     display: block;
   }
-  .modal-progress {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
+
+  .uploadcv{
+    color: #00B3FF;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+
+
+font-weight: 400;
+line-height: normal;
+text-decoration-line: underline;
+cursor: pointer;
   }
-  .progress {
-    width: 200px;
-    height: 10px;
-  }
-  .progress-bar {
-    animation-duration: 2s; /* Adjust the animation duration as needed */
-  }
-  .bg-custom {
-    background-color: #fcd406 !important;
-  }
-  .buttonCloseModal{
-    background-color: #FCD406; 
-    border: 16px none;
-      font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1rem;
+
+  .uploadcv:hover{
+    color: #0b5372;
+
   }
 
   @media (min-width: 800px) {
     .container8{
       justify-content: end;
+
     }
+
+    .spacing{
+      justify-content: end;
+    }
+
   }
   @media (max-width: 800px) {
     .flex-item-right, .flex-item-left  {
@@ -471,6 +527,9 @@
     .button8{
       width: 100%;
   }
+  .button80{
+    width: 100%;
+}
     .check1{
       flex-basis: 100%;
     }
@@ -481,18 +540,65 @@
     .container8{
       width: 100%;
       margin-bottom: 2%;
-      justify-content: space-between;
     }
 
     .button8{
       width: 50%;
     }
     
+    .button80{
+      width: 50%;
+    }
     .c22{
       width: 50%;
     }
 
-  
+    .container10{
+      width: 100%;
+    }
+  .container15{
+    flex-direction: column-reverse;
+    
+  }
+.container16{
+width: 100%;
+flex: 2;
+}
+
+
+.container17{
+ width: 100%;
+ flex: 1;
+ margin-bottom: 4%;
+}
+    
+    
+    .img-responsive {
+      width: 25%;
+      height: 30%;
+      margin-bottom: 10%;
+    }
+
+    .order1{
+      order: 2;
+    }
+    .order2{
+      order: 1;
+    }
+
+    .container5{
+
+      margin-bottom: 5%;
+      margin-top:4%;
+    }
+
+    .contspace{
+      margin-bottom: 4%;
+    }
+
+    .genderbox{
+      width: 100%;
+    }
   }
 
   @media (max-width:500px) {
@@ -511,6 +617,10 @@
   }
 
   .container8{
+    width: 100%;
+  }
+
+  .c22{
     width: 100%;
   }
 }

@@ -1,7 +1,10 @@
 <div class="services">
-    <app-nav></app-nav>
+        <app-nav></app-nav>
 
     <div class="container">
-        <app-service *ngFor="let title of titles; index as i" [title]="title" [link]="links[i]"></app-service>
+        <app-service *ngFor="let title of titles; index as i" 
+        [title]="title" [link]="links[i]" [description]="description[i]">
+
+        </app-service>
     </div>
 </div>

@@ -6,21 +6,24 @@ import { SearchComponent } from './search/search.component';
 import { AftersearchComponent } from './aftersearch/aftersearch.component';
 import { ServicesComponent } from './services/services.component';
 import { StudentprogramComponent } from './studentprogram/studentprogram.component';
+import { TorrismVisaComponent } from './torrism-visa/torrism-visa.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/services',pathMatch: 'full'},
+  // { path: '', redirectTo: '/',pathMatch: 'full'},
   { path: 'tickiting', component: FlighttickitingComponent },
   { path: 'imigration', component: ImigrationComponent },
   { path: 'search', component: SearchComponent },
   {path:'aftersearch', component: AftersearchComponent},
-  {path:'services' , component:ServicesComponent},
-  {path:'student', component:StudentprogramComponent}
+  {path:'' , component:ServicesComponent},
+  {path:'student', component:StudentprogramComponent},
+  {path:'tourism', component:TorrismVisaComponent}
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-    onSameUrlNavigation : 'reload'
+    onSameUrlNavigation : 'reload',
+    // scrollPositionRestoration: 'top'
   })
 ],
   exports: [RouterModule]

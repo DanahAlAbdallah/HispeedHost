@@ -3,37 +3,14 @@
     <div class="img">
       <img class="img-responsive" src="./assets/group.PNG"/>
     </div>
-  
-  
-    <!-- Modal -->
-<!-- Modal -->
+
 <div
 class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}" role="dialog"
 >
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Immigration Sent</h5>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-      </div>
-      <div class="modal-body">
-        <ng-container *ngIf="isResponseReceived">
-          <p>{{ response }}</p> <!-- Display the response message here -->
-        </ng-container>
-        <ng-container *ngIf="!isResponseReceived">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-custom" role="progressbar" [style.width.%]="100"></div>
-          </div>
-          <p>Loading...</p> <!-- Display a loading message or spinner here -->
-        </ng-container>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button 
-         type="button" class="btn  buttonCloseModal" [disabled]="!isResponseReceived"
-          (click)="reset()" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+          <app-modal-popup [isResponseReceived]="isResponseReceived"
+                          title="Immigration Sent"
+                          [response]="response"
+          ></app-modal-popup>
 </div>
 
 
@@ -55,14 +32,16 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                     </div>
                       
                       <div class=" c1">
-                        <select [(ngModel)]="imigration.passportCountry" class="select1 ps-3" id="">
-                            <option *ngFor="let code of passportCountryCode">
-                              {{code.cca2}}
-                            </option>
+                        <select [(ngModel)]="imigration.passportCountry" class="select1 ps-3" id="" (change)="checkPassportCountryIsEmpty()">
+                          <option *ngFor="let currentResidence of currentResidenceCountries">
+                            {{currentResidence.name.common}}
+                          </option>
                         </select>
                         <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span> 
                       </div>
-                      
+                      <div class=" mb-2" *ngIf="isPassportCountryEmpty">
+                        <p class="text-danger">* Passport Country required</p>
+                      </div>
                   </div>
                 </div>
   
@@ -71,14 +50,54 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                 </div>
               </div>
               </div>
+              <div style="
+                 margin-top: 4%; width:100%;
+              " 
+              class="d-flex flex-row justify-content-between genderbox">
+                  <div style="
+                  
+                  flex-basis: 34%; margin-right: 0%;" class="c1">
+                    <button class="button1">Gender</button>
+                  </div>
+                  <div style=" 
+                
+                  flex-basis: 60%;
+                  " class="c1">
+                    <div class="check1">
+                      <div class="checkboxes d-flex flex-row justify-content-between ">
+                        <div *ngFor="let item of genders; let i = index;">
+                          <label class="checkbox-label">
+                            <input type="checkbox" [checked]="item.checked" (change)="handleCheckboxGenderChange(item)">
+                            <span id="labelText">{{item.label}}</span>
+                          </label>
+                        </div>
+                      </div>
+        
+                      <div class=" mb-2" *ngIf="isGenderEmpty">
+                        <p class="text-danger">* Gender required</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
   
             <div class="flex-item-right">
               <div class="d-flex flex-column">
-                <input [(ngModel)]="dateOfBirth" placeholder="Date of Birth" class="input2 pe-3" type="date" (change)="checkDOBIsEmpty()">
-                <div class=" mb-2 " *ngIf="isDOBEmpty">
-                  <p class="text-danger">* DateOfBirth required, Or Your Age Should be At least 18 years </p>
+               
+                <div style="width: 100%;" class="d-flex flex-row justify-content-between">
+                  <button style="width: 48%;" class="button2">
+                    Date Of Birth
+                  </button>
+                  <div style="width: 50%;">
+                    <input style="width: 100%;" [(ngModel)]="dateOfBirth" placeholder="Date of Birth"  class="input2 pe-3" type="date" (change)="checkDOBIsEmpty()">
+                    <div class=" mb-2 " *ngIf="isDOBEmpty">
+                      <p class="text-danger">* DateOfBirth required, Or Your Age Should be At least 18 years </p>
+                    </div>
+                  </div>
+                
                 </div>
+               
+               
                 <div class=" flex-container4">
                   <div class=" c2">
   
@@ -88,18 +107,21 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                   </div>
   
                     <div class= "c2">
-                      <select [(ngModel)]="imigration.CurrentResidence" class="select2 ps-3" id="">
+                      <select [(ngModel)]="imigration.CurrentResidence" class="select2 ps-3" id="" (change)="checkCurrentResidenceIsEmpty()">
                         <option *ngFor="let currentResidence of currentResidenceCountries">
                           {{currentResidence.name.common}}
                         </option>
                       </select>
                       <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span>
                     </div>
-                    
+                    <div class=" mb-2" *ngIf="isCurrentResidence">
+                      <p class="text-danger">* Current Residence required</p>
+                    </div>
                 </div>
               </div>
             </div>
   
+            
             
     </div>
   
@@ -127,6 +149,10 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                     <span id="labelText">{{item.label}}</span>
                   </label>
                 </div>
+              </div>
+
+              <div class=" mb-2" *ngIf="isVisaStatusEmpty">
+                <p class="text-danger">* Visa Status required</p>
               </div>
             </div>
             
@@ -170,7 +196,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
       
   
       <div class="container5">
-        <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()"/>
+        <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()" [disabled]="isDontHaveQualification"/>
         <div class=" mb-2" *ngIf="isLTOQEmpty">
           <p class="text-danger">* ListTypeOfQualification required</p>
         </div>
@@ -181,14 +207,47 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
     <div class="line1"></div>
 
     <div class="d-flex flex-column">
-      <div class=" container4">   
-        <button class="button8">
-          What is Your Profession
-        </button>
+      <div class=" container15">   
+        <div class="container16">
+          <button class="button8">
+            What is Your Profession?
+          </button>
+        </div>
+        
+       
+        <div class=" container17 ">
+          <button style="margin-right: 2%;" class="button8">
+            Upload Your CV
+          </button>
+          <div class="d-flex flex-column">
+            <p class="uploadcv" (click)="triggerFileInput()">
+              CV.dox ( it can be in the following
+               formats, dox, pdf)
+            </p>
+
+              <div style="font-size: 17px;color: cadetblue;" *ngIf="selectedFileName">
+               {{ selectedFileName }}
+            </div> 
+            <div class=" mb-2" *ngIf="isCvSelectedEmpty">
+              <p class="text-danger">* Cv required</p>
+            </div>
+          </div>
+          
+         
+          <input
+          type="file"
+          #fileInput
+          accept=".docx, .pdf"
+          (change)="handleFileInput($event)"
+          style="display: none"
+        />
+        </div>
+       
       </div>
+
       <div class="container6">
         <div class="container7">
-          <input [(ngModel)]="imigration.profession" type="text" class="input4" (keyup)="checkProfessionIsEmpty()"/>
+          <input [(ngModel)]="imigration.profession" type="text" placeholder="Profession" class="input4" (keyup)="checkProfessionIsEmpty()"/>
           <div class=" mb-2" *ngIf="isProfessionEmpty">
             <p class="text-danger">* Profession required</p>
           </div>
@@ -213,7 +272,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
   
     <div class="line1"></div>
   
-    <div class="d-flex flex-column mb-5">
+    <div class="d-flex flex-column mb-4">
           <div class=" container4">   
             <button class="button4">
               What is your English proficiency?
@@ -229,49 +288,64 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                 </label>
               </div>
             </div>
+
+            <div class=" mb-2" *ngIf="isEnglishProfEmpty">
+              <p class="text-danger">* English Profession required</p>
+            </div>
           </div>
           
     </div>
   
     <div class="line"></div>
-  
-  
-    <div class="d-flex flex-column">
-      <div class=" container4">  
-        <div class="container8">
-          <button class="button5">
-            Have you completed a English test in the last 3 years?
-          </button>
-        </div> 
-          
 
-          <div class="container8 d-flex flex-row ">
-            <button style="margin-right: 2%;" class="button8">
-              Desired Country
-            </button>
-            <div class= "c22">
-              <select [(ngModel)]="imigration.desiredCountry" class="select2 ps-3" id="">
-                <option *ngFor="let currentResidence of currentResidenceCountries">
-                  {{currentResidence.name.common}}
-                </option>
-              </select>
-              <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span>
-            </div>
-          </div>
-        
-      </div>
-  
-      <div>
-        <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
-          <div *ngFor="let item of items21">
-          <label class="checkbox-label">
-              <input type="checkbox"  [checked]="item.checked" (change)="handleCheckboxChange3(item)">
-              <span id="labelText">{{item.label}}</span>
-            </label>
-          </div>
+
+
+<div class="d-flex flex-column">
+  <div class=" container4">  
+    <div class="container8 order1">
+      <button class="button5">
+        Have you completed a English test in the last 3 years?
+      </button>
+    </div> 
+      
+
+    <div  class=" container8 d-flex flex-column order2">
+      <div style="width: 100%;" class="contspace d-flex flex-row spacing">
+        <button style="margin-right: 2%;" class="button80">
+          Desired Country
+        </button>
+        <div class= "c22">
+          <select [(ngModel)]="imigration.desiredCountry" class="select2 ps-3" id="" (change)="checkDesiredCountryIsEmpty()">
+            <option *ngFor="let currentResidence of currentResidenceCountries">
+              {{currentResidence.name.common}}
+            </option>
+          </select>
+          <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span>
         </div>
+
+       
       </div>
+
+      <div class="d-flex spacing mb-2" *ngIf="isDesiredCountryEmpty">
+        <p class="text-danger">* Desired Country required</p>
+      </div>
+    </div>
+     
+    
+    
   </div>
+
+  <div>
+    <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
+      <div *ngFor="let item of items21">
+      <label class="checkbox-label">
+          <input type="checkbox"  [checked]="item.checked" (change)="handleCheckboxChange3(item)">
+          <span id="labelText">{{item.label}}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
   
   
   <div class="d-flex flex-column">

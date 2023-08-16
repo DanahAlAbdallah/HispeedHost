@@ -1,37 +1,53 @@
-<nav class="navbar navbar-expand-lg  navbar-light ">
-    <div class="container-fluid">
-      <div class="d-flex justify-content-end">
-        <a class="navbar-brand" href="#">
-          <img class="img-responsive"  src="./assets/group.PNG" />
-        </a>
-      </div>
-  
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Home
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-  
-          <li class="nav-item">
-            <a class="nav-link  fw-bolder" aria-current="page">About us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bolder" routerLink="/services">Services</a>
-          </li>
-          
-        </ul>
-      </div>
+
+
+<nav  class="navbar navbar-expand-lg navbar-light" [ngClass]="{'navbar-scrolled': isNavbarScrolled, 'scrolling': isScrolling}" >
+  <div class="container-fluid d-flex align-items-center justify-content-center">
+    
+    <button  class="navbar-toggler buttonTog border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" (click)="toggleNavSidebar()">
+      <span class="navbar-toggler-icon" [ngClass]="{'c': isIconLight && isScrolling}"></span>
+    </button>
+    
+    <a class="navbar-brand" href="https://hispeed-group.com/">
+      <img class="img-responsive navbar-logo" [src]="imageSource" [ngClass]="{'image-spacing': isScrolling}" />
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll d-none d-lg-flex">
+        <li class="nav-item" >
+          <a class="nav-link fw-bolder" href="https://hispeed-group.com/" (click)="setNavItemColorAndClose(isIconLight)" (click)="setActiveLink('HOME')" [ngClass]="{'light': isIconLight}">HOME</a>
+        </li>
+
+        <li class="nav-item" >
+          <a style="color: #9c9a9a;" class="nav-link fw-bolder" routerLink="/" (click)="setNavItemColorAndClose(isIconLight)" (click)="setActiveLink('SERVICES')" [ngClass]="{'light': isIconLight}">SERVICES</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link fw-bolder" href="https://hispeed-group.com/index.php/about-us-3/" (click)="setActiveLink('ABOUT US')" (click)="setNavItemColorAndClose(isIconLight)" [ngClass]="{'light': isIconLight}">ABOUT US</a>
+        </li>
+      
+      </ul>
     </div>
-  </nav>
+    
+    <div class="nav-sidebar" [ngClass]="{'active': isNavSidebarOpen}">
+      <ul style="width: 100%;" class="navbar-nav flex-column d-lg-none">
+        <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
+          <a class="nav-link fw-bolder text-left" href="https://hispeed-group.com/" (click)="setNavItemColorAndClose(isIconLight)">HOME</a>
+        </li>
+        
+        <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
+          <a class="nav-link fw-bolder text-left" href="https://hispeed-group.com/index.php/about-us-3/" (click)="setNavItemColorAndClose(isIconLight)">ABOUT US</a>
+        </li>
+        
+        <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
+          <a style="color: #FCD406;" class="nav-link fw-bolder text-left" routerLink="/" (click)="setNavItemColorAndClose(isIconLight)">SERVICES</a>
+        </li>
+      </ul>
+    </div>
+    
+       
+    
+
+  </div>
+</nav>
+
+

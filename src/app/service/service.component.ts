@@ -9,5 +9,6 @@ export class ServiceComponent {
 
   @Input() title:string = "";
   @Input() link:string = "";
+  @Input() description:string ="";
 
 }

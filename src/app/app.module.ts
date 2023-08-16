@@ -23,6 +23,12 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormDataSharedComponent } from './form-data-shared/form-data-shared.component';
 import { TorrismVisaComponent } from './torrism-visa/torrism-visa.component';
 import { StudentprogramComponent } from './studentprogram/studentprogram.component';
+import { ModalPopupComponent } from './modal-popup/modal-popup.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StickyHeaderDirective } from './sticky-header.directive';
+import { ScrollToBottomDirective } from './scroll-to-bottom.directive';
+import { LoadingModalComponent } from './loading-modal/loading-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +49,11 @@ import { StudentprogramComponent } from './studentprogram/studentprogram.compone
     InputflightsinfoComponent,
     FormDataSharedComponent,
     TorrismVisaComponent,
-    StudentprogramComponent
+    StudentprogramComponent,
+    ModalPopupComponent,
+    StickyHeaderDirective,
+    ScrollToBottomDirective,
+    LoadingModalComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +61,7 @@ import { StudentprogramComponent } from './studentprogram/studentprogram.compone
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule
+
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

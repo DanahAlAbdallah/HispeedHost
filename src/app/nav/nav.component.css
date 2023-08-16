@@ -1,40 +1,245 @@
-.navbar-logo {
-    margin-right: auto;
-  }
+  .navbar-logo {
+      margin-right: auto;
+
+      margin-right: 10px; /* Adjust this value to your preference */
+  padding: 5px; /* Adjust this value to your preference */
+
+    }
 
 
-  .navbar-nav {
+/* Adjust the main content area to accommodate the sidebar */
+.container-fluid {
+  padding-left: 0; /* Remove the default left padding */
+}
+
+/* Define styles for the left sidebar */
+.nav-sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Initial position, hidden */
+  width: 250px;
+  height: 100%;
+  background-color: #f8f9fa;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* Show the sidebar when the "active" class is present */
+.nav-sidebar.active {
+  left: 0;
+}
+
+/* Add styles for the active navigation items (light color) */
+.nav-sidebar .nav-link.light {
+  color: #fff !important;
+  /* Additional styles for light color */
+}
+
+    .navbar-nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+  width: 60%;
+
+    }
+
+    .navbar-nav .nav-item {
+      margin-left: 5%;
+    }
+
+    .navbar-nav .nav-link.active a {
+  color: #686565; 
+}
+
+
+.text-left {
+  text-align: left !important;
+}
+
+.nav-item-with-divider {
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  padding: 10px 0; /* Adjust the padding as needed */
+  padding-left: 10px; /* Add left margin */
+}
+
+
+
+    .navbar-nav .nav-item a {
+      color: #000;
+      font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      /* font-style: normal; */
+      font-weight: 600;
+      /* line-height: normal; */
+      text-transform: uppercase;
+      height: 40px;
+    }
+
+    .navbar-nav .nav-item:first-child {
+      margin-left: 0;
+    }
+
+    .navbar-scrolled {
+      /* background-color: #212121 !important; */
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .icon-light {
+      filter: brightness(5); /* Apply brightness to make the icon appear light */
+      transition: filter 0.3s ease-in-out;
+    }
+
+    .sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .light .nav-link {
+      color: #fff !important;
+      /* Add any additional styles for the light color here */
+    }
+
+    
+    .light {
+      color: #fff !important;
+      /* Add any additional styles for the light color here */
+    }
+    
+    .light .nav-link {
+      color: #fff !important;
+      /* Add any additional styles for the light color here */
+    }
+
+
+    
+
+    @media (min-width: 993px) {
+      .image-spacing {
+      }
+    
+      .scrolling .nav-item {
+        margin-right: 20px;
+      }
+    }
+    
+.navbar-brand img{
+  width: 80%;
+  height: 60%;
+}
+    
+
+
+/* Center and fix the image in the navbar for small screens */
+@media (max-width: 767px) {
+  .navbar-brand {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-width: 60%;
+    height: 100%; /* Ensure the navbar has a fixed height */
   }
-
-  .navbar-nav .nav-item {
-    margin-left: 10%;
-  }
-
-  .navbar-nav .nav-item a {
-    color: #000;
-    font-family: Poppins;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
-  .navbar-nav .nav-item:first-child {
-    margin-left: 0;
-  }
-
-
 
   
-@media (max-width:500px) {
-    
-    .navbar-brand img {
-      width: 50%;
-      height: 70%;
-    }
+  .navbar-brand img {
+    max-width: 100%;
+    max-height: 100%; /* Ensure the image does not exceed the height of the navbar */
+  }
+
+  .navbar-logo {
+    margin-right: 0; /* Reset margin for mobile screens */
+    padding: 0; /* Reset padding for mobile screens */
+  }
+  
+  .navbar-nav .nav-item {
+    margin-left: 0; /* Reset margin for mobile screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .navbar-toggler {
+    align-self: flex-start; /* Align button to the left */
+    margin-top: 10px; /* Add margin for spacing */
+  }
+
+  .navbar-logo {
+    max-width: 120px;
+    margin: auto; /* Center the image vertically */
+    order: -1; /* Place the image above the button in the DOM order */
+  }
   
 }
+
+/* Ensure the image is vertically centered in the navbar */
+
+
+@media (min-width:700px) {
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+   margin-left: 100px;
+  }
+}
+
+/* Fix the image position when scrolling */
+.navbar-scrolled .navbar-brand img {
+  filter: brightness(5); /* Apply brightness to make the icon appear light */
+  /* Add any additional styles for the scrolled image here */
+ 
+ 
+}
+
+    
+  @media (max-width:500px) {
+      
+      .navbar-brand img {
+        width: 50%;
+        height: 80%;
+       
+      }
+  
+      .c{
+        display: none;
+      }
+      .buttonTog{
+        position: fixed;
+        margin-right: 150px;
+      }
+      .navbar-brand{
+        margin-right: 0px;
+      }
+  }
+
+
+  /* CSS for the flex container */
+.container-fluid {
+  display: flex;
+  justify-content: space-between; /* Align items at the beginning and end of the container */
+  align-items: center; /* Vertically center items */
+}
+
+/* Style for the button */
+.navbar-toggler {
+  /* Customize your button styles here */
+}
+
+/* Style for the logo image */
+.navbar-logo {
+  max-width: 100px; /* Adjust the maximum width as needed */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiLocalBaseUrl: "http://localhost:8080",
+  apiLocalBaseUrl: "https://www.libanux.com",
   apiPassportCountryCodeBaseUrl: "https://visa-requirements4.p.rapidapi.com",
   currentResidenceBaseUrl: "https://restcountries.com/v3.1",
   apiFlightsBaseUrl: "https://booking-com13.p.rapidapi.com/flights"

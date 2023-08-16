@@ -1,0 +1,24 @@
+.modal-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+  .progress {
+    width: 300px;
+    height: 15px;
+  }
+  .progress-bar {
+    animation-duration: 2s; /* Adjust the animation duration as needed */
+  }
+  .bg-custom {
+    background-color: #fcd406 !important;
+  }
+  .buttonCloseModal{
+    background-color: #FCD406; 
+    border: 16px none;
+      font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+  }

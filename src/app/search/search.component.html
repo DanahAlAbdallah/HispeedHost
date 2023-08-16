@@ -1,7 +1,8 @@
-<div class="search">
+<div #scrollMe style="overflow: auto;" class="search" >
 
     <app-nav></app-nav>
-      
+
+  <app-loading-modal *ngIf="isDataLoad"></app-loading-modal>
 
       <div class="d-flex flex-column middle_container">
         <!-- top  -->
@@ -19,6 +20,10 @@
                     </ul>
                           
                 </div>
+
+                <div class=" mb-2" *ngIf="isMajorEmpty">
+                    <p class="text-danger">* Major required</p>
+                </div>
             </div>
             
             <div class="box flex-item ">
@@ -34,6 +39,10 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class=" mb-2" *ngIf="isYearsEmpty">
+                    <p class="text-danger">* Years required</p>
+                </div>
             </div>
 
             <div class="box flex-item ">
@@ -47,6 +56,10 @@
                             {{ degree }}
                         </li>
                     </ul>
+                </div>
+
+                <div class=" mb-2" *ngIf="isdegressEmpty">
+                    <p class="text-danger">* Degrees required</p>
                 </div>
             </div>
             
@@ -63,6 +76,9 @@
                     </ul>
                 </div>
 
+                <div class=" mb-2" *ngIf="isGendersEmpty">
+                    <p class="text-danger">* Genders required</p>
+                </div>
               
             </div>
         </div >
@@ -72,7 +88,6 @@
 
       <div class="container2">
         <div class="line">
-                    lfdlfj
         </div>
       </div>
 
@@ -82,7 +97,10 @@
                 Search
            </button>
       </div>
+
+      <div class="line1"></div>
           
-    </div>
+      <app-aftersearch (newItemEvent)="isDataLoaded($event)" #afterSearchComponent></app-aftersearch>
+</div>
 
 

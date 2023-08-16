@@ -145,8 +145,16 @@
     height: 8px;
     background: #FCD406;
     border-radius: 4px;
-    margin-top: 6%;
+    margin-top: 5%;
   }
+
+  .line2 {
+    margin-top: 4%;
+    height: 8px;
+    background: #FCD406;
+    border-radius: 4px;
+  }
+
   .button3 {
     background: #FCD406;
     border-radius: 16px;
@@ -258,7 +266,7 @@
     padding-left: 2%;
   }
   .checkboxes1 {
-    width: 15%;
+    width: 25%;
   }
   .button4 {
     background: #FCD406;
@@ -342,6 +350,25 @@
     width: 30%;
   }
 
+  
+  .button10 {
+    background: #FCD406;
+    border-radius: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 24px;
+    color: #000000;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    border: none 16px;
+    height: 62px;
+    width: 30%;
+  }
+
+
   .button9 {
     background: #FCD406;
     border-radius: 16px;
@@ -378,8 +405,8 @@
   }
 
   .container9{
-    margin-top: 4%;
     width: 20%;
+    margin-top: 3%;
   }
 
   .input4{
@@ -408,30 +435,7 @@
   .modal.show {
     display: block;
   }
-  .modal-progress {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-  }
-  .progress {
-    width: 200px;
-    height: 10px;
-  }
-  .progress-bar {
-    animation-duration: 2s; /* Adjust the animation duration as needed */
-  }
-  .bg-custom {
-    background-color: #fcd406 !important;
-  }
-  .buttonCloseModal{
-    background-color: #FCD406; 
-    border: 16px none;
-      font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1rem;
-  }
+ 
 
   @media (max-width: 800px) {
     .flex-item-right, .flex-item-left  {
@@ -470,6 +474,10 @@
     .button8{
       width: 100%;
   }
+
+      .button10{
+      width: 50%;
+  }
     .check1{
       flex-basis: 100%;
     }
@@ -480,11 +488,10 @@
     .container8{
       width: 100%;
       margin-bottom: 2%;
-      justify-content: space-between;
     }
 
     .button8{
-      width: 50%;
+      width: 100%;
     }
     
     .c22{
@@ -497,6 +504,18 @@
 
     .blabla{
         margin-bottom: 3%;
+    }
+
+
+    .button5{
+      margin-top: 3%;
+    }
+
+    
+    .img-responsive {
+      width: 25%;
+      height: 30%;
+      margin-bottom: 10%;
     }
   }
 
@@ -518,4 +537,5 @@
   .container8{
     width: 100%;
   }
+  
 }

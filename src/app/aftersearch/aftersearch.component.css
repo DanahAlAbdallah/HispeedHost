@@ -20,3 +20,31 @@ html, body {
     align-items: stretch;
 
 }
+
+/* app.component.css */
+.no-data-message {
+  font-size: large;
+  color: #007bff; /* Change this to your desired text color */
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Add some styling to the search results */
+.search-results {
+  margin-top: 20px; /* Add some space above the results */
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Move it slightly down for animation */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Animate the results when scrolling into view */
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
