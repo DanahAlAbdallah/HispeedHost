@@ -14,15 +14,15 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll d-none d-lg-flex">
         <li class="nav-item" >
-          <a class="nav-link fw-bolder" href="https://hispeed-group.com/" (click)="setNavItemColorAndClose(isIconLight)" (click)="setActiveLink('HOME')" [ngClass]="{'light': isIconLight}">HOME</a>
+          <a class="nav-link fw-bolder" href="https://hispeed-group.com/" >HOME</a>
         </li>
 
         <li class="nav-item" >
-          <a style="color: #9c9a9a;" class="nav-link fw-bolder" routerLink="/" (click)="setNavItemColorAndClose(isIconLight)" (click)="setActiveLink('SERVICES')" [ngClass]="{'light': isIconLight}">SERVICES</a>
+          <a style="color: #9c9a9a;" class="nav-link fw-bolder" routerLink="/" >SERVICES</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link fw-bolder" href="https://hispeed-group.com/index.php/about-us-3/" (click)="setActiveLink('ABOUT US')" (click)="setNavItemColorAndClose(isIconLight)" [ngClass]="{'light': isIconLight}">ABOUT US</a>
+          <a class="nav-link fw-bolder" href="https://hispeed-group.com/about-us-3/">ABOUT US</a>
         </li>
       
       </ul>
@@ -35,11 +35,11 @@
         </li>
         
         <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
-          <a class="nav-link fw-bolder text-left" href="https://hispeed-group.com/index.php/about-us-3/" (click)="setNavItemColorAndClose(isIconLight)">ABOUT US</a>
+          <a style="color: #FCD406;" class="nav-link fw-bolder text-left" routerLink="/" (click)="setNavItemColorAndClose(isIconLight)">SERVICES</a>
         </li>
         
-        <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
-          <a style="color: #FCD406;" class="nav-link fw-bolder text-left" routerLink="/" (click)="setNavItemColorAndClose(isIconLight)">SERVICES</a>
+        <li class="nav-item nav-item-with-divider " [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
+          <a  class="nav-link fw-bolder text-left last-item"  href="https://hispeed-group.com/about-us-3/" (click)="setNavItemColorAndClose(isIconLight)">ABOUT US</a>
         </li>
       </ul>
     </div>

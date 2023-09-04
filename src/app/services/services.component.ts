@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class ServicesComponent {
 
-  public titles:any[] = ["IMIGRATION PROG", "Tourism Visa", "Student Program", "Find an Emlpoyee"];
+  public titles:any[] = ["IMMIGRATION PROGRAM", "Tourism Visa", "Student Program", "Find an Employee"];
   public links:any[] = ["/imigration","/tourism","/student","/search"]
   public description:any[] = [
     'Tailored solutions for relocating abroad; we guide you through legalities, paperwork, and needs for a seamless transition.',

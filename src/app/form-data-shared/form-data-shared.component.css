@@ -1,0 +1,77 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 4%;
+    margin-bottom: 10%;
+    flex-wrap: wrap;
+}
+.ee{
+    width: 47%;
+}
+
+.flex-item {
+    display: flex;
+    width: 50%;
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 10px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+
+.input {
+    background: #FFFFFF;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    border: none 16px;
+    border-color: #FFFFFF;
+    padding-left: 2%;
+    height: 62px;
+
+    box-sizing: border-box;
+
+    width: 100%; /* Set inputs to take 50% of the width */
+    padding: 10px;
+    margin-right: 5px;
+  }
+
+.explanation-button{
+    background: #FCD406;
+    border-radius: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 24px;
+    color: #000000;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    border: none 16px;
+    height: 62px;
+    width: 47%; /* Set buttons to take 50% of the width */
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+
+    .flex-item {
+        width: 100%;
+    }
+    
+    .flex-item {
+        flex-direction: column;
+    }
+    
+    .input, .explanation-button {
+        width: 100%; /* Set inputs and buttons to take full width on mobile */
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .ee{
+        width: 100%;
+    }
+}

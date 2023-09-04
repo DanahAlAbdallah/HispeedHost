@@ -24,6 +24,11 @@ export class StudentprogramComponent {
   public isExamEmpty = false;
   public isDegreeEmpty = false;
   public isDesiredCountryEmpty = false;
+  public isPhoneNumberRequired:boolean = false;
+  public isEmailRequired:boolean = false;
+  public isGenderEmpty = false;
+  public isOtherVisaStatus = false;
+
 
   public isFormSent:boolean = false;
   public response!:any;
@@ -34,6 +39,17 @@ export class StudentprogramComponent {
   public dateOfBirth: Date = new Date();
 
   public disablebuttonModal = true;
+
+  public desiredCountries:string[]  = [
+    "Australia",
+    "Canada",
+    "Russia",
+    "France",
+    "Italy",
+    "Belarus",
+    "Purtugal",
+    "Belgium"
+  ]
 
   constructor(
     private router: Router, 
@@ -93,12 +109,19 @@ export class StudentprogramComponent {
   ];
   
   public items3: { label: string, checked: boolean }[] = [
-    { label: 'excellent', checked: false },
+    { label: 'Excellent', checked: false },
     { label: 'Very good', checked: false },
     { label: 'Good', checked: false },
     { label: 'Moderate', checked: false },
     { label: 'Low', checked: false },
     { label: 'Very low', checked: false }
+  ];
+
+   
+  public genders = [
+    { label: 'Male', value: 'Male', checked: false },
+    { label: 'Female', value: 'Female', checked: false },
+
   ];
 
   public handleCheckboxChangeExam(selectedItem: { label: string, value:string,checked: boolean }): void {
@@ -113,11 +136,29 @@ export class StudentprogramComponent {
 
 
   
- 
+  public handleCheckboxGenderChange(selectedItem: { label: string,value:string, checked: boolean }): void {
+    this.genders.forEach(item => {
+      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
+      if(item.checked){
+      
+        this.student.gender = item.value;
+        this.checkGenderIsEmpty();
+      }
+    });
+  }
+
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
+        if(item.value != "Other"){
+          this.isOtherVisaStatus = true;
+          this.student.explain = "disabled"
+          this.isEVSEmpty = false;
+        }else{
+          this.isOtherVisaStatus = false;
+          this.student.explain = ""
+        }
         this.student.visaStatus = item.value;
         this.checkVisaStatusIsEmpty();
       }
@@ -155,7 +196,9 @@ export class StudentprogramComponent {
       !this.student.passportCountry || 
       !this.student.listOfQualification ||
       !this.student.explain||
-      !this.student.degree) {
+      !this.student.degree||
+      !this.student.gender ||
+      (!this.student.phoneNumber && !this.student.email)) {
       this.isSomethingEmpty = true;
       this.isShowModal = false; 
       return;
@@ -208,7 +251,8 @@ export class StudentprogramComponent {
     };
     
 
-    const elements = ["fullName", "dateOfBirth", "passportCountry", "currentResidence", "visaStatus","explain", "listOfQualification","exam","degree","desiredCountry"];
+    const elements = ["fullName", "dateOfBirth", "passportCountry", "currentResidence", "visaStatus","explain",
+     "listOfQualification","exam","degree","desiredCountry","phoneNumber","email","gender"];
     
     let isSomethingEmpty = false;
     
@@ -256,6 +300,30 @@ export class StudentprogramComponent {
                   this.isDesiredCountryEmpty = true;
 
                   break;
+                case "phoneNumber":
+                  if(this.student.email.length != 0){
+                    this.isPhoneNumberRequired = false;
+                    this.isEmailRequired = false;
+                  }else{
+                    this.isPhoneNumberRequired = true;
+                    this.isEmailRequired = true;
+
+                  }
+                  break;
+                case "email":
+                  if(this.student.phoneNumber.length != 0){
+                    this.isEmailRequired = false;
+                    this.isPhoneNumberRequired = false;
+
+                  }else{
+                    this.isEmailRequired = true;
+                    this.isPhoneNumberRequired = true;
+
+                  }
+                  break;
+                  case "gender":
+                    this.isGenderEmpty = true;
+                    break;
             }
         }
     }
@@ -328,6 +396,25 @@ public checkDesiredCountryIsEmpty(){
   this.buttonDisable();
 }
 
+public checkGenderIsEmpty(){
+  this.isGenderEmpty = this.student.gender.trim().length === 0;
+
+  this.buttonDisable();
+
+}
+
+public checkPhoneNumberIsEmpty(){
+  this.isPhoneNumberRequired = this.student.phoneNumber.trim().length === 0 &&  this.student.email.trim().length === 0;
+  this.buttonDisable();
+}
+
+public checkEmailIsEmpty(){
+  this.isEmailRequired = this.student.email.trim().length === 0 &&  this.student.phoneNumber.trim().length === 0;
+
+  this.buttonDisable();
+
+}
+
   public getCurrentResidenceCountries(){
     this.serviceImmi.loadCurrentResidenceCountries().subscribe({
         next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
@@ -346,11 +433,27 @@ public checkDesiredCountryIsEmpty(){
       this.student.desiredCountry.length == 0 ||
       this.student.passportCountry.length == 0 ||
       this.student.currentResidence.length == 0 ||
-      this.student.visaStatus.length == 0){
+      this.student.gender.length == 0||
+
+      this.student.visaStatus.length == 0 ||
+      (this.student.email.length ==0 && this.student.phoneNumber.length ==0)){
         this.disablebuttonModal = true;
       }
       else{
         this.disablebuttonModal = false;
+        this.isSomethingEmpty = false;
       }
+  }
+
+  emailValue(email:string){
+    this.student.email = email;
+    this.checkEmailIsEmpty();
+
+  }
+
+  phoneNumberValue(phoneNumber:string){
+    this.student.phoneNumber = phoneNumber;
+    this.checkPhoneNumberIsEmpty();
+
   }
 }

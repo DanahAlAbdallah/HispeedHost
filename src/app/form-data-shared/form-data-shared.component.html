@@ -1,1 +1,26 @@
-<p>form-data-shared works!</p>
+<div class="flex-container">
+
+    <div class="flex-item">
+        <button class="explanation-button">Email Address</button>
+        <div class="d-flex flex-column ee">
+            <input (keyup)="emailValueKeyUp($event)" class="input" type="email" placeholder="Email"  [pattern]="emailPattern" required>
+            <div class=" mb-2" *ngIf="isEmailValid">
+                <p class="text-danger">* Email Not Valid.</p>
+              </div>
+        </div>
+       
+    </div>
+    <div class="flex-item">
+        <button class="explanation-button">Phone Number</button>
+        <div class="d-flex flex-column ee">
+            <input  (keyup)="phoneNumberValueKeyUp($event)" class="input" type="tel" placeholder="Phone Number" required >
+
+        </div>
+    </div>
+
+    <div class=" mb-2" *ngIf="isEmailRequired && isPhoneNumberRequired">
+        <p class="text-danger">* You can choose one of them, make sure to fill at least one of them, or you can fill both.</p>
+      </div>
+</div>
+
+

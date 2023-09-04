@@ -12,11 +12,14 @@ export class ImmigrationData {
     isCompleteEngishTest: boolean;
     doYouHaveOffer: boolean;
     profession:string;
+    professionOther:string;
     yearsOfExperience:string;
     education:string;
     desiredCountry:string;
     gender:string;
     filename:string;
+    phoneNumber:string;
+    email:string;
   
     constructor() {
       this.id = 0;
@@ -37,6 +40,9 @@ export class ImmigrationData {
       this.desiredCountry = "";
       this.gender = "";
       this.filename = "";
+      this.phoneNumber = "";
+      this.email = "";
+      this.professionOther = "";
     }
 
 

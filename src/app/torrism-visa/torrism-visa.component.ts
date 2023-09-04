@@ -24,6 +24,11 @@ export class TorrismVisaComponent {
   public isShowModal = false;
   public passportCountryCode:any[]=  [];
   public currentResidenceCountries:any[]=  [];
+  public isPhoneNumberRequired:boolean = false;
+  public isEmailRequired:boolean = false;
+  public isGenderEmpty = false;
+  public isCurrentResidenceEmpty = false;
+  public isOtherVisaStatus = false;
 
   public dateOfBirth: Date = new Date();
 
@@ -62,12 +67,24 @@ export class TorrismVisaComponent {
   ];
 
 
- 
+  public genders = [
+    { label: 'Male', value: 'Male', checked: false },
+    { label: 'Female', value: 'Female', checked: false },
+
+  ];
  
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
+        if(item.value != "Other"){
+          this.isOtherVisaStatus = true;
+          this.tourism.explain = "disabled"
+          this.isEVSEmpty = false;
+        }else{
+          this.isOtherVisaStatus = false;
+          this.tourism.explain = ""
+        }
         this.tourism.visaStatus = item.value;
         this.checkVisaStatusIsEmpty();
       }
@@ -75,6 +92,18 @@ export class TorrismVisaComponent {
   }
   
   
+   
+  public handleCheckboxGenderChange(selectedItem: { label: string,value:string, checked: boolean }): void {
+    this.genders.forEach(item => {
+      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
+      if(item.checked){
+        
+        this.tourism.gender = item.value;
+        this.checkGenderIsEmpty();
+      }
+    });
+  }
+
   public isResponseReceived: boolean = false;
 
   public submit():void{
@@ -88,8 +117,11 @@ export class TorrismVisaComponent {
       !this.tourism.dateOfBirth ||
       !this.tourism.passportCountry || 
       !this.tourism.explain||
+      !this.tourism.currentResidence||
       !this.tourism.visaStatus ||
-      !this.tourism.desiredCountry) {
+      !this.tourism.desiredCountry ||
+      !this.tourism.gender||
+      (!this.tourism.phoneNumber && !this.tourism.email)) {
       this.isSomethingEmpty = true;
       this.isShowModal = false; 
 
@@ -141,7 +173,8 @@ export class TorrismVisaComponent {
     };
     
 
-    const elements = ["fullName", "dateOfBirth", "passportCountry", "visaStatus","explain", "listOfQualification","exam","degree","desiredCountry"];
+    const elements = ["fullName", "dateOfBirth", "passportCountry", "visaStatus","explain",
+     "listOfQualification","exam","degree","desiredCountry","currentResidence","phoneNumber","email","gender"];
     
     let isSomethingEmpty = false;
     
@@ -175,6 +208,34 @@ export class TorrismVisaComponent {
                   this.isVisaStatusEmpty = true;
 
                   break;
+                  case "phoneNumber":
+                    if(this.tourism.email.length != 0){
+                      this.isPhoneNumberRequired = false;
+                      this.isEmailRequired = false;
+                    }else{
+                      this.isPhoneNumberRequired = true;
+                      this.isEmailRequired = true;
+  
+                    }
+                    break;
+                  case "email":
+                    if(this.tourism.phoneNumber.length != 0){
+                      this.isEmailRequired = false;
+                      this.isPhoneNumberRequired = false;
+  
+                    }else{
+                      this.isEmailRequired = true;
+                      this.isPhoneNumberRequired = true;
+  
+                    }
+                    break;
+                case "gender":
+                  this.isGenderEmpty = true;
+                  break;
+                  case "currentResidence":
+                    this.isCurrentResidenceEmpty = true;
+  
+                    break;
             }
         }
     }
@@ -206,6 +267,14 @@ export class TorrismVisaComponent {
 
 
 
+public checkCurrentResidenceIsEmpty(){
+  this.isCurrentResidenceEmpty = this.tourism.currentResidence.trim().length === 0;
+
+  this.buttonDisable();
+
+}
+
+
 public checkPassportCountryIsEmpty(){
   this.isPassportCountryEmpty = this.tourism.passportCountry.trim().length === 0;
 
@@ -223,6 +292,18 @@ public checkDesiredCountryIsEmpty(){
   this.buttonDisable();
 }
 
+public checkPhoneNumberIsEmpty(){
+  this.isPhoneNumberRequired = this.tourism.phoneNumber.trim().length === 0 &&  this.tourism.email.trim().length === 0;
+  this.buttonDisable();
+}
+
+public checkEmailIsEmpty(){
+  this.isEmailRequired = this.tourism.email.trim().length === 0 &&  this.tourism.phoneNumber.trim().length === 0;
+
+  this.buttonDisable();
+
+}
+
   public getCurrentResidenceCountries(){
     this.serviceImmi.loadCurrentResidenceCountries().subscribe({
         next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
@@ -237,13 +318,32 @@ public checkDesiredCountryIsEmpty(){
       this.tourism.explain.length == 0 ||
       this.tourism.desiredCountry.length == 0 ||
       this.tourism.passportCountry.length == 0 ||
-      this.tourism.visaStatus.length == 0){
-        console.log("wpwpwp")
+      this.tourism.visaStatus.length == 0||
+      this.tourism.currentResidence.length == 0 ||
+      this.tourism.gender.length == 0||
+      (this.tourism.email.length ==0 && this.tourism.phoneNumber.length ==0)){
         this.disablebuttonModal = true;
       }
       else{
-        console.log("wpwpwp1")
         this.disablebuttonModal = false;
+        this.isSomethingEmpty = false;
       }
+  }
+
+  public checkGenderIsEmpty(){
+    this.isGenderEmpty = this.tourism.gender.trim().length === 0;
+    this.buttonDisable();
+  }
+
+  emailValue(email:string){
+    this.tourism.email = email;
+    this.checkEmailIsEmpty();
+
+  }
+
+  phoneNumberValue(phoneNumber:string){
+    this.tourism.phoneNumber = phoneNumber;
+    this.checkPhoneNumberIsEmpty();
+
   }
 }

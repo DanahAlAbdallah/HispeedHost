@@ -30,6 +30,8 @@ export class NavComponent {
     this.isNavbarScrolled = window.pageYOffset > this.scrollThreshold;
     this.isIconLight = this.isNavbarScrolled;
     this.imageSource = this.isNavbarScrolled ? './assets/logohighspeededit-1.png' : './assets/group.PNG';
+    this.isScrolling = true;
+
   }
 
   @HostListener('window:wheel', [])
@@ -41,7 +43,7 @@ export class NavComponent {
   @HostListener('window:click', [])
   onWindowClick() {
     // Reset the scrolling state
-    this.isScrolling = false;
+    this.isScrolling = true;
   }
 
 
@@ -69,12 +71,16 @@ export class NavComponent {
 
     }
 
+
   }
 
+  
   // Attach the click event listener to the entire document
   ngOnInit() {
     this.renderer.listen('document', 'click', (event: Event) => {
       this.onDocumentClick(event as MouseEvent);
     });
   }
+
+  
 }

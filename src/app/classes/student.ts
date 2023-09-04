@@ -11,6 +11,9 @@ export class Student{
     degree:string;
     desiredCountry:string;
     doYouhaveScholarship:boolean;
+    phoneNumber:string;
+    email:string;
+    gender:string;
 
     constructor(
         
@@ -27,6 +30,9 @@ export class Student{
         this.degree = "";
         this.desiredCountry = "";
         this.doYouhaveScholarship = false;
+        this.phoneNumber = "";
+        this.email = "";
+        this.gender= "";
       }
 
       [element: string]: any;

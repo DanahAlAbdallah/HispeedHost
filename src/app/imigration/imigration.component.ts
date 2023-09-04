@@ -34,6 +34,12 @@ export class ImigrationComponent implements OnInit {
   public isEnglishProfEmpty:boolean = false;
   public isGenderEmpty = false;
   public isDontHaveQualification:boolean = false;
+  public isPhoneNumberRequired:boolean = false;
+  public isEmailRequired:boolean = false;
+  public isOtherVisaStatus:boolean = false;
+  public isProfessionOther:boolean = false;
+  public isProfessionOtherRequired:boolean = false;
+
 
   public response!:any;
   public isShowModal = false;
@@ -49,6 +55,32 @@ export class ImigrationComponent implements OnInit {
 
   selectedFileName: string | null = null;
   selectedFile?: File | null;
+
+
+  public professions:any = [
+    "Computer Science",
+    "Graphic design",
+    "Mechanical Engineer",
+    "Accounting",
+    "Marketing",
+    "Interior Design",
+    "Other"
+  ]
+
+  public years:any = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ]
+
+  public educations:any = [
+    "Collage",
+    "University",
+    "Masters"
+  ]
 
 
   constructor(
@@ -107,7 +139,7 @@ export class ImigrationComponent implements OnInit {
   ];
   
   public items3: { label: string, checked: boolean }[] = [
-    { label: 'excellent', checked: false },
+    { label: 'Excellent', checked: false },
     { label: 'Very good', checked: false },
     { label: 'Good', checked: false },
     { label: 'Moderate', checked: false },
@@ -131,6 +163,14 @@ export class ImigrationComponent implements OnInit {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
+        if(item.value != "Other"){
+          this.isOtherVisaStatus = true;
+          this.imigration.explainVisaStatus = "disabled"
+          this.isEVSEmpty = false;
+        }else{
+          this.isOtherVisaStatus = false;
+          this.imigration.explainVisaStatus = ""
+        }
         this.imigration.visaStatus = item.value;
         this.checkVisaStatusIsEmpty();
       }
@@ -225,7 +265,9 @@ export class ImigrationComponent implements OnInit {
       !this.imigration.visaStatus||
       !this.imigration.gender||
       !this.imigration.desiredCountry ||
-      !this.imigration.filename) {
+      !this.imigration.filename||
+      (!this.imigration.phoneNumber && !this.imigration.email)||
+      (!this.imigration.professionOther && this.imigration.profession =="Other")) {
       this.isSomethingEmpty = true;
       this.isShowModal = false; 
       return;
@@ -280,8 +322,8 @@ export class ImigrationComponent implements OnInit {
 
     
     const elements = ["FullName", "dateofbirth", "explainVisaStatus", "listTypeOfQualification", "passportCountry",
-    "CurrentResidence","holdQualification","desiredCountry","gender","filename",
-    "visaStatus", "englishProficiency","profession", "yearsOfExperience","education"];
+    "CurrentResidence","holdQualification","desiredCountry","gender","filename","phoneNumber","email",
+    "visaStatus", "englishProficiency","profession", "yearsOfExperience","education","professionOther"];
     
     let isSomethingEmpty = false;
     
@@ -336,12 +378,38 @@ export class ImigrationComponent implements OnInit {
                 case "education":
                   this.isEducationEmpty = true;
                   break;
-                  case "gender":
+                case "gender":
                     this.isGenderEmpty = true;
                     break;
-                    case "filename":
+                case "filename":
                     this.isCvSelectedEmpty = true;
                     break;
+                    case "phoneNumber":
+                  if(this.imigration.email.length != 0){
+                    this.isPhoneNumberRequired = false;
+                    this.isEmailRequired = false;
+                  }else{
+                    this.isPhoneNumberRequired = true;
+                    this.isEmailRequired = true;
+
+                  }
+                  break;
+                case "email":
+                  if(this.imigration.phoneNumber.length != 0){
+                    this.isEmailRequired = false;
+                    this.isPhoneNumberRequired = false;
+
+                  }else{
+                    this.isEmailRequired = true;
+                    this.isPhoneNumberRequired = true;
+
+                  }
+                  break;
+                case "professionOther":
+                  if(this.imigration.profession == "Other"){
+                    this.isProfessionOtherRequired = true;
+                  }
+                  break;
             }
         }
     }
@@ -382,6 +450,14 @@ public checkLTQIsEmpty(){
 
 public checkProfessionIsEmpty(){
   this.isProfessionEmpty = this.imigration.profession.trim().length === 0;
+  if(!this.isProfessionEmpty){
+    if(this.imigration.profession == "Other"){
+        this.isProfessionOther = true;
+    }
+    else{
+      this.isProfessionOther = false;
+    }
+  }
 
   this.buttonDisable();
 
@@ -445,6 +521,24 @@ public checkDesiredCountryIsEmpty(){
 }
 
 
+public checkPhoneNumberIsEmpty(){
+  this.isPhoneNumberRequired = this.imigration.phoneNumber.trim().length === 0 &&  this.imigration.email.trim().length === 0;
+  this.buttonDisable();
+}
+
+public checkEmailIsEmpty(){
+  this.isEmailRequired = this.imigration.email.trim().length === 0 &&  this.imigration.phoneNumber.trim().length === 0;
+
+  this.buttonDisable();
+
+}
+
+public checkProfessionOtherIsEmpty(){
+  this.isProfessionOtherRequired = this.imigration.professionOther.trim().length === 0 && this.imigration.profession == "Other";
+
+  this.buttonDisable();
+}
+
   // public getPassportCountryCode(){
   //   this.service.loadPassportCountryCode().subscribe({
   //       next: (v:any) => {this.passportCountryCode = v.countries;},
@@ -472,12 +566,15 @@ public checkDesiredCountryIsEmpty(){
       this.imigration.visaStatus.length == 0||
       this.imigration.desiredCountry.length == 0 ||
       this.imigration.gender.length == 0||
-      this.imigration.filename.length ==0
-       ){
+      this.imigration.filename.length ==0 ||
+      (this.imigration.email.length ==0 && this.imigration.phoneNumber.length ==0)||
+      (this.imigration.profession == "Other" && this.imigration.professionOther.length == 0)
+             ){
         this.disablebuttonModal = true;
       }
       else{
         this.disablebuttonModal = false;
+        this.isSomethingEmpty = false;
       }
   }
 
@@ -505,4 +602,15 @@ public checkDesiredCountryIsEmpty(){
     }
   }
 
+  emailValue(email:string){
+    this.imigration.email = email;
+    this.checkEmailIsEmpty();
+
+  }
+
+  phoneNumberValue(phoneNumber:string){
+    this.imigration.phoneNumber = phoneNumber;
+    this.checkPhoneNumberIsEmpty();
+
+  }
 }

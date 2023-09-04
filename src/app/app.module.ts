@@ -28,6 +28,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StickyHeaderDirective } from './sticky-header.directive';
 import { ScrollToBottomDirective } from './scroll-to-bottom.directive';
 import { LoadingModalComponent } from './loading-modal/loading-modal.component';
+import { FooterComponent } from './footer/footer.component';
+import { CopyrightComponent } from './copyright/copyright.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { LoadingModalComponent } from './loading-modal/loading-modal.component';
     ModalPopupComponent,
     StickyHeaderDirective,
     ScrollToBottomDirective,
-    LoadingModalComponent
+    LoadingModalComponent,
+    FooterComponent,
+    CopyrightComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,6 @@ import { LoadingModalComponent } from './loading-modal/loading-modal.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule
-
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

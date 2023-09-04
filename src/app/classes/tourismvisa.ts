@@ -7,6 +7,9 @@ export class TourismVisa{
     visaStatus:string;
     explain:string;
     desiredCountry:string;
+    phoneNumber:string;
+    email:string;
+    gender:string;
 
     constructor(
         
@@ -19,6 +22,9 @@ export class TourismVisa{
         this.visaStatus = "";
         this.explain = "";
         this.desiredCountry = "";
+        this.phoneNumber = "";
+        this.email = "";
+        this.gender = "";
       }
 
       [element: string]: any;

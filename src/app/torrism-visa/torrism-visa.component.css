@@ -141,6 +141,14 @@
     border-radius: 4px;
     margin-top: 3.5%;
   }
+
+  .line123 {
+    height: 8px;
+    background: #FCD406;
+    border-radius: 4px;
+    margin-top: 0%;
+  }
+
   .line1 {
     height: 8px;
     background: #FCD406;

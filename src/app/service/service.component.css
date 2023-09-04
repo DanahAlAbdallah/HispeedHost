@@ -103,7 +103,7 @@ margin-bottom: 11%;
 
 @media (max-width:500px) {
     .image-container{
-        margin-bottom: 10%;
+        margin-bottom: 7%;
         margin-right: 0px;
         width: fit-content;
         height: 370px;
@@ -129,5 +129,12 @@ margin-bottom: 11%;
 
       margin-bottom: 10%;
     }
+
+    .title {
+    
+  font-size: 25px;
+  
+    }
+
 }
 

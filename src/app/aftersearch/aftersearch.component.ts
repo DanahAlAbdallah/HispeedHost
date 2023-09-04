@@ -35,7 +35,8 @@ export class AftersearchComponent implements OnInit {
       this.requestHr.gender = params['gender'];
       
 
-      this.service.getAllHrResults(this.requestHr).subscribe({
+      if(this.requestHr.profession !== undefined){
+        this.service.getAllHrResults(this.requestHr).subscribe({
           next: (res) => { 
             this.Items = res 
 
@@ -60,6 +61,8 @@ export class AftersearchComponent implements OnInit {
           },
           complete: () => {}
       });
+      }
+     
 
     });
 

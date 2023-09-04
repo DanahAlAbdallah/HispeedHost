@@ -1,9 +1,8 @@
+<app-nav></app-nav>
+
+
 <div class="flex-container">
 
-    <div class="img">
-      <img class="img-responsive" src="./assets/group.PNG"/>
-    </div>
-  
   
     <!-- Modal -->
 <!-- Modal -->
@@ -36,6 +35,8 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                       
                       <div class=" c1">
                         <select [(ngModel)]="student.passportCountry" class="select1 ps-3" id="" (change)="checkPassportCountryIsEmpty()">
+                          <option value="" disabled selected>Select a country</option>
+
                             <option *ngFor="let code of currentResidenceCountries">
                               {{code.name.common}}
                             </option>
@@ -57,7 +58,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
   
             <div class="flex-item-right">
               <div class="d-flex flex-column">
-                <div style="width: 100%;" class="d-flex flex-row justify-content-between">
+                <div style="width: 100%;" class="d-flex flex-row justify-content-between blabla">
                   <button style="width: 48%;" class="button2">
                     Date Of Birth
                   </button>
@@ -79,6 +80,8 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
   
                     <div class= "c2">
                       <select [(ngModel)]="student.currentResidence" class="select2 ps-3" id="" (change)="checkCurrentResidenceIsEmpty()">
+                        <option value="" disabled selected>Select a country</option>
+
                         <option *ngFor="let currentResidence of currentResidenceCountries">
                           {{currentResidence.name.common}}
                         </option>
@@ -137,7 +140,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
           <div class="blabla"></div>
 
           <div class="container5">
-            <input [(ngModel)]="student.explain" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()"/>
+            <input [(ngModel)]="student.explain" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()" [disabled]="isOtherVisaStatus"/>
             <div class=" mb-2" *ngIf="isEVSEmpty">
               <p class="text-danger">* ExplainVisaStatus required</p>
             </div>
@@ -150,6 +153,11 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
   
     <div class="d-flex flex-column mt-4">
     
+      <div class=" container44">   
+        <button class="button3">
+            What is Your Educational level?
+        </button>
+      </div>
       <div class="container5">
         <input [(ngModel)]="student.listOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()"/>
         <div class=" mb-2" *ngIf="isLTOQEmpty">
@@ -160,7 +168,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
     </div>
     <div class="line1"></div>
 
-    <div class="d-flex flex-column">
+    <div  class="d-flex flex-column">
       <div class=" container4">   
         <button class="button8">
             Did you have one of these exams?
@@ -191,7 +199,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
     </div>
       
   
-    <div class="line2"></div>
+    <div class="line22"></div>
   
     <div class="d-flex flex-column">
       <div class=" container4">  
@@ -203,8 +211,10 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
             </button>
             <div class= "c22">
               <select [(ngModel)]="student.desiredCountry" class="select2 ps-3" id="" (change)="checkDesiredCountryIsEmpty()">
-                <option *ngFor="let currentResidence of currentResidenceCountries">
-                  {{currentResidence.name.common}}
+                <option value="" disabled selected>Select a country</option>
+
+                <option *ngFor="let desiredcountry of desiredCountries">
+                  {{desiredcountry}}
                 </option>
               </select>
               <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span>
@@ -229,7 +239,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
 
         <div>
           <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
-            <div *ngFor="let item of items21">
+            <div *ngFor="let item of items22">
               <label class="checkbox-label">
                 <input type="checkbox"  [checked]="item.checked" (change)="handleCheckboxChange4(item)">
                 <span id="labelText">{{item.label}}</span>
@@ -243,11 +253,59 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
       
   </div>
   
+
+  <div class="line2"></div>
+
   
+  <app-form-data-shared [isEmailRequired]="isEmailRequired" 
+  [isPhoneNumberRequired]="isPhoneNumberRequired" 
+  (emailValue)="emailValue($event)"
+  (phoneNumberValue)="phoneNumberValue($event)">
+  </app-form-data-shared>
+
+  <div class="line123"></div>
+
+
+  <div style="
+                 margin-top: 4%; width:100%;
+              " 
+              class="d-flex flex-row justify-content-between genderbox">
+                  <div style="
+                  
+                  flex-basis: 34%; margin-right: 0%;" class="c1">
+                    <button class="button1">Gender</button>
+                  </div>
+                  <div style=" 
+                
+                  flex-basis: 60%;
+                  " class="c1">
+                    <div class="check1">
+                      <div class="checkboxes d-flex flex-row justify-content-between ">
+                        <div *ngFor="let item of genders; let i = index;">
+                          <label class="checkbox-label">
+                            <input type="checkbox" [checked]="item.checked" (change)="handleCheckboxGenderChange(item)">
+                            <span id="labelText">{{item.label}}</span>
+                          </label>
+                        </div>
+                      </div>
+        
+                      <div class=" mb-2" *ngIf="isGenderEmpty">
+                        <p class="text-danger">* Gender required</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
 
   <div style="margin-bottom: 3%;" class=""></div>
 
   <div  style="margin-bottom: 3%;"  class=""></div>
+  
+  <div class=" mb-2" *ngIf="isSomethingEmpty">
+    <p class="text-danger">There fields is Empty, Please Check!</p>
+  </div>
+
+
+  <div  style="margin-bottom: 5%;"  class=""></div>
 
   <div class="d-flex flex-column align-items-center mb-5">
     <button *ngIf="disablebuttonModal" (click)="submit()" class="button7"  type="button">

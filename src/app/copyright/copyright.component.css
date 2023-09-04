@@ -1,0 +1,11 @@
+ /* Style for regular link text */
+ a strong {
+    text-decoration: none; /* Remove underline */
+    color: #848484; /* Set default text color */
+    font-family: Calibri, Arial, Helvetica, sans-serif; 
+}
+
+/* Style for link text on hover */
+a strong:hover {
+    color: rgb(252,212,6); /* Change text color on hover */
+}
