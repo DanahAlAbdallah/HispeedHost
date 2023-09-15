@@ -149,7 +149,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
               <div class="checkboxes d-flex flex-row justify-content-between flex-wrap">
                 <div *ngFor="let item of items; let i = index;">
                   <label class="checkbox-label">
-                    <input type="checkbox" [checked]="item.checked" (change)="handleCheckboxChange1(item)">
+                    <input  type="checkbox" [checked]="item.checked" (change)="handleCheckboxChange1(item)">
                     <span id="labelText">{{item.label}}</span>
                   </label>
                 </div>
@@ -168,8 +168,8 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
               </div>
           </div>
   
-          <div class="container5">
-            <input [(ngModel)]="imigration.explainVisaStatus" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()" [disabled]="isOtherVisaStatus"/>
+          <div *ngIf="hideEVSInput" class="container5">
+            <input  [(ngModel)]="imigration.explainVisaStatus" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()" [disabled]="isOtherVisaStatus"/>
             <div class=" mb-2" *ngIf="isEVSEmpty">
               <p class="text-danger">* ExplainVisaStatus required</p>
             </div>
@@ -199,7 +199,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
       </div>                
       
   
-      <div class="container5">
+      <div *ngIf="hideHoldQual" class="container5">
         <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()" [disabled]="isDontHaveQualification"/>
         <div class=" mb-2" *ngIf="isLTOQEmpty">
           <p class="text-danger">* ListTypeOfQualification required</p>

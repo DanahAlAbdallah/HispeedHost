@@ -158,7 +158,7 @@ export class ImigrationComponent implements OnInit {
     });
   }
   
- 
+  hideEVSInput:boolean = true;
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
@@ -166,9 +166,11 @@ export class ImigrationComponent implements OnInit {
         if(item.value != "Other"){
           this.isOtherVisaStatus = true;
           this.imigration.explainVisaStatus = "disabled"
+          this.hideEVSInput = false;
           this.isEVSEmpty = false;
         }else{
           this.isOtherVisaStatus = false;
+          this.hideEVSInput = true;
           this.imigration.explainVisaStatus = ""
         }
         this.imigration.visaStatus = item.value;
@@ -188,6 +190,7 @@ export class ImigrationComponent implements OnInit {
     });
   }
 
+  hideHoldQual:boolean = true;
   public handleCheckboxChange2(selectedItem: { label: string, checked: boolean }): void {
     this.items2.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
@@ -196,7 +199,7 @@ export class ImigrationComponent implements OnInit {
           this.imigration.holdQualification = true;
           this.isDontHaveQualification = false;
           this.imigration.listTypeOfQualification = ""
-
+          this.hideHoldQual = true;
         }
         else{
 
@@ -204,7 +207,7 @@ export class ImigrationComponent implements OnInit {
           this.isDontHaveQualification = true;
           this.isholdQualificationEmpty = false;
           this.imigration.listTypeOfQualification = "No : Dont Have!"
-
+          this.hideHoldQual = false;
           this.checkLTQIsEmpty();
         }
       }
@@ -247,34 +250,33 @@ export class ImigrationComponent implements OnInit {
 
   public submit():void{
 
-    this.checkingEmpty();
 
 
-    if (!this.imigration.FullName ||
-      !this.imigration.dateofbirth ||
-      !this.imigration.explainVisaStatus ||
-      !this.imigration.listTypeOfQualification ||
-      !this.imigration.visaStatus||
-      !this.imigration.englishProficiency||
-      !this.imigration.education ||
-      !this.imigration.profession ||
-      !this.imigration.yearsOfExperience||
-      !this.imigration.passportCountry||
-      !this.imigration.CurrentResidence||
-      !this.imigration.englishProficiency||
-      !this.imigration.visaStatus||
-      !this.imigration.gender||
-      !this.imigration.desiredCountry ||
-      !this.imigration.filename||
-      (!this.imigration.phoneNumber && !this.imigration.email)||
-      (!this.imigration.professionOther && this.imigration.profession =="Other")) {
-      this.isSomethingEmpty = true;
-      this.isShowModal = false; 
-      return;
-  }
+    // if (!this.imigration.FullName ||
+    //   !this.imigration.dateofbirth ||
+    //   !this.imigration.explainVisaStatus ||
+    //   !this.imigration.listTypeOfQualification ||
+    //   !this.imigration.visaStatus||
+    //   !this.imigration.englishProficiency||
+    //   !this.imigration.education ||
+    //   !this.imigration.profession ||
+    //   !this.imigration.yearsOfExperience||
+    //   !this.imigration.passportCountry||
+    //   !this.imigration.CurrentResidence||
+    //   !this.imigration.englishProficiency||
+    //   !this.imigration.visaStatus||
+    //   !this.imigration.gender||
+    //   !this.imigration.desiredCountry ||
+    //   !this.imigration.filename||
+    //   (!this.imigration.phoneNumber && !this.imigration.email)||
+    //   (!this.imigration.professionOther && this.imigration.profession =="Other")) {
+      if(this.checkingEmpty() == true){
+        this.isSomethingEmpty = true;
+        this.isShowModal = false; 
+        return;
+      }
 
-
-  console.log(this.imigration);
+      console.log("khjhjh")
 
   this.isResponseReceived = false;
 
@@ -333,56 +335,71 @@ export class ImigrationComponent implements OnInit {
             switch (element) {
                 case "FullName":
                     this.isFullNameEmpty = true;
+                    isSomethingEmpty = true;
                     break;
                 case "dateofbirth":
                     this.isDOBEmpty = true;
+                    isSomethingEmpty = true;
                     break;
                 case "explainVisaStatus":
                     this.isEVSEmpty = true;
+                    isSomethingEmpty = true;
                     break;
                 case "passportCountry":
                   this.isPassportCountryEmpty = true;
+                  isSomethingEmpty = true;
                   break;
                 case "CurrentResidence":
                   this.isCurrentResidence = true;
+                  isSomethingEmpty = true;
                   break;
                 case "holdQualification":
                   if(this.isDontHaveQualification == true){
                     this.isholdQualificationEmpty = false;
                     this.imigration.listTypeOfQualification = "Dont Have!"
+                    isSomethingEmpty = true;
                   }else{
                     this.isholdQualificationEmpty = true;
-
+                    isSomethingEmpty = true;
                   }
 
                   break;
                 case "desiredCountry":
                   this.isDesiredCountryEmpty = true;
+                  isSomethingEmpty = true;
                   break;
                 case "visaStatus":
                   this.isVisaStatusEmpty = true;
+                  isSomethingEmpty = true;
                   break;
                 case "englishProficiency":
                   this.isEnglishProfEmpty = true;
+                  isSomethingEmpty = true;
                   break;
 
                 case "listTypeOfQualification":
                     this.isLTOQEmpty = true;
+                    isSomethingEmpty = true;
                     break;
                 case "profession":
                   this.isProfessionEmpty = true;
+                  isSomethingEmpty = true;
                   break;
                 case "yearsOfExperience":
                   this.isYearsOfExpEmpty = true;
+                  isSomethingEmpty = true;
                   break;
                 case "education":
                   this.isEducationEmpty = true;
+                  isSomethingEmpty = true;
                   break;
                 case "gender":
                     this.isGenderEmpty = true;
+                    isSomethingEmpty = true;
                     break;
                 case "filename":
                     this.isCvSelectedEmpty = true;
+                    isSomethingEmpty = true;
                     break;
                     case "phoneNumber":
                   if(this.imigration.email.length != 0){
@@ -391,7 +408,7 @@ export class ImigrationComponent implements OnInit {
                   }else{
                     this.isPhoneNumberRequired = true;
                     this.isEmailRequired = true;
-
+                    isSomethingEmpty = true;
                   }
                   break;
                 case "email":
@@ -402,14 +419,17 @@ export class ImigrationComponent implements OnInit {
                   }else{
                     this.isEmailRequired = true;
                     this.isPhoneNumberRequired = true;
-
+                    isSomethingEmpty = true;
                   }
                   break;
                 case "professionOther":
                   if(this.imigration.profession == "Other"){
                     this.isProfessionOtherRequired = true;
+                    isSomethingEmpty = true;
                   }
                   break;
+                default:
+                  isSomethingEmpty = false;
             }
         }
     }
