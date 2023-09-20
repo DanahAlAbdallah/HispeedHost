@@ -73,17 +73,21 @@ export class TorrismVisaComponent {
 
   ];
  
+  hideEVSInput:boolean = false;
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
         if(item.value != "Other"){
+          this.hideEVSInput = false;
           this.isOtherVisaStatus = true;
           this.tourism.explain = "disabled"
           this.isEVSEmpty = false;
         }else{
           this.isOtherVisaStatus = false;
           this.tourism.explain = ""
+          this.hideEVSInput = true;
+
         }
         this.tourism.visaStatus = item.value;
         this.checkVisaStatusIsEmpty();
@@ -321,7 +325,7 @@ public checkEmailIsEmpty(){
       this.tourism.visaStatus.length == 0||
       this.tourism.currentResidence.length == 0 ||
       this.tourism.gender.length == 0||
-      (this.tourism.email.length ==0 && this.tourism.phoneNumber.length ==0)){
+      (this.tourism.email.length == 0 && this.tourism.phoneNumber.length ==0)){
         this.disablebuttonModal = true;
       }
       else{

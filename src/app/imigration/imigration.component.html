@@ -200,7 +200,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
       
   
       <div *ngIf="hideHoldQual" class="container5">
-        <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()" [disabled]="isDontHaveQualification"/>
+        <input [(ngModel)]="imigration.listTypeOfQualification" placeholder="List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()" [disabled]="isDontHaveQualification"/>
         <div class=" mb-2" *ngIf="isLTOQEmpty">
           <p class="text-danger">* ListTypeOfQualification required</p>
         </div>
@@ -252,10 +252,11 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
       <div class="container6">
         <div class="container7">
 
-          <select [(ngModel)]="imigration.profession" class="" class="input4 ps-3" id=""  (change)="checkProfessionIsEmpty()">
+          <select [(ngModel)]="imigration.profession" class="" class="input4 ps-3" id="" 
+           (change)="checkProfessionIsEmpty()" [ngStyle]="{'font-weight': imigration.profession!= '' ? 'bold' : 'normal'}">
             <option value="" disabled selected>Select a Profession</option>
 
-            <option *ngFor="let profession of professions">
+            <option *ngFor="let profession of professions" [ngStyle]="{'font-weight': profession === imigration.profession ? 'bold' : 'normal'}">
               {{profession}}
             </option>
           
@@ -275,10 +276,11 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
 
         <div class="container7">
           
-          <select [(ngModel)]="imigration.yearsOfExperience" class="" class="input4 ps-3" id=""  (change)="checkYearsOFEIsEmpty()">
-            <option value="" disabled selected>Select Years Of Experience</option>
+          <select [(ngModel)]="imigration.yearsOfExperience" class="" class="input4 ps-3" id=""  
+          (change)="checkYearsOFEIsEmpty()" [ngStyle]="{'font-weight': imigration.yearsOfExperience!= '' ? 'bold' : 'normal'}">
+            <option value="" disabled selected >Select Years Of Experience</option>
 
-            <option  *ngFor="let year of years" >
+            <option  *ngFor="let year of years" [ngStyle]="{'font-weight': year === imigration.yearsOfExperience ? 'bold' : 'normal'}">
                 {{year}}
             </option>
             
@@ -291,10 +293,11 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
 
         <div class="container7">
           
-          <select [(ngModel)]="imigration.education" class="input4 " id=""  (change)="checkEducatioIsEmpty()">
+          <select [(ngModel)]="imigration.education" class="input4 " id=""  
+          (change)="checkEducatioIsEmpty()" [ngStyle]="{'font-weight': imigration.education!= '' ? 'bold' : 'normal'}">
             <option value="" disabled selected>Select Your Education</option>
 
-            <option  *ngFor="let education of educations">
+            <option  *ngFor="let education of educations"  [ngStyle]="{'font-weight': education === imigration.education ? 'bold' : 'normal'}">
                 {{education}}
             </option>
            

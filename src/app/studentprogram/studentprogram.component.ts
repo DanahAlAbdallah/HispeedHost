@@ -147,17 +147,20 @@ export class StudentprogramComponent {
     });
   }
 
+  hideEVSInput:boolean = false;
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
         if(item.value != "Other"){
+          this.hideEVSInput = false;
           this.isOtherVisaStatus = true;
           this.student.explain = "disabled"
           this.isEVSEmpty = false;
         }else{
           this.isOtherVisaStatus = false;
           this.student.explain = ""
+          this.hideEVSInput = true;
         }
         this.student.visaStatus = item.value;
         this.checkVisaStatusIsEmpty();

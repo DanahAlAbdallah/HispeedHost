@@ -20,13 +20,20 @@ export class FormDataSharedComponent {
 
   emailValueKeyUp(event:any){
     const isValidEmail = this.emailPattern.test(event.target.value);
-    if (isValidEmail) {
-      this.emailValue.emit(event.target.value);
+    if(event.target.value != ""){
+      if (isValidEmail) {
+        this.emailValue.emit(event.target.value);
+        this.isEmailValid = false;
+  
+      } else {
+          this.isEmailValid = true;
+      }
+    }
+    else{
       this.isEmailValid = false;
 
-    } else {
-      this.isEmailValid = true;
     }
+ 
     if(this.emailValue !== null || this.emailValue !== "" || (this.phoneNumberValue.length ==0)){
       this.isEmailRequired = false;
       this.isPhoneNumberRequired = false;

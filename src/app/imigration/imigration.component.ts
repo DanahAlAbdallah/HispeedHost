@@ -158,7 +158,7 @@ export class ImigrationComponent implements OnInit {
     });
   }
   
-  hideEVSInput:boolean = true;
+  hideEVSInput:boolean = false;
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
@@ -190,7 +190,7 @@ export class ImigrationComponent implements OnInit {
     });
   }
 
-  hideHoldQual:boolean = true;
+  hideHoldQual:boolean = false;
   public handleCheckboxChange2(selectedItem: { label: string, checked: boolean }): void {
     this.items2.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
@@ -401,7 +401,7 @@ export class ImigrationComponent implements OnInit {
                     this.isCvSelectedEmpty = true;
                     isSomethingEmpty = true;
                     break;
-                    case "phoneNumber":
+                case "phoneNumber":
                   if(this.imigration.email.length != 0){
                     this.isPhoneNumberRequired = false;
                     this.isEmailRequired = false;
@@ -587,6 +587,10 @@ public checkProfessionOtherIsEmpty(){
       this.imigration.desiredCountry.length == 0 ||
       this.imigration.gender.length == 0||
       this.imigration.filename.length ==0 ||
+      this.imigration.profession.length == 0||
+      this.imigration.yearsOfExperience.length == 0||
+      this.imigration.education.length == 0||
+
       (this.imigration.email.length ==0 && this.imigration.phoneNumber.length ==0)||
       (this.imigration.profession == "Other" && this.imigration.professionOther.length == 0)
              ){
@@ -615,9 +619,11 @@ public checkProfessionOtherIsEmpty(){
       this.selectedFileName = this.selectedFile.name;
       this.isCvSelectedEmpty = false;
       this.imigration.filename = this.selectedFileName;
+      this.buttonDisable();
     } else {
       this.selectedFileName = null;
       this.isCvSelectedEmpty = true;
+      this.buttonDisable();
 
     }
   }

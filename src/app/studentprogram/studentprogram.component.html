@@ -139,7 +139,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
   
           <div class="blabla"></div>
 
-          <div class="container5">
+          <div  *ngIf="hideEVSInput" class="container5">
             <input [(ngModel)]="student.explain" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()" [disabled]="isOtherVisaStatus"/>
             <div class=" mb-2" *ngIf="isEVSEmpty">
               <p class="text-danger">* ExplainVisaStatus required</p>
@@ -158,10 +158,10 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
             What is Your Educational level?
         </button>
       </div>
-      <div class="container5">
-        <input [(ngModel)]="student.listOfQualification" placeholder="Yes : List type of qualification" type="text" class="input3" (keyup)="checkLTQIsEmpty()"/>
+      <div  class="container5">
+        <input [(ngModel)]="student.listOfQualification" placeholder="Your Educational level" type="text" class="input3" (keyup)="checkLTQIsEmpty()"/>
         <div class=" mb-2" *ngIf="isLTOQEmpty">
-          <p class="text-danger">* ListTypeOfQualification required</p>
+          <p class="text-danger">* Educational level required</p>
         </div>
       </div>
   
