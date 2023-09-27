@@ -203,10 +203,11 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
 
   
   <app-form-data-shared [isEmailRequired]="isEmailRequired" 
-  [isPhoneNumberRequired]="isPhoneNumberRequired" 
-  (emailValue)="emailValue($event)"
-  (phoneNumberValue)="phoneNumberValue($event)">
+        [isPhoneNumberRequired]="isPhoneNumberRequired" 
+        (emailValue)="emailValue($event)"
+        (phoneNumberValue)="phoneNumberValue($event)">
   </app-form-data-shared>
+  
   <div class="line123"></div>
 
   <div style="

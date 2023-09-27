@@ -147,7 +147,7 @@ export class SearchComponent  {
       }
   };
 
-    const elements = ['major', 'years','degree','gender'];
+    const elements = ['major','gender'];
 
 
     let isSomethingEmpty = false;
@@ -158,14 +158,6 @@ export class SearchComponent  {
             switch (element) {
                 case "major":
                     this.isMajorEmpty = true;
-                    isSomethingEmpty = true;
-                    break;
-                case "years":
-                    this.isYearsEmpty = true;
-                    isSomethingEmpty = true;
-                    break;
-                case "degree":
-                    this.isdegressEmpty = true;
                     isSomethingEmpty = true;
                     break;
                 case "gender":
@@ -194,7 +186,14 @@ export class SearchComponent  {
     this.isDataLoad = isLoadEmit;
     console.log(isLoadEmit)
    }
+
+   majorSelectedItemEvent(major:string){
+      this.search_Data.major = major;
+   }
   
+   genderSelectedItemEvent(gender:string){
+      this.search_Data.gender = gender;
+   }
 }
 
 

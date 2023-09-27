@@ -30,6 +30,7 @@ import { ScrollToBottomDirective } from './scroll-to-bottom.directive';
 import { LoadingModalComponent } from './loading-modal/loading-modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { CopyrightComponent } from './copyright/copyright.component';
+import { SearchItemComponent } from './search-item/search-item.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { CopyrightComponent } from './copyright/copyright.component';
     ScrollToBottomDirective,
     LoadingModalComponent,
     FooterComponent,
-    CopyrightComponent
+    CopyrightComponent,
+    SearchItemComponent
   ],
   imports: [
     BrowserModule,

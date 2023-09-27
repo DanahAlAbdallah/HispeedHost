@@ -74,8 +74,6 @@ export class ImigrationService {
 
     let params = new HttpParams();
     params = params.set('profession', imiHrReq.profession);
-    params = params.set('education', imiHrReq.education);
-    params = params.set('yearsexp', imiHrReq.yearOfExp)
     params = params.set('gender', imiHrReq.gender);
 
     return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/hr',{params}).pipe(

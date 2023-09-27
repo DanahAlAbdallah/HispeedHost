@@ -8,99 +8,33 @@
 
       <div class="d-flex flex-column middle_container">
         <!-- top  -->
-        <div class="d-flex flex-row justify-content-between flex-wrap">
+        <div class="d-flex flex-row justify-content-around flex-wrap">
             <div class="box     flex-item ">
-                <div class="box1">
-                    <p class="textIn">Major</p>
-                </div>
-
-                <div class="box2">
-                    <ul>
-                        <li *ngFor="let major of majors" (click)="selectItemMajor(major)" [ngClass]="{ 'selected': majorSelected === major }">
-                            {{ major }}
-                        </li>
-                    </ul>
-                          
-                </div>
-
-                <div class=" mb-2" *ngIf="isMajorEmpty">
-                    <p class="text-danger">* Major required</p>
-                </div>
-            </div>
-            
-            <div class="box flex-item ">
-
-                <div class="box1">
-                    <p class="textIn">Years of EXP.</p>
-                </div>
-
-                <div class="box2">
-                    <ul>
-                        <li *ngFor="let year of years" (click)="selectItemYear(year)" [ngClass]="{ 'selected': yearSelected === year }">
-                            {{ year }}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class=" mb-2" *ngIf="isYearsEmpty">
-                    <p class="text-danger">* Years required</p>
-                </div>
-            </div>
-
-            <div class="box flex-item ">
-                <div class="box1">
-                    <p class="textIn">Degree</p>
-                </div>
-
-                <div class="box2">
-                    <ul>
-                        <li *ngFor="let degree of degrees" (click)="selectItemDegree(degree)" [ngClass]="{ 'selected': degreeSelected === degree }">
-                            {{ degree }}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class=" mb-2" *ngIf="isdegressEmpty">
-                    <p class="text-danger">* Degrees required</p>
-                </div>
-            </div>
-            
-            <div class="box flex-item ">
-                <div class="box1">
-                    <p class="textIn">Gender</p>
-                </div>
-
-                <div class="box2">
-                    <ul>
-                        <li *ngFor="let gender of genders" (click)="selectItemGender(gender)" [ngClass]="{ 'selected': genderSelected === gender }">
-                            {{ gender }}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class=" mb-2" *ngIf="isGendersEmpty">
-                    <p class="text-danger">* Genders required</p>
-                </div>
               
+                <app-search-item [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
+
             </div>
+            
+            <div class="box     flex-item ">
+              
+                <app-search-item [isNothingSelected]="isGendersEmpty" [items]="genders" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
+
+            </div>
+
+
+            <div class="container3">
+              
+                <button (click)="search()" class="buttonSearch">
+                    Search
+               </button>
+            </div>
+         
+           
         </div >
 
     
       </div>
 
-      <div class="container2">
-        <div class="line">
-        </div>
-      </div>
-
-      <div class="container3">
-        
-           <button (click)="search()" class="buttonSearch">
-                Search
-           </button>
-      </div>
-
-      <div class="line1"></div>
           
       <app-aftersearch (newItemEvent)="isDataLoaded($event)" #afterSearchComponent></app-aftersearch>
 </div>
