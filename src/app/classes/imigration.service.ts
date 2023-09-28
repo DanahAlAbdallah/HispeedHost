@@ -69,7 +69,7 @@ export class ImigrationService {
 
 
 
-  public getAllHrResults(imiHrReq: ImmigrationHrRequest): Observable<any[]> {
+  public getHrResultsWithSpecificCondition(imiHrReq: ImmigrationHrRequest): Observable<any[]> {
 
 
     let params = new HttpParams();
@@ -77,6 +77,26 @@ export class ImigrationService {
     params = params.set('gender', imiHrReq.gender);
 
     return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/hr',{params}).pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  } 
+
+  public getAllHrResults(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/hr/all').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  } 
+
+  public getAllProfessions(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/profession/all').pipe(
       retry(3),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => new Error('Something bad happened; please try again later.'));

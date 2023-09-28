@@ -13,10 +13,13 @@ export class SearchItemComponent {
   @Input() isNothingSelected = false;
   @Output() itemValue = new EventEmitter<string>();
 
-  public majorSelected = "";
+  public itemSelected = "";
 
-  selectItem(item:string) {
-    this.itemValue.emit(item);
+  selectItem() {
+    this.itemValue.emit(this.itemSelected);
+    if(this.itemSelected !== ""){
+      this.isNothingSelected = false;
+    }
   }
 
 }

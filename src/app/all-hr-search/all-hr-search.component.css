@@ -25,7 +25,7 @@ html, body {
 .no-data-message {
   font-size: large;
   color: #00B3FF; /* Change this to your desired text color */
-  font-weight: normal;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -48,3 +48,26 @@ html, body {
   transform: translateY(0);
 }
 
+.backdiv{
+    margin-top: 3%;
+    margin-left: 4%;
+}
+
+.back-button {
+    background-color: #FCD406;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .back-button:hover {
+    background-color: #d1b62f;
+  }
+  
+  .fa {
+    margin-right: 5px; /* Add some space between the icon and text */
+  }
+  

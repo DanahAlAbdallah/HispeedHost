@@ -1,15 +1,16 @@
-import { Component, ElementRef, ViewChild  } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Search } from '../classes/search';
 import { AftersearchComponent } from '../aftersearch/aftersearch.component';
 import { filter } from 'rxjs';
+import { ImigrationService } from '../classes/imigration.service';
 
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent  {
+export class SearchComponent implements OnInit {
 
   @ViewChild('scrollMe') private scrollContainer!: ElementRef;
   
@@ -17,12 +18,10 @@ export class SearchComponent  {
   public search_Data:Search;
 
   public isMajorEmpty = false;
-  public isYearsEmpty = false;
-  public isdegressEmpty = false;
   public isGendersEmpty = false;
   public isDataLoad:boolean = false;
 
-  constructor(private router:Router){
+  constructor(private router:Router, private service:ImigrationService){
 
     this.search_Data = new Search();
 
@@ -45,14 +44,22 @@ export class SearchComponent  {
    });
   }
 
-  public majors: string[] = [
-    "Graphic Desing",
-    "Mechanical Engineer",
-    "Accounting",
-    "Computer Science",
-    "Marketing",
-    "Interior Design"
-  ]; 
+  public majors: string[] = []; 
+
+  ngOnInit(): void {
+    this.service.getAllProfessions().subscribe({
+      next: (v:any) => {
+        v.forEach((obj:any) => {
+          this.majors.push(obj.profession);
+        });
+        
+      },
+      error: (e) => {},
+      complete: () =>{}
+  });
+  }
+
+
 
   majorSelected: any = null;
 
@@ -61,45 +68,6 @@ export class SearchComponent  {
     this.search_Data.major = this.majorSelected;
     if(this,this.search_Data.major !== ""){
       this.isMajorEmpty = false;
-    }
-  }
-  
-
-  public years: string[] = [
-    "1 Year",
-    "2 Years",
-    "3 Years",
-    "4 Years",
-    "5 Years",
-    "6 Years"
-  ]; 
-
-  yearSelected: any = null;
-
-  selectItemYear(item: any): void {
-    this.yearSelected = item;
-    const temp = this.yearSelected.split(" ");
-    this.search_Data.years = temp[0];
-
-    if(this,this.search_Data.years !== ""){
-      this.isYearsEmpty = false;
-    }
-  }
-
-
-  public degrees: string[] = [
-    "Collage",
-    "University",
-    "Masters",
-  ]; 
-
-  degreeSelected: any = null;
-
-  selectItemDegree(item: any): void {
-    this.degreeSelected = item;
-    this.search_Data.degree = this.degreeSelected;
-    if(this,this.search_Data.degree !== ""){
-      this.isdegressEmpty = false;
     }
   }
 
@@ -125,8 +93,6 @@ export class SearchComponent  {
     }
     this.router.navigate(['search'] ,{ queryParams: { 
       profession:this.search_Data.major, 
-      yearsexp:this.search_Data.years,
-      degree:this.search_Data.degree,
       gender:this.search_Data.gender
     } });
 
@@ -193,6 +159,7 @@ export class SearchComponent  {
   
    genderSelectedItemEvent(gender:string){
       this.search_Data.gender = gender;
+
    }
 }
 

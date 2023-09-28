@@ -36,7 +36,7 @@ export class AftersearchComponent implements OnInit {
       
 
       if(this.requestHr.profession !== undefined){
-        this.service.getAllHrResults(this.requestHr).subscribe({
+        this.service.getHrResultsWithSpecificCondition(this.requestHr).subscribe({
           next: (res) => { 
             this.Items = res 
 

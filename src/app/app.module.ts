@@ -31,6 +31,7 @@ import { LoadingModalComponent } from './loading-modal/loading-modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { CopyrightComponent } from './copyright/copyright.component';
 import { SearchItemComponent } from './search-item/search-item.component';
+import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { SearchItemComponent } from './search-item/search-item.component';
     LoadingModalComponent,
     FooterComponent,
     CopyrightComponent,
-    SearchItemComponent
+    SearchItemComponent,
+    AllHrSearchComponent
   ],
   imports: [
     BrowserModule,

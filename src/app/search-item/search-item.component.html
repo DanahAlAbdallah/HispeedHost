@@ -1,18 +1,18 @@
-<div class="box1">
-    <p class="textIn">{{type}}</p>
-</div>
-
-<div class="box2">
-    <select>
-        <option value="" disabled selected>Select a Major</option>
-
-        <option *ngFor="let item of items" (change)="selectItem(item)" [ngClass]="{ 'selected': majorSelected === item }">
-            {{ item }}
-        </option>
-    </select>
-          
-</div>
-
-<div class=" mb-2" *ngIf="isNothingSelected">
-    <p class="text-danger">* {{type}} required</p>
+<div class="primary">
+    <div class="box1">
+        <p class="yellow-underline">{{type}}</p>
+    </div>
+    
+    <div class="box2">
+        <select class="select2" [(ngModel)]="itemSelected" (change)="selectItem()">
+            <option value="" disabled selected>Select a {{type}}</option>
+            <option *ngFor="let item of items" [value]="item">{{ item }}</option>
+        </select>
+        
+              
+    </div>
+    
+    <div class=" mb-2" *ngIf="isNothingSelected">
+        <p class="text-danger">* {{type}} required</p>
+    </div>
 </div>

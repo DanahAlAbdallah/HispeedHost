@@ -6,9 +6,9 @@
 
   <app-loading-modal *ngIf="isDataLoad"></app-loading-modal>
 
-      <div class="d-flex flex-column middle_container">
+      <div style="padding-left: 10%;" class="d-flex flex-column middle_container">
         <!-- top  -->
-        <div class="d-flex flex-row justify-content-around flex-wrap">
+        <div class="d-flex flex-row justify-content-between flex-wrap">
             <div class="box     flex-item ">
               
                 <app-search-item [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
@@ -22,20 +22,29 @@
             </div>
 
 
-            <div class="container3">
+            <div class="box flex-item">
+                <div class="c1">
+
+                </div>
               
-                <button (click)="search()" class="buttonSearch">
-                    Search
-               </button>
+                <div class="c2">
+                    <button (click)="search()" class="buttonSearch">
+                        Search
+                   </button>
+                </div>
+               
             </div>
          
            
         </div >
+        <div class="findalldiv">
+            <a routerLink="/all" class="findall" href="">Or Find All Data</a>
 
-    
+        </div>
+
       </div>
 
-          
+
       <app-aftersearch (newItemEvent)="isDataLoaded($event)" #afterSearchComponent></app-aftersearch>
 </div>
 
