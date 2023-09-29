@@ -8,6 +8,7 @@ import { ServicesComponent } from './services/services.component';
 import { StudentprogramComponent } from './studentprogram/studentprogram.component';
 import { TorrismVisaComponent } from './torrism-visa/torrism-visa.component';
 import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/',pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'' , component:ServicesComponent},
   {path:'student', component:StudentprogramComponent},
   {path:'tourism', component:TorrismVisaComponent},
-  {path:'all', component:AllHrSearchComponent}
+  {path:'all', component:AllHrSearchComponent},
+  {path:'home', component:HomeComponent}
 ];
 
 @NgModule({

@@ -64,6 +64,14 @@
   color: #686565;
 }
 
+.iconLightHome{
+  color: #fff !important;
+}
+
+.iconSelected{
+  color: #b3b3b3;
+}
+
 @media (min-width:992px) {
   .container-fluid{
     padding-right: 60px;

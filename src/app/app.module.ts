@@ -32,6 +32,11 @@ import { FooterComponent } from './footer/footer.component';
 import { CopyrightComponent } from './copyright/copyright.component';
 import { SearchItemComponent } from './search-item/search-item.component';
 import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
+import { HomeComponent } from './home/home.component';
+import { SliderComponent } from './slider/slider.component';
+import { SliderItemComponent } from './slider-item/slider-item.component';
+import { ServicesHomeComponent } from './services-home/services-home.component';
+import { ServiceHomeComponent } from './service-home/service-home.component';
 
 
 @NgModule({
@@ -61,7 +66,12 @@ import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
     FooterComponent,
     CopyrightComponent,
     SearchItemComponent,
-    AllHrSearchComponent
+    AllHrSearchComponent,
+    HomeComponent,
+    SliderComponent,
+    SliderItemComponent,
+    ServicesHomeComponent,
+    ServiceHomeComponent
   ],
   imports: [
     BrowserModule,

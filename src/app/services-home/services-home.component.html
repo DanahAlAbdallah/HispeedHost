@@ -1,0 +1,25 @@
+<div class="main">
+    <div class="div_title">
+        <p class="title">OUR SERVICES</p>
+        <img class="underline_title" src="./assets/underline.png"/>
+    </div>
+   
+    <div class="description">
+        <p class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+    </div>
+
+    <!-- services -->
+    <div class="services">
+        <app-service-home 
+            *ngFor="let title of titles,let i = index"
+             [imgUrl]="photos[i]"
+             [title]="title"
+             [_routelink]="links[i]"
+             [desc]="desc[i]"
+        ></app-service-home>
+    </div>
+</div>
+
+

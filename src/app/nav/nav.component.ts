@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -16,6 +16,11 @@ export class NavComponent {
 
   activeLink: string = ''; // Variable to track the active link
 
+
+  @Input() iconLightHome = false;
+  @Input() navItemsHome = false;
+  @Input() whichNavItems = "Home";
+
   setActiveLink(link: string) {
     this.activeLink = link;
   }
@@ -29,7 +34,7 @@ export class NavComponent {
   onWindowScroll() {
     this.isNavbarScrolled = window.pageYOffset > this.scrollThreshold;
     this.isIconLight = this.isNavbarScrolled;
-    this.imageSource = this.isNavbarScrolled ? './assets/logohighspeededit-1.png' : './assets/group.PNG';
+    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/Group_light.png' : './assets/group.PNG';
     this.isScrolling = true;
 
   }
@@ -77,6 +82,8 @@ export class NavComponent {
   
   // Attach the click event listener to the entire document
   ngOnInit() {
+    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/Group_light.png' : './assets/group.PNG';
+
     this.renderer.listen('document', 'click', (event: Event) => {
       this.onDocumentClick(event as MouseEvent);
     });

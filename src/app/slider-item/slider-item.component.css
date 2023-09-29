@@ -1,0 +1,81 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.row1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.big_text{
+    width: 70%;
+    font-size: 50px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.img-left{
+    cursor: pointer;
+}
+
+.img-right{
+    cursor: pointer;
+}
+
+.row2{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 3.2%;
+    justify-content: center;
+}
+
+.second_paragra{
+    text-align: center;
+    width: 65%;
+    color: #ffffff;
+    font-size: large;
+}
+
+.row3{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5%;
+    justify-content: center;
+}
+
+
+.find_tour{
+    width: 12%;
+    height: 58.707px;
+    background-color:  #FCD406;
+    border-radius: 26px;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+}
+
+.find_tour:hover{
+    background-color:  #d1bc51;
+
+}
+
+.row4{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16%;
+}

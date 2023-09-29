@@ -14,15 +14,15 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll d-none d-lg-flex">
         <li class="nav-item" >
-          <a class="nav-link fw-bolder" href="https://hispeed-group.com/" >HOME</a>
+          <a class="nav-link fw-bolder" href="https://hispeed-group.com/" [ngClass]="{'iconLightHome': navItemsHome, 'iconSelected':navItemsHome &&  whichNavItems === 'Home'}" >HOME</a>
         </li>
 
         <li class="nav-item" >
-          <a style="color: #9c9a9a;" class="nav-link fw-bolder" routerLink="/" >SERVICES</a>
+          <a style="color: #9c9a9a;" class="nav-link fw-bolder" routerLink="/" [ngClass]="{'iconLightHome': navItemsHome && whichNavItems !== 'Services', 'iconSelected': whichNavItems == 'Services'}">SERVICES</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link fw-bolder" href="https://hispeed-group.com/about-us-3/">ABOUT US</a>
+          <a class="nav-link fw-bolder" href="https://hispeed-group.com/about-us-3/" [ngClass]="{'iconLightHome': navItemsHome && whichNavItems !== 'About Us', 'iconSelected' : whichNavItems == 'About Us'}">ABOUT US</a>
         </li>
       
       </ul>
