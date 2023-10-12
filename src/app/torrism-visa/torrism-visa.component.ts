@@ -310,7 +310,11 @@ public checkEmailIsEmpty(){
 
   public getCurrentResidenceCountries(){
     this.serviceImmi.loadCurrentResidenceCountries().subscribe({
-        next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
+        next: (v:any) => {
+          this.currentResidenceCountries =
+          v.filter((c:any) => c.name.common !== 'Israel')
+          .sort((a:any, b:any) => a.name.common >= b.name.common ? 1 : -1);
+        },
         error: (e) => {console.log(e)},
         complete: () =>{console.log("is complete")}
     });

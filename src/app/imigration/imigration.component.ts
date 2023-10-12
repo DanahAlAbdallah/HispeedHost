@@ -39,7 +39,7 @@ export class ImigrationComponent implements OnInit {
   public isOtherVisaStatus:boolean = false;
   public isProfessionOther:boolean = false;
   public isProfessionOtherRequired:boolean = false;
-
+  public isNationalityEqualToCurrentResi:boolean = false;
 
   public response!:any;
   public isShowModal = false;
@@ -160,6 +160,7 @@ export class ImigrationComponent implements OnInit {
   
   hideEVSInput:boolean = false;
   public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
+    
     this.items.forEach(item => {
       item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
       if(item.checked){
@@ -496,16 +497,45 @@ public checkEducatioIsEmpty(){
 
 }
 
-public checkPassportCountryIsEmpty(){
+public checkPassportCountryIsEmpty() {
+  if(
+    this.imigration.CurrentResidence == this.imigration.passportCountry
+  ){
+      this.imigration.visaStatus = "Dont have";
+      this.isNationalityEqualToCurrentResi = true;
+  }else{
+    this.isNationalityEqualToCurrentResi = false;
+    this.imigration.visaStatus = '';
+  }
+
+ console.log(this.imigration.visaStatus)
+
   this.isPassportCountryEmpty = this.imigration.passportCountry.trim().length === 0;
 
-  this.buttonDisable();
+  console.log(this.imigration.visaStatus);
 
+  this.buttonDisable();
 }
 
 
-public checkCurrentResidenceIsEmpty(){
+public checkCurrentResidenceIsEmpty() {
+  if(
+    this.imigration.CurrentResidence == this.imigration.passportCountry
+  ){
+      this.imigration.visaStatus = "Dont have";
+      this.isNationalityEqualToCurrentResi = true;
+  }
+  else{
+    this.isNationalityEqualToCurrentResi = false;
+    this.imigration.visaStatus = '';
+  }
+
+  console.log(this.imigration.visaStatus)
+
   this.isCurrentResidence = this.imigration.CurrentResidence.trim().length === 0;
+
+
+  console.log(this.imigration.visaStatus);
 
   this.buttonDisable();
 
@@ -520,6 +550,7 @@ public checkVisaStatusIsEmpty(){
 }
 
 public checkGenderIsEmpty(){
+  
   this.isGenderEmpty = this.imigration.gender.trim().length === 0;
 
   this.buttonDisable();
@@ -569,7 +600,11 @@ public checkProfessionOtherIsEmpty(){
 
   public getCurrentResidenceCountries(){
     this.service.loadCurrentResidenceCountries().subscribe({
-        next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
+        next: (v:any) => {
+          this.currentResidenceCountries =
+           v.filter((c:any) => c.name.common !== 'Israel')
+           .sort((a:any, b:any) => a.name.common >= b.name.common ? 1 : -1);
+        },
         error: (e) => {console.log(e)},
         complete: () =>{console.log("is complete")}
     });
@@ -591,14 +626,17 @@ public checkProfessionOtherIsEmpty(){
       this.imigration.yearsOfExperience.length == 0||
       this.imigration.education.length == 0||
 
-      (this.imigration.email.length ==0 && this.imigration.phoneNumber.length ==0)||
+      (this.imigration.email.length ==0 && this.imigration.phoneNumber.length == 0)||
       (this.imigration.profession == "Other" && this.imigration.professionOther.length == 0)
              ){
         this.disablebuttonModal = true;
+        console.log(this.imigration.visaStatus);
+        console.log("woowo")
       }
       else{
         this.disablebuttonModal = false;
         this.isSomethingEmpty = false;
+        console.log("woowo1")
       }
   }
 

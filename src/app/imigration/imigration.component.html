@@ -26,7 +26,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                   <div class="flex-container3 ">
                     <div class="c1">
                       <button class="button1">
-                        Passport Country
+                        Nationality
                     </button>
                     </div>
                       
@@ -40,7 +40,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
                         <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span> 
                       </div>
                       <div class=" mb-2" *ngIf="isPassportCountryEmpty">
-                        <p class="text-danger">* Passport Country required</p>
+                        <p class="text-danger">* Nationality required</p>
                       </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
     <div class="line"></div>
   
   
-       <div class="  d-flex flex-column">
+       <div  *ngIf="!isNationalityEqualToCurrentResi" class="  d-flex flex-column">
   
           <div class=" container4">   
             <button class="button3">
@@ -145,8 +145,12 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
   
           <div class=" d-flex flex-row flex-wrap mt-3 align-items-center">
   
-            <div class="check1">
-              <div class="checkboxes d-flex flex-row justify-content-between flex-wrap">
+            <div class="check1" >
+              <div  
+              [ngClass]="{
+                'checkboxes d-flex flex-row justify-content-between flex-wrap':!isNationalityEqualToCurrentResi,
+                'margi':isNationalityEqualToCurrentResi
+              }">
                 <div *ngFor="let item of items; let i = index;">
                   <label class="checkbox-label">
                     <input  type="checkbox" [checked]="item.checked" (change)="handleCheckboxChange1(item)">
@@ -177,7 +181,7 @@ class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}
         
     </div>
   
-    <div class="line"></div>
+    <div *ngIf="!isNationalityEqualToCurrentResi" class="line"></div>
   
   
     <div class="d-flex flex-column">

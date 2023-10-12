@@ -102,5 +102,15 @@ export class ImigrationService {
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     );
+  }
+
+  public getAllYears(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/yesrs/all').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
   } 
 }

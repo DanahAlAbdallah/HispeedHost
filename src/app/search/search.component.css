@@ -168,6 +168,11 @@ line-height: normal;
 
 }
 
+.middle_container{
+  padding-left: 10%;
+
+}
+
   @media (min-width: 1200px) {
     .middle_container{
       padding-right: 10%;
@@ -235,5 +240,8 @@ line-height: normal;
       margin-top: 4%;
     }
 
-
+    .middle_container{
+      padding-left: 0%;
+  
+    }
   }
