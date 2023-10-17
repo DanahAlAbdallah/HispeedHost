@@ -37,6 +37,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SliderItemComponent } from './slider-item/slider-item.component';
 import { ServicesHomeComponent } from './services-home/services-home.component';
 import { ServiceHomeComponent } from './service-home/service-home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { ServiceHomeComponent } from './service-home/service-home.component';
     SliderComponent,
     SliderItemComponent,
     ServicesHomeComponent,
-    ServiceHomeComponent
+    ServiceHomeComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
