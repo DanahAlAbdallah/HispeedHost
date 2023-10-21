@@ -1,0 +1,92 @@
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(235, 235, 235);   
+}
+
+.title-div{
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1{
+    font-size: 30px;
+
+}
+
+.underline_title{
+    background-color: black;
+    
+    height: 1px;
+    width: 8vw;
+}
+
+.desc-div{
+    text-align: center;
+    margin-top: 3vw;
+    width: 40%;
+}
+
+.desc{
+    text-align: center;
+    color: rgb(177, 177, 177);
+    font-size: 15px;
+    font-weight: 500;
+}
+.testimonials{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+    flex-wrap: wrap;
+    margin-top: 3%;
+    align-items: center;
+}
+
+.items{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 3%;
+
+}
+
+@media (max-width:1200px) {
+    .items{
+        width: 50%;
+
+    }
+}
+
+@media (max-width:830px) {
+    .items{
+        width: 70%;
+
+    }
+}
+@media (max-width:700px) {
+    .items{
+        width: 100%;
+        margin-bottom: 5%;
+        align-items: center;
+    }
+
+    .desc-div{
+
+        width: 85%;
+    }
+
+    .underline_title{
+        background-color: black;
+        margin-top: 0.1vw;
+        height: 1px;
+        width: 13.7vw;
+    }
+}

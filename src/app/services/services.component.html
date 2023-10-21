@@ -1,16 +1,19 @@
-<app-nav></app-nav>
+<div style="background-color: rgb(92, 91, 91);">
+    <app-nav [iconLightHome]="true"></app-nav>
 
 
-<div class="services">
-
-    <div class="container">
-        <app-service *ngFor="let title of titles; index as i" 
-        [title]="title" [link]="links[i]" [description]="description[i]">
-
-        </app-service>
+    <div class="services">
+    
+        <div class="container">
+            <app-service *ngFor="let title of titles;index as i"
+            [ngStyle]="{'align-self': (i === 4) ? 'flex-start' : 'auto'}"
+                 [title]="title" [link]="links[i]" [description]="description[i]">
+    
+            </app-service>
+        </div>
     </div>
+    
+    
+    
+    <app-footer></app-footer>
 </div>
-
-
-
-<app-footer></app-footer>

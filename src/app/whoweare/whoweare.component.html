@@ -1,0 +1,30 @@
+<div class="main">
+    <img class="img" src="./assets/who-we-are.png"/>
+
+    <div class="blocks">
+       
+        <div class="div_title">
+            <p class="title">Who We Are</p>
+            <img class="underline_title" src="./assets/underline.png"/>
+        </div>
+
+        <div class="description">
+            <p class="desc">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+            </p>
+        </div>
+
+        <div class="who-we-are">
+            <div class="container">
+                <div class="main-second" *ngFor="let icon of icons, index as i">
+                    <app-whowearesection 
+                    [icon]="icon" 
+                    [title]="titles[i]"
+                    [desc]="description[i]"
+                    ></app-whowearesection>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

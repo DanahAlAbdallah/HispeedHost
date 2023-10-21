@@ -12,7 +12,7 @@ export class NavComponent {
   public isNavItemSelected: boolean = false;
   isNavSidebarOpen: boolean = false;
   scrollThreshold = 10;
-  imageSource: string = './assets/group.PNG';
+  imageSource: string = './assets/icon-general.png';
 
   activeLink: string = ''; // Variable to track the active link
 
@@ -34,7 +34,7 @@ export class NavComponent {
   onWindowScroll() {
     this.isNavbarScrolled = window.pageYOffset > this.scrollThreshold;
     this.isIconLight = this.isNavbarScrolled;
-    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/Group_light.png' : './assets/group.PNG';
+    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/icon-general-white.png' : './assets/icon-general.png';
     this.isScrolling = true;
 
   }
@@ -82,7 +82,7 @@ export class NavComponent {
   
   // Attach the click event listener to the entire document
   ngOnInit() {
-    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/Group_light.png' : './assets/group.PNG';
+    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/icon-general-white.png' : './assets/icon-general.png';
 
     this.renderer.listen('document', 'click', (event: Event) => {
       this.onDocumentClick(event as MouseEvent);

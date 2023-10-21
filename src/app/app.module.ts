@@ -38,6 +38,17 @@ import { SliderItemComponent } from './slider-item/slider-item.component';
 import { ServicesHomeComponent } from './services-home/services-home.component';
 import { ServiceHomeComponent } from './service-home/service-home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ApplyforjobComponent } from './applyforjob/applyforjob.component';
+import { FormsSection1Component } from './forms-section1/forms-section1.component';
+import { WhoweareComponent } from './whoweare/whoweare.component';
+import { WhowearesectionComponent } from './whowearesection/whowearesection.component';
+import { SpcialPackageComponent } from './spcial-package/spcial-package.component';
+import { SpcialPackageItemComponent } from './spcial-package-item/spcial-package-item.component';
+import { WemakeTourComponent } from './wemake-tour/wemake-tour.component';
+import { TestimonialsComponent } from './testimonials/testimonials.component';
+import { TestimonialsItemComponent } from './testimonials-item/testimonials-item.component';
+import { HomeFormComponent } from './home-form/home-form.component';
+import { HomeContactFooterComponent } from './home-contact-footer/home-contact-footer.component';
 
 
 @NgModule({
@@ -73,7 +84,18 @@ import { AboutUsComponent } from './about-us/about-us.component';
     SliderItemComponent,
     ServicesHomeComponent,
     ServiceHomeComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ApplyforjobComponent,
+    FormsSection1Component,
+    WhoweareComponent,
+    WhowearesectionComponent,
+    SpcialPackageComponent,
+    SpcialPackageItemComponent,
+    WemakeTourComponent,
+    TestimonialsComponent,
+    TestimonialsItemComponent,
+    HomeFormComponent,
+    HomeContactFooterComponent
   ],
   imports: [
     BrowserModule,

@@ -5,12 +5,14 @@ html, body {
 }
 
 
+
 .services {
     display: flex;
     flex-direction: column;
     background-color: transparent;
     flex-shrink: 0;
 
+    margin-top: 5%;
     padding-top: 1%;
     padding-left: 2%;
     padding-right: 2%;
@@ -32,7 +34,7 @@ html, body {
     height: 60%;
     padding-left: 8%;
     padding-right: 8%;
-
+    
     flex-wrap: wrap;
 }
 

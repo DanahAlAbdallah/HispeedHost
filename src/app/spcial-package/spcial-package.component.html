@@ -1,0 +1,21 @@
+<div class="main">
+
+    <div class="title-div">
+        <h1 class="title">SPECIAL PACKAGE</h1>
+    </div>
+
+    <div class="desc-div">
+        <p class="desc"> Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</p>
+    </div>
+
+    <div class="packages">
+        <div class="container">
+            <div class="main-second"  *ngFor="let package of photos, index as i">
+                <app-spcial-package-item 
+                    [photo]="package"
+                    [country]="countries[i]">
+                </app-spcial-package-item>
+            </div>
+        </div>
+    </div>
+</div>

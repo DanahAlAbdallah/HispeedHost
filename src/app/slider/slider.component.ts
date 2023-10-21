@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ScrollService } from '../classes/scroll.service';
 
 @Component({
   selector: 'app-slider',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class SliderComponent {
 
+  constructor(private scrollService: ScrollService) { }
+
+
+  scrollToY(){
+
+    this.scrollService.scrollToYPosition(600);
+  }
 }

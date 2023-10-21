@@ -6,21 +6,27 @@
    
     <div class="description">
         <p class="desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing eli.
         </p>
     </div>
-
-    <!-- services -->
+    
+    
     <div class="services">
-        <app-service-home 
-            *ngFor="let title of titles,let i = index"
-             [imgUrl]="photos[i]"
-             [title]="title"
-             [_routelink]="links[i]"
-             [desc]="desc[i]"
-        ></app-service-home>
-
+        <div class="container">
+            <div class="main-second"  *ngFor="let title of titles,index as i">
+                <app-service-home
+                
+                    [imgUrl]="photos[i]"
+                    [title]="title"
+                    [_routelink]="links[i]"
+                    [desc]="desc[i]"
+            ></app-service-home>    
+            </div>
+        
+            
+        </div>
     </div>
+       
 </div>
 
 

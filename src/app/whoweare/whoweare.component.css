@@ -1,0 +1,164 @@
+.main{
+    width: 100%;
+    height:100%;
+    position: relative;
+}
+
+.img{
+    width: 100%;
+    display: block;
+    height: 100%;
+}
+
+.blocks{
+    display: flex;
+    flex-direction: column;
+    
+    position: absolute;
+    left: 0%;
+    top:7%;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .div_title{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    font-size: 3.4vw;
+    font-weight: 400;
+    color: #F8D413;
+}
+
+.underline_title{
+    margin-top: 0.5%;
+    height: 1px;
+    width: 15vw;
+}
+
+.description{
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.desc{
+    text-align: center;
+    width: 50%;
+    line-height: 1.2vw;
+    font-size: 1.3vw;
+    color: white;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.whoweare {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-bottom: 20%;
+}
+
+.container{
+
+    margin-top: 2%;
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content:center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main-second{
+
+        border-radius: 50px;
+        width: 24%;
+        height: 25vw;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+        margin-left: 3%;
+        margin-right: 3%;
+}
+
+.main-second:hover{
+    cursor: pointer;
+}
+
+
+@media (max-width:700px) {
+    .title{
+        font-size: 6vw;
+       
+    }
+
+    .desc{
+       
+        font-size: 2.8vw;
+        width: 80%;
+    }
+
+    .main-second{
+        width: 60%;
+        margin-bottom: 4%;
+        height: 300px;
+
+    }
+
+    .img{
+        
+        height: 1200px;
+    }
+}
+
+
+@media (max-width:576px) {
+    
+    .title{
+        line-height: 0.2vw;
+    }
+    .main-second{
+        border-radius: 30px;
+        height: 250px;
+
+    }
+
+
+    .description{
+        margin-top: 2%;
+        margin-bottom: 0%;
+    }
+
+    .desc{
+        line-height: 85%;
+    }
+
+    .underline_title{
+        margin-top: 0.21;
+    }
+    
+
+    .img{
+        
+        height: 950px;
+    }
+}
+

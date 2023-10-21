@@ -10,6 +10,7 @@ import { TorrismVisaComponent } from './torrism-visa/torrism-visa.component';
 import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
 import { HomeComponent } from './home/home.component';
 import {AboutUsComponent} from './about-us/about-us.component';
+import { ApplyforjobComponent } from './applyforjob/applyforjob.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/',pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'tourism', component:TorrismVisaComponent},
   {path:'all', component:AllHrSearchComponent},
   {path:'home', component:HomeComponent},
-  {path:'aboutus', component:AboutUsComponent}
+  {path:'about', component:AboutUsComponent},
+  {path:'apply', component:ApplyforjobComponent}
 ];
 
 @NgModule({

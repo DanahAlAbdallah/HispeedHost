@@ -1,25 +1,32 @@
 /* Base styles */
 .container-fluid {
   display: flex;
-  justify-content: space-between;
+  justify-content:none;
   align-items: center;
  
 }
-
-.navbar-toggler {
-  /* Customize your button styles here */
-}
-
 .navbar-logo {
   max-width: 100px; /* Adjust the maximum width as needed */
   height: auto; /* Maintain the aspect ratio */
 }
 
-/* Navbar appearance */
-.navbar-scrolled {
-  /* Add any additional styles for the scrolled navbar here */
+
+
+.div-contactius{
+  width: 10%;
+}
+.contactus{
+  height:40px;
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 1px solid white;
 }
 
+.contactus:hover{
+  background-color: #000;
+}
 /* Icon appearance */
 .icon-light {
   filter: brightness(5);
@@ -34,14 +41,23 @@
 
 /* Navigation items */
 .navbar-nav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 60%;
+  flex: 2;
+  justify-content: center;
+  padding-left: 20px; /* Add more left padding to increase space on the left side */
+  padding-right: 20px; /* Add more right padding to increase space on the right side */
 }
 
 .navbar-nav .nav-item {
-  margin-left: 5%;
+  margin: 0 40px;
+
+}
+
+.navbar > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1; /* Take up available space to push the button to the right */
+  padding-right: 15px; /* Add some right padding to space it from the right edge */
 }
 
 /* Light color */
@@ -52,12 +68,11 @@
 }
 
 .navbar-nav .nav-item a {
-  color: #000;
-  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+    font-family: "Ubuntu", Arial, Helvetica, sans-serif;
   font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-style: normal;
   height: 40px;
+
 }
 
 .navbar-nav .nav-item a:hover{
@@ -72,9 +87,15 @@
   color: #b3b3b3;
 }
 
+nav div ul li a{
+  color: white;
+  font-size: 14px;
+}
+
 @media (min-width:992px) {
   .container-fluid{
-    padding-right: 60px;
+    margin-right: 130px;
+    padding-right: 130px;
     padding-left: 130px; /* Add spacing from left and right */
     padding-top: 20px;
   }
@@ -83,7 +104,17 @@
 /* Mobile screen styles */
 @media (max-width: 992px) {
   /* Hide the default navbar items */
+
+  .div-contactius{
+    display: none;
+  }
  
+  .navbar > div:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* Take up available space to push the button to the right */
+  }
   .c {
     display: none;
   }
@@ -181,5 +212,12 @@
   font-size: 12px; /* Adjust font size as needed */
   padding: 10px 10px; /* Remove padding */
   margin: 0; /* Remove margin */
-  display: block; /* Make items take full width */
+  display: block; /*
+ Make items take full width */
+
+}
+
+
+.color{
+  color: white;
 }

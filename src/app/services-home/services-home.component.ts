@@ -9,14 +9,14 @@ export class ServicesHomeComponent {
 
 
   public photos:string[] = [
-    './assets/tayara-yellow.png',
-    './assets/bonbon.png',
-    './assets/student.png',
-    './assets/findemp.png'
+    './assets/immigration-icon.png',
+    './assets/tourism-icon.png',
+    './assets/student-icon.png',
+    './assets/findemployee-icon.png'
   ]
 
   public titles:string[] = [
-    'FLIGHT BOOKING',
+    'Flight Booking',
     'Tourism Visa',
     'Student Program',
     'Find an Employee'

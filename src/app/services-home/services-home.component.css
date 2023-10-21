@@ -1,11 +1,15 @@
 .main{
-    margin-top: 5%;
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: rgb(92, 91, 91);
+    align-items: center;
+    /* background: linear-gradient(to bottom, rgb(211, 211, 211), rgb(92, 91, 91)); */
+
 }
 
 .div_title{
+    margin-top: 5%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -13,13 +17,15 @@
 }
 
 .title{
-    font-size: 50px;
-    font-weight: bold;
-    color: #000000;
+    font-size: 3.4vw;
+    font-weight: 200;
+    color: #F8D413;
 }
 
 .underline_title{
-    margin-top: 1.5%;
+    margin-top: 0.5vw;
+    height: 1px;
+    width: 15vw;
 }
 
 .description{
@@ -34,19 +40,82 @@
 
 .desc{
     text-align: center;
-    width: 60%;
-    font-size: 20px;
-    color: #000000;
-    font-weight: 400;
+    width: 30%;
+    line-height: 1.3vw;
+    font-size: 1.5vw;
+    color: #929292;
+    font-weight: 200;
     font-style: normal;
 }
 
-.services{
-    display:flex;
+.services {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 13%;
+    padding-right: 13%;
+    flex-shrink: 0;
+    align-items: stretch;
+    margin-bottom: 20%;
+}
+
+.container{
+    display: flex;
     flex-direction: row;
     width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
-    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main-second{
+
+        width: 40%;
+        height: 250px;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-bottom: 3%;
+
+}
+
+.main-second:hover{
+    background-color: black;
+    border-radius: 15px;
+    padding: 1%;
+    cursor: pointer;
+}
+
+
+@media (max-width:700px) {
+    .title{
+        font-size: 6vw;
+      
+    }
+
+
+    .underline_title{
+        margin-top: -1vw;
+        width: 23vw;
+    }
+
+    .desc{
+        width: 70%;
+        line-height: 3vw;
+        font-size: 3vw;
+        color: #929292;
+        font-weight: 200;
+        font-style: normal;
+    }
+
+}
+@media (max-width:576px) {
+    
+    .main-second{
+        width: 100%;
+    }
+    
 }

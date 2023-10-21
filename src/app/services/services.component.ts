@@ -8,12 +8,13 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class ServicesComponent {
 
-  public titles:any[] = ["IMMIGRATION PROGRAM", "Tourism Visa", "Student Program", "Find an Employee"];
-  public links:any[] = ["/imigration","/tourism","/student","/search"]
+  public titles:any[] = ["IMMIGRATION PROGRAM", "TOURISM VISA", "STUDENT PROGRAM", "FIND EMPLOYEE","APPLY FOR A JOB"];
+  public links:any[] = ["/imigration","/tourism","/student","/search","/apply"]
   public description:any[] = [
     'Tailored solutions for relocating abroad; we guide you through legalities, paperwork, and needs for a seamless transition.',
     'Easily obtain tourism visas for diverse destinations, ensuring smooth entries and carefree travel experiences.',
     'Navigate educational journeys abroad smoothly, from institution selection to application management, achieving academic aspirations.',
+    'Connect with top talent using our streamlined HR services, boosting business growth through efficient recruitment.',
     'Connect with top talent using our streamlined HR services, boosting business growth through efficient recruitment.'
   ]
 
