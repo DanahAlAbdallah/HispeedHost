@@ -28,15 +28,15 @@
     display: flex;
     align-items: start;
     justify-content: center;
-    margin-top: 1vw;
+    margin-top: 2vw;
 }
 
 .description {
     color: rgb(177, 177, 177);
     font-size: 1.3vw;
     font-weight: 200;
-    word-break: break-all;
     line-height: 1.2vw;
+    text-align: center  ;
 }   
 
 .underline_title{
@@ -49,11 +49,15 @@
 
 @media (max-width:576px) {
     
-   
+    .img{
+       margin-bottom: 3%;
+    }
 
     .underline_title{
         margin-top: -12px;
     }
+
+    
 }
 
 @media (max-width :980px ) {
@@ -69,21 +73,24 @@
 
 @media (max-width :700px ) {
     .description{
-        font-size: 3vw;
+        font-size: 3.5vw;
         flex-grow: 1;
+        text-align: center;
         line-height: 110%;
     }
 
     .description-div{
         margin-top: 20%;
-        height: 100px;
+        height: 150px;
         align-items: center;
         flex-direction: column;
         justify-content: center;
     }
 
     .title{
-        font-size: 3vw;
+        font-size: 4vw;
+        width: 100%;
+        text-align: center;
     }
 
     .underline_title{

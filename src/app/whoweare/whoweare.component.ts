@@ -21,8 +21,8 @@ export class WhoweareComponent {
   ]
 
   description: string[] = [
-    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.',
-    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.',
-    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.',
+    "Explore Handpicked Hotels: Where you'll find the perfect blend of comfort, cultural immersion, and unforgettable experiences.",
+    'Experience world-class travel service with us. Personalized, exceptional, and unforgettable journeys await.',
+    'Embrace Our Unbeatable Best Price Guarantee: Your gateway to affordable and unforgettable journeys.',
     ]
 }

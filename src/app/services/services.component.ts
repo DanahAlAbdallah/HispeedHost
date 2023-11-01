@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css']
 })
-export class ServicesComponent {
+export class ServicesComponent implements OnDestroy{
 
   public titles:any[] = ["IMMIGRATION PROGRAM", "TOURISM VISA", "STUDENT PROGRAM", "FIND EMPLOYEE","APPLY FOR A JOB"];
   public links:any[] = ["/imigration","/tourism","/student","/search","/apply"]
@@ -27,5 +27,9 @@ export class ServicesComponent {
              window.scrollTo(0,0);
           }
    });
+  }
+
+  ngOnDestroy(): void {
+
   }
 }

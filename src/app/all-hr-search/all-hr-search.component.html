@@ -6,34 +6,39 @@
       </button>
 </div>
 
-  
+
 <div class="aftersearch" >
 
 
     <div style="margin-top: 10%;" >
-    
+
     </div>
     <div id="searchResults"  *ngIf="!isEmpty">
-        <app-aftersearchitem  *ngFor="let af of Items" 
-        [name]="af.full_name" 
-        [age]="af.age" 
-        [location]="af.current_residence" 
+        <app-aftersearchitem  *ngFor="let af of Items"
+        [name]="af.full_name"
+        [age]="af.age"
+        [location]="af.current_residence"
         [contactlink]="af.contactlink"
         [resumelink]="af.link_cv"
         [isEmpty]="isEmpty"
         >
-    
+
         </app-aftersearchitem>
     </div>
-    
+
     <div *ngIf="isEmpty">
-    
+
         <p class="no-data-message">{{message}}</p>
     </div>
-    
-    
+
+
     <div style="margin-bottom: 10%;" >
-    
-    
-    
+
+
+
     </div>
+
+    </div>
+
+<app-home-contact-footer></app-home-contact-footer>
+    <app-footer></app-footer>

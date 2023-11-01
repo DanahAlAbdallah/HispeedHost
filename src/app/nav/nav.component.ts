@@ -1,4 +1,6 @@
 import { Component, ElementRef, HostListener, Input, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ScrollService } from '../classes/scroll.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,15 +22,19 @@ export class NavComponent {
   @Input() iconLightHome = false;
   @Input() navItemsHome = false;
   @Input() whichNavItems = "Home";
+  isClicked: boolean= false;
 
   setActiveLink(link: string) {
     this.activeLink = link;
   }
 
   @ViewChild('blbla', { static: false }) navSidebar!: ElementRef;
-  
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+
+  constructor(private elementRef: ElementRef,
+     private renderer: Renderer2,
+      private route:Router,
+     private scroll:ScrollService ) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -55,10 +61,11 @@ export class NavComponent {
   setNavItemColor(isLight: boolean) {
     this.isNavItemSelected = isLight;
   }
- 
+
 
   toggleNavSidebar() {
     this.isNavSidebarOpen = !this.isNavSidebarOpen;
+    this.isClicked = !this.isClicked;
   }
 
   setNavItemColorAndClose(isLight: boolean) {
@@ -79,7 +86,7 @@ export class NavComponent {
 
   }
 
-  
+
   // Attach the click event listener to the entire document
   ngOnInit() {
     this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/icon-general-white.png' : './assets/icon-general.png';
@@ -89,5 +96,25 @@ export class NavComponent {
     });
   }
 
-  
+
+  goToContactUs(){
+    this.route.navigate(['/']);
+    setTimeout(() => {
+      this.scroll.scrollToElement(document.getElementById('contact'));
+      document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})
+
+    }, 100);
+  }
+
+  goToContactUsFromSideBar(){
+    this.route.navigate(['/']);
+    setTimeout(() => {
+      this.scroll.scrollToElement(document.getElementById('contact'));
+      document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})
+
+    }, 100);
+
+    this.isNavSidebarOpen= false;
+  }
+
 }

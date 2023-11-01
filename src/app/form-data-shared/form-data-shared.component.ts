@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-data-shared',
@@ -7,46 +8,88 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 })
 export class FormDataSharedComponent {
 
-  @Input() isEmailRequired:boolean = false;
-  @Input() isPhoneNumberRequired:boolean = false;
+  myForm: FormGroup;
 
-  emailPattern: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  @Input() formFields?: EmailPhoneClass;
+ 
   @ViewChild('emailInput') emailInput: any;
 
-  @Output() emailValue = new EventEmitter<string>();
-  @Output() phoneNumberValue = new EventEmitter<string>();
+  @Output() emailphoneData = new EventEmitter<EmailPhoneClass>();
+  @Input() isSomethingEmpty:boolean = false
+  @Output() formValidityChanged = new EventEmitter<boolean>();
 
- public isEmailValid = false;
+ constructor(private fb: UntypedFormBuilder) { 
+  this.myForm  = this.fb.group({
+    // email: ['',[Validators.required,Validators.email]],
+    // phoneNumber: ['',[Validators.required, Validators.minLength(7)]],
+     email: [''],
+     phoneNumber: ['']
+  });
 
-  emailValueKeyUp(event:any){
-    const isValidEmail = this.emailPattern.test(event.target.value);
-    if(event.target.value != ""){
-      if (isValidEmail) {
-        this.emailValue.emit(event.target.value);
-        this.isEmailValid = false;
-  
-      } else {
-          this.isEmailValid = true;
+  const customValidator = (control: AbstractControl) => {
+    if (control.value) {
+      if (control === this.myForm.get('email') && this.myForm.get('email')?.value != '') {
+        return Validators.email(control);
+      }
+      if (control === this.myForm.get('phoneNumber') && this.myForm.get('phoneNumber')?.value != '') {
+        return Validators.minLength(7)(control);
       }
     }
+    return null;
+  };
+
+  const customValidatorRequired = (control: AbstractControl) => {
+    if (control.value) {
+      if (control === this.myForm.get('email') 
+      && this.myForm.get('email')?.value == ''
+      && this.myForm.get('phoneNumber')?.value == '') {
+        return Validators.required(control);
+      }
+      if (control === this.myForm.get('phoneNumber') 
+      && this.myForm.get('phoneNumber')?.value == ''
+      && this.myForm.get('email')?.value == '') {
+        return Validators.required(control);
+      }
+    }
+    return null;
+  };
+
+  this.myForm.get('email')?.setValidators([customValidatorRequired, customValidator]);
+this.myForm.get('phoneNumber')?.setValidators([customValidatorRequired, customValidator]);
+
+  this.myForm.statusChanges.subscribe((status) => {
+    if (status === 'INVALID') {
+      this.formValidityChanged.emit(false);
+    }
     else{
-      this.isEmailValid = false;
+      this.formValidityChanged.emit(true);
+    }
+  });
+}
 
-    }
- 
-    if(this.emailValue !== null || this.emailValue !== "" || (this.phoneNumberValue.length ==0)){
-      this.isEmailRequired = false;
-      this.isPhoneNumberRequired = false;
-    }
-  }
 
-  phoneNumberValueKeyUp(event:any){
-    this.phoneNumberValue.emit(event.target.value);
-    if(this.phoneNumberValue !== null || this.phoneNumberValue !== "" || 
-    (this.emailValue.length == 0)){
-      this.isEmailRequired = false;
-      this.isPhoneNumberRequired = false;
-    }
-  }
+onFieldChange(fieldName: string, value: string) {
+  // if(this.myForm.invalid){
+  //   this.formFields!.isValidForm = false;
+  //   console.log("invalid")
+
+  // }
+  // else{
+  //   this.formFields!.isValidForm = true;
+  //   console.log("valid")
+
+  // }
+  this.formFields![fieldName] = value
+  this.emailphoneData.emit(this.formFields);
+}
+}
+
+
+export class EmailPhoneClass{
+  email:string = '';
+  phoneNumber:string = '';
+  isValidForm:boolean = false;
+
+  [key: string]: string | undefined|boolean;
 
 }

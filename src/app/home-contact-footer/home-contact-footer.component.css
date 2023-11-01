@@ -15,9 +15,13 @@
     font-size: 17px;
 }
 
+.info{
+  color: rgb(175, 175, 175);
+}
 
 .info:hover{
     color: #F8D413;
+    cursor: pointer;
 }
 
 
@@ -27,27 +31,28 @@
     justify-content: space-between;
     align-items: center; /* Center the content horizontally */
   }
-  
+
   .white-line {
     width: 1px;
     height: 50px; /* Adjust the height as needed */
     background-color: white;
     transform: rotate(180deg); /* Rotate the line 90 degrees to make it vertical */
   }
-  
+
   .back-to {
     color: white;
     margin-bottom: 50%;
     transform: rotate(-90deg);
     margin-top: 30%; /* Rotate the text -90 degrees to make it vertical */
+
   }
-  
+
 
 
   .back:hover{
-    
-    cursor: pointer;
     animation: moveUpDown 2s ease-in-out infinite; /* Customize duration and timing as needed */
+
+    cursor: pointer;
   }
 
 
@@ -62,3 +67,16 @@
       transform: translateY(0);
     }
   }
+
+
+
+a {
+  text-decoration: none;
+  color: rgb(175, 175, 175);
+}
+
+a:hover{
+  color: #F8D413;
+  cursor: pointer;
+}
+

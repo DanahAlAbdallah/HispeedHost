@@ -4,6 +4,7 @@ import { Search } from '../classes/search';
 import { AftersearchComponent } from '../aftersearch/aftersearch.component';
 import { filter } from 'rxjs';
 import { ImigrationService } from '../classes/imigration.service';
+import {ScrollService} from "../classes/scroll.service";
 
 @Component({
   selector: 'search',
@@ -13,7 +14,7 @@ import { ImigrationService } from '../classes/imigration.service';
 export class SearchComponent implements OnInit {
 
   @ViewChild('scrollMe') private scrollContainer!: ElementRef;
-  
+
 
   public search_Data:Search;
 
@@ -21,7 +22,7 @@ export class SearchComponent implements OnInit {
   public isGendersEmpty = false;
   public isDataLoad:boolean = false;
 
-  constructor(private router:Router, private service:ImigrationService){
+  constructor(private router:Router, private service:ImigrationService , private scroll_service:ScrollService){
 
     this.search_Data = new Search();
 
@@ -33,9 +34,9 @@ export class SearchComponent implements OnInit {
           this.isDataLoad = false; // Reset the flag after performing the action
         }
       }, 2000);
-     
+
     });
-      //subscribes every changes of your route
+
       this.router.events.subscribe((event) => {
           if (event instanceof NavigationEnd){
              //scroll to top
@@ -44,7 +45,7 @@ export class SearchComponent implements OnInit {
    });
   }
 
-  public majors: string[] = []; 
+  public majors: string[] = [];
 
   ngOnInit(): void {
     this.service.getAllProfessions().subscribe({
@@ -52,7 +53,7 @@ export class SearchComponent implements OnInit {
         v.forEach((obj:any) => {
           this.majors.push(obj.profession);
         });
-        
+
       },
       error: (e) => {},
       complete: () =>{}
@@ -71,11 +72,11 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  
+
   public genders: string[] = [
     "Male",
     "Female"
-  ]; 
+  ];
 
   genderSelected: any = null;
 
@@ -91,8 +92,8 @@ export class SearchComponent implements OnInit {
     if(this.checkEmpty()){
       return;
     }
-    this.router.navigate(['search'] ,{ queryParams: { 
-      profession:this.search_Data.major, 
+    this.router.navigate(['search'] ,{ queryParams: {
+      profession:this.search_Data.major,
       gender:this.search_Data.gender
     } });
 
@@ -117,7 +118,7 @@ export class SearchComponent implements OnInit {
 
 
     let isSomethingEmpty = false;
-    
+
     for (const element of elements) {
         const value = nullSafeValue(this.search_Data.get(element));
         if (value === "EMPTY") {
@@ -134,7 +135,7 @@ export class SearchComponent implements OnInit {
 
         }
     }
-    
+
     return isSomethingEmpty;
   }
 
@@ -144,7 +145,7 @@ export class SearchComponent implements OnInit {
         // Scroll to the end of the page
         window.scrollTo(0, document.documentElement.scrollHeight);
       }
-    });          
+    });
 }
 
 
@@ -156,7 +157,7 @@ export class SearchComponent implements OnInit {
    majorSelectedItemEvent(major:string){
       this.search_Data.major = major;
    }
-  
+
    genderSelectedItemEvent(gender:string){
       this.search_Data.gender = gender;
 

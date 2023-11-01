@@ -5,7 +5,8 @@
     align-items: center;
     padding-left: 1%;
     padding-right: 1%;
-    margin-top: 7.5%;
+    margin-top: 6.5%;
+    height: 100%;
 }
 
 .row1{
@@ -31,7 +32,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top:2vw;
+    margin-top:0vw;
     justify-content: center;
 }
 
@@ -40,7 +41,7 @@
     width: 100%;
     color: #ffffff;
     font-size: 1.3vw;
-    font-weight: 100;
+    font-weight: 300;
 }
 
 .row3{
@@ -48,7 +49,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 10vw;
+    margin-top: 12%;
     justify-content: center;
 }
 
@@ -56,6 +57,9 @@
 .arrow{
     width: 2.7vw;
     height: 1.5vw;
+
+    cursor: pointer;
+    animation: moveUpDown 2s ease-in-out infinite; 
 }
 
 
@@ -77,15 +81,20 @@
     }
     .second_paragra{
         margin-top: 1.4%;
-        font-size: 2.4vw;
-        width: 70%;
+        font-size: 2.7vw;
+        font-weight: 400;
+        width: 80%;
         line-height: -20px;
+        color: hsl(0, 3%, 85%);
+
     }
 
     .arrow{
         width: 6vw;
         height: 3vw;
     }
+
+    
 }
 
 
@@ -106,3 +115,12 @@
     }
   }
 
+
+    @media (max-width: 500px)  {
+    .row3 {
+        margin-top: 77%;
+
+      }
+
+    
+  }

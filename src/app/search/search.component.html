@@ -1,51 +1,54 @@
-<app-nav></app-nav>
 
 
-<div #scrollMe style="overflow: auto;" class="search" >
+    <app-nav></app-nav>
 
 
-  <app-loading-modal *ngIf="isDataLoad"></app-loading-modal>
-
-      <div class="d-flex flex-column middle_container">
-        <!-- top  -->
-        <div class="d-flex flex-row justify-content-between flex-wrap">
-            <div class="box     flex-item ">
-              
-                <app-search-item [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
-
-            </div>
-            
-            <div class="box     flex-item ">
-              
-                <app-search-item [isNothingSelected]="isGendersEmpty" [items]="genders" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
-
-            </div>
+    <div #scrollMe style="overflow: auto;" class="search" >
 
 
-            <div class="box flex-item">
-                <div class="c1">
+        <app-loading-modal *ngIf="isDataLoad"></app-loading-modal>
 
-                </div>
-              
+            <div class="d-flex flex-column middle_container">
+              <div class="d-flex flex-row justify-content-between flex-wrap">
+                  <div class="box     flex-item ">
+
+                      <app-search-item [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
+
+                  </div>
+
+                  <div class="box     flex-item ">
+
+                      <app-search-item [isNothingSelected]="isGendersEmpty" [items]="genders" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
+
+                  </div>
+
+              </div >
+
+
+
+              <div class="box flex-item">
+
+
                 <div class="c2">
                     <button (click)="search()" class="buttonSearch">
                         Search
                    </button>
                 </div>
-               
+
             </div>
-         
-           
-        </div >
-        <div class="findalldiv">
-            <a routerLink="/all" class="findall" href="">Or Find All Data</a>
 
-        </div>
+              <div class="findalldiv">
+                  <a routerLink="/all" class="findall" href="">Or Find All Data</a>
 
+              </div>
+
+            </div>
+
+
+            <app-aftersearch (newItemEvent)="isDataLoaded($event)" #afterSearchComponent></app-aftersearch>
       </div>
 
 
-      <app-aftersearch (newItemEvent)="isDataLoaded($event)" #afterSearchComponent></app-aftersearch>
-</div>
 
-
+    <app-home-contact-footer></app-home-contact-footer>
+<app-footer></app-footer>

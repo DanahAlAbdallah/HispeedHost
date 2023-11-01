@@ -118,6 +118,8 @@
 
 @media (max-width:500px) {
     .image-container{
+      width: 330px;
+      height: 370px;
         margin-bottom: 7%;
         margin-right: 0px;
     }
@@ -149,5 +151,15 @@
   
     }
 
+}
+
+
+
+@media (max-width:350px) {
+  .image-container{
+    width: 280px;
+    height: 320px;
+    
+  }
 }
 

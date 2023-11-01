@@ -3,7 +3,7 @@
   display: flex;
   justify-content:none;
   align-items: center;
- 
+
 }
 .navbar-logo {
   max-width: 100px; /* Adjust the maximum width as needed */
@@ -26,6 +26,7 @@
 
 .contactus:hover{
   background-color: #000;
+  border: 1px solid black;
 }
 /* Icon appearance */
 .icon-light {
@@ -76,7 +77,7 @@
 }
 
 .navbar-nav .nav-item a:hover{
-  color: #686565;
+  color: #939598;
 }
 
 .iconLightHome{
@@ -108,7 +109,7 @@ nav div ul li a{
   .div-contactius{
     display: none;
   }
- 
+
   .navbar > div:last-child {
     display: flex;
     justify-content: center;
@@ -118,22 +119,29 @@ nav div ul li a{
   .c {
     display: none;
   }
-  
+
   .navbar-nav {
     display: none;
   }
 
   /* Show the navbar sidebar when active */
-  .nav-sidebar.active {
+  .nav-sidebar {
     position: fixed;
     top: 0;
     left: -100%; /* Start hidden on the left */
     width: 70%; /* Adjust the width as needed */
     height: 100vh;
-    background-color: #f8f9fa;
+    background-color: #c5c5c5;
     z-index: 1000;
     overflow-y: auto;
-    transition: left 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  .nav-sidebar.active {
+    transform: translateX(0);
+    opacity: 1;
   }
 
   .nav-sidebar.active .navbar-nav {
@@ -146,7 +154,7 @@ nav div ul li a{
 
   .navbar-toggler {
     position: fixed;
-    top: 10px;
+    top: 14.2px;
     left: 10px;
     z-index: 1000; /* Set lower z-index to be behind the sidebar */
     display: block;
@@ -169,11 +177,11 @@ nav div ul li a{
     height: 80%;
   }
   .navbar-brand{
-    margin-top: 7px;    
+    margin-top: 7px;
     margin-left: 25px;
   }
 
-  
+
 }
 
 .hide-on-scroll {
@@ -220,4 +228,39 @@ nav div ul li a{
 
 .color{
   color: white;
+}
+
+.active-link {
+  text-decoration: underline;
+  text-decoration-color: rgb(175, 175, 175);
+}
+
+.active-link-sidebar{
+  color: #F8D413;
+}
+
+
+@keyframes slide-in {
+  0% {
+    left: -100%; /* Start off-screen to the left */
+  }
+  100% {
+    left: 0; /* Slide in to the left edge */
+  }
+}
+
+
+
+button.buttonTog:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0px 0px transparent;
+}
+
+button.buttonTog {
+  transition: transform 0.3s;
+}
+
+button.buttonTog.clicked {
+  transform: rotate(180deg);
 }

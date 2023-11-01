@@ -31,7 +31,7 @@ export class ImigrationService {
           return throwError(() => new Error('Something bad happened; please try again later.'));
         })
     );
-  } 
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -40,7 +40,7 @@ export class ImigrationService {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+      return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
   public loadPassportCountryCode():Observable<any[]>{
@@ -54,7 +54,7 @@ export class ImigrationService {
                               catchError(this.handleError)
                             );
 
-    
+
   }
 
   public loadCurrentResidenceCountries():Observable<any[]>{
@@ -64,7 +64,7 @@ export class ImigrationService {
                             catchError(this.handleError)
                           );
 
-  
+
 }
 
 
@@ -82,7 +82,7 @@ export class ImigrationService {
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     );
-  } 
+  }
 
   public getAllHrResults(): Observable<any[]> {
 
@@ -92,7 +92,7 @@ export class ImigrationService {
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     );
-  } 
+  }
 
   public getAllProfessions(): Observable<any[]> {
 
@@ -106,11 +106,11 @@ export class ImigrationService {
 
   public getAllYears(): Observable<any[]> {
 
-    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/yesrs/all').pipe(
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/years/all').pipe(
       retry(3),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     );
-  } 
+  }
 }

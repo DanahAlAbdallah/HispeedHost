@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {RouterModule, Routes, Scroll} from '@angular/router';
 import { FlighttickitingComponent } from './flighttickiting/flighttickiting.component';
 import { ImigrationComponent } from './imigration/imigration.component';
 import { SearchComponent } from './search/search.component';
@@ -11,6 +11,7 @@ import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
 import { HomeComponent } from './home/home.component';
 import {AboutUsComponent} from './about-us/about-us.component';
 import { ApplyforjobComponent } from './applyforjob/applyforjob.component';
+import {ScrollDispatcher} from "@angular/cdk/overlay";
 
 const routes: Routes = [
   // { path: '', redirectTo: '/',pathMatch: 'full'},
@@ -18,22 +19,23 @@ const routes: Routes = [
   { path: 'imigration', component: ImigrationComponent },
   { path: 'search', component: SearchComponent },
   {path:'aftersearch', component: AftersearchComponent},
-  {path:'' , component:ServicesComponent},
+  {path:'services' , component:ServicesComponent},
   {path:'student', component:StudentprogramComponent},
   {path:'tourism', component:TorrismVisaComponent},
   {path:'all', component:AllHrSearchComponent},
-  {path:'home', component:HomeComponent},
+  {path:'', component:HomeComponent},
   {path:'about', component:AboutUsComponent},
   {path:'apply', component:ApplyforjobComponent}
 ];
 
 @NgModule({
+  exports: [RouterModule],
   imports: [
     RouterModule.forRoot(routes, {
-    onSameUrlNavigation : 'reload',
-    // scrollPositionRestoration: 'top'
-  })
-],
-  exports: [RouterModule]
+        onSameUrlNavigation: 'reload',
+        // scrollPositionRestoration: 'top'
+      },
+    )
+  ],
 })
 export class AppRoutingModule { }

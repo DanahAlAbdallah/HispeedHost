@@ -1,0 +1,76 @@
+<form class="main" [formGroup]="myForm">
+    <div class="first-row">
+        <div class="col1">
+            <p class="label-name">Profession*</p>
+            <select formControlName="profession" class="common" (change)="onFieldChange('profession', myForm.get('profession')?.value)">
+                <option value="" selected disabled>Business</option>
+                <option *ngFor="let profession of professions">
+                    {{profession}}
+                </option>
+                <option>Other</option>
+            </select>
+
+
+            <div style="margin-left: 8%;" *ngIf="myForm.get('profession')?.hasError('required') && isSomethingEmpty ">
+                <p class="text-danger">Profession is required.</p>
+            </div>
+
+
+        </div>
+
+        <div class="col1">
+            <p class="label-name">Years of experience*</p>
+            <!-- <select formControlName="yearofexperience"  class="common" (change)="onFieldChange('yearofexperience', myForm.get('yearofexperience')?.value)">
+                <option value="" selected disabled>0</option>
+                <option >1</option>
+
+            </select> -->
+            <input formControlName="yearofexperience" type="number"  class="common" min="0" (change)="onFieldChange('yearofexperience', myForm.get('yearofexperience')?.value)"/>
+            <div style="margin-left: 8%;" *ngIf="myForm.get('yearofexperience')?.hasError('required') && isSomethingEmpty ">
+            <p class="text-danger">Year of experience is required.</p>
+            </div>
+        </div>
+        <div class="col1">
+            <p class="label-name">Education*</p>
+            <select formControlName="education"  class="common" (change)="onFieldChange('education', myForm.get('education')?.value)">
+                <option value="" selected disabled>Choose your education</option>
+                <option>Collage</option>
+                <option>University</option>
+
+                <option>Masters</option>
+            </select>
+            <div style="margin-left: 8%;" *ngIf="myForm.get('education')?.hasError('required') && isSomethingEmpty ">
+                <p class="text-danger">Education is required.</p>
+            </div>
+        </div>
+
+    </div>
+
+
+<div>
+  <input *ngIf="isOtherSelectedVar" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)"/>
+  <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required') && isSomethingEmpty && isOtherSelectedVar ">
+    <p class="text-danger">Profession is required.</p>
+  </div>
+</div>
+    <div class="second-row">
+
+        <div class="row1-sec-row">
+            <p    class="text">
+                CV.dox (it can be in the following formats, dox, pdf)
+            </p>
+
+            <p formControlName="filename" class="text-danger" *ngIf="myForm.get('filename')?.hasError('required') && isSomethingEmpty ">
+                cv is required
+            </p>
+
+            <input id="file" class="button" type="file" accept=".docx,.pdf"
+            (change)="handleFileInput($event)" placeholder="Upload Your CV">
+
+            <label *ngIf="selectedFile == null" for="file">Upload Your CV</label>
+            <label *ngIf="selectedFile != null" for="file">{{selectedFileName}}</label>
+
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,82 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    margin: 5% 10% 5% 10%;
+
+}
+
+
+.status{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.box{
+    margin-right: 2%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.text{
+}
+
+.checkbox-label{
+
+}
+
+.check{
+
+}
+
+.common{
+    margin-top: 1%;
+    background-color: transparent;
+    font-weight: 400;
+    padding: 1% 8% 0% 1%;
+    height: 45px;
+    width: 100%;
+
+    border: none; /* Remove the default border */
+  border-bottom: 2px solid #000; /* Add a 2px solid black bottom border */
+  outline: none;
+}
+
+
+.common:focus{
+    border-bottom: 2px solid #ffee00; /* Add a 2px solid black bottom border */
+    padding-bottom: 1%;
+}
+
+.checkboxes1{
+    width: 100%;
+
+  }
+
+  .checkbox-third{
+    border: 10px solid white;
+    text-align: center;
+  }
+
+  .label-checkbox{
+    margin-left: 10%;
+  }
+
+  .checkbox-label{
+    width: 180%;
+  }
+
+@media (max-width:768px) {
+    .checkboxes1{
+        width: 80%;
+
+    }
+    .label-checkbox{
+        margin-left: 5%;
+      }
+
+  .checkbox-label{
+    margin-bottom: 2%;
+  }
+}

@@ -1,35 +1,15 @@
 export class TourismVisa{
-    id:number;
-    fullName:string;
-    dateOfBirth:string;
-    passportCountry:string;
-    currentResidence:string;
-    visaStatus:string;
-    explain:string;
-    desiredCountry:string;
-    phoneNumber:string;
-    email:string;
-    gender:string;
-
-    constructor(
-        
-      ) {
-        this.id = 0;
-        this.fullName = "";
-        this.dateOfBirth = "";
-        this.passportCountry = "";
-        this.currentResidence = "";
-        this.visaStatus = "";
-        this.explain = "";
-        this.desiredCountry = "";
-        this.phoneNumber = "";
-        this.email = "";
-        this.gender = "";
-      }
-
-      [element: string]: any;
-
-      get(element: string) {
-          return this[element];
-      }
+  constructor(
+    public id: number = 0,
+    public fullName: string = "",
+    public dateOfBirth: string = "",
+    public passportCountry: string = "",
+    public currentResidence: string = "",
+    public visaStatus: string = "",
+    public explain: string = "",
+    public desiredCountry: string = "",
+    public phoneNumber: string = "",
+    public email: string = "",
+    public gender: string = ""
+  ) {}
 }

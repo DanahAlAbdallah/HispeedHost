@@ -38,10 +38,10 @@
 
 .shared{
     width: 45%;
-    border: none; 
-    outline: none; 
+    border: none;
+    outline: none;
     background-color: transparent;
-    border-bottom: 2px solid  #745F52    ; 
+    border-bottom: 2px solid  #745F52    ;
     transition: border-bottom 0.3s;
 }
 
@@ -68,10 +68,10 @@
 
 .row2-1-shared{
     width: 100%;
-    border: none; 
-    outline: none; 
+    border: none;
+    outline: none;
     background-color: transparent;
-    border-bottom: 2px solid  #745F52    ; 
+    border-bottom: 2px solid  #745F52    ;
     transition: border-bottom 0.3s;
 }
 
@@ -92,10 +92,10 @@
 
 .message{
     width: 100%;
-    border: none; 
-    outline: none; 
+    border: none;
+    outline: none;
     background-color: transparent;
-    border-bottom: 2px solid  #745F52    ; 
+    border-bottom: 2px solid  #745F52    ;
     transition: border-bottom 0.3s;
 }
 
@@ -115,6 +115,35 @@
     font-size: 17px;
 }
 
+.button:hover{
+  background-color: black;
+  color:white;
+  border: none;
+
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+  }
+
+  .spinner {
+    width: 40px; /* Adjust the size of the spinner */
+    height: 40px; /* Adjust the size of the spinner */
+    border: 4px solid #ccc; /* Adjust the border color */
+    border-top: 4px solid #007BFF; /* Adjust the spinner color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Add a spinning animation */
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
 
 @media (max-width:940px) {
     /* .shared{
@@ -129,5 +158,10 @@
     .button{
         bottom: -5%;
         width: 40%;
+    }
+
+    .card{
+        width: 90%;
+         margin-bottom: 8%;
     }
 }

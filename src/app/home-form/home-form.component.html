@@ -1,43 +1,77 @@
 <div class="main">
 
-    <div class="card">
+    <form  class="card" [formGroup]="myForm" (ngSubmit)="send()">
 
         <div class="row1">
             <p>First name*</p>
             <div class="row1-1">
 
-                <input class="shared" type="text" name="username"  placeholder="Ali">
-                <input class="shared" type="text" name="lastname" placeholder="Mrad">
+                <input class="shared" formControlName="firstName" type="text" name="username"  placeholder="First name">
+                <input  class="shared" formControlName="lastName" type="text" name="lastname" placeholder="Last name">
 
             </div>
+
+            <div *ngIf="
+                myForm.get('firstName')?.hasError('required') && myForm.get('firstName')?.touched ||
+                myForm.get('lastName')?.hasError('required') && myForm.get('lastName')?.touched
+            ">
+                <p class="text-danger">FullName is required.</p>
+              </div>
         </div>
         
         <div class="row2">
             <div class="row2-1">
                 <p>Email address*</p>
-                <input class="row2-1-shared" type="email" name="emai"  placeholder="hello@example.com">
-
+                <input formControlName="email" class="row2-1-shared" type="email" name="email"  placeholder="hello@example.com">
+                <div *ngIf="myForm.get('email')?.hasError('required') && myForm.get('email')?.touched">
+                    <p class="text-danger">Email is required.</p>
+                  </div>
+                  <div  *ngIf="myForm.get('email')?.hasError('email') && myForm.get('email')?.touched">
+                    <p class="text-danger">Invalid email format.</p>
+                  </div>
             </div>
 
             <div class="row2-1">
                 <p>Service type*</p>
 
-                <select class="row2-1-shared" type="" name="lastname" >
+                <select formControlName="type"  class="row2-1-shared" type="" name="type" >
                     <option value="" selected disabled>Select one</option>
+                    <option value="Flight Booking" >Flight Booking</option>
+                    <option value="Tourism Visa">Tourism Visa</option>
+
+                    <option value="Student Program">Student Program</option>
+
+                    <option value="Find an Employee" >Find an Employee</option>
+
                 </select>
 
+                <div *ngIf="myForm.get('type')?.hasError('required') && myForm.get('type')?.touched">
+                    <p class="text-danger">Type is required.</p>
+                  </div>
             </div>
-
-
-
         </div>
 
         <div class="row3">
             <p>Messages*</p>
-            <input class="message" type="text" name="message" placeholder="Type your message here">
+            <textarea formControlName="messages" class="message" name="message" placeholder="Type your message here"></textarea>
+            <div *ngIf="myForm.get('messages')?.hasError('required') && myForm.get('messages')?.touched">
+                <p class="text-danger">Messages is required.</p>
+              </div>
         </div>
 
-        <button class="button">Submit</button>
-    </div>
+        <!-- Your form content here -->
+<!-- ... -->
+
+<div class="loading-spinner" *ngIf="isSubmitting">
+    <div class="spinner"></div>
+  </div>
+  <div style="margin-top: 3%;" *ngIf="!isSubmitting">
+    <p>{{msg}}</p>
+  </div>
+  
+        <!-- <p style="margin-top: 2%;">Form Status: {{ profileForm.status }}</p> -->
+
+        <button type="submit" class="button" >Submit</button>
+    </form>
 
 </div>

@@ -1,0 +1,37 @@
+<form [formGroup]="myForm" class="main">
+    <p>Visa status in current country</p>
+<!--
+    <div class="status">
+        <div class="box" *ngFor="let item of items; let i = index;">
+            <label class="checkbox-label">
+              <input formControlName="status" class="check" type="checkbox" [checked]="item.checked" (change)="handleCheckboxChange1(item)">
+              <span class="text" id="labelText">{{item.label}}</span>
+            </label>
+          </div>
+    </div> -->
+
+    <div>
+      <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
+        <div *ngFor="let item of items">
+        <label class="checkbox-label">
+            <input formControlName="status" class="checkbox-third" type="checkbox"  [checked]="item.checked" (change)="handleCheckboxChange1(item)">
+            <span class="label-checkbox" id="labelText">{{item.label}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-left: 8%;" *ngIf="myForm.get('status')?.hasError('required')  && isSomethingEmpty ">
+        <p class="text-danger">Status is required.</p>
+      </div>
+    <div  *ngIf="hideEVSInput" class="container5">
+        <input formControlName="explain" placeholder="Explain" type="text" class="common" (input)="onFieldChange('explain', this.myForm.get('explain')?.value)" />
+        <div class=" mb-2" *ngIf="isOtherVisaStatus">
+          <p class="text-danger">* Explain visa status required</p>
+        </div>
+    </div>
+
+    <div style="margin-left: 8%;" *ngIf="myForm.get('explain')?.hasError('required')  && isSomethingEmpty && hideEVSInput ">
+        <p class="text-danger">Explain is required.</p>
+      </div>
+</form>

@@ -1,30 +1,34 @@
-<p style="margin-top: 4%;">
-    <strong>Note:</strong> You can either fill at least one of these fields or fill both if you prefer.</p>
 
-<div class="flex-container">
-
-
-    <div class="flex-item">
-        <button class="explanation-button">Email Address</button>
-        <div class="d-flex flex-column ee">
-            <input (keyup)="emailValueKeyUp($event)" class="input" type="email" placeholder="Email"  [pattern]="emailPattern" required>
-            <div class=" mb-2" *ngIf="isEmailValid">
-                <p class="text-danger">* Email Not Valid.</p>
-              </div>
+<form class="main" [formGroup]="myForm">
+    <p style="margin-left: 3%;">
+        <strong>Note:</strong> You can either fill at least one of these fields or fill both if you prefer.</p>
+    
+    <div class="flex-container">
+    
+    
+        <div class="flex-item">
+            <div class="d-flex flex-column ee">
+                <input formControlName="email" class="input" type="email" placeholder="Email" (input)="onFieldChange('email', myForm.get('email')?.value)">
+                <div class=" mb-2" *ngIf="myForm.get('email')?.hasError('email')">
+                    <p class="text-danger">* Email Not Valid.</p>
+                  </div>
+            </div>
+           
         </div>
-       
-    </div>
-    <div class="flex-item">
-        <button class="explanation-button">Phone Number</button>
-        <div class="d-flex flex-column ee">
-            <input  (keyup)="phoneNumberValueKeyUp($event)" class="input" type="tel" placeholder="Phone Number" required >
+        <div class="flex-item s">
+            <div class="d-flex flex-column ee">
+                <input formControlName="phoneNumber" class="input" type="tel" 
+                placeholder="Phone Number" (input)="onFieldChange('phoneNumber', myForm.get('phoneNumber')?.value)" >
 
+                <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('minlength') ">
+                    <p class="text-danger">* Phone number is too short..</p>
+                  </div>
+            </div>
+        </div>
+    
+        <div class=" mb-2" *ngIf="isSomethingEmpty && (formFields?.email?.length == 0 && formFields?.phoneNumber?.length == 0)">
+            <p class="text-danger">* Make sure to fill at least one of them.</p>
         </div>
     </div>
-
-    <div class=" mb-2" *ngIf="isEmailRequired && isPhoneNumberRequired">
-        <p class="text-danger">* Make sure to fill at least one of them.</p>
-      </div>
-</div>
-
-
+    
+</form>

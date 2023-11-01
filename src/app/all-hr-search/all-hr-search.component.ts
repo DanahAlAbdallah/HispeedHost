@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ImigrationService } from '../classes/imigration.service';
 import { AfterSearch } from '../classes/afterseatch';
 
@@ -17,7 +17,12 @@ export class AllHrSearchComponent {
   public Items:AfterSearch[] = [];
 
   constructor(private router: Router,private route: ActivatedRoute, private service:ImigrationService) {
-
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd){
+         //scroll to top
+         window.scrollTo(0,0);
+      }
+    });
   }
   
 
@@ -32,7 +37,7 @@ export class AllHrSearchComponent {
     this.service.getAllHrResults().subscribe({
           next: (res) => { 
             this.Items = res 
-
+            console.log(this.Items)
             if(res.length !== 0){
               this.isEmpty = false;
               this.newItemEvent.emit(false);

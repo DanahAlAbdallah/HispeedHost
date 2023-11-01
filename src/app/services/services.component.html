@@ -3,17 +3,16 @@
 
 
     <div class="services">
-    
+
         <div class="container">
             <app-service *ngFor="let title of titles;index as i"
-            [ngStyle]="{'align-self': (i === 4) ? 'flex-start' : 'auto'}"
                  [title]="title" [link]="links[i]" [description]="description[i]">
-    
+
             </app-service>
         </div>
     </div>
-    
-    
-    
+
+
+    <app-home-contact-footer></app-home-contact-footer>
     <app-footer></app-footer>
 </div>

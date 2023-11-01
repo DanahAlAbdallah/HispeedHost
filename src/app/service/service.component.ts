@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-service',
@@ -11,4 +11,6 @@ export class ServiceComponent {
   @Input() link:string = "";
   @Input() description:string ="";
 
+
+  
 }

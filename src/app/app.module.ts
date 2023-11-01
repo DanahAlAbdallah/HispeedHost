@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { FlighttickitingComponent } from './flighttickiting/flighttickiting.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ImigrationComponent } from './imigration/imigration.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlightsComponent } from './flights/flights.component';
 import { SearchComponent } from './search/search.component';
 import { NavComponent } from './nav/nav.component';
@@ -19,7 +19,7 @@ import { SearchflightBoxComponent } from './searchflight-box/searchflight-box.co
 import { ShimmerComponent } from './shimmer/shimmer.component';
 import { FlightComponent } from './flight/flight.component';
 import { InputflightsinfoComponent } from './inputflightsinfo/inputflightsinfo.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {HashLocationStrategy, LocationStrategy, NgOptimizedImage} from '@angular/common';
 import { FormDataSharedComponent } from './form-data-shared/form-data-shared.component';
 import { TorrismVisaComponent } from './torrism-visa/torrism-visa.component';
 import { StudentprogramComponent } from './studentprogram/studentprogram.component';
@@ -49,6 +49,14 @@ import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { TestimonialsItemComponent } from './testimonials-item/testimonials-item.component';
 import { HomeFormComponent } from './home-form/home-form.component';
 import { HomeContactFooterComponent } from './home-contact-footer/home-contact-footer.component';
+import { FirstrowComponent } from './shared-components/firstrow/firstrow.component';
+import { SecondRowComponent } from './shared-components/second-row/second-row.component';
+import { ThirdRowComponent } from './shared-components/third-row/third-row.component';
+import { ForthRowComponent } from './shared-components/forth-row/forth-row.component';
+import { FiveRowComponent } from './shared-components/five-row/five-row.component';
+import { SixRowComponent } from './shared-components/six-row/six-row.component';
+import { RowSevenComponent } from './shared-components/row-seven/row-seven.component';
+import { ShowErrorComponent } from './shared-components/show-error/show-error.component';
 
 
 @NgModule({
@@ -95,15 +103,25 @@ import { HomeContactFooterComponent } from './home-contact-footer/home-contact-f
     TestimonialsComponent,
     TestimonialsItemComponent,
     HomeFormComponent,
-    HomeContactFooterComponent
+    HomeContactFooterComponent,
+    FirstrowComponent,
+    SecondRowComponent,
+    ThirdRowComponent,
+    ForthRowComponent,
+    FiveRowComponent,
+    SixRowComponent,
+    RowSevenComponent,
+    ShowErrorComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        NgOptimizedImage
+    ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })

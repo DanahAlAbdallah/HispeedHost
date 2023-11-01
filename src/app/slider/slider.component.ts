@@ -13,6 +13,6 @@ export class SliderComponent {
 
   scrollToY(){
 
-    this.scrollService.scrollToYPosition(600);
+    this.scrollService.scrollToElement(document.getElementById('services'));
   }
 }
