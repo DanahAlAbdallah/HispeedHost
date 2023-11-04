@@ -22,7 +22,8 @@ export class SearchComponent implements OnInit {
   public isGendersEmpty = false;
   public isDataLoad:boolean = false;
 
-  constructor(private router:Router, private service:ImigrationService , private scroll_service:ScrollService){
+  constructor(private router:Router, private service:ImigrationService ,
+              private scroll_service:ScrollService ){
 
     this.search_Data = new Search();
 
@@ -50,8 +51,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllProfessions().subscribe({
       next: (v:any) => {
-        v.forEach((obj:any) => {
-          this.majors.push(obj.profession);
+        v.forEach((profession:any) => {
+          this.majors.push(profession.name);
         });
 
       },
@@ -76,6 +77,11 @@ export class SearchComponent implements OnInit {
   public genders: string[] = [
     "Male",
     "Female"
+  ];
+
+  public icons: string[] = [
+    "./assets/profession.png",
+    "./assets/person-fill.png"
   ];
 
   genderSelected: any = null;
@@ -143,7 +149,9 @@ export class SearchComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Scroll to the end of the page
-        window.scrollTo(0, document.documentElement.scrollHeight);
+        // window.scrollTo(0, document.documentElement.scrollHeight);
+          this.scroll_service.scrollToElement(document.getElementById("after")
+        )
       }
     });
 }

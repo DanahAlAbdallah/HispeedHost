@@ -29,17 +29,34 @@
   <div class="second-row">
 
     <div class="row1-sec-row">
-      <p    class="text">
-        Certificate.pdf (Optional)
-      </p>
+      <div class="w-100 d-flex flex-row align-items-center justify-content-between">
+
+          <p    class="text">
+            Certificate.pdf (Optional)
+          </p>
+
+          <input id="file" class="button" type="file" accept=".pdf"
+                 (change)="handleFileInput($event)" placeholder="Upload Your Certificate">
+
+          <label class="labelUp" *ngIf="selectedFile == null" for="file">
+            <p class="text-under-label">Upload Your Certificate</p>
+          </label>
+
+          <label class="labelUp" *ngIf="selectedFile != null" for="file">
+            <p class="text-under-label">{{selectedFileName}}</p>
+          </label>
+
+        </div>
 
 
-      <input id="file" class="button" type="file" accept=".pdf"
-             (change)="handleFileInput($event)" placeholder="Upload Your Certificate">
+      <div style="margin-left: 30%">
 
-      <label class="labelUp" *ngIf="selectedFile == null" for="file">Upload Your Certificate</label>
-      <label class="labelUp" *ngIf="selectedFile != null" for="file">{{selectedFileName}}</label>
+        <p formControlName="filename" class="text-danger" *ngIf="myForm.get('filename')?.hasError('required') && isSomethingEmpty ">
+          cv is required
+        </p>
 
+        <p class="text-danger" *ngIf="isFileNotSupported"> Wrong file format.</p>
+      </div>
     </div>
 
   </div>

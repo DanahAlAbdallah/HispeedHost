@@ -12,13 +12,13 @@
               <div class="d-flex flex-row justify-content-between flex-wrap">
                   <div class="box     flex-item ">
 
-                      <app-search-item [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
+                      <app-search-item [icon]="icons[0]" [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
 
                   </div>
 
                   <div class="box     flex-item ">
 
-                      <app-search-item [isNothingSelected]="isGendersEmpty" [items]="genders" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
+                      <app-search-item [icon]="icons[1]" [isNothingSelected]="isGendersEmpty" [items]="genders" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
 
                   </div>
 

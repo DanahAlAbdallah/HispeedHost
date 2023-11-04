@@ -17,12 +17,12 @@ export class FirstrowComponent implements OnInit {
 
   countries :any[] = []
 
-  days:number[] = []
-  months:string[] = []
+  days:any[] = []
+  months:any[] = []
   years:number[] = []
 
 
-  constructor(private fb: UntypedFormBuilder, private service_country:ImigrationService) { 
+  constructor(private fb: UntypedFormBuilder, private service_country:ImigrationService) {
     this.myForm  = this.fb.group({
       fullName: ['',Validators.required],
       day: ['',Validators.required],
@@ -38,8 +38,8 @@ export class FirstrowComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCountries()
-    this.days = DateUtils.getDaysArray()
-    this.months = DateUtils.getMonthsArray()
+    this.days = DateUtils.getDays();
+    this.months = DateUtils.getMonthsArray();
     const currentYear = new Date().getFullYear();
     this.years = DateUtils.getYearsArray().filter((year) => (currentYear - year) > 18)
   }
@@ -63,7 +63,7 @@ export class FirstrowComponent implements OnInit {
         complete: () =>{console.log("is complete")}
     });
   }
-  
+
 }
 
 export class FirstRow {
@@ -74,7 +74,7 @@ export class FirstRow {
     passportCountry: string = '';
     currentResidence: string = '';
     gender: string = '';
-  
+
     [key: string]: string | undefined;
 }
 

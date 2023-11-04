@@ -19,7 +19,7 @@ export class ApplyforjobComponent implements OnInit{
     form_row1:FirstRow = new FirstRow();
     form_row2:SecondRow = new SecondRow()
     form_row3:ThirdRow = new ThirdRow()
-    form_row4:FourRowData = new FourRowData()
+    // form_row4:FourRowData = new FourRowData()
     isSomethingEmpty:boolean = false;
     isChekedFirstTime = false;
     cvFile:File | null = null;
@@ -60,9 +60,9 @@ export class ApplyforjobComponent implements OnInit{
       this.form_row3  = updatedFormFields;
     }
 
-    onFourRowChanged(updatedFormFields: FourRowData){
-      this.form_row4  = updatedFormFields;
-    }
+    // onFourRowChanged(updatedFormFields: FourRowData){
+    //   this.form_row4  = updatedFormFields;
+    // }
 
     onCvFileUploaded(file:File){
       this.cvFile = file;
@@ -128,9 +128,9 @@ export class ApplyforjobComponent implements OnInit{
           this.isSomethingEmpty = true;
           break;
 
-        case this.form_row4.desiredCountry:
-          this.isSomethingEmpty = true;
-          break;
+        // case this.form_row4.desiredCountry:
+        //   this.isSomethingEmpty = true;
+        //   break;
 
         case this.form_row2.file_name:
           this.isSomethingEmpty = true;
@@ -142,15 +142,17 @@ export class ApplyforjobComponent implements OnInit{
 
       if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
         this.isSomethingEmpty = true;
-      }
-
-      if(!this.form_row3.temp || this.isSomethingEmpty ) {
-        this.isChekedFirstTime = true;
         return;
       }
 
-      if(this.isOtherProfessionSelected == true && this.form_row2.other == ''){
+      if( this.isSomethingEmpty ) {
+        return;
+      }
+
+      if(this.isOtherProfessionSelected && this.form_row2.other == ''){
         return
+      }else{
+        this.form_row2.profession = this.form_row2.other;
       }
 
       if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
@@ -167,11 +169,11 @@ export class ApplyforjobComponent implements OnInit{
         this.form_row1.passportCountry,
         this.form_row1.currentResidence,
         this.form_row3.englishProficiency,
-        this.form_row3.completeEnglishTest,
+        false,
         this.form_row2.profession,
         this.form_row2.yearofexperience,
         this.form_row2.education,
-        this.form_row4.desiredCountry,
+        "anything",
         this.form_row1.gender,
         'whatever',
         this.emailPhone.phoneNumber,

@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" id="contact">
 
     <form  class="card" [formGroup]="myForm" (ngSubmit)="send()">
 
@@ -18,7 +18,7 @@
                 <p class="text-danger">FullName is required.</p>
               </div>
         </div>
-        
+
         <div class="row2">
             <div class="row2-1">
                 <p>Email address*</p>
@@ -36,12 +36,13 @@
 
                 <select formControlName="type"  class="row2-1-shared" type="" name="type" >
                     <option value="" selected disabled>Select one</option>
-                    <option value="Flight Booking" >Flight Booking</option>
+                    <option value="Immigration Program" >Immigration Program</option>
                     <option value="Tourism Visa">Tourism Visa</option>
 
                     <option value="Student Program">Student Program</option>
 
                     <option value="Find an Employee" >Find an Employee</option>
+                  <option value="Other" >Other</option>
 
                 </select>
 
@@ -68,7 +69,7 @@
   <div style="margin-top: 3%;" *ngIf="!isSubmitting">
     <p>{{msg}}</p>
   </div>
-  
+
         <!-- <p style="margin-top: 2%;">Form Status: {{ profileForm.status }}</p> -->
 
         <button type="submit" class="button" >Submit</button>

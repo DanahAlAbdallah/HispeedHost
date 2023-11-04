@@ -13,8 +13,9 @@ export class AppComponent  implements OnInit {
   constructor(private router: Router , private scroll:ScrollService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.scroll.scrollToElement(document.getElementById('nav21'));
-        document.getElementById('nav21')?.scrollIntoView({behavior:'smooth'})
+        window.scrollTo(0,0);
+        // this.scroll.scrollToElement(document.getElementById('nav21'));
+        // document.getElementById('nav21')?.scrollIntoView({behavior:'smooth'})
       }
     });
   }

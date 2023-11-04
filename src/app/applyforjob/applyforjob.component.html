@@ -32,14 +32,15 @@
     [isSomethingEmpty]="isSomethingEmpty"
     (thirdRowData)="onThirdRowChanged($event)"
     [isCheckFirstTime]="isChekedFirstTime"
+    [isHideCompleteEnglishTest]="true"
   ></app-third-row>
 
-  <app-forth-row
-    [formFields]="form_row4"
-    [isSomethingEmpty]="isSomethingEmpty"
-    (fourthRowData)="onFourRowChanged($event)"
-    [countries]="desiredCountries"
-  ></app-forth-row>
+<!--  <app-forth-row-->
+<!--    [formFields]="form_row4"-->
+<!--    [isSomethingEmpty]="isSomethingEmpty"-->
+<!--    (fourthRowData)="onFourRowChanged($event)"-->
+<!--    [countries]="desiredCountries"-->
+<!--  ></app-forth-row>-->
 
   <app-form-data-shared
     [isSomethingEmpty]="isSomethingEmpty"

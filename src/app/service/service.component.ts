@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-service',
@@ -11,6 +12,15 @@ export class ServiceComponent {
   @Input() link:string = "";
   @Input() description:string ="";
 
+  constructor(private router: Router) {}
 
-  
+  navigateToSearch() {
+      this.router.navigateByUrl(this.link ).then(() => {
+        setTimeout(
+          ()=>{window.location.reload();},
+          20
+        )
+      });
+  }
+
 }

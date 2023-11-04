@@ -1,5 +1,6 @@
 .main {
   height: 200%;
+  overflow-x: hidden;
 }
 
 .ss{

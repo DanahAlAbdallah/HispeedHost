@@ -178,13 +178,13 @@ export class ImigrationComponent implements OnInit {
       this.isSomethingEmpty = true;
     }
 
-    if(!this.form_row3.temp || this.isSomethingEmpty) {
+    if(!this.form_row3.temp ) {
       this.isChekedFirstTime = true;
       return
     }
 
 
-    if(!this.form_row4.temp || this.isSomethingEmpty) {
+    if(!this.form_row4.temp) {
       this.isChekedFirstTime = true;
       return
     }
@@ -214,6 +214,10 @@ export class ImigrationComponent implements OnInit {
       return;
     }
 
+    if(this.isSomethingEmpty){
+      return;
+    }
+
     this.immigration = new ImmigrationData(
       0,
       this.form_row1.fullName,
@@ -235,7 +239,7 @@ export class ImigrationComponent implements OnInit {
       'whatever',
       this.emailPhone.phoneNumber,
       this.emailPhone.email,
-      ''
+      this.form_row2.other
     );
 
     this.isShowModal = true;

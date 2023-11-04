@@ -3,7 +3,7 @@
         <div class="col1">
             <p class="label-name">What is your english profciency?*</p>
             <select formControlName="englishproficiency" class="common" (change)="onFieldChange('englishProficiency', myForm.get('englishproficiency')?.value)">
-                <option value="" selected disabled>Excellent</option>
+                <option value="" selected disabled>English proficiency</option>
                 <option>Excellent</option>
                 <option>Very Good</option>
 
@@ -17,11 +17,11 @@
 
             </select>
             <div style="margin-left: 8%;" *ngIf="myForm.get('englishproficiency')?.hasError('required') && isSomethingEmpty ">
-                <p class="text-danger">English Profciency is required.</p>
+                <p class="text-danger">English Proficiency is required.</p>
             </div>
         </div>
 
-        <div class="col2">
+        <div class="col2" *ngIf="!isHideCompleteEnglishTest">
             <p class="label-name1">Have you ever completed a english test in the last 3 years?*</p>
             <div>
                 <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">

@@ -3,7 +3,7 @@
         <div class="col1">
             <p class="label-name">Profession*</p>
             <select formControlName="profession" class="common" (change)="onFieldChange('profession', myForm.get('profession')?.value)">
-                <option value="" selected disabled>Business</option>
+                <option value="" selected disabled>Profession</option>
                 <option *ngFor="let profession of professions">
                     {{profession}}
                 </option>
@@ -48,7 +48,7 @@
 
 
 <div>
-  <input *ngIf="isOtherSelectedVar" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)"/>
+  <input *ngIf="isOtherSelectedVar || formFields?.profession == 'Other'" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)"/>
   <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required') && isSomethingEmpty && isOtherSelectedVar ">
     <p class="text-danger">Profession is required.</p>
   </div>
@@ -56,21 +56,38 @@
     <div class="second-row">
 
         <div class="row1-sec-row">
+          <div class="div_text">
             <p    class="text">
-                CV.dox (it can be in the following formats, dox, pdf)
+              CV.dox (it can be in the following formats, dox, pdf)
             </p>
+          </div>
 
-            <p formControlName="filename" class="text-danger" *ngIf="myForm.get('filename')?.hasError('required') && isSomethingEmpty ">
-                cv is required
-            </p>
-
+          <div style="width: 46%; " class=" d-flex flex-column align-items-center">
             <input id="file" class="button" type="file" accept=".docx,.pdf"
-            (change)="handleFileInput($event)" placeholder="Upload Your CV">
+                   (change)="handleFileInput($event)" placeholder="Upload Your CV">
 
-            <label *ngIf="selectedFile == null" for="file">Upload Your CV</label>
-            <label *ngIf="selectedFile != null" for="file">{{selectedFileName}}</label>
+            <label class="labelUp" *ngIf="selectedFile == null" for="file">
+              <p class="text-under-label">Upload Your CV</p>
+            </label>
+            <label class="labelUp" *ngIf="selectedFile != null" for="file">
+              <p class="text-under-label">{{selectedFileName}}</p>
+            </label>
+
+            <div style="margin-left: 3%; margin-top: 0.5%;">
+
+              <p formControlName="filename" class="text-danger" *ngIf="myForm.get('filename')?.hasError('required') && isSomethingEmpty ">
+                cv is required
+              </p>
+
+              <p class="text-danger" *ngIf="isFileNotSupported"> Wrong file format.</p>
+              <p  class="text-danger" *ngIf="isMoreThanMaxFileSize"> File size should not exceed 10 MB.</p>
+            </div>
+          </div>
+
+
 
         </div>
+
 
     </div>
 </form>

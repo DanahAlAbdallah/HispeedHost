@@ -36,6 +36,7 @@ export class StudentprogramComponent implements OnInit{
   checkBoxTextDesc :string = "Do You Have a Scholarship to the Desired Country?";
   checkBoxTextError :string = "Completed a English Test is required.";
 
+  certificate_file:File | null= null;
 
   desiredCountries:string[] = [
     'Australia',
@@ -78,6 +79,10 @@ export class StudentprogramComponent implements OnInit{
 
   onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
     this.emailPhone  = updatedFormFields;
+  }
+
+  onFileUpload(file:File){
+    this.certificate_file = file;
   }
 
   isSomethingNotValid:boolean = false;
@@ -138,7 +143,7 @@ export class StudentprogramComponent implements OnInit{
       this.isSomethingEmpty = true;
     }
 
-    if(!this.form_row4.temp || this.isSomethingEmpty) {
+    if(!this.form_row4.temp ) {
       this.isChekedFirstTime = true;
       return
     }
@@ -147,11 +152,6 @@ export class StudentprogramComponent implements OnInit{
     if((this.form_row5.explain=='' && this.isEVSOpen) || this.isSomethingEmpty){
       this.isSomethingEmpty = true;
       return;
-    }
-
-    if(!this.form_row4.temp || this.isSomethingEmpty) {
-      this.isChekedFirstTime = true;
-      return
     }
 
 
@@ -173,7 +173,6 @@ export class StudentprogramComponent implements OnInit{
       this.form_row1.currentResidence,
       this.form_row5.status,
       this.form_row5.explain,
-      this.form_row6.listTypeOfQualification,
       this.form_row7.exam,
       this.form_row7.degree,
       this.form_row4.desiredCountry,
@@ -184,7 +183,7 @@ export class StudentprogramComponent implements OnInit{
     );
 
     this.isShowModal = true;
-    this.student_service.addStudent(this.student).subscribe({
+    this.student_service.addStudent(this.student, this.certificate_file).subscribe({
       next:(res:any) => {
         this.response = "Form sent successfully";
         this.isResponseReceived = true;

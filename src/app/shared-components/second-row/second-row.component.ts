@@ -10,52 +10,57 @@ import { ImigrationService } from 'src/app/classes/imigration.service';
 export class SecondRowComponent implements OnInit {
   myForm: FormGroup;
   @Input() formFields?: SecondRow;
-  @Input() isSomethingEmpty:boolean = false;
+  @Input() isSomethingEmpty: boolean = false;
   @Output() secondRowData = new EventEmitter<SecondRow>
   @Output() cv_file = new EventEmitter<File>
   @Output() isOtherSelected = new EventEmitter<boolean>
 
 
-  professions:string[] = []
-  years:string[] = []
+  isFileNotSupported: boolean = false;
+
+  professions: string[] = []
+  years: string[] = []
 
   selectedFile?: File | null;
   selectedFileName: string | null = null;
 
-  isOtherSelectedVar:boolean = false;
+  isOtherSelectedVar: boolean = false;
+  isMoreThanMaxFileSize: boolean = false;
 
-  constructor(private fb: UntypedFormBuilder, private service:ImigrationService) {
-    this.myForm  = this.fb.group({
-      profession: ['',Validators.required],
-      yearofexperience: ['',Validators.required],
-      education: ['',Validators.required],
+  constructor(private fb: UntypedFormBuilder, private service: ImigrationService) {
+    this.myForm = this.fb.group({
+      profession: ['', Validators.required],
+      yearofexperience: ['', Validators.required],
+      education: ['', Validators.required],
       filename: ['', Validators.required],
-      other: ['',Validators.required]
+      other: ['', Validators.required]
 
     });
   }
+
   ngOnInit(): void {
     this.service.getAllProfessions().subscribe({
-      next: (v:any) => {
-        v.forEach((obj:any) => {
-          this.professions.push(obj.profession);
+      next: (v: any) => {
+        v.forEach((profession: any) => {
+          this.professions.push(profession.name);
         });
 
       },
-      error: (e) => {},
-      complete: () =>{}
-  });
+      error: (e) => {
+      },
+      complete: () => {
+      }
+    });
   }
 
   onFieldChange(fieldName: string, value: string) {
     this.formFields![fieldName] = value
     this.secondRowData.emit(this.formFields);
 
-    if(fieldName == "profession" && value == "Other"){
+    if (fieldName == "profession" && value == "Other") {
       this.isOtherSelectedVar = true;
       this.isOtherSelected.emit(true);
-    }
-    else{
+    } else {
       this.isOtherSelectedVar = false;
       this.isOtherSelected.emit(false);
 
@@ -64,17 +69,39 @@ export class SecondRowComponent implements OnInit {
 
   handleFileInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-     this.selectedFile = inputElement.files ? inputElement.files[0] : null;
+    const selectedFile = inputElement.files ? inputElement.files[0] : null;
 
-    if (this.selectedFile) {
-      this.selectedFileName = this.selectedFile.name;
-      this.myForm.patchValue({"filename":this.selectedFileName})
-      this.onFieldChange('file_name',this.selectedFileName)
-      this.cv_file.emit(this.selectedFile)
+    if (selectedFile) {
+      const fileName = selectedFile.name;
+      const fileExtension = fileName.split('.').pop()!.toLowerCase();
+      this.isMoreThanMaxFileSize = false;
+      this.isFileNotSupported = false;
+      // Check file extension
+      if (fileExtension === 'pdf' || fileExtension === 'docx') {
+        this.isFileNotSupported = false;
+        this.isMoreThanMaxFileSize = false;
+        // Check file size
+        const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+        if (selectedFile.size <= maxSizeInBytes) {
+          this.isMoreThanMaxFileSize = false;
+          this.isFileNotSupported = false;
+          this.selectedFile = selectedFile;
+          this.selectedFileName = fileName;
+          this.myForm.patchValue({filename: this.selectedFileName});
+          this.onFieldChange('file_name', this.selectedFileName);
+          this.cv_file.emit(this.selectedFile);
+        } else {
+          this.isMoreThanMaxFileSize = true;
+        }
+      } else {
+        this.isFileNotSupported = true;
+
+      }
     } else {
       this.selectedFileName = null;
     }
   }
+
 }
 
 export class SecondRow {

@@ -1,14 +1,14 @@
-<div class="aftersearch" >
+<div class="aftersearch" id="after">
 
 
 <div style="margin-top: 10%;" >
 
 </div>
 <div id="searchResults"  *ngIf="!isEmpty">
-    <app-aftersearchitem  *ngFor="let af of Items" 
-    [name]="af.full_name" 
-    [age]="af.age" 
-    [location]="af.current_residence" 
+    <app-aftersearchitem  *ngFor="let af of Items"
+    [name]="af.full_name"
+    [age]="af.age"
+    [location]="af.current_residence"
     [contactlink]="af.contactlink"
     [resumelink]="af.link_cv"
     [isEmpty]="isEmpty"

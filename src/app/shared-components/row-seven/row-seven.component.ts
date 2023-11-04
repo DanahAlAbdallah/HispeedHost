@@ -28,6 +28,8 @@ export class RowSevenComponent {
 
   ];
 
+  isFileNotSupported: boolean = false;
+
   onFieldChange(fieldName: string, value: string) {
     this.formFields![fieldName] = value;
     this.RowSevehData.emit(this.formFields);
@@ -60,21 +62,34 @@ export class RowSevenComponent {
 
   selectedFile?: File | null;
   selectedFileName: string | null = null;
-  @Output() cv_file = new EventEmitter<File>
+  @Output() certificate_file = new EventEmitter<File>
 
   handleFileInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    this.selectedFile = inputElement.files ? inputElement.files[0] : null;
+    const selectedFile = inputElement.files ? inputElement.files[0] : null;
 
-    if (this.selectedFile) {
-      this.selectedFileName = this.selectedFile.name;
-      this.myForm.patchValue({"filename":this.selectedFileName})
-      this.onFieldChange('file_name',this.selectedFileName)
-      this.cv_file.emit(this.selectedFile)
+    if (selectedFile) {
+      const fileName = selectedFile.name;
+      const fileExtension = fileName.split('.').pop()!.toLowerCase();
+
+      if (fileExtension === 'pdf') {
+        this.isFileNotSupported = false;
+        // The file has a valid extension
+        this.selectedFile = selectedFile;
+        this.selectedFileName = fileName;
+        this.myForm.patchValue({ filename: this.selectedFileName });
+        this.onFieldChange('file_name', this.selectedFileName);
+        this.certificate_file.emit(this.selectedFile);
+      } else {
+        // Invalid file extension
+        // alert('Please upload a PDF or DOCX file.');
+        this.isFileNotSupported = true;
+      }
     } else {
       this.selectedFileName = null;
     }
   }
+
 }
 
 export class RowSeven{

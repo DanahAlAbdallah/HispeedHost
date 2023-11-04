@@ -11,7 +11,7 @@
 
     <div class="services">
         <div class="container">
-            <div class="main-second" [routerLink]="[links[i]]" *ngFor="let title of titles,index as i">
+            <div class="main-second" *ngFor="let title of titles,index as i">
                 <app-service-home
 
                     [imgUrl]="photos[i]"

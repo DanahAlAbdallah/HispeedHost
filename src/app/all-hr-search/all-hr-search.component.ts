@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ImigrationService } from '../classes/imigration.service';
-import { AfterSearch } from '../classes/afterseatch';
+import {AfterSearch, AfterSearch1} from '../classes/afterseatch';
 
 @Component({
   selector: 'app-all-hr-search',
@@ -10,11 +10,11 @@ import { AfterSearch } from '../classes/afterseatch';
 })
 export class AllHrSearchComponent {
   public message:string = "";
-
+  isHrPage= true;
   @Output() newItemEvent = new EventEmitter<boolean>();
   isEmpty:boolean = false;
 
-  public Items:AfterSearch[] = [];
+  public Items:AfterSearch1 [] = [];
 
   constructor(private router: Router,private route: ActivatedRoute, private service:ImigrationService) {
     this.router.events.subscribe((event) => {
@@ -24,20 +24,18 @@ export class AllHrSearchComponent {
       }
     });
   }
-  
+
 
   goBack() {
-    // Use the router to navigate back to a previous page or location
     this.router.navigate(['/search']);
   }
   temp:any[] = [];
 
   ngOnInit(): void {
-   
+
     this.service.getAllHrResults().subscribe({
-          next: (res) => { 
-            this.Items = res 
-            console.log(this.Items)
+          next: (res) => {
+            this.Items = res
             if(res.length !== 0){
               this.isEmpty = false;
               this.newItemEvent.emit(false);
@@ -60,7 +58,7 @@ export class AllHrSearchComponent {
           complete: () => {}
       });
       }
-     
+
 
 }
 

@@ -7,7 +7,6 @@ export class Student {
     public currentResidence: string = "",
     public visaStatus: string = "",
     public explain: string = "",
-    public listOfQualification: string = "",
     public exam: string = "",
     public degree: string = "",
     public desiredCountry: string = "",

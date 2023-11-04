@@ -12,7 +12,9 @@ export class ThirdRowComponent {
   @Input() isSomethingEmpty:boolean = false;
   @Input() isCheckFirstTime = false;
   @Output() thirdRowData = new EventEmitter<ThirdRow>
-  
+
+  @Input() isHideCompleteEnglishTest = false;
+
   public items21: { label: string, checked: boolean }[] = [
     { label: 'Yes', checked: false },
     { label: 'No', checked: false }
@@ -22,6 +24,7 @@ export class ThirdRowComponent {
   public handleCheckboxChange3(selectedItem: { label: string, checked: boolean }): void {
     this.onFieldChange('temp',true)
     this.isCheckFirstTime =false
+    console.log(this.isCheckFirstTime)
     this.items21.forEach(item => {
       item.checked = item === selectedItem;
       if(item.checked){
@@ -35,7 +38,7 @@ export class ThirdRowComponent {
     });
   }
 
-  constructor(private fb: UntypedFormBuilder) { 
+  constructor(private fb: UntypedFormBuilder) {
     this.myForm  = this.fb.group({
       englishproficiency: ['',Validators.required],
       completeenglishtest: [0,Validators.required]

@@ -17,6 +17,14 @@ export class ServiceHomeComponent {
 
   }
 
+  navigateToSearch() {
+    this.route.navigateByUrl(this._routelink ).then(() => {
+      setTimeout(
+        ()=>{window.location.reload();},
+        15
+      )
+    });
+  }
   public navigate(){
     this.route.navigate([this._routelink]);
   }

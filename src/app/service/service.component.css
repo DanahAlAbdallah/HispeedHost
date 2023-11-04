@@ -16,14 +16,14 @@
     border: 1px solid white;
     margin-bottom: 10%;
   }
-  
+
   .image-container img {
     display: block;
     width: 100%;
     height: auto;
     height: 100%;
   }
-  
+
   .text-container {
 
     width: 100%;
@@ -42,7 +42,7 @@
     padding: 20px; /* Optional: Add padding as desired */
     box-sizing: border-box; /* Optional: Include padding in element's total size */
   }
-  
+
   .title {
 
     white-space: pre-line;
@@ -55,7 +55,7 @@
     font-weight: 500;
     line-height: normal;
   }
-  
+
   .line {
     margin-top: -14px;
     width: 70px;
@@ -63,7 +63,7 @@
     border-radius: 16px;
     background: white;
   }
-  
+
   .description {
     color: white;
 
@@ -101,17 +101,17 @@
     line-height: normal;
     border: 1px solid white;
     border-radius: 10px;
-   
+
   }
-  
+
   .button:hover{
     background-color: black;
   }
-  
+
   @media (max-width:1200px) {
     .image-container{
         margin-bottom: 10%;
-   
+
     }
 }
 
@@ -146,20 +146,28 @@
     }
 
     .title {
-    
+
   font-size: 25px;
-  
+
     }
 
 }
 
 
 
-@media (max-width:350px) {
-  .image-container{
-    width: 280px;
+@media (max-width:380px) {
+  .image-container {
+    width: 300px;
     height: 320px;
-    
+
   }
+}
+
+  @media (max-width:365px) {
+    .image-container{
+      width: 280px;
+      height: 320px;
+
+    }
 }
 

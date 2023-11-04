@@ -13,16 +13,24 @@ export class StudentService {
 
   constructor(private httpClient:HttpClient) { }
 
-  public addStudent(student: Student): Observable<any> {
+  public addStudent(student: Student, certificate: File | null |undefined): Observable<any> {
 
-    const observable = this.httpClient.post<any>(this.apiUrl+'/api/v1/student/add', student);
+    const formData: FormData = new FormData();
+    // @ts-ignore
+    if(certificate != null || certificate != undefined){
+      formData.append('certificate', certificate, certificate.name);
+    }
+    formData.append('student', JSON.stringify(student));
+
+
+    const observable = this.httpClient.post<any>(this.apiUrl+'/api/v1/student/add', formData);
     return observable.pipe(
         retry(3),
         catchError((error: HttpErrorResponse) => {
           return throwError(() => new Error('Something bad happened; please try again later.'));
         })
     );
-  } 
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
