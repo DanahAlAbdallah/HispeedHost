@@ -13,10 +13,11 @@ export class ApplyForJob{
         public gender: string,
         public linkCv: string,
         public phoneNumber?: string,
-        public email?: string
+        public email?: string,
+        public imageFile?:string
       ) {
         this.status = 'Pending';
       }
-    
+
       status: string = 'Pending';
 }

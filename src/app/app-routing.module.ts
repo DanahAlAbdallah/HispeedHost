@@ -11,7 +11,6 @@ import { AllHrSearchComponent } from './all-hr-search/all-hr-search.component';
 import { HomeComponent } from './home/home.component';
 import {AboutUsComponent} from './about-us/about-us.component';
 import { ApplyforjobComponent } from './applyforjob/applyforjob.component';
-import {ScrollDispatcher} from "@angular/cdk/overlay";
 
 const routes: Routes = [
   // { path: '', redirectTo: '/',pathMatch: 'full'},

@@ -17,6 +17,9 @@ export class AftersearchitemComponent {
   @Input() resumelink:string = "";
   @Input() isEmpty: boolean = false;
   @Input() profession:string = "";
+  @Input() year_of_experience:number = 0;
+  @Input() link_image:string = "";
+
 
   @Input() gender:string = ""
 

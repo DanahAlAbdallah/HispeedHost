@@ -28,6 +28,7 @@ export class ImigrationComponent implements OnInit {
   isSomethingEmpty:boolean = false;
   isChekedFirstTime = false;
   cvFile:File | null = null;
+  imageUpload:File | null = null;
   isEVSOpen:boolean = false;
 
   emailPhone:EmailPhoneClass = new EmailPhoneClass()
@@ -75,6 +76,10 @@ export class ImigrationComponent implements OnInit {
 
   onCvFileUploaded(file:File){
     this.cvFile = file;
+  }
+
+  onImageUpload(file:File){
+    this.imageUpload = file;
   }
 
   onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
@@ -202,6 +207,8 @@ export class ImigrationComponent implements OnInit {
     }
 
     if(this.isOtherProfessionSelected == true && this.form_row2.other == ''){
+      this.isSomethingEmpty = true;
+
       return
     }
 
@@ -239,20 +246,38 @@ export class ImigrationComponent implements OnInit {
       'whatever',
       this.emailPhone.phoneNumber,
       this.emailPhone.email,
-      this.form_row2.other
+      this.form_row2.other,
+      ""
     );
 
     this.isShowModal = true;
-    this.immigration_service.addImigration(this.immigration,this.cvFile).subscribe({
-      next:(res:any) => {
-        this.response = "Form sent successfully";
-        this.isResponseReceived = true;
-      },
-      error:(err:any) => {
-        this.response = "Something Wrong";
-        this.isResponseReceived = true;
-      },
-      complete:()=>{}
-    });
+ 
+    if(this.imageUpload != null){
+      this.immigration_service.addImigrationWithImage(this.immigration,this.cvFile,this.imageUpload).subscribe({
+        next:(res:any) => {
+          this.response = "Form sent successfully";
+          this.isResponseReceived = true;
+        },
+        error:(err:any) => {
+          this.response = "Something Wrong";
+          this.isResponseReceived = true;
+        },
+        complete:()=>{}
+      });
+    }else{
+
+      this.immigration_service.addImigration(this.immigration,this.cvFile).subscribe({
+        next:(res:any) => {
+          this.response = "Form sent successfully";
+          this.isResponseReceived = true;
+        },
+        error:(err:any) => {
+          this.response = "Something Wrong";
+          this.isResponseReceived = true;
+        },
+        complete:()=>{}
+      });
+    }
+
   }
 }

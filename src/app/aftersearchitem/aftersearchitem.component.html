@@ -1,9 +1,19 @@
 <div class="container">
-    <div class="container1">
-        <img  src="./assets/🦆 icon _profile circle_.png"/>
-    </div>
+  
+  <div class="container1" *ngIf="link_image == null">
+    <img  src="./assets/🦆 icon _profile circle_.png"/>
+
+  </div>
+
+  <div class="circular-image-container"  *ngIf="link_image !== null">
+    <img [src]="link_image"/>
+
+</div>
 
     <div class="container2">
+
+        
+      
         <div class="firstrow">
             <div class="d-flex ">
                 <label><strong>Name:&nbsp;</strong></label>
@@ -28,6 +38,12 @@
         </div>
 
         <div class="secondrow">
+
+          <div class="d-flex">
+            <label><strong>Years Of Experience:&nbsp;</strong></label>
+            <p>{{year_of_experience}}</p>
+          </div>
+
 
           <div class="d-flex" *ngIf="isHRpage">
             <label><strong>Profession:&nbsp;</strong></label>

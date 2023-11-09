@@ -16,11 +16,12 @@ export class ImigrationService {
 
   constructor(private httpClient:HttpClient) { }
 
-  public addImigration(imigration: ImmigrationData, selectedFile:File | null |undefined): Observable<ImmigrationResponse> {
+  public addImigrationWithImage(imigration: ImmigrationData, selectedFile:File | null |undefined, imageUpload:File): Observable<ImmigrationResponse> {
 
     const formData: FormData = new FormData();
     if(selectedFile != null){
       formData.append('cv', selectedFile, selectedFile.name);
+      formData.append('image', imageUpload, imageUpload.name);
       formData.append('imigration', JSON.stringify(imigration));
     }
 
@@ -33,6 +34,23 @@ export class ImigrationService {
     );
   }
 
+
+  public addImigration(imigration: ImmigrationData, selectedFile:File | null |undefined): Observable<ImmigrationResponse> {
+
+    const formData: FormData = new FormData();
+    if(selectedFile != null){
+      formData.append('cv', selectedFile, selectedFile.name);
+      formData.append('imigration', JSON.stringify(imigration));
+    }
+
+    const observable = this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/immigrations/add',formData);
+    return observable.pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);

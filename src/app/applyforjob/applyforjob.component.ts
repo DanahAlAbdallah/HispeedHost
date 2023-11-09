@@ -23,7 +23,8 @@ export class ApplyforjobComponent implements OnInit{
     isSomethingEmpty:boolean = false;
     isChekedFirstTime = false;
     cvFile:File | null = null;
-    emailPhone:EmailPhoneClass = new EmailPhoneClass()
+    imageUpload: File | null = null;
+  emailPhone:EmailPhoneClass = new EmailPhoneClass()
 
 
     isOtherProfessionSelected:boolean = false;
@@ -67,6 +68,10 @@ export class ApplyforjobComponent implements OnInit{
     onCvFileUploaded(file:File){
       this.cvFile = file;
     }
+
+  onImageUpload(file:File){
+    this.imageUpload = file;
+  }
 
     onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
       this.emailPhone  = updatedFormFields;
@@ -149,10 +154,8 @@ export class ApplyforjobComponent implements OnInit{
         return;
       }
 
-      if(this.isOtherProfessionSelected && this.form_row2.other == ''){
+      if(this.isOtherProfessionSelected == true && this.form_row2.other == ''){
         return
-      }else{
-        this.form_row2.profession = this.form_row2.other;
       }
 
       if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
@@ -161,6 +164,10 @@ export class ApplyforjobComponent implements OnInit{
 
       if(this.isSomethingNotValid){
         return;
+      }
+
+      if(this.form_row2.profession == "Other" && this.form_row2.other != ''){
+        this.form_row2.profession = this.form_row2.other; 
       }
 
       this.apply = new ApplyForJob(
@@ -177,21 +184,39 @@ export class ApplyforjobComponent implements OnInit{
         this.form_row1.gender,
         'whatever',
         this.emailPhone.phoneNumber,
-        this.emailPhone.email
+        this.emailPhone.email,
+        ""
       );
 
 
       this.isShowModal = true;
-      this.apply_service.insertApply(this.apply,this.cvFile).subscribe({
-        next:(res:any) => {
-          this.response = "Form sent successfully";
-          this.isResponseReceived = true;
-        },
-        error:(err:any) => {
-          this.response = "Something Wrong";
-          this.isResponseReceived = true;
-        },
-        complete:()=>{}
-      });
+
+      if(this.imageUpload != null){
+        this.apply_service.insertApplyWithImage(this.apply,this.cvFile, this.imageUpload).subscribe({
+          next:(res:any) => {
+            this.response = "Form sent successfully";
+            this.isResponseReceived = true;
+          },
+          error:(err:any) => {
+            this.response = "Something Wrong";
+            this.isResponseReceived = true;
+          },
+          complete:()=>{}
+        });
+      }else {
+        this.apply_service.insertApply(this.apply,this.cvFile).subscribe({
+          next:(res:any) => {
+            this.response = "Form sent successfully";
+            this.isResponseReceived = true;
+          },
+          error:(err:any) => {
+            this.response = "Something Wrong";
+            this.isResponseReceived = true;
+          },
+          complete:()=>{}
+        });
+      }
+
+
     }
 }

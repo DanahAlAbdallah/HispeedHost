@@ -49,7 +49,7 @@
 
 <div>
   <input *ngIf="isOtherSelectedVar || formFields?.profession == 'Other'" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)"/>
-  <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required') && isSomethingEmpty && isOtherSelectedVar ">
+  <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required')  && isOtherSelectedVar ">
     <p class="text-danger">Profession is required.</p>
   </div>
 </div>
@@ -81,7 +81,7 @@
 
               <p class="text-danger" *ngIf="isFileNotSupported"> Wrong file format.</p>
               <p  class="text-danger" *ngIf="isMoreThanMaxFileSize"> File size should not exceed 10 MB.</p>
-            </div>
+            </div>  
           </div>
 
 
@@ -90,4 +90,43 @@
 
 
     </div>
+
+  <div class="second-row">
+
+    <div class="row1-sec-row">
+      <div class="div_text">
+        <p class="text">
+          Profile.jpeg (it can be in the following formats, jpeg, png) (Optional)
+        </p>
+      </div>
+
+      <div style="width: 46%; " class=" d-flex flex-column align-items-center">
+        <input id="img" class="button" type="file" accept="image/*"
+               (change)="handleFileInputImage($event)" placeholder="Upload Your Profile Image">
+        <label class="labelUp" *ngIf="selectedFileImage == null " for="img">
+          <p *ngIf="!uploading" class="text-under-label">Upload Your Profile Image</p>
+          <p *ngIf="uploading" class="text-under-label">wait for image compressing...</p>
+        </label>
+
+        <label class="labelUp" *ngIf="selectedFileImage != null" for="img">
+          <p class="text-under-label">{{selectedFileNameImage}}</p>
+        </label>
+
+       <div style="margin-left: 3%; margin-top: 0.5%;">
+<!-- 
+         <p formControlName="filename_img" class="text-danger" *ngIf="myForm.get('filename_img')?.hasError('required') && isSomethingEmpty ">
+           profile img is required
+         </p> -->
+
+         <p class="text-danger" *ngIf="isFileNotSupportedImage">Not Supported Image format.</p>
+
+       </div>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
 </form>

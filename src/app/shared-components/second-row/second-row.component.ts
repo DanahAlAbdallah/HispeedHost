@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ImigrationService } from 'src/app/classes/imigration.service';
+import imageCompression from 'browser-image-compression';
 
 @Component({
   selector: 'app-second-row',
@@ -13,10 +14,12 @@ export class SecondRowComponent implements OnInit {
   @Input() isSomethingEmpty: boolean = false;
   @Output() secondRowData = new EventEmitter<SecondRow>
   @Output() cv_file = new EventEmitter<File>
+  @Output() img_profile_file = new EventEmitter<File>
   @Output() isOtherSelected = new EventEmitter<boolean>
 
 
   isFileNotSupported: boolean = false;
+  isFileNotSupportedImage:boolean = false;
 
   professions: string[] = []
   years: string[] = []
@@ -24,8 +27,13 @@ export class SecondRowComponent implements OnInit {
   selectedFile?: File | null;
   selectedFileName: string | null = null;
 
+  selectedFileImage?: File | null;
+  selectedFileNameImage: string | null = null;
+
   isOtherSelectedVar: boolean = false;
   isMoreThanMaxFileSize: boolean = false;
+  isFileNotSupportedImg: boolean = false;
+  uploading: boolean = false;
 
   constructor(private fb: UntypedFormBuilder, private service: ImigrationService) {
     this.myForm = this.fb.group({
@@ -33,6 +41,7 @@ export class SecondRowComponent implements OnInit {
       yearofexperience: ['', Validators.required],
       education: ['', Validators.required],
       filename: ['', Validators.required],
+      filename_img: ['', Validators.required],
       other: ['', Validators.required]
 
     });
@@ -60,7 +69,7 @@ export class SecondRowComponent implements OnInit {
     if (fieldName == "profession" && value == "Other") {
       this.isOtherSelectedVar = true;
       this.isOtherSelected.emit(true);
-    } else {
+    } else if(fieldName == "profession" && value != "Other") {
       this.isOtherSelectedVar = false;
       this.isOtherSelected.emit(false);
 
@@ -102,6 +111,50 @@ export class SecondRowComponent implements OnInit {
     }
   }
 
+
+  async handleFileInputImage(event: Event) {
+    // @ts-ignore
+    const imageFile = event.target?.files[0];
+
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+
+    try {
+      this.uploading = true;
+      const compressedFile = await imageCompression(<File>imageFile, options);
+
+      if (compressedFile) {
+        this.uploading = false;
+
+        const fileName = compressedFile.name;
+        const fileExtension = fileName.split('.').pop()!.toLowerCase();
+        // Check file extension
+        if (fileExtension === 'jpeg' || fileExtension === 'png' || fileExtension === 'jpg') {
+          this.isFileNotSupportedImage = false;
+          this.selectedFileImage = compressedFile;
+          this.selectedFileNameImage = fileName;
+          this.myForm.patchValue({filename_img: this.selectedFileNameImage});
+          if (this.selectedFileNameImage != null) {
+            this.onFieldChange('filename_img', this.selectedFileNameImage);
+          }
+          // @ts-ignore
+          this.img_profile_file.emit(this.selectedFileImage);
+
+        } else {
+          this.isFileNotSupportedImage = true;
+        }
+      } else {
+        this.selectedFileName = null;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
 }
 
 export class SecondRow {
@@ -109,6 +162,7 @@ export class SecondRow {
     yearofexperience: string = '';
     education: string = '';
     file_name: string = '';
+    filename_img:string = '';
     other:string = '';
 
     [key: string]: string | undefined  | null;

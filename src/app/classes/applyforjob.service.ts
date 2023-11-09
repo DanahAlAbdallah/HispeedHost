@@ -29,5 +29,23 @@ export class ApplyforjobService {
           return throwError(() => new Error('Something bad happened; please try again later.'));
         })
     );
-  } 
+  }
+
+  public insertApplyWithImage(apply: ApplyForJob, selectedFile:File | null |undefined, imageUpload:File): Observable<any> {
+
+    const formData: FormData = new FormData();
+    if(selectedFile != null){
+      formData.append('cv', selectedFile, selectedFile.name);
+      formData.append('image', imageUpload, imageUpload.name);
+      formData.append('applyjob', JSON.stringify(apply));
+    }
+
+    const observable = this.httpClient.post<any>(this.apiUrl+'/api/v1/applyjob/new',formData);
+    return observable.pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
 }

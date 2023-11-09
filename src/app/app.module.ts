@@ -120,9 +120,13 @@ import { ShowErrorComponent } from './shared-components/show-error/show-error.co
         HttpClientModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+
     ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+
+}
