@@ -25,6 +25,7 @@ export class ApplyforjobComponent implements OnInit{
     cvFile:File | null = null;
     imageUpload: File | null = null;
   emailPhone:EmailPhoneClass = new EmailPhoneClass()
+  imageUploadFileName:string = ""
 
 
     isOtherProfessionSelected:boolean = false;
@@ -71,6 +72,7 @@ export class ApplyforjobComponent implements OnInit{
 
   onImageUpload(file:File){
     this.imageUpload = file;
+    this.imageUploadFileName = file.name;
   }
 
     onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
@@ -82,6 +84,7 @@ export class ApplyforjobComponent implements OnInit{
     }
 
     isSomethingNotValid:boolean = false;
+  isFileNotSupportedImage: boolean= false;
 
     onFormValidityChanged(isValid: boolean) {
 
@@ -141,13 +144,18 @@ export class ApplyforjobComponent implements OnInit{
           this.isSomethingEmpty = true;
           break;
 
+        case this.imageUploadFileName:
+          this.isSomethingEmpty = true;
+          break;
+
+        case this.emailPhone.email:
+          this.isSomethingEmpty = true;
+          break;
+        case this.emailPhone.phoneNumber:
+          this.isSomethingEmpty = true;
+          break;
         default:
           this.isSomethingEmpty = false
-      }
-
-      if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
-        this.isSomethingEmpty = true;
-        return;
       }
 
       if( this.isSomethingEmpty ) {
@@ -158,7 +166,7 @@ export class ApplyforjobComponent implements OnInit{
         return
       }
 
-      if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+      if(this.isSomethingNotValid ){
         return;
       }
 
@@ -167,7 +175,7 @@ export class ApplyforjobComponent implements OnInit{
       }
 
       if(this.form_row2.profession == "Other" && this.form_row2.other != ''){
-        this.form_row2.profession = this.form_row2.other; 
+        this.form_row2.profession = this.form_row2.other;
       }
 
       this.apply = new ApplyForJob(
@@ -219,4 +227,8 @@ export class ApplyforjobComponent implements OnInit{
 
 
     }
+
+  onFileNotSupported($event: boolean) {
+    this.isFileNotSupportedImage = $event;
+  }
 }

@@ -29,6 +29,7 @@ export class ImigrationComponent implements OnInit {
   isChekedFirstTime = false;
   cvFile:File | null = null;
   imageUpload:File | null = null;
+  imageUploadFileName:string = ""
   isEVSOpen:boolean = false;
 
   emailPhone:EmailPhoneClass = new EmailPhoneClass()
@@ -80,6 +81,11 @@ export class ImigrationComponent implements OnInit {
 
   onImageUpload(file:File){
     this.imageUpload = file;
+    this.imageUploadFileName = file.name;
+  }
+
+  onFileNotSupported(isNot:boolean){
+    this.isFileNotSupportedImage = isNot;
   }
 
   onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
@@ -107,7 +113,6 @@ export class ImigrationComponent implements OnInit {
   onOtherProfessionSelected(updatedFormFields: boolean){
     this.isOtherProfessionSelected  = updatedFormFields;
   }
-
 
   isSomethingNotValid:boolean = false;
 
@@ -172,15 +177,17 @@ export class ImigrationComponent implements OnInit {
       case this.form_row2.file_name:
         this.isSomethingEmpty = true;
         break;
-
+      case this.imageUploadFileName:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.email:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.phoneNumber:
+        this.isSomethingEmpty = true;
+        break;
       default:
         this.isSomethingEmpty = false
-    }
-
-
-
-    if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
-      this.isSomethingEmpty = true;
     }
 
     if(!this.form_row3.temp ) {
@@ -213,7 +220,7 @@ export class ImigrationComponent implements OnInit {
     }
 
 
-    if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+    if(this.isSomethingNotValid ){
       return;
     }
 
@@ -251,7 +258,7 @@ export class ImigrationComponent implements OnInit {
     );
 
     this.isShowModal = true;
- 
+
     if(this.imageUpload != null){
       this.immigration_service.addImigrationWithImage(this.immigration,this.cvFile,this.imageUpload).subscribe({
         next:(res:any) => {
@@ -280,4 +287,9 @@ export class ImigrationComponent implements OnInit {
     }
 
   }
+
+  protected readonly ImigrationService = ImigrationService;
+
+
+  isFileNotSupportedImage: boolean = false;
 }

@@ -20,6 +20,8 @@ export class AftersearchitemComponent {
   @Input() year_of_experience:number = 0;
   @Input() link_image:string = "";
 
+  @Input() education:string = "";
+  @Input() passport_country:string = "";
 
   @Input() gender:string = ""
 

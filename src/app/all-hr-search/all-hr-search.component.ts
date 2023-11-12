@@ -36,6 +36,7 @@ export class AllHrSearchComponent {
     this.service.getAllHrResults().subscribe({
           next: (res) => {
             this.Items = res
+            console.log(this.Items)
             if(res.length !== 0){
               this.isEmpty = false;
               this.newItemEvent.emit(false);

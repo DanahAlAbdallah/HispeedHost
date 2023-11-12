@@ -21,11 +21,11 @@ export class ServiceHomeComponent {
     this.route.navigateByUrl(this._routelink ).then(() => {
       setTimeout(
         ()=>{window.location.reload();},
-        15
+        25
       )
     });
   }
   public navigate(){
-    this.route.navigate([this._routelink]);
+    this.route.navigate([this._routelink]).then(() => window.scrollTo(0,0));
   }
 }

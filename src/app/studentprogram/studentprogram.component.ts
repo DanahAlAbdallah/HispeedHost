@@ -134,13 +134,14 @@ export class StudentprogramComponent implements OnInit{
       case this.form_row7.degree:
         this.isSomethingEmpty = true;
         break;
+      case this.emailPhone.email:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.phoneNumber:
+        this.isSomethingEmpty = true;
+        break;
       default:
         this.isSomethingEmpty = false
-    }
-
-
-    if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
-      this.isSomethingEmpty = true;
     }
 
     if(!this.form_row4.temp ) {
@@ -155,7 +156,7 @@ export class StudentprogramComponent implements OnInit{
     }
 
 
-    if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+    if(this.isSomethingNotValid){
       return;
     }
 

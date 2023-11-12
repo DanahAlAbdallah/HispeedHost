@@ -112,48 +112,6 @@ export class SecondRowComponent implements OnInit {
   }
 
 
-  async handleFileInputImage(event: Event) {
-    // @ts-ignore
-    const imageFile = event.target?.files[0];
-
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true,
-    }
-
-    try {
-      this.uploading = true;
-      const compressedFile = await imageCompression(<File>imageFile, options);
-
-      if (compressedFile) {
-        this.uploading = false;
-
-        const fileName = compressedFile.name;
-        const fileExtension = fileName.split('.').pop()!.toLowerCase();
-        // Check file extension
-        if (fileExtension === 'jpeg' || fileExtension === 'png' || fileExtension === 'jpg') {
-          this.isFileNotSupportedImage = false;
-          this.selectedFileImage = compressedFile;
-          this.selectedFileNameImage = fileName;
-          this.myForm.patchValue({filename_img: this.selectedFileNameImage});
-          if (this.selectedFileNameImage != null) {
-            this.onFieldChange('filename_img', this.selectedFileNameImage);
-          }
-          // @ts-ignore
-          this.img_profile_file.emit(this.selectedFileImage);
-
-        } else {
-          this.isFileNotSupportedImage = true;
-        }
-      } else {
-        this.selectedFileName = null;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
 
 }
 

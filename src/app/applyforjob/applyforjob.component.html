@@ -11,6 +11,26 @@
 
 <div class="main" >
 
+  <div style="background-color: transparent;display: flex;flex-direction: column; align-items: center; justify-content: center; margin-top: 3%;width: 100%">
+    <app-circularimage
+      [isSomethingEmpty]="isSomethingEmpty"
+      (img_profile_file)="onImageUpload($event)"
+      (isFileNotSupportedImageEvent)="onFileNotSupported($event)"
+    ></app-circularimage>
+
+
+    <div style="margin-top: 0.5%;">
+
+      <p  class="text-danger" *ngIf="imageUpload == null && isSomethingEmpty ">
+        profile img is required
+      </p>
+
+      <p class="text-danger" *ngIf="isFileNotSupportedImage">Not Supported Image format.</p>
+
+    </div>
+
+  </div>
+
   <app-firstrow [formFields]="form_row1"
                 [isSomethingEmpty]="isSomethingEmpty"
                 (firstRowData)="onFirstRowChanged($event)"
@@ -23,7 +43,6 @@
     [isSomethingEmpty]="isSomethingEmpty"
     (secondRowData)="onSecondRowChanged($event)"
     (cv_file)="onCvFileUploaded($event)"
-    (img_profile_file)="onImageUpload($event)"
     (isOtherSelected)="onOtherProfessionSelected($event)"
   ></app-second-row>
 

@@ -1,34 +1,36 @@
 
 <form class="main" [formGroup]="myForm">
-    <p style="margin-left: 3%;">
-        <strong>Note:</strong> You can either fill at least one of these fields or fill both if you prefer.</p>
-    
+    <p style="margin-left: 3%; margin-bottom: 3%">
+        <strong>Note:</strong> Both phone number and email are required.</p>
+
     <div class="flex-container">
-    
-    
+
+
         <div class="flex-item">
             <div class="d-flex flex-column ee">
                 <input formControlName="email" class="input" type="email" placeholder="Email" (input)="onFieldChange('email', myForm.get('email')?.value)">
+              <div class=" mb-2" *ngIf="myForm.get('email')?.hasError('required')  && isSomethingEmpty">
+                <p class="text-danger">* Email required.</p>
+              </div>
                 <div class=" mb-2" *ngIf="myForm.get('email')?.hasError('email')">
                     <p class="text-danger">* Email Not Valid.</p>
                   </div>
             </div>
-           
+
         </div>
         <div class="flex-item s">
             <div class="d-flex flex-column ee">
-                <input formControlName="phoneNumber" class="input" type="tel" 
+                <input formControlName="phoneNumber" class="input" type="tel"
                 placeholder="Phone Number" (input)="onFieldChange('phoneNumber', myForm.get('phoneNumber')?.value)" >
-
+              <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('required') && isSomethingEmpty">
+                <p class="text-danger">* Phone number required.</p>
+              </div>
                 <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('minlength') ">
                     <p class="text-danger">* Phone number is too short..</p>
                   </div>
             </div>
         </div>
-    
-        <div class=" mb-2" *ngIf="isSomethingEmpty && (formFields?.email?.length == 0 && formFields?.phoneNumber?.length == 0)">
-            <p class="text-danger">* Make sure to fill at least one of them.</p>
-        </div>
+
     </div>
-    
+
 </form>

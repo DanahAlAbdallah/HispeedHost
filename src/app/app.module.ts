@@ -57,6 +57,9 @@ import { FiveRowComponent } from './shared-components/five-row/five-row.componen
 import { SixRowComponent } from './shared-components/six-row/six-row.component';
 import { RowSevenComponent } from './shared-components/row-seven/row-seven.component';
 import { ShowErrorComponent } from './shared-components/show-error/show-error.component';
+import { CircularimageComponent } from './circularimage/circularimage.component';
+import { MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -111,18 +114,21 @@ import { ShowErrorComponent } from './shared-components/show-error/show-error.co
     FiveRowComponent,
     SixRowComponent,
     RowSevenComponent,
-    ShowErrorComponent
+    ShowErrorComponent,
+    CircularimageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        NgOptimizedImage,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
 
-    ],
+    MatCardModule,
+    MatIconModule
+  ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })

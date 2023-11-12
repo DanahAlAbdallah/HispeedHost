@@ -100,13 +100,16 @@ export class TorrismVisaComponent implements OnInit{
         this.isSomethingEmpty = true;
         break;
 
+      case this.emailPhone.email:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.phoneNumber:
+        this.isSomethingEmpty = true;
+        break;
       default:
         this.isSomethingEmpty = false
     }
 
-    if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
-      this.isSomethingEmpty = true;
-    }
 
     if((this.form_row5.explain=='' && this.isEVSOpen) || this.isSomethingEmpty){
       this.isSomethingEmpty = true;
@@ -114,7 +117,7 @@ export class TorrismVisaComponent implements OnInit{
     }
 
 
-    if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+    if(this.isSomethingNotValid ){
       return;
     }
 
