@@ -65,10 +65,5 @@ export class CircularimageComponent {
 
   }
 
-  triggerFileInput(): void {
-    // programmatically trigger the click event of the hidden file input
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    fileInput.click();
-  }
 
 }

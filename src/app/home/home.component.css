@@ -9,7 +9,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    height: 100vh; /* Set the fixed height for the container */
+    /* Set the fixed height for the container */
   }
   
   .background-image {
@@ -48,8 +48,15 @@
 
   @media (max-width: 768px)  {
     .image-container {
-        height: 110vh; /* Set the fixed height for the container */
+        height: 50vh; /* Set the fixed height for the container */
       }
 
+    
+  }
+
+  @media (max-width: 500px)  {
+    .slider{
+      top: 28%;
+    }
     
   }
