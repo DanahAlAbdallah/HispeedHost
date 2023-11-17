@@ -202,11 +202,19 @@ export class ImigrationComponent implements OnInit {
     }
 
     if(this.isOtherProfessionSelected == true && this.form_row2.other == ''){
+      this.isSomethingEmpty = true;
+
       return
+    }
+
+    if(this.form_row2.profession == "Other" && this.form_row2.other == ''){
+      this.isSomethingEmpty = true;
+      return;
     }
 
 
     if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+
       return;
     }
 

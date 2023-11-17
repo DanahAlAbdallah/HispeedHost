@@ -145,19 +145,23 @@ export class ApplyforjobComponent implements OnInit{
         return;
       }
 
-      if( this.isSomethingEmpty ) {
-        return;
+      if(this.isOtherProfessionSelected && this.form_row2.other == '') {
+        return
       }
 
-      if(this.isOtherProfessionSelected && this.form_row2.other == ''){
-        return
-      }else{
-        this.form_row2.profession = this.form_row2.other;
-      }
 
       if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
         return;
       }
+
+      if(this.isOtherProfessionSelected && this.form_row2.other != '') {
+        this.form_row2.profession = this.form_row2.other;
+      }
+
+      if( this.isSomethingEmpty ) {
+        return;
+      }
+
 
       if(this.isSomethingNotValid){
         return;

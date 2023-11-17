@@ -60,7 +60,7 @@ export class SecondRowComponent implements OnInit {
     if (fieldName == "profession" && value == "Other") {
       this.isOtherSelectedVar = true;
       this.isOtherSelected.emit(true);
-    } else {
+    } else if(fieldName == "profession" && value != "Other") {
       this.isOtherSelectedVar = false;
       this.isOtherSelected.emit(false);
 

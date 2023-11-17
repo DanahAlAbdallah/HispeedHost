@@ -49,7 +49,7 @@
 
 <div>
   <input *ngIf="isOtherSelectedVar || formFields?.profession == 'Other'" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)"/>
-  <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required') && isSomethingEmpty && isOtherSelectedVar ">
+  <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required')  && isOtherSelectedVar ">
     <p class="text-danger">Profession is required.</p>
   </div>
 </div>
