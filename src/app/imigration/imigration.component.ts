@@ -28,6 +28,8 @@ export class ImigrationComponent implements OnInit {
   isSomethingEmpty:boolean = false;
   isChekedFirstTime = false;
   cvFile:File | null = null;
+  imageUpload:File | null = null;
+  imageUploadFileName:string = ""
   isEVSOpen:boolean = false;
 
   emailPhone:EmailPhoneClass = new EmailPhoneClass()
@@ -77,6 +79,15 @@ export class ImigrationComponent implements OnInit {
     this.cvFile = file;
   }
 
+  onImageUpload(file:File){
+    this.imageUpload = file;
+    this.imageUploadFileName = file.name;
+  }
+
+  onFileNotSupported(isNot:boolean){
+    this.isFileNotSupportedImage = isNot;
+  }
+
   onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
     this.emailPhone  = updatedFormFields;
   }
@@ -102,7 +113,6 @@ export class ImigrationComponent implements OnInit {
   onOtherProfessionSelected(updatedFormFields: boolean){
     this.isOtherProfessionSelected  = updatedFormFields;
   }
-
 
   isSomethingNotValid:boolean = false;
 
@@ -167,15 +177,17 @@ export class ImigrationComponent implements OnInit {
       case this.form_row2.file_name:
         this.isSomethingEmpty = true;
         break;
-
+      case this.imageUploadFileName:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.email:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.phoneNumber:
+        this.isSomethingEmpty = true;
+        break;
       default:
         this.isSomethingEmpty = false
-    }
-
-
-
-    if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
-      this.isSomethingEmpty = true;
     }
 
     if(!this.form_row3.temp ) {
@@ -213,8 +225,12 @@ export class ImigrationComponent implements OnInit {
     }
 
 
+<<<<<<< HEAD
     if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
 
+=======
+    if(this.isSomethingNotValid ){
+>>>>>>> 46c5d10f242e73fe876f01f21168d4e77d2657b2
       return;
     }
 
@@ -247,20 +263,43 @@ export class ImigrationComponent implements OnInit {
       'whatever',
       this.emailPhone.phoneNumber,
       this.emailPhone.email,
-      this.form_row2.other
+      this.form_row2.other,
+      ""
     );
 
     this.isShowModal = true;
-    this.immigration_service.addImigration(this.immigration,this.cvFile).subscribe({
-      next:(res:any) => {
-        this.response = "Form sent successfully";
-        this.isResponseReceived = true;
-      },
-      error:(err:any) => {
-        this.response = "Something Wrong";
-        this.isResponseReceived = true;
-      },
-      complete:()=>{}
-    });
+
+    if(this.imageUpload != null){
+      this.immigration_service.addImigrationWithImage(this.immigration,this.cvFile,this.imageUpload).subscribe({
+        next:(res:any) => {
+          this.response = "Form sent successfully";
+          this.isResponseReceived = true;
+        },
+        error:(err:any) => {
+          this.response = "Something Wrong";
+          this.isResponseReceived = true;
+        },
+        complete:()=>{}
+      });
+    }else{
+
+      this.immigration_service.addImigration(this.immigration,this.cvFile).subscribe({
+        next:(res:any) => {
+          this.response = "Form sent successfully";
+          this.isResponseReceived = true;
+        },
+        error:(err:any) => {
+          this.response = "Something Wrong";
+          this.isResponseReceived = true;
+        },
+        complete:()=>{}
+      });
+    }
+
   }
+
+  protected readonly ImigrationService = ImigrationService;
+
+
+  isFileNotSupportedImage: boolean = false;
 }

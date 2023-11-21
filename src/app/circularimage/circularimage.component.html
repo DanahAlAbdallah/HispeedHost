@@ -1,0 +1,11 @@
+<!-- circular-image-upload.component.html -->
+<mat-card class="mat-card main"   >
+  <div class="circular-card">
+    <input type="file" (change)="onFileSelected($event)" id="fileInput" style="display: none" />
+    <label style="cursor: pointer;" for="fileInput">
+      <img *ngIf="imageUrl" [src]="imageUrl" class="circular-image" alt="Uploaded Image" />
+      <span  *ngIf="!imageUrl">Upload Image</span>
+    </label>
+  </div>
+</mat-card>
+

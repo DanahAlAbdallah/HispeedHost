@@ -20,13 +20,14 @@ export class ImmigrationData {
     public filename: string,
     public phoneNumber: string,
     public email: string,
-    public professionOther: string
+    public professionOther: string,
+    public imageFile:string
   ) {}
 
 
 }
 
-  
+
 
   export class ImmigrationResponse{
     response:string = "";

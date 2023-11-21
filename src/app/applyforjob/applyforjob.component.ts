@@ -23,7 +23,9 @@ export class ApplyforjobComponent implements OnInit{
     isSomethingEmpty:boolean = false;
     isChekedFirstTime = false;
     cvFile:File | null = null;
-    emailPhone:EmailPhoneClass = new EmailPhoneClass()
+    imageUpload: File | null = null;
+  emailPhone:EmailPhoneClass = new EmailPhoneClass()
+  imageUploadFileName:string = ""
 
 
     isOtherProfessionSelected:boolean = false;
@@ -68,6 +70,11 @@ export class ApplyforjobComponent implements OnInit{
       this.cvFile = file;
     }
 
+  onImageUpload(file:File){
+    this.imageUpload = file;
+    this.imageUploadFileName = file.name;
+  }
+
     onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
       this.emailPhone  = updatedFormFields;
     }
@@ -77,6 +84,7 @@ export class ApplyforjobComponent implements OnInit{
     }
 
     isSomethingNotValid:boolean = false;
+  isFileNotSupportedImage: boolean= false;
 
     onFormValidityChanged(isValid: boolean) {
 
@@ -136,10 +144,21 @@ export class ApplyforjobComponent implements OnInit{
           this.isSomethingEmpty = true;
           break;
 
+        case this.imageUploadFileName:
+          this.isSomethingEmpty = true;
+          break;
+
+        case this.emailPhone.email:
+          this.isSomethingEmpty = true;
+          break;
+        case this.emailPhone.phoneNumber:
+          this.isSomethingEmpty = true;
+          break;
         default:
           this.isSomethingEmpty = false
       }
 
+<<<<<<< HEAD
       if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
         this.isSomethingEmpty = true;
         return;
@@ -149,8 +168,17 @@ export class ApplyforjobComponent implements OnInit{
         return
       }
 
+=======
+      if( this.isSomethingEmpty ) {
+        return;
+      }
 
-      if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+      if(this.isOtherProfessionSelected == true && this.form_row2.other == ''){
+        return
+      }
+>>>>>>> 46c5d10f242e73fe876f01f21168d4e77d2657b2
+
+      if(this.isSomethingNotValid ){
         return;
       }
 
@@ -167,6 +195,10 @@ export class ApplyforjobComponent implements OnInit{
         return;
       }
 
+      if(this.form_row2.profession == "Other" && this.form_row2.other != ''){
+        this.form_row2.profession = this.form_row2.other;
+      }
+
       this.apply = new ApplyForJob(
         this.form_row1.fullName,
         `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
@@ -181,21 +213,43 @@ export class ApplyforjobComponent implements OnInit{
         this.form_row1.gender,
         'whatever',
         this.emailPhone.phoneNumber,
-        this.emailPhone.email
+        this.emailPhone.email,
+        ""
       );
 
 
       this.isShowModal = true;
-      this.apply_service.insertApply(this.apply,this.cvFile).subscribe({
-        next:(res:any) => {
-          this.response = "Form sent successfully";
-          this.isResponseReceived = true;
-        },
-        error:(err:any) => {
-          this.response = "Something Wrong";
-          this.isResponseReceived = true;
-        },
-        complete:()=>{}
-      });
+
+      if(this.imageUpload != null){
+        this.apply_service.insertApplyWithImage(this.apply,this.cvFile, this.imageUpload).subscribe({
+          next:(res:any) => {
+            this.response = "Form sent successfully";
+            this.isResponseReceived = true;
+          },
+          error:(err:any) => {
+            this.response = "Something Wrong";
+            this.isResponseReceived = true;
+          },
+          complete:()=>{}
+        });
+      }else {
+        this.apply_service.insertApply(this.apply,this.cvFile).subscribe({
+          next:(res:any) => {
+            this.response = "Form sent successfully";
+            this.isResponseReceived = true;
+          },
+          error:(err:any) => {
+            this.response = "Something Wrong";
+            this.isResponseReceived = true;
+          },
+          complete:()=>{}
+        });
+      }
+
+
     }
+
+  onFileNotSupported($event: boolean) {
+    this.isFileNotSupportedImage = $event;
+  }
 }

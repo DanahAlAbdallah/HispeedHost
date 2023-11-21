@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ImigrationService } from 'src/app/classes/imigration.service';
+import imageCompression from 'browser-image-compression';
 
 @Component({
   selector: 'app-second-row',
@@ -13,10 +14,12 @@ export class SecondRowComponent implements OnInit {
   @Input() isSomethingEmpty: boolean = false;
   @Output() secondRowData = new EventEmitter<SecondRow>
   @Output() cv_file = new EventEmitter<File>
+  @Output() img_profile_file = new EventEmitter<File>
   @Output() isOtherSelected = new EventEmitter<boolean>
 
 
   isFileNotSupported: boolean = false;
+  isFileNotSupportedImage:boolean = false;
 
   professions: string[] = []
   years: string[] = []
@@ -24,8 +27,13 @@ export class SecondRowComponent implements OnInit {
   selectedFile?: File | null;
   selectedFileName: string | null = null;
 
+  selectedFileImage?: File | null;
+  selectedFileNameImage: string | null = null;
+
   isOtherSelectedVar: boolean = false;
   isMoreThanMaxFileSize: boolean = false;
+  isFileNotSupportedImg: boolean = false;
+  uploading: boolean = false;
 
   constructor(private fb: UntypedFormBuilder, private service: ImigrationService) {
     this.myForm = this.fb.group({
@@ -33,6 +41,7 @@ export class SecondRowComponent implements OnInit {
       yearofexperience: ['', Validators.required],
       education: ['', Validators.required],
       filename: ['', Validators.required],
+      filename_img: ['', Validators.required],
       other: ['', Validators.required]
 
     });
@@ -102,6 +111,8 @@ export class SecondRowComponent implements OnInit {
     }
   }
 
+
+
 }
 
 export class SecondRow {
@@ -109,6 +120,7 @@ export class SecondRow {
     yearofexperience: string = '';
     education: string = '';
     file_name: string = '';
+    filename_img:string = '';
     other:string = '';
 
     [key: string]: string | undefined  | null;
