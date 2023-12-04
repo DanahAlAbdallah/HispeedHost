@@ -59,6 +59,11 @@ export class ImigrationComponent implements OnInit {
 
   }
 
+  isValidPrefix:boolean = false;
+  onValidPrefix(prefix:boolean){
+    this.isValidPrefix = prefix;
+  }
+
   onFirstRowChanged(updatedFormFields: FirstRow) {
     this.form_row1 = updatedFormFields;
   }
@@ -235,6 +240,10 @@ export class ImigrationComponent implements OnInit {
     if(this.isSomethingEmpty){
       return;
     }
+
+    if(this.isValidPrefix){
+      return;
+  }
 
     this.immigration = new ImmigrationData(
       0,

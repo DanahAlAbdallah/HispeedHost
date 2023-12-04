@@ -36,6 +36,11 @@ export class TorrismVisaComponent implements OnInit{
      this.getCountries();
   }
 
+  isValidPrefix:boolean = false;
+  onValidPrefix(prefix:boolean){
+    this.isValidPrefix = prefix;
+  }
+
   onFirstRowChanged(updatedFormFields: FirstRow) {
     this.form_row1 = updatedFormFields;
   }
@@ -123,6 +128,10 @@ export class TorrismVisaComponent implements OnInit{
 
     if(this.isSomethingNotValid){
       return;
+    }
+
+    if(this.isValidPrefix){
+        return;
     }
 
     this.tourism = new TourismVisa(

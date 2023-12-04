@@ -17,6 +17,9 @@ export class FormDataSharedComponent {
   @Output() emailphoneData = new EventEmitter<EmailPhoneClass>();
   @Input() isSomethingEmpty:boolean = false
   @Output() formValidityChanged = new EventEmitter<boolean>();
+  @Output() isValidPrefixEvent = new EventEmitter<boolean>();
+
+  notSelectAnyPrefix:boolean = true;
 
  constructor(private fb: UntypedFormBuilder) {
   this.myForm  = this.fb.group({
@@ -68,7 +71,7 @@ this.myForm.get('phoneNumber')?.setValidators([Validators.required, customValida
   });
 }
 
-
+ isNotValid:boolean = false;
 onFieldChange(fieldName: string, value: string) {
   // if(this.myForm.invalid){
   //   this.formFields!.isValidForm = false;
@@ -79,19 +82,28 @@ onFieldChange(fieldName: string, value: string) {
   //   this.formFields!.isValidForm = true;
   //   console.log("valid")
 
+  // }]
+
+  // if(fieldName === "phoneCode"){
+  //    this.isValid = this.validatePhoneNumberPrefixCode(value);
   // }
+
   let codePhone = this.myForm.get("phoneCode")?.value;
-  if(codePhone === '' && fieldName == "phoneNumber"){
-      return;
-  }else if(codePhone !== '' &&  fieldName == "phoneNumber"){
+  if(codePhone === '' && fieldName == "phoneNumber" && this.isNotValid) {
+    return;
+  } else if(codePhone !== '' &&  fieldName == "phoneNumber"){
     value = `${codePhone}${value}`;
-    console.log(value)
   }
 
   this.formFields![fieldName] = value
   this.emailphoneData.emit(this.formFields);
 }
 
+ isValidPrefix(prefix: string): boolean {
+  console.log(prefix)
+  const foundPrefix = this.prefixCode.find(item => '+'+item.value == prefix);
+  return !!foundPrefix;
+}
 
  prefixCode:any[] = [
     { label: 'Afghanistan +93', value: '93' },
@@ -351,7 +363,6 @@ onFieldChange(fieldName: string, value: string) {
  filteredOptions = this.prefixCode;
  showDropdownFlag = false;
 
- phoneCodeControl = new FormControl('');
 
  onInputChange(event: Event) {
    const value = (event.target as HTMLInputElement).value;
@@ -359,6 +370,15 @@ onFieldChange(fieldName: string, value: string) {
      option.label.toLowerCase().includes(value.toLowerCase())
    );
    this.showDropdownFlag = true; // Show the dropdown as the user types
+
+   if(this.isValidPrefix(value)){
+    this.isNotValid = false;
+    this.isValidPrefixEvent.emit(this.isNotValid);
+   }else{
+    this.isNotValid = true;
+    this.isValidPrefixEvent.emit(this.isNotValid);
+
+   }
  }
 
  showDropdown() {
@@ -370,11 +390,24 @@ onFieldChange(fieldName: string, value: string) {
    setTimeout(() => {
      this.showDropdownFlag = false;
    }, 200);
+
  }
 
  selectOption(option: any) {
+
+  if(this.isValidPrefix(option.value)){
+    this.isNotValid = false;
+    this.isValidPrefixEvent.emit(this.isNotValid);
+   }else{
+    this.isNotValid = true;
+    this.isValidPrefixEvent.emit(this.isNotValid);
+
+   }
+  this.notSelectAnyPrefix = false;
   this.myForm.get('phoneCode')?.setValue('+' + option.value);
   this.onFieldChange('phoneNumber', this.myForm.get("phoneNumber")?.value)
+  this.onFieldChange('phoneCode', this.myForm.get("phoneCode")?.value)
+
   this.hideDropdown();
 }
 

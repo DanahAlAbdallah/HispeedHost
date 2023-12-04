@@ -50,6 +50,12 @@ export class ApplyforjobComponent implements OnInit{
 
   }
 
+  isValidPrefix:boolean = false;
+  onValidPrefix(prefix:boolean){
+    this.isValidPrefix = prefix;
+  }
+
+
     onFirstRowChanged(updatedFormFields: FirstRow) {
       this.form_row1 = updatedFormFields;
     }
@@ -182,6 +188,9 @@ export class ApplyforjobComponent implements OnInit{
         return;
       }
 
+      if(this.isValidPrefix){
+        return;
+    }
 
       this.apply = new ApplyForJob(
         this.form_row1.fullName,

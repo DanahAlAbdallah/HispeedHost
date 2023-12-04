@@ -54,7 +54,7 @@
     (emailphoneData)="onEmailPhoneRowChanged($event)"
     [formFields]="emailPhone"
     (formValidityChanged)="onFormValidityChanged($event)"
-
+    (isValidPrefixEvent)="onValidPrefix($event)"
     ></app-form-data-shared>
 
     <app-show-error *ngIf="isSomethingEmpty"></app-show-error>

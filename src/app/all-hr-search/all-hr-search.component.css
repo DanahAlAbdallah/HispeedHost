@@ -10,6 +10,8 @@ html, body {
     flex-direction: column;
     background-color: transparent;
     flex-shrink: 0;
+    align-items: center;
+    /* justify-content: center; */
 
     padding-top: 0%;
     padding-left: 8%;
@@ -76,23 +78,28 @@ html, body {
   
 
   /* CSS */
-.styled-link {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  color: #00b3ff;
-  font-size: var(--font-size);
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration: underline;
-  transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-/* Change text color on hover */
-.styled-link:hover {
-  color: #0088cc;
-}
+  .styled-button {
+    margin-top: 3%;
+    width: 10%;
+    background: black;
+    border: none;
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    font: inherit;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: var(--font-size);
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    border-radius: 7px; /* Adjust border radius as needed */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Change text color and background color on hover */
+  .styled-button:hover {
+    background: #F8D413; /* New background color on hover */
+    color: #ffffff; /* New text color on hover */
+  }
+  

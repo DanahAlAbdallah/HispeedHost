@@ -40,9 +40,12 @@
         <p class="no-data-message">{{message}}</p>
     </div>
 
-    <button *ngIf="!isEmpty && !isLoadingMore && showButton"   class="show-more-button styled-link" (click)="loadMoreItems()">
+    <div style="width: 100%; display: flex; justify-content: center;align-items: center;">
+    <button *ngIf="!isEmpty && !isLoadingMore && showButton"   class="show-more-button styled-button" (click)="loadMoreItems()">
         Show More
       </button>
+    </div>
+
       <div *ngIf="isLoadingMore && !isPageLoad">
         <!-- Loading indicator or message while loading more items -->
         Loading more candidates...

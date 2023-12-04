@@ -56,6 +56,11 @@ export class StudentprogramComponent implements OnInit{
   ngOnInit(): void {
   }
 
+  isValidPrefix:boolean = false;
+  onValidPrefix(prefix:boolean){
+    this.isValidPrefix = prefix;
+  }
+
   onFirstRowChanged(updatedFormFields: FirstRow) {
     this.form_row1 = updatedFormFields;
   }
@@ -165,7 +170,9 @@ export class StudentprogramComponent implements OnInit{
       return;
     }
 
-
+    if(this.isValidPrefix){
+      return;
+  }
     this.student = new Student(
       0,
       this.form_row1.fullName,
