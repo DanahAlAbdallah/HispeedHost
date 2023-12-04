@@ -30,10 +30,10 @@ export class AftersearchComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.requestHr.profession = params['profession'];
-      this.requestHr.yearOfExp = params['yearsexp'];
-      this.requestHr.education= params['degree'];
+      // this.requestHr.yearOfExp = params['yearsexp'];
+      // this.requestHr.education= params['degree'];
       this.requestHr.gender = params['gender'];
-      
+      this.requestHr.nationality = params['nationality'];
 
       if(this.requestHr.profession !== undefined){
         this.service.getHrResultsWithSpecificCondition(this.requestHr).subscribe({

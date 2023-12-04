@@ -11,15 +11,16 @@
 
 <div class="main">
 
-  <div style="background-color: transparent;display: flex;flex-direction: column; align-items: center; justify-content: center; margin-top: 3%;width: 100%">
+  <div style="background-color: transparent;display: flex;flex-direction: column; align-items: center; justify-content: center; margin-top: 5%;width: 100%">
     <app-circularimage
       [isSomethingEmpty]="isSomethingEmpty"
       (img_profile_file)="onImageUpload($event)"
       (isFileNotSupportedImageEvent)="onFileNotSupported($event)"
+      (isCompressing)="onImageCompressed($event)"
     ></app-circularimage>
 
 
-    <div style="margin-top: 0.5%;">
+    <div style="margin-top: 3%;">
 
       <p  class="text-danger" *ngIf="imageUpload == null && isSomethingEmpty ">
         profile img is required
@@ -27,6 +28,10 @@
 
       <p class="text-danger" *ngIf="isFileNotSupportedImage">Not Supported Image format.</p>
 
+      <p class="text-danger" *ngIf="isCompressing">
+        Wait<span class="ellipsis-animation"></span>
+      </p>
+      
     </div>
 
   </div>
@@ -103,3 +108,5 @@
 <app-home-contact-footer></app-home-contact-footer>
 
 <app-footer></app-footer>
+
+

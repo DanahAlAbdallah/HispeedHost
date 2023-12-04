@@ -5,6 +5,7 @@ import { AftersearchComponent } from '../aftersearch/aftersearch.component';
 import { filter } from 'rxjs';
 import { ImigrationService } from '../classes/imigration.service';
 import {ScrollService} from "../classes/scroll.service";
+import { ApplyforjobService } from '../classes/applyforjob.service';
 
 @Component({
   selector: 'search',
@@ -21,9 +22,11 @@ export class SearchComponent implements OnInit {
   public isMajorEmpty = false;
   public isGendersEmpty = false;
   public isDataLoad:boolean = false;
+  nationality:any[] = []
 
-  constructor(private router:Router, private service:ImigrationService ,
-              private scroll_service:ScrollService ){
+  constructor(private router:Router, 
+    private service:ImigrationService ,
+              private scroll_service:ScrollService, private apply:ApplyforjobService ){
 
     this.search_Data = new Search();
 
@@ -46,19 +49,34 @@ export class SearchComponent implements OnInit {
    });
   }
 
-  public majors: string[] = [];
+  public majors: any[] = [];
+  countsFindAll:number = 0;
 
   ngOnInit(): void {
-    this.service.getAllProfessions().subscribe({
+    this.apply.getProfessionWithCounts().subscribe({
       next: (v:any) => {
-        v.forEach((profession:any) => {
-          this.majors.push(profession.name);
-        });
-
+       this.majors = v 
       },
       error: (e) => {},
       complete: () =>{}
   });
+
+  this.apply.getGenderWithCounts().subscribe({
+    next: (v:any) => {
+     this.genders = v 
+    },
+    error: (e) => {},
+    complete: () =>{}
+});
+
+  this.apply.getCounts().subscribe({
+    next: (v:any) => {
+      this.countsFindAll = v.data;
+    },
+    error: (e) => {},
+    complete: () =>{}
+  });
+  this.getCountries();
   }
 
 
@@ -74,14 +92,14 @@ export class SearchComponent implements OnInit {
   }
 
 
-  public genders: string[] = [
-    "Male",
-    "Female"
+  public genders: any[] = [
+
   ];
 
   public icons: string[] = [
     "./assets/profession.png",
-    "./assets/person-fill.png"
+    "./assets/person-fill.png",
+    "./assets/Union.png",
   ];
 
   genderSelected: any = null;
@@ -95,12 +113,14 @@ export class SearchComponent implements OnInit {
   }
 
   search():void{
+
     if(this.checkEmpty()){
       return;
     }
     this.router.navigate(['search'] ,{ queryParams: {
       profession:this.search_Data.major,
-      gender:this.search_Data.gender
+      gender:this.search_Data.gender,
+      nationality: this.search_Data.nationality
     } });
 
     this.isDataLoad = true;
@@ -120,7 +140,7 @@ export class SearchComponent implements OnInit {
       }
   };
 
-    const elements = ['major','gender'];
+    const elements = ['major'];
 
 
     let isSomethingEmpty = false;
@@ -133,10 +153,6 @@ export class SearchComponent implements OnInit {
                     this.isMajorEmpty = true;
                     isSomethingEmpty = true;
                     break;
-                case "gender":
-                  this.isGendersEmpty = true;
-                  isSomethingEmpty = true;
-                  break;
             }
 
         }
@@ -150,8 +166,7 @@ export class SearchComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         // Scroll to the end of the page
         // window.scrollTo(0, document.documentElement.scrollHeight);
-          this.scroll_service.scrollToElement(document.getElementById("after")
-        )
+          this.scroll_service.scrollToElement(document.getElementById("after"))
       }
     });
 }
@@ -167,9 +182,48 @@ export class SearchComponent implements OnInit {
    }
 
    genderSelectedItemEvent(gender:string){
-      this.search_Data.gender = gender;
+      if(gender == 'Both'){
+        this.search_Data.gender = "";
+      }else{
+        this.search_Data.gender = gender;
+
+      }
 
    }
+
+  nationalitySelected:string = ""
+
+   nationalitySelectedItemEvent(nationality:string){
+    if(nationality == "All"){
+      this.search_Data.nationality = "";
+
+    }else{
+      this.search_Data.nationality = nationality;
+
+    }
+   }
+
+
+   countries:any[] = [];
+
+  public getCountries(){
+    this.service.loadCurrentResidenceCountries().subscribe({
+        next: (v:any) => {
+          this.countries =
+           v.filter((c:any) => c.name.common !== 'Israel')
+           .sort((a:any, b:any) => a.name.common >= b.name.common ? 1 : -1);
+
+           this.countries = this.countries.map((country:any) => {
+            return country.name.common;
+           })
+
+           console.log(this.countries)
+        },
+       
+        error: (e) => {console.log(e)},
+        complete: () =>{console.log("is complete")}
+    });
+  }
 }
 
 

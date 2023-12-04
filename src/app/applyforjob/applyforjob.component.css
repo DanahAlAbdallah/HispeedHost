@@ -43,3 +43,30 @@
     width: 80%;
   }
 }
+
+
+@keyframes ellipsis {
+  0% {
+    content: ".";
+    animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  33% {
+    content: "..";
+    animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  66% {
+    content: "...";
+    animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  100% {
+    content: ".";
+    animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+}
+
+.ellipsis-animation::after {
+  content: "...";
+  display: inline-block;
+  width: 1ch;
+  animation: ellipsis 1.5s infinite;
+}

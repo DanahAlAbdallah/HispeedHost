@@ -158,7 +158,6 @@ export class ApplyforjobComponent implements OnInit{
           this.isSomethingEmpty = false
       }
 
-<<<<<<< HEAD
       if(this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
         this.isSomethingEmpty = true;
         return;
@@ -168,19 +167,7 @@ export class ApplyforjobComponent implements OnInit{
         return
       }
 
-=======
-      if( this.isSomethingEmpty ) {
-        return;
-      }
 
-      if(this.isOtherProfessionSelected == true && this.form_row2.other == ''){
-        return
-      }
->>>>>>> 46c5d10f242e73fe876f01f21168d4e77d2657b2
-
-      if(this.isSomethingNotValid ){
-        return;
-      }
 
       if(this.isOtherProfessionSelected && this.form_row2.other != '') {
         this.form_row2.profession = this.form_row2.other;
@@ -195,9 +182,6 @@ export class ApplyforjobComponent implements OnInit{
         return;
       }
 
-      if(this.form_row2.profession == "Other" && this.form_row2.other != ''){
-        this.form_row2.profession = this.form_row2.other;
-      }
 
       this.apply = new ApplyForJob(
         this.form_row1.fullName,
@@ -251,5 +235,11 @@ export class ApplyforjobComponent implements OnInit{
 
   onFileNotSupported($event: boolean) {
     this.isFileNotSupportedImage = $event;
+  }
+
+  isCompressing:boolean = false;
+
+  onImageCompressed($event: boolean){
+    this.isCompressing = $event;
   }
 }

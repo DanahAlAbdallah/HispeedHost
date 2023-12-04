@@ -8,25 +8,31 @@
 
         <app-loading-modal *ngIf="isDataLoad"></app-loading-modal>
 
-            <div class="d-flex flex-column middle_container">
+            <div class="d-flex flex-column middle_container ">
               <div class="d-flex flex-row justify-content-between flex-wrap">
                   <div class="box     flex-item ">
 
-                      <app-search-item [icon]="icons[0]" [isNothingSelected]="isMajorEmpty" [items]="majors" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
+                      <app-search-item [icon]="icons[0]" [isNothingSelected]="isMajorEmpty" [items]="majors" [isHavingCount]="true" type="Major" (itemValue)="majorSelectedItemEvent($event)"></app-search-item>
 
                   </div>
 
                   <div class="box     flex-item ">
 
-                      <app-search-item [icon]="icons[1]" [isNothingSelected]="isGendersEmpty" [items]="genders" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
+                      <app-search-item [icon]="icons[1]"  [items]="genders" [isGender]="true" [isHavingCount]="true" type="Gender" (itemValue)="genderSelectedItemEvent($event)"></app-search-item>
 
                   </div>
+
+                  <div class="box     flex-item ">
+
+                    <app-search-item [icon]="icons[2]" [items]="countries" type="Nationality" (itemValue)="nationalitySelectedItemEvent($event)"></app-search-item>
+
+                </div>
 
               </div >
 
 
 
-              <div class="box flex-item">
+              <div class="box flex-item ">
 
 
                 <div class="c2">
@@ -38,7 +44,7 @@
             </div>
 
               <div class="findalldiv">
-                  <a routerLink="/all" class="findall" href="">Or Find All Data</a>
+                  <a routerLink="/all" class="findall" href="">Show all candidates({{countsFindAll}})</a>
 
               </div>
 

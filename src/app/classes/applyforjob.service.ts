@@ -48,4 +48,35 @@ export class ApplyforjobService {
       })
     );
   }
+
+
+  public getCounts(): Observable<any> {
+
+    return this.httpClient.get<any>(this.apiUrl+'/api/v1/applyjob/counts').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
+
+  public getProfessionWithCounts(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/applyjob/allprofession/counts').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
+
+  public getGenderWithCounts(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/applyjob/gender/counts').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
 }

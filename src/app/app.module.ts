@@ -60,6 +60,8 @@ import { ShowErrorComponent } from './shared-components/show-error/show-error.co
 import { CircularimageComponent } from './circularimage/circularimage.component';
 import { MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import { ImageCropperModule } from 'ngx-image-cropper';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 @NgModule({
@@ -125,9 +127,10 @@ import {MatIconModule} from "@angular/material/icon";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgOptimizedImage,
-
+    ImageCropperModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

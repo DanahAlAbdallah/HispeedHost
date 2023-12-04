@@ -6,10 +6,37 @@
     <div class="box2">
       <div class="custom-select">
         <span class="icon"><img [src]="icon"/></span>
-        <select (blur)="close()" (click)="toggleSelect()" class="select2" [(ngModel)]="itemSelected" (change)="selectItem()">
+        
+        <select *ngIf="!isHavingCount" (blur)="close()" (click)="toggleSelect()" class="select2" [(ngModel)]="itemSelected" (change)="selectItem()">
           <option value="" disabled selected>Select a {{type}}</option>
+          <option>All</option>
+
           <option *ngFor="let item of items" [value]="item">{{ item }}</option>
         </select>
+
+        <select *ngIf="isHavingCount && !isGender" (blur)="close()" (click)="toggleSelect()" class="select2" [(ngModel)]="itemSelected" (change)="selectItem()">
+          <option value="" disabled selected>Select a {{type}}</option>
+          <ng-container *ngFor="let item of items">
+            <option [value]="item.profession">{{ item.profession }}<span *ngIf="itemSelected !== item.profession">({{item.counts}})</span></option>
+          </ng-container>
+
+        </select>
+        
+        
+
+        <select *ngIf="isHavingCount && isGender" (blur)="close()" (click)="toggleSelect()" class="select2" [(ngModel)]="itemSelected" (change)="selectItem()">
+          <option value="" disabled selected>Select a {{type}}</option>
+          <ng-container *ngFor="let item of items">
+            <option [value]="item.gender">
+              {{ item.gender }}<span *ngIf="itemSelected !== item.gender">({{ item.count }})</span>
+            </option>
+          </ng-container>
+
+          <option>Both</option>
+
+        </select>
+        
+        
 
         <span class="custom-arrow" [ngClass]="{'bounceIcon':isSelectOpen}" ><i  class="bi bi-chevron-down "></i></span>
       </div>

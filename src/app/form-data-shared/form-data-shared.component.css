@@ -37,7 +37,70 @@
   }
 
 
+  .input1 {
+    width: 48%;
+    color: rgb(155, 153, 153);
+    font-weight: 400;
+    padding: 1% 8% 1% 8%;
+    margin-top: -6px;
+    border-radius: 30px;
+    border: 1px solid #F5F5F5;
+    height: 45px;
+    background-color: #F5F5F5
+  }
 
+.form-select{
+    padding: 1% 8% 1% 8%;
+
+    width: 100%;
+    color: rgb(155, 153, 153);
+    font-weight: 400;
+    margin-top: -6px;
+    border-radius: 30px;
+    border: 1px solid #F5F5F5;
+    height: 45px;
+    background-color: #F5F5F5
+}
+
+
+
+/* CSS for the dropdown */
+.dropdown {
+    position: relative;
+    width: 48%; /* Adjust this width as needed */
+  }
+  
+  ul {
+    margin-top: 4%;
+    list-style: none; /* Remove bullet points */
+    background-color: #fff; /* White background */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px;
+    max-height: 150px; /* Maximum height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 0;
+    position: absolute;
+    top: 100%; /* Position below the input */
+    left: 0;
+    z-index: 1000; /* Adjust z-index as needed */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8); /* Shadow style with less transparency */
+  }
+  
+  li {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Gray line between items */
+    cursor: pointer;
+  }
+
+  li:hover{
+    background-color: #ececec;
+  }
+  
+  /* Remove bottom border from the last li */
+  li:last-child {
+    border-bottom: none;
+  }
+  
 /* Media query for mobile screens */
 @media (max-width: 768px) {
 

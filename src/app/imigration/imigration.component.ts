@@ -225,16 +225,10 @@ export class ImigrationComponent implements OnInit {
     }
 
 
-<<<<<<< HEAD
     if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
-
-=======
-    if(this.isSomethingNotValid ){
->>>>>>> 46c5d10f242e73fe876f01f21168d4e77d2657b2
-      return;
+      return
     }
-
-    if(this.isSomethingNotValid){
+    if(this.isSomethingNotValid ){
       return;
     }
 
@@ -296,6 +290,12 @@ export class ImigrationComponent implements OnInit {
       });
     }
 
+  }
+
+  isCompressing:boolean = false;
+
+  onImageCompressed($event: boolean){
+    this.isCompressing = $event;
   }
 
   protected readonly ImigrationService = ImigrationService;

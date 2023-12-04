@@ -20,6 +20,8 @@ html, body {
 
     align-items: stretch;
 
+    overflow-x: hidden;
+
 }
 
 /* app.component.css */
@@ -72,3 +74,25 @@ html, body {
     margin-right: 5px; /* Add some space between the icon and text */
   }
   
+
+  /* CSS */
+.styled-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: #00b3ff;
+  font-size: var(--font-size);
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Change text color on hover */
+.styled-link:hover {
+  color: #0088cc;
+}

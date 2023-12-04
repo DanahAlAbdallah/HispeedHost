@@ -19,12 +19,37 @@
 
         </div>
         <div class="flex-item s">
+        
             <div class="d-flex flex-column ee">
-                <input formControlName="phoneNumber" class="input" type="tel"
+             
+              <div style="width: 100%;" class="d-flex justify-content-between">
+                <div class="dropdown">
+                  <input type="text" class="form-select" formControlName="phoneCode" id="phone" name="phone" placeholder="Prefix code" (input)="onInputChange($event)" (focus)="showDropdown()" (blur)="hideDropdown()">
+                  <ul *ngIf="showDropdownFlag">
+                    <li *ngFor="let option of filteredOptions" (click)="selectOption(option)">
+                      {{ option.label }}
+                    </li>
+                  </ul>
+                </div>
+                
+                
+                
+                
+                
+                <input  formControlName="phoneNumber" class="input1" type="tel"
                 placeholder="Phone Number" (input)="onFieldChange('phoneNumber', myForm.get('phoneNumber')?.value)" >
-              <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('required') && isSomethingEmpty">
+          
+              </div>
+                <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('required') && isSomethingEmpty">
                 <p class="text-danger">* Phone number required.</p>
               </div>
+
+              <div class=" mb-2" *ngIf="myForm.get('phoneCode')?.hasError('required') 
+              && myForm.get('phoneNumber')?.value !== '' &&
+              !myForm.get('phoneNumber')?.hasError('minlength')">
+                <p class="text-danger">* Phone number code required.</p>
+              </div>
+
                 <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('minlength') ">
                     <p class="text-danger">* Phone number is too short..</p>
                   </div>

@@ -3,6 +3,7 @@ export class ImmigrationHrRequest{
     education:string;
     yearOfExp:string;
     gender:string;
+    nationality:string;
 
 
     constructor(){
@@ -10,5 +11,6 @@ export class ImmigrationHrRequest{
         this.profession = "";
         this.yearOfExp = "";
         this.gender = "";
+        this.nationality = ""
     }
 }

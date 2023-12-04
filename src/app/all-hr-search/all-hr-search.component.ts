@@ -13,6 +13,7 @@ export class AllHrSearchComponent {
   isHrPage= true;
   @Output() newItemEvent = new EventEmitter<boolean>();
   isEmpty:boolean = false;
+  isPageLoad:boolean = false
 
   public Items:AfterSearch1 [] = [];
 
@@ -31,35 +32,65 @@ export class AllHrSearchComponent {
   }
   temp:any[] = [];
 
+
+  page = 0; // Current page number
+  pageSize = 15; // Number of items to load per page
+  isLoadingMore = false; 
+  showMoreButton = false;
+
   ngOnInit(): void {
 
-    this.service.getAllHrResults().subscribe({
-          next: (res) => {
-            this.Items = res
-            console.log(this.Items)
-            if(res.length !== 0){
-              this.isEmpty = false;
-              this.newItemEvent.emit(false);
-            }else{
-                this.isEmpty = true;
-                this.message = "No Data With this Specifications.";
-                console.log("")
-                this.newItemEvent.emit(false);
+    this.isPageLoad = true;
+    this.loadMoreItems()
+      
+  }
 
-            }
+      displayedItems: any[] = []; 
 
+      message1:string = "";
+      showMessage1:boolean = false;
+      showButton:boolean = false;
 
-          },
-          error: (error) => {
-            this.isEmpty = true;
-            this.message = "Something Wrong, Please Try Again.";
-            this.newItemEvent.emit(false);
+      loadMoreItems(): void {
 
-          },
-          complete: () => {}
-      });
-      }
+        this.showMessage1 = false;
+        this.showMoreButton = this.Items.length > this.displayedItems.length;
 
+        if (!this.isLoadingMore) {
+          this.isLoadingMore = true;
+          this.showButton = false;
 
+          // Increment the page number
+          this.page++;
+    
+          // Fetch more items based on the page number and page size
+          this.service.getAllHrResults(this.page, this.pageSize).subscribe({
+            next: (res) => {
+              if (res.length > 0) {
+                this.Items = [...this.Items, ...res];
+                this.isEmpty = false;
+              } else {
+                this.showMessage1 = true;
+                this.message1 = "No more data available.";
+                this.showButton = false;
+              }
+            },
+            error: (error) => {
+              this.showMessage1 = true;
+              this.message1 = "Error fetching more data.";
+              this.showButton = true;
+              this.isPageLoad = false;
+
+            },
+            complete: () => {
+              this.isLoadingMore = false;
+              this.showButton = true;
+              this.isPageLoad = false;
+            },
+          });
+
+          console.log(this.showButton)
+        }
+    }
 }
 

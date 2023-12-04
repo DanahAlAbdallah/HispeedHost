@@ -4,6 +4,7 @@
   height: 120px;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   clip-path: circle(50% at center);
@@ -12,9 +13,9 @@
 }
 
 /* circular-image-upload.component.scss */
-.main :hover {
-  background-color: #c7c7c7; /* Optional: add a background color */
-}
+/* .main :hover {
+  background-color: #c7c7c7; 
+} */
 
 .main{
   border-radius: 50%;

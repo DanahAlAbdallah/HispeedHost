@@ -10,10 +10,12 @@ export class SearchItemComponent {
   isSelectOpen: boolean = false;
 
   @Input() type:string = "";
-  @Input() items:string[] = [];
+  @Input() items:any[] = [];
   @Input() isNothingSelected = false;
   @Input() icon:string = "";
   @Output() itemValue = new EventEmitter<string>();
+  @Input() isHavingCount = false;
+  @Input() isGender = false;
 
   public itemSelected = "";
 
@@ -24,6 +26,12 @@ export class SearchItemComponent {
     if(this.itemSelected !== ""){
       this.isNothingSelected = false;
     }
+
+    const selectedItem = this.items.find(item => item.gender === this.itemSelected);
+  if (selectedItem) {
+    this.selectedCount = selectedItem.count;
+    // Perform other actions as needed upon item selection
+  }
   }
 
   toggleSelect() {
@@ -34,4 +42,9 @@ export class SearchItemComponent {
     this.isSelectOpen = false;
 
   }
+
+
+  // Initialize selectedCount
+selectedCount: number | undefined;
+
 }

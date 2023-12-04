@@ -26,6 +26,7 @@ export class AftersearchitemComponent {
   @Input() gender:string = ""
 
   @Input() isHRpage: boolean = false;
+
   constructor(){
   }
 
