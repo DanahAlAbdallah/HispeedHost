@@ -15,9 +15,9 @@ export class ServiceComponent {
   constructor(private router: Router) {}
 
   navigateToSearch() {
-      this.router.navigateByUrl(this.link ).then(() => {
+      this.router.navigateByUrl(this.link ).finally(() => {
         setTimeout(
-          ()=>{window.location.reload();},
+          ()=>{window.scrollTo(0,0);},
           20
         )
       });

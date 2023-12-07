@@ -395,7 +395,7 @@ onFieldChange(fieldName: string, value: string) {
 
  selectOption(option: any) {
 
-  if(this.isValidPrefix(option.value)){
+  if(this.isValidPrefix('+'+option.value)){
     this.isNotValid = false;
     this.isValidPrefixEvent.emit(this.isNotValid);
    }else{

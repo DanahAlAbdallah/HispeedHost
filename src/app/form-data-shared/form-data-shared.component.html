@@ -26,7 +26,7 @@
                 <div class="dropdown">
                   <input type="text" class="form-select" 
                   formControlName="phoneCode" id="phone" name="phone"
-                   placeholder="Prefix code" (input)="onInputChange($event)" 
+                   placeholder="Country code" (input)="onInputChange($event)" 
                    (focus)="showDropdown()" (blur)="hideDropdown()">
 
                   <ul *ngIf="showDropdownFlag">
@@ -48,7 +48,7 @@
               <div class=" mb-2" *ngIf="myForm.get('phoneCode')?.hasError('required') 
                 && myForm.get('phoneNumber')?.value !== '' &&
                 !myForm.get('phoneNumber')?.hasError('minlength')">
-                <p class="text-danger">* Prefix code required.</p>
+                <p class="text-danger">* Country code required.</p>
               </div>
 
                 <div class=" mb-2" *ngIf="myForm.get('phoneNumber')?.hasError('minlength') ">
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class=" mb-2" *ngIf="isNotValid ">
-                  <p class="text-danger">* Prefix code not valid.</p>
+                  <p class="text-danger">* Country code not valid.</p>
                 </div>
             </div>
         </div>

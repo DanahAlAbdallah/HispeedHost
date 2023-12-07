@@ -80,3 +80,9 @@ a:hover{
   cursor: pointer;
 }
 
+@media (max-width:500px) {
+  .main{
+    padding: 5% 5% 2% 5%;
+
+  }
+}

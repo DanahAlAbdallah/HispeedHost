@@ -20,7 +20,7 @@ export class ServiceHomeComponent {
   navigateToSearch() {
     this.route.navigateByUrl(this._routelink ).then(() => {
       setTimeout(
-        ()=>{window.location.reload();},
+        ()=>{window.scrollTo(0,0);},
         25
       )
     });

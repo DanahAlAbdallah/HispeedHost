@@ -10,15 +10,15 @@ import {ScrollService} from "./classes/scroll.service";
 })
 export class AppComponent  implements OnInit {
 
-  constructor(private router: Router , private scroll:ScrollService) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        window.scrollTo(0,0);
-        // this.scroll.scrollToElement(document.getElementById('nav21'));
-        // document.getElementById('nav21')?.scrollIntoView({behavior:'smooth'})
-      }
-    });
-  }
+  // constructor(private router: Router , private scroll:ScrollService) {
+  //   this.router.events.subscribe((event) => {
+  //     if (event instanceof NavigationEnd) {
+  //       window.scrollTo(0,0);
+  //       // this.scroll.scrollToElement(document.getElementById('nav21'));
+  //       // document.getElementById('nav21')?.scrollIntoView({behavior:'smooth'})
+  //     }
+  //   });
+  // }
 
   ngOnInit(): void {
       //this.router.navigate(['imigration']);

@@ -29,12 +29,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 100px;
+    height: 115px;
+    width: 115px;
     overflow: hidden;
     clip-path: circle(50% at center); /* Creates a circular clip path */
     border-radius: 50%;
-  border:1px solid #000000;
+    border: 2px solid #d3d3d3;
 
 }
 
@@ -55,7 +55,7 @@
     padding-right: 5%;
     padding-left: 5%;
     justify-content: center;
-    border: 3px solid #d3d3d3;
+    border: 2px solid #d3d3d3;
     border-radius: 16px;
 }
 
