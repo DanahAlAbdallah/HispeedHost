@@ -1,10 +1,10 @@
 export class ImmigrationData {
   constructor(
     public id: number,
-    public FullName: string,
+    public fullName: string,
     public dateofbirth: string,
     public passportCountry: string,
-    public CurrentResidence: string,
+    public currentResidence: string,
     public visaStatus: string,
     public explainVisaStatus: string,
     public holdQualification: boolean,
