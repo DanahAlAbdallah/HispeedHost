@@ -6,6 +6,7 @@ export class Search{
     years:string;
     degree:string;
     gender:string;
+    nationality:string
 
     constructor(
         
@@ -14,6 +15,7 @@ export class Search{
         this.years = "";
         this.degree = "";
         this.gender = "";
+        this.nationality = ""
       }
 
       [element: string]: any;

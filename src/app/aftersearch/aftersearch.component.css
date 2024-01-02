@@ -11,21 +11,21 @@ html, body {
     background-color: transparent;
     flex-shrink: 0;
 
-    padding-top: 3%;
+    padding-top: 0%;
     padding-left: 8%;
     padding-right: 8%;
 
     height: 100%;
-
-    align-items: stretch;
+    align-items: center;
+    /* align-items: stretch; */
 
 }
 
 /* app.component.css */
 .no-data-message {
   font-size: large;
-  color: #007bff; /* Change this to your desired text color */
-  font-weight: bold;
+  color: #00B3FF; /* Change this to your desired text color */
+  font-weight: normal;
   text-align: center;
 }
 

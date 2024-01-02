@@ -1,4 +1,6 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ScrollService } from '../classes/scroll.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,24 +14,33 @@ export class NavComponent {
   public isNavItemSelected: boolean = false;
   isNavSidebarOpen: boolean = false;
   scrollThreshold = 10;
-  imageSource: string = './assets/group.PNG';
+  imageSource: string = './assets/icon-general.png';
 
   activeLink: string = ''; // Variable to track the active link
+
+
+  @Input() iconLightHome = false;
+  @Input() navItemsHome = false;
+  @Input() whichNavItems = "Home";
+  isClicked: boolean= false;
 
   setActiveLink(link: string) {
     this.activeLink = link;
   }
 
   @ViewChild('blbla', { static: false }) navSidebar!: ElementRef;
-  
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+
+  constructor(private elementRef: ElementRef,
+     private renderer: Renderer2,
+      private route:Router,
+     private scroll:ScrollService ) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isNavbarScrolled = window.pageYOffset > this.scrollThreshold;
     this.isIconLight = this.isNavbarScrolled;
-    this.imageSource = this.isNavbarScrolled ? './assets/logohighspeededit-1.png' : './assets/group.PNG';
+    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/icon-general-white.png' : './assets/icon-general.png';
     this.isScrolling = true;
 
   }
@@ -50,10 +61,11 @@ export class NavComponent {
   setNavItemColor(isLight: boolean) {
     this.isNavItemSelected = isLight;
   }
- 
+
 
   toggleNavSidebar() {
     this.isNavSidebarOpen = !this.isNavSidebarOpen;
+    this.isClicked = !this.isClicked;
   }
 
   setNavItemColorAndClose(isLight: boolean) {
@@ -74,13 +86,35 @@ export class NavComponent {
 
   }
 
-  
+
   // Attach the click event listener to the entire document
   ngOnInit() {
+    this.imageSource = this.isNavbarScrolled || this.iconLightHome ? './assets/icon-general-white.png' : './assets/icon-general.png';
+
     this.renderer.listen('document', 'click', (event: Event) => {
       this.onDocumentClick(event as MouseEvent);
     });
   }
 
-  
+
+  goToContactUs(){
+    this.route.navigate(['/']);
+    setTimeout(() => {
+      this.scroll.scrollToElement(document.getElementById('contact'));
+      document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})
+
+    }, 100);
+  }
+
+  goToContactUsFromSideBar(){
+    this.route.navigate(['/']);
+    setTimeout(() => {
+      this.scroll.scrollToElement(document.getElementById('contact'));
+      document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})
+
+    }, 100);
+
+    this.isNavSidebarOpen= false;
+  }
+
 }

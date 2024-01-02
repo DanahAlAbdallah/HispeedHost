@@ -1,0 +1,36 @@
+<section>
+
+  
+<div class="nav-container">
+    <app-nav [iconLightHome]="iconHomeLight" [navItemsHome]="isNavItemsLight" [whichNavItems]="whichNavItem"></app-nav>
+</div>
+<div class="image-container">
+    <img src="./assets/photo-home-page.png" class="background-image" />
+
+
+    <div class="slider">
+      <app-slider></app-slider>
+
+    </div>
+
+    <img src="./assets/bottomofhome.png" class="bottom-img"/>
+  </div>
+
+<app-services-home></app-services-home>
+
+<app-whoweare *ngIf="false"></app-whoweare>
+
+<app-spcial-package *ngIf="false"></app-spcial-package>
+
+<app-wemake-tour *ngIf="false"></app-wemake-tour>
+
+<app-testimonials *ngIf="false"></app-testimonials>
+
+<app-home-form></app-home-form>
+
+<app-home-contact-footer></app-home-contact-footer>
+
+<app-footer></app-footer>
+
+
+</section>

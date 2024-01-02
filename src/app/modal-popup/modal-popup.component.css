@@ -12,13 +12,18 @@
     animation-duration: 2s; /* Adjust the animation duration as needed */
   }
   .bg-custom {
-    background-color: #fcd406 !important;
+    background-color: #a8a8a8 !important;
   }
   .buttonCloseModal{
-    background-color: #FCD406; 
+    background-color: #000000; 
     border: 16px none;
+    color: white;
       font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 1rem;
+  }
+
+  .buttonCloseModal:hover{
+    background-color: #727171; 
   }

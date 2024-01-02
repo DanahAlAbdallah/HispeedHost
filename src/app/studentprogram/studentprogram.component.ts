@@ -1,462 +1,242 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { ImigrationService } from '../classes/imigration.service';
-import { ImmigrationData } from '../classes/Immigration';
+import {Component, OnInit} from '@angular/core';
 import { Student } from '../classes/student';
 import { StudentService } from '../classes/student.service';
+import { FirstRow } from '../shared-components/firstrow/firstrow.component';
+import { FourRowData } from '../shared-components/forth-row/forth-row.component';
+import { RowFive } from '../shared-components/five-row/five-row.component';
+import { RowSix } from '../shared-components/six-row/six-row.component';
+import { RowSeven } from '../shared-components/row-seven/row-seven.component';
+import { EmailPhoneClass } from '../form-data-shared/form-data-shared.component';
+import {NavigationEnd, Router} from "@angular/router";
+import {ScrollService} from "../classes/scroll.service";
+import { SecondRow } from '../shared-components/second-row/second-row.component';
 
 @Component({
   selector: 'app-studentprogram',
   templateUrl: './studentprogram.component.html',
   styleUrls: ['./studentprogram.component.css']
 })
-export class StudentprogramComponent {
-  public student:Student;
+export class StudentprogramComponent implements OnInit{
+  form_row1: FirstRow = new FirstRow();
+  form_row2: SecondRow = new SecondRow();
 
-  public isSomethingEmpty:boolean = false;
-  public isFullNameEmpty:boolean = false;
-  public isDOBEmpty = false;
-  public isEVSEmpty = false;
-  public isLTOQEmpty = false;
-  public isPassportCountryEmpty = false;
-  public isCurrentResidenceEmpty = false;
-  public isVisaStatusEmpty = false;
-  public isExamEmpty = false;
-  public isDegreeEmpty = false;
-  public isDesiredCountryEmpty = false;
-  public isPhoneNumberRequired:boolean = false;
-  public isEmailRequired:boolean = false;
-  public isGenderEmpty = false;
-  public isOtherVisaStatus = false;
+  form_row4:FourRowData = new FourRowData()
+  form_row5:RowFive = new RowFive()
+  form_row6:RowSix = new RowSix()
+  form_row7:RowSeven = new RowSeven()
+  emailPhone:EmailPhoneClass = new EmailPhoneClass()
 
+  isSomethingEmpty:boolean = false;
+  isChekedFirstTime = false;
 
-  public isFormSent:boolean = false;
-  public response!:any;
+  isEVSOpen:boolean = false;
+  student:Student | null = null
+
   public isShowModal = false;
-  public passportCountryCode:any[]=  [];
-  public currentResidenceCountries:any[]=  [];
+  isResponseReceived: boolean = false;
+  response:string = ""
 
-  public dateOfBirth: Date = new Date();
+  checkBoxTextDesc :string = "Do You Have a Scholarship to the Desired Country?";
+  checkBoxTextError :string = "Completed a English Test is required.";
 
-  public disablebuttonModal = true;
+  certificate_file: File | null = null;
+  public NotHideVisaStatus: boolean = true;
 
-  public desiredCountries:string[]  = [
-    "Australia",
-    "Canada",
-    "Russia",
-    "France",
-    "Italy",
-    "Belarus",
-    "Purtugal",
-    "Belgium"
+
+  desiredCountries:string[] = [
+    'Australia',
+    'Canada',
+    'Russia',
+    'France',
+    'Italy',
+    'Belarus',
+    'Purtural',
+    'Belgium'
   ]
 
-  constructor(
-    private router: Router, 
-    private route: ActivatedRoute,
-    private service:StudentService,
-    private serviceImmi:ImigrationService
-    ){
-      this.student = new Student();
+  constructor(private student_service:StudentService,private router:Router){
 
-
-          this.router.events.subscribe((event) => {
-              if (event instanceof NavigationEnd){
-                 //scroll to top
-                 window.scrollTo(0,0);
-              }
-       });
   }
+
   ngOnInit(): void {
-    //this.getPassportCountryCode();
-    this.getCurrentResidenceCountries();
-
-    this.buttonDisable();
   }
 
-  public items = [
-    { label: 'Work', value: 'Work', checked: false },
-    { label: 'Permanent Resident', value: 'Permanent Resident', checked: false },
-    { label: 'Student', value: 'Student', checked: false },
-    { label: 'Temporary Resident', value: 'Temporary Resident', checked: false },
-    { label: 'Other', value: 'Other', checked: false },
+  isValidPrefix:boolean = false;
+  onValidPrefix(prefix:boolean){
+    this.isValidPrefix = prefix;
+  }
 
-  ];
+  onFirstRowChanged(updatedFormFields: FirstRow) {
+    this.form_row1 = updatedFormFields;
+  }
 
-  public exams = [
-    { label: 'IELTS', value: 'IELTS', checked: false },
-    { label: 'TOEFL', value: 'TOEFL', checked: false },
-    { label: 'TOEIC ', value: 'TOEIC ', checked: false },
-    { label: 'CLEPIP', value: 'CLEPIP', checked: false }
-  ];
+  onSecondRowChanged(updatedFormFields: SecondRow) {
+    console.log(updatedFormFields);
+    this.form_row2 = updatedFormFields;
+  }
 
-  public items2: { label: string, checked: boolean }[] = [
-    { label: 'Yes', checked: false },
-    { label: 'No', checked: false },
-    // Add more items as needed
-  ];
+  onFourRowChanged(updatedFormFields: FourRowData){
+    this.form_row4  = updatedFormFields;
+  }
 
-  public items21: { label: string, checked: boolean }[] = [
-    { label: 'Yes', checked: false },
-    { label: 'No', checked: false },
-    // Add more items as needed
-  ];
 
-  public items22: { label: string, checked: boolean }[] = [
-    { label: 'Yes', checked: false },
-    { label: 'No', checked: false },
-    // Add more items as needed
-  ];
-  
-  public items3: { label: string, checked: boolean }[] = [
-    { label: 'Excellent', checked: false },
-    { label: 'Very good', checked: false },
-    { label: 'Good', checked: false },
-    { label: 'Moderate', checked: false },
-    { label: 'Low', checked: false },
-    { label: 'Very low', checked: false }
-  ];
+  onRowFiveChanged(updatedFormFields: RowFive){
+    this.form_row5  = updatedFormFields;
+  }
 
-   
-  public genders = [
-    { label: 'Male', value: 'Male', checked: false },
-    { label: 'Female', value: 'Female', checked: false },
+  onSevenRowChanged(updatedFormFields: RowSeven){
+    this.form_row7  = updatedFormFields;
+  }
 
-  ];
+  onEvsOpened(isEVSOpen:boolean){
+    this.isEVSOpen = isEVSOpen;
+  }
 
-  public handleCheckboxChangeExam(selectedItem: { label: string, value:string,checked: boolean }): void {
-    this.exams.forEach(exam => {
-      exam.checked = exam === selectedItem; 
-      if(exam.checked){
-        this.student.exam = exam.label;
-        this.checkExamIsEmpty();
+  onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
+    this.emailPhone  = updatedFormFields;
+  }
+
+  onFileUpload(file:File){
+    this.certificate_file = file;
+  }
+
+  onNationalityEqualToCurrentResident_HideVisaStatus(hide: boolean) {
+    this.NotHideVisaStatus = hide;
+  }
+
+  isSomethingNotValid:boolean = false;
+
+    onFormValidityChanged(isValid: boolean) {
+
+      if (!isValid) {
+        this.isSomethingNotValid = true;
+      }else{
+        this.isSomethingNotValid = false;
       }
-    });
-  }
+    }
+
+  submit(){
+    switch(""){
+      case this.form_row1.firstName:
+        this.isSomethingEmpty = true;
+        break;
+
+      case this.form_row1.lastName:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.day:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.month:
+        this.isSomethingEmpty = true;
+        break;
+
+      case this.form_row1.year:
+        this.isSomethingEmpty = true;
+        break;
+
+      case this.form_row1.currentResidence:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.passportCountry:
+        this.isSomethingEmpty = true;
+        break;
 
 
-  
-  public handleCheckboxGenderChange(selectedItem: { label: string,value:string, checked: boolean }): void {
-    this.genders.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-      
-        this.student.gender = item.value;
-        this.checkGenderIsEmpty();
-      }
-    });
-  }
+      case this.form_row4.desiredCountry:
+        this.isSomethingEmpty = true;
+        break;
 
-  hideEVSInput:boolean = false;
-  public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
-    this.items.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        if(item.value != "Other"){
-          this.hideEVSInput = false;
-          this.isOtherVisaStatus = true;
-          this.student.explain = "disabled"
-          this.isEVSEmpty = false;
-        }else{
-          this.isOtherVisaStatus = false;
-          this.student.explain = ""
-          this.hideEVSInput = true;
-        }
-        this.student.visaStatus = item.value;
-        this.checkVisaStatusIsEmpty();
-      }
-    });
-  }
-  
+      case this.form_row7.exam:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row7.degree:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.email:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.phoneNumber:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row2.education:
+        this.isSomethingEmpty = true;
+        break;
 
+      default:
+        this.isSomethingEmpty = false
+    }
 
-  public handleCheckboxChange4(selectedItem: { label: string, checked: boolean }): void {
-    this.items22.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        if(item.label == "Yes"){
-          this.student.doYouhaveScholarship = true;
-        }
-        else{
-          this.student.doYouhaveScholarship = false;
-        }
-      }
-    });
-  }
-  
-  isResponseReceived: boolean = false;
-
-  public submit():void{
-
-    this.checkingEmpty();
-
-
-    if (!this.student.fullName ||
-      !this.student.dateOfBirth ||
-      !this.student.exam ||
-      !this.student.listOfQualification ||
-      !this.student.currentResidence||
-      !this.student.passportCountry || 
-      !this.student.listOfQualification ||
-      !this.student.explain||
-      !this.student.degree||
-      !this.student.gender ||
-      (!this.student.phoneNumber && !this.student.email)) {
-      this.isSomethingEmpty = true;
-      this.isShowModal = false; 
+    if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
       return;
-  }
-
-
-  console.log(this.student);
-
-  this.isResponseReceived = false;
-
-      this.service.addStudent(this.student).subscribe({
-        next: (v:any) => {
-          if(v.data.response != null){
-            this.response = v.data.response; 
-          }
-        },
-        error: (e:any) => {
-          console.log(e);
-          this.response = "Something Wrong! Please Try Again." ;
-            this.isResponseReceived = true;
-
-        },
-        complete: () =>{
-         
-          this.isResponseReceived = true;
-
-        } 
-      });
-
-  }
-
-
-  public reset():void{
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.navigate(['./'], {
-      relativeTo: this.route,
-      queryParamsHandling: "merge"
-    })
-  }
-
-  private checkingEmpty(){
-      const nullSafeValue = (value: any) => {
-        if (value === null) {
-            return "NULL";
-        } else if (value === "") {
-            return "EMPTY";
-        } else {
-            return value;
-        }
-    };
-    
-
-    const elements = ["fullName", "dateOfBirth", "passportCountry", "currentResidence", "visaStatus","explain",
-     "listOfQualification","exam","degree","desiredCountry","phoneNumber","email","gender"];
-    
-    let isSomethingEmpty = false;
-    
-    for (const element of elements) {
-        const value = nullSafeValue(this.student.get(element));
-        if (value === "EMPTY") {
-            switch (element) {
-                case "fullName":
-                    this.isFullNameEmpty = true;
-
-                    break;
-                case "dateOfBirth":
-                    this.isDOBEmpty = true;
-
-                    break;
-                case "explain":
-                    this.isEVSEmpty = true;
-
-                    break;
-                case "listOfQualification":
-                    this.isLTOQEmpty = true;
-
-                    break;
-                case "passportCountry":
-                  this.isPassportCountryEmpty = true;
-
-                  break;
-                case "currentResidence":
-                  this.isCurrentResidenceEmpty = true;
-
-                  break;
-                case "visaStatus":
-                  this.isVisaStatusEmpty = true;
-
-                  break;
-                case "exam":
-                  this.isExamEmpty = true;
-
-                  break;
-                case "degree":
-                  this.isDegreeEmpty = true;
-
-                  break;
-                case "desiredCountry":
-                  this.isDesiredCountryEmpty = true;
-
-                  break;
-                case "phoneNumber":
-                  if(this.student.email.length != 0){
-                    this.isPhoneNumberRequired = false;
-                    this.isEmailRequired = false;
-                  }else{
-                    this.isPhoneNumberRequired = true;
-                    this.isEmailRequired = true;
-
-                  }
-                  break;
-                case "email":
-                  if(this.student.phoneNumber.length != 0){
-                    this.isEmailRequired = false;
-                    this.isPhoneNumberRequired = false;
-
-                  }else{
-                    this.isEmailRequired = true;
-                    this.isPhoneNumberRequired = true;
-
-                  }
-                  break;
-                  case "gender":
-                    this.isGenderEmpty = true;
-                    break;
-            }
-        }
     }
     
-    return isSomethingEmpty;
-  }
+    if(!this.form_row4.temp ) {
+      this.isChekedFirstTime = true;
+      return
+    }
+
+    if (this.form_row5.status == '' && this.NotHideVisaStatus == true) {
+      this.isSomethingEmpty = true;
+      return;
+    }
+
+    if ((this.form_row5.explain == '' && this.isEVSOpen) || this.isSomethingEmpty) {
+      if (this.NotHideVisaStatus != true) {
+        this.isSomethingEmpty = true;
+        return;
+      }
+    }
+
+    if(this.isSomethingNotValid){
+      return;
+    }
 
 
-  public checkFullNameIsEmpty(){
-     this.isFullNameEmpty = this.student.fullName.trim().length === 0;
-     this.buttonDisable();
-  }
+    if(this.isSomethingNotValid){
+      return;
+    }
 
-  public checkDOBIsEmpty(){
-    const year = new Date().getFullYear() - parseInt(this.dateOfBirth.toLocaleString('en-US', { year: 'numeric' }),10);
-    this.isDOBEmpty = this.dateOfBirth.toLocaleString().trim().length === 0 || year < 18;
-    this.student.dateOfBirth = this.dateOfBirth.toLocaleString();
+    if(this.isValidPrefix){
+      return;
+    }
 
-    this.buttonDisable();
+    if (this.isSomethingEmpty) {
+      return;
+    }
 
- }
+    let fullName = this.form_row1.firstName + " " + this.form_row1.lastName;
 
- public checkExplainIsEmpty(){
-  this.isEVSEmpty = this.student.explain.trim().length === 0;
+    this.student = new Student(
+      0,
+      fullName,
+      `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
+      this.form_row1.passportCountry,
+      this.form_row1.currentResidence,
+      this.form_row2.education,
+      this.form_row5.status,
+      this.form_row5.explain,
+      this.form_row7.exam,
+      this.form_row7.degree,
+      this.form_row4.desiredCountry,
+      this.form_row4.doYouHaveScholar,
+      this.emailPhone.phoneNumber,
+      this.emailPhone.email,
+      this.form_row1.gender,
+      this.certificate_file?.name
+    );
 
-  this.buttonDisable();
-
-}
-
-public checkLTQIsEmpty(){
-  this.isLTOQEmpty = this.student.listOfQualification.trim().length === 0;
-
-  this.buttonDisable();
-
-}
-
-public checkCurrentResidenceIsEmpty(){
-  this.isCurrentResidenceEmpty = this.student.currentResidence.trim().length === 0;
-
-  this.buttonDisable();
-
-}
-
-public checkDegreeIsEmpty(){
-  this.isDegreeEmpty = this.student.degree.trim().length === 0;
-
-  this.buttonDisable();
-}
-
-public checkExamIsEmpty(){
-  this.isExamEmpty = this.student.exam.trim().length === 0;
-
-  this.buttonDisable();
-}
-
-public checkPassportCountryIsEmpty(){
-  this.isPassportCountryEmpty = this.student.passportCountry.trim().length === 0;
-
-  this.buttonDisable();
-}
-public checkVisaStatusIsEmpty(){
-  this.isVisaStatusEmpty = this.student.visaStatus.trim().length === 0;
-
-  this.buttonDisable();
-}
-
-public checkDesiredCountryIsEmpty(){
-  this.isDesiredCountryEmpty = this.student.desiredCountry.trim().length === 0;
-
-  this.buttonDisable();
-}
-
-public checkGenderIsEmpty(){
-  this.isGenderEmpty = this.student.gender.trim().length === 0;
-
-  this.buttonDisable();
-
-}
-
-public checkPhoneNumberIsEmpty(){
-  this.isPhoneNumberRequired = this.student.phoneNumber.trim().length === 0 &&  this.student.email.trim().length === 0;
-  this.buttonDisable();
-}
-
-public checkEmailIsEmpty(){
-  this.isEmailRequired = this.student.email.trim().length === 0 &&  this.student.phoneNumber.trim().length === 0;
-
-  this.buttonDisable();
-
-}
-
-  public getCurrentResidenceCountries(){
-    this.serviceImmi.loadCurrentResidenceCountries().subscribe({
-        next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
-        error: (e) => {console.log(e)},
-        complete: () =>{console.log("is complete")}
+    this.isShowModal = true;
+    this.student_service.addStudent(this.student, this.certificate_file).subscribe({
+      next:(res:any) => {
+        this.response = "Form sent successfully";
+        this.isResponseReceived = true;
+      },
+      error:(err:any) => {
+        this.response = err;          ;
+        this.isResponseReceived = true;
+      },
+      complete:()=>{}
     });
-  }
-
-  public buttonDisable(){
-    if(this.student.fullName.length == 0 || 
-      this.student.dateOfBirth.length == 0 ||
-      this.student.explain.length == 0 ||
-      this.student.listOfQualification.length == 0 ||
-      this.student.exam.length == 0 ||
-      this.student.degree.length == 0 ||
-      this.student.desiredCountry.length == 0 ||
-      this.student.passportCountry.length == 0 ||
-      this.student.currentResidence.length == 0 ||
-      this.student.gender.length == 0||
-
-      this.student.visaStatus.length == 0 ||
-      (this.student.email.length ==0 && this.student.phoneNumber.length ==0)){
-        this.disablebuttonModal = true;
-      }
-      else{
-        this.disablebuttonModal = false;
-        this.isSomethingEmpty = false;
-      }
-  }
-
-  emailValue(email:string){
-    this.student.email = email;
-    this.checkEmailIsEmpty();
-
-  }
-
-  phoneNumberValue(phoneNumber:string){
-    this.student.phoneNumber = phoneNumber;
-    this.checkPhoneNumberIsEmpty();
-
   }
 }

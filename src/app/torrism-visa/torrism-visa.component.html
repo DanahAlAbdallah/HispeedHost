@@ -1,263 +1,60 @@
+
+
+
 <app-nav></app-nav>
 
 
-<div class="flex-container">
-
-  
-    <!-- Modal -->
-<!-- Modal -->
-<div
-class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}" role="dialog"
->
-  <app-modal-popup [isResponseReceived]="isResponseReceived"
-                    title="Tourism Visa"
-                    [response]="response"
-    ></app-modal-popup>
+<div class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}" role="dialog">
+          <app-modal-popup [isResponseReceived]="isResponseReceived"
+                          title="Tourism Visa Sent"
+                          [response]="response"
+          ></app-modal-popup>
 </div>
 
+<div class="main">
 
-    <div class="flex-container2">
-  
-            <div class=" flex-item-left">
-              <div class="d-flex flex-column">
-                <input  [(ngModel)]="tourism.fullName" placeholder="Full Name" class="input1" type="text" required (keyup)="checkFullNameIsEmpty()">
-                <div class=" mb-2" *ngIf="isFullNameEmpty">
-                  <p class="text-danger">* FullName required</p>
-                </div>
-                <div class="d-flex flex-row">
-                <div class=" c11">
-                  <div class="flex-container3 ">
-                    <div class="c1">
-                      <button class="button1">
-                        Passport Country
-                    </button>
-                    </div>
-                      
-                      <div class=" c1">
-                        <select [(ngModel)]="tourism.passportCountry" class="select1 ps-3" id="" (change)="checkPassportCountryIsEmpty()">
-                                                      <option value="" disabled selected>Select a country</option>
 
-                            <option *ngFor="let code of currentResidenceCountries">
-                              {{code.name.common}}
-                            </option>
-                        </select>
-                        <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span> 
-                      </div>
-                      <div class=" mb-2" *ngIf="isPassportCountryEmpty">
-                        <p class="text-danger">* Passport Country required</p>
-                      </div>
-                  </div>
-                </div>
-  
-                <div class=" c112" >
-  
-                </div>
-              </div>
-              </div>
-            </div>
-  
-            <div class="flex-item-right">
-              <div class="d-flex flex-column">
-                <div style="width: 100%;" class="d-flex flex-row justify-content-between">
-                  <button style="width: 48%;" class="button2">
-                    Date Of Birth
-                  </button>
-                  <div style="width: 50%;">
-                    <input style="width: 100%;" [(ngModel)]="dateOfBirth" placeholder="Date of Birth"  class="input2 pe-3" type="date" (change)="checkDOBIsEmpty()">
-                    <div class=" mb-2 " *ngIf="isDOBEmpty">
-                      <p class="text-danger">* DateOfBirth required, Or Your Age Should be At least 18 years </p>
-                    </div>
-                  </div>
-                
-                </div>
-               
-                <div class=" flex-container4">
-                  <div class=" c2">
-  
-                    <button class="button2">
-                      Current Residence
-                    </button>
-                  </div>
-  
-                    <div class= "c2">
-                      <select [(ngModel)]="tourism.currentResidence" class="select2 ps-3" id="" (change)="checkCurrentResidenceIsEmpty()">
-                        <option value="" disabled selected>Select a country</option>
 
-                        <option *ngFor="let currentResidence of currentResidenceCountries">
-                          {{currentResidence.name.common}}
-                        </option>
-                      </select>
-                      <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span>
-                    </div>
-                    <div class=" mb-2" *ngIf="isCurrentResidenceEmpty">
-                        <p class="text-danger">* Current Residence required</p>
-                      </div>
-              </div>
-              </div>
-            </div>
-            
+    <app-firstrow [formFields]="form_row1"
+                   [isSomethingEmpty]="isSomethingEmpty"
+                   (firstRowData)="onFirstRowChanged($event)"
+                   (isNatioAndCurrentResidenceIsEqual)="onNationalityEqualToCurrentResident_HideVisaStatus($event)"
+
+                   >
+    </app-firstrow>
+
+    <app-five-row
+       [notHideVisaStatus]="NotHideVisaStatus"
+       [formFields]="form_row5"
+       [isSomethingEmpty]="isSomethingEmpty"
+       (RowFiveData)="onRowFiveChanged($event)"
+       (isEVSOpend)="onEvsChanged($event)"
+    ></app-five-row>
+
+    <app-forth-row
+        [formFields]="form_row4"
+        [isSomethingEmpty]="isSomethingEmpty"
+        (fourthRowData)="onFourRowChanged($event)"
+        [countries]="desiredCountries"
+    ></app-forth-row>
+
+    <app-form-data-shared
+    [isSomethingEmpty]="isSomethingEmpty"
+    (emailphoneData)="onEmailPhoneRowChanged($event)"
+    [formFields]="emailPhone"
+    (formValidityChanged)="onFormValidityChanged($event)"
+    (isValidPrefixEvent)="onValidPrefix($event)"
+    ></app-form-data-shared>
+
+    <app-show-error *ngIf="isSomethingEmpty"></app-show-error>
+
+    <div style="text-align: center; padding-bottom: 5%;">
+        <button (click)="submit()" class="submit">
+            Submit
+         </button>
     </div>
-  
-  
-    <div class="line"></div>
-  
-  
-       <div class="  d-flex flex-column">
-  
-          <div class=" container4">   
-            <button class="button3">
-                Visa status in current country
-            </button>
-          </div>
-  
-         
-  
-          <div class=" d-flex flex-row flex-wrap mt-3 align-items-center">
-  
-            <div class="check1">
-              <div class="checkboxes d-flex flex-row justify-content-between flex-wrap">
-                <div *ngFor="let item of items; let i = index;">
-                  <label class="checkbox-label">
-                    <input type="checkbox" [checked]="item.checked" (change)="handleCheckboxChange1(item)">
-                    <span id="labelText">{{item.label}}</span>
-                  </label>
-                </div>
-              </div>
 
-
-              <div class=" mb-2" *ngIf="isVisaStatusEmpty">
-                <p class="text-danger">* Visa Status required</p>
-              </div>
-            </div>
-            
-            
-              
-  
-              <div class="check2">
-  
-              </div>
-          </div>
-  
-          <div class="blabla"></div>
-
-          <div *ngIf="hideEVSInput" class="container5">
-            <input [(ngModel)]="tourism.explain" placeholder="Explain" type="text" class="input3" (keyup)="checkExplainIsEmpty()" [disabled]="isOtherVisaStatus"/>
-            <div class=" mb-2" *ngIf="isEVSEmpty">
-              <p class="text-danger">* ExplainVisaStatus required</p>
-            </div>
-          </div>
-        
-    </div>
-  
-    <div class="line"></div>
-  
-  
-    <div class="d-flex flex-column mt-4">
-    
-      <div class="container5">
-       
-      </div>
-  
-    </div>
-    
-      
-  
-  
-    <div style="margin-bottom: 2%;" class="d-flex flex-column">
-      <div class=" container4">  
-
-
-        <div class="container8 d-flex flex-row ">
-            <button style="margin-right: 2%;" class="button8">
-              Desired Country
-            </button>
-            <div class= "c22">
-              <select [(ngModel)]="tourism.desiredCountry" class="select2 ps-3" id="" (change)="checkDesiredCountryIsEmpty()">
-                <option value="" disabled selected>Select a country</option>
-
-                <option *ngFor="let currentResidence of currentResidenceCountries">
-                  {{currentResidence.name.common}}
-                </option>
-              </select>
-              <span class="select-icon"><img src="./assets/polygon_1.PNG"/></span>
-
-              
-            </div>
-           
-           
-          </div>
-          
-        
-      </div>
-      <div class=" mb-2" *ngIf="isDesiredCountryEmpty">
-        <p class="text-danger">* Desired Country required</p>
-      </div>
-      <div>
-        <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
-          
-        </div>
-      </div>
-  </div>
-  
-  <div class="line"></div>
-
-  
-  <app-form-data-shared [isEmailRequired]="isEmailRequired" 
-  [isPhoneNumberRequired]="isPhoneNumberRequired" 
-  (emailValue)="emailValue($event)"
-  (phoneNumberValue)="phoneNumberValue($event)">
-  </app-form-data-shared>
-  <div class="line123"></div>
-
-  <div style="
-                 margin-top: 4%; width:100%;
-              " 
-              class="d-flex flex-row justify-content-between genderbox">
-                  <div style="
-                  
-                  flex-basis: 34%; margin-right: 0%;" class="c1">
-                    <button class="button1">Gender</button>
-                  </div>
-                  <div style=" 
-                
-                  flex-basis: 60%;
-                  " class="c1">
-                    <div class="check1">
-                      <div class="checkboxes d-flex flex-row justify-content-between ">
-                        <div *ngFor="let item of genders; let i = index;">
-                          <label class="checkbox-label">
-                            <input type="checkbox" [checked]="item.checked" (change)="handleCheckboxGenderChange(item)">
-                            <span id="labelText">{{item.label}}</span>
-                          </label>
-                        </div>
-                      </div>
-        
-                      <div class=" mb-2" *ngIf="isGenderEmpty">
-                        <p class="text-danger">* Gender required</p>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-
-
-  <div style="margin-bottom: 3%;" class=""></div>
-
-  <div class=" mb-2" *ngIf="isSomethingEmpty">
-    <p class="text-danger">There fields is Empty, Please Check!</p>
-  </div>
-
-  
-  <div  style="margin-bottom: 3%;"  class=""></div>
-
-  <div class="d-flex flex-column align-items-center mb-5">
-    <button *ngIf="disablebuttonModal" (click)="submit()" class="button7"  type="button">
-      Save
-  </button>
-    <button *ngIf="!disablebuttonModal" (click)="submit()" class="button7"  type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Save
-    </button>
-  </div>
-
-  
 </div>
-  
+
+<app-home-contact-footer></app-home-contact-footer>
+<app-footer></app-footer>

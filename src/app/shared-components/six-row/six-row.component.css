@@ -1,0 +1,154 @@
+
+.main{
+    display: flex;
+    flex-direction: column;
+    margin: 5% 10% 5% 10%;
+
+ }
+   .col2{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+
+  .col1{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 30%;
+  }
+  .label-name{
+    margin-left: 0%;
+  }
+
+
+.name{
+    color: rgb(155, 153, 153);
+    font-weight: 400;
+    padding: 1% 8% 1% 8%;
+    margin-top: -6px;
+    border-radius: 30px;
+    border: 1px solid #F5F5F5;
+    height: 45px;
+    background-color: #F5F5F5;
+}
+
+
+
+.first-row{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .is-invalid {
+    border: 2px solid red;
+    background-color: #ffcccc;
+  }
+  
+  .date-col{
+    width: 30%;
+  }
+
+  .row1-sec-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 65%;
+  }
+
+
+
+.second-row{
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+
+.text{
+    width: 40%;
+    text-align: center;
+    padding: 0 0% 0 8%;
+
+}
+
+.button{
+   display: none;
+}
+
+/* label {
+    width: 46%;
+    color: rgb(155, 153, 153);
+    font-weight: 400;
+    padding: 1% 8% 1% 8%;
+    margin-top: -6px;
+    border-radius: 30px;
+    border: 1px solid #F5F5F5;
+    height: 45px;
+    background-color: #F5F5F5;
+    text-align: center;
+    padding-top: 1.7%;
+}
+
+label:hover{
+    background-color: black;
+    border: 1px solid black;
+    cursor: pointer;
+} */
+
+  .checkboxes1{
+    width: 35%;
+    
+
+  }
+  
+  .checkbox-third{
+    border: 10px solid white;
+    text-align: center;
+  }
+
+  .label-checkbox{
+    margin-left: 10%;
+  }
+
+  .checkbox-label{
+    width: 180%;
+  }
+
+
+
+  .common{
+    margin-top: 1%;
+    background-color: transparent;
+    font-weight: 400;
+    padding: 1% 8% 0% 1%;
+    height: 45px;
+    width: 100%;
+
+    border: none; /* Remove the default border */
+  border-bottom: 2px solid #000; /* Add a 2px solid black bottom border */
+  outline: none; 
+}
+
+
+.common:focus{
+    border-bottom: 2px solid #ffee00; /* Add a 2px solid black bottom border */
+    padding-bottom: 1%;
+}
+
+@media (max-width:768px) {
+  .col1{
+  
+    width: 100%;
+  }
+}

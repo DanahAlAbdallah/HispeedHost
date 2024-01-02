@@ -1,0 +1,49 @@
+
+
+.row1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1vw;
+}
+
+.title{
+    color: white;
+    font-size: 1.8vw;
+    font-weight: 200;
+}
+
+.description-div{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    margin-top: 1.2vw;
+}
+
+.description {
+    color: rgb(177, 177, 177);
+    font-size: 1.2vw;
+    line-height: 1.5vw;
+    font-weight: 200;
+}   
+
+@media (max-width:700px) {
+    
+    .title{
+        font-size: 4vw;
+    }
+
+    .description {
+        font-size: 3vw;
+        line-height: 3.3vw;
+        text-align: center;
+   
+    } 
+}

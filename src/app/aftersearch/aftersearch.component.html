@@ -1,17 +1,21 @@
-<div class="aftersearch" >
+<div class="aftersearch" id="after">
 
 
 <div style="margin-top: 10%;" >
 
 </div>
 <div id="searchResults"  *ngIf="!isEmpty">
-    <app-aftersearchitem  *ngFor="let af of Items" 
-    [name]="af.full_name" 
-    [age]="af.age" 
-    [location]="af.current_residence" 
+    <app-aftersearchitem  *ngFor="let af of Items"
+    [name]="af.full_name"
+    [age]="af.age"
+    [location]="af.current_residence"
     [contactlink]="af.contactlink"
-    [resumelink]="af.resumelink"
+    [resumelink]="af.link_cv"
+    [year_of_experience]="af.years_of_experience"
+    [link_image]="af.image_file"
     [isEmpty]="isEmpty"
+    [passport_country]="af.passport_country"
+    [education]="af.education"
     >
 
     </app-aftersearchitem>
@@ -26,5 +30,7 @@
 <div style="margin-bottom: 10%;" >
 
 
+
+</div>
 
 </div>

@@ -1,0 +1,113 @@
+<form class="main" [formGroup]="myForm">
+
+  <div class="first-row">
+
+    <div class="col1-0">
+      <div class="fullnameDiv">
+        <div class="input-container">
+          <p class="label-name">First name*</p>
+          <input formControlName="firstName" class="name"
+                 type="text" placeholder="First Name" (input)="onFieldChange('firstName', myForm.get('firstName')?.value)" />
+          <div style="margin-left: 8%;" *ngIf="myForm.get('firstName')?.hasError('required') && isSomethingEmpty">
+            <p class="text-danger">First Name is required.</p>
+          </div>
+        </div>
+        <div class="input-container">
+          <p class="label-name">Last name*</p>
+          <input formControlName="lastName" class="name"
+                 type="text" placeholder="Last Name" (input)="onFieldChange('lastName', myForm.get('lastName')?.value)" />
+          <div style="margin-left: 8%;" *ngIf="myForm.get('lastName')?.hasError('required') && isSomethingEmpty">
+            <p class="text-danger">Last Name is required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col2">
+      <p class="label-date">Date of birth*</p>
+      <div class="row-date">
+        <div class="date-col">
+          <select formControlName="day" class="date" (change)="onFieldChange('day', myForm.get('day')?.value)">
+            <option value="" disabled selected>Day</option>
+            <option *ngFor="let day of days" [value]="day.value">{{day.label}}</option>
+
+          </select>
+
+          <div style="margin-left: 8%;" *ngIf="myForm.get('day')?.hasError('required') && isSomethingEmpty ">
+            <p class="text-danger">Day is required.</p>
+          </div>
+        </div>
+
+
+        <div class="date-col">
+          <select formControlName="month" class="date" (change)="onFieldChange('month', myForm.get('month')?.value)">
+            <option value="" disabled selected>Month</option>
+            <option *ngFor="let month of months" [value]="month.value">
+              {{month.label}}
+            </option>
+          </select>
+
+          <div style="margin-left: 8%;" *ngIf="myForm.get('month')?.hasError('required')  && isSomethingEmpty ">
+            <p class="text-danger">Month is required.</p>
+          </div>
+        </div>
+
+        <div class="date-col">
+          <select formControlName="year" class="date" (change)="onFieldChange('year', myForm.get('year')?.value)">
+            <option value="" disabled selected>Year</option>
+            <option *ngFor="let year of years">
+              {{year}}
+            </option>
+          </select>
+          <div style="margin-left: 8%;" *ngIf="myForm.get('year')?.hasError('required') && isSomethingEmpty ">
+            <p class="text-danger">Year is required.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+    <div class="second-row">
+      <div class="col1">
+        <p class="label-name">Nationality*</p>
+        <select formControlName="passportCountry" class="passportcountry" (change)="onFieldChange('passportCountry', myForm.get('passportCountry')?.value)">
+          <option value="" selected disabled>Nationality</option>
+          <option *ngFor="let country of countries">
+            {{country.name.common}}
+          </option>
+        </select>
+        <div style="margin-left: 8%;" *ngIf="myForm.get('passportCountry')?.hasError('required') && isSomethingEmpty ">
+          <p class="text-danger">Passport country is required.</p>
+        </div>
+    </div>
+
+    <div class="col1">
+      <p class="label-name">Gender*</p>
+      <select formControlName="gender"  class="passportcountry" (change)="onFieldChange('gender', myForm.get('gender')?.value)">
+          <option value="" selected disabled>Gender</option>
+          <option value="Male">Male</option>
+
+          <option value="Female">Female</option>
+
+      </select>
+      <div style="margin-left: 8%;" *ngIf="myForm.get('gender')?.hasError('required') && isSomethingEmpty ">
+        <p class="text-danger">Gender is required.</p>
+      </div>
+  </div>
+  <div class="col1">
+    <p class="label-name">Current residence*</p>
+    <select formControlName="currentResidence"  class="passportcountry" (change)="onFieldChange('currentResidence', myForm.get('currentResidence')?.value)">
+        <option value="" selected disabled>Country</option>
+        <option *ngFor="let country of countries">
+          {{country.name.common}}
+        </option>
+    </select>
+    <div style="margin-left: 8%;" *ngIf="myForm.get('currentResidence')?.hasError('required') && isSomethingEmpty ">
+      <p class="text-danger">Current residence is required.</p>
+    </div>
+</div>
+
+    </div>
+</form>

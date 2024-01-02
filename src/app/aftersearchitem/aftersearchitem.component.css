@@ -1,8 +1,14 @@
-.container{
+:root {
+    --font-size: 16px;
+    --border-width: 5px;
+}
 
-    margin-top: 2%;
+
+.container{
+    margin-top: 0%;
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 100%;
     height: 162px;
 }
@@ -12,22 +18,46 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 162px;
+    height: 110px;
+    width: 110px;
     border-radius: 16px;
+
     background: #D9D9D9;
 }
+
+.circular-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 115px;
+    width: 115px;
+    overflow: hidden;
+    clip-path: circle(50% at center); /* Creates a circular clip path */
+    border-radius: 50%;
+    border: 2px solid #d3d3d3;
+
+}
+
+  .circular-image-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Maintain the aspect ratio and cover the container */
+   
+  }
+
+
 
 .container2{
     display: flex;
     flex-direction: column;
     width: 862px;
-    height: 100%;
+    height: 140px;
     padding-right: 5%;
     padding-left: 5%;
     justify-content: center;
+    border: 2px solid #d3d3d3;
+    border-radius: 16px;
 }
-
 
 .firstrow{
     display: flex;
@@ -36,6 +66,7 @@
 }
 
 .secondrow{
+  margin-top: 2%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -43,9 +74,9 @@
 
 
 label {
-    
+
     color: #000;
-    font-size: 20px;
+    font-size: var(--font-size);
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
@@ -54,7 +85,7 @@ label {
 
 p{
 color: #000;
-font-size: 20px;
+font-size: var(--font-size);
 font-family: Inter;
 font-style: normal;
 font-weight: 400;
@@ -63,7 +94,7 @@ line-height: normal;
 
 a {
    color: #00B3FF;
-    font-size: 20px;
+    font-size: var(--font-size);
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
@@ -71,15 +102,24 @@ a {
     text-decoration-line: underline;
 }
 
-@media (max-width:1000px) {
+
+@media (min-width:1200px) {
+    .container2{
+        margin-left: 1%;
+    }
+}
+
+@media (max-width:1200px) {
     .firstrow{
         flex-direction: column;
         justify-content: space-evenly;
     }
-    
+
     .secondrow{
         flex-direction: column;
         justify-content: space-evenly;
+      margin-top: 2%;
+
     }
     .container{
 
@@ -88,7 +128,41 @@ a {
 
         flex-direction: column;
         width: 100%;
-        height: 300px;
+        height: max-content;
+        justify-content: center;
+    align-items: center;
+
     }
-    
+
+    .container1{
+        margin-bottom: 4%;
+        height: 100px;
+        width: 100px;
+    }
+
+    .circular-image-container{
+        margin-bottom: 4%;
+
+      height: 120px;
+      width: 120px;
+    }
+
+  .circular-image-container img {
+    height: 120px;
+    width: 130px;
+    object-fit: contain;
+  }
+
+
+    .container2{
+
+      padding-top: 3%;
+      padding-bottom: 3%;
+        width: 100%;
+        height: max-content;
+    }
+
 }
+
+
+

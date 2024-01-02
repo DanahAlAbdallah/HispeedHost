@@ -1,0 +1,43 @@
+<form class="main" [formGroup]="myForm">
+    <div class="first-row">
+        <div class="col1">
+            <p class="label-name">What is your english profciency?*</p>
+            <select formControlName="englishproficiency" class="common" (change)="onFieldChange('englishProficiency', myForm.get('englishproficiency')?.value)">
+                <option value="" selected disabled>English proficiency</option>
+                <option>Excellent</option>
+                <option>Very Good</option>
+
+                <option>Good</option>
+
+                <option>Moderate</option>
+
+                <option>Low</option>
+
+                <option>Very Low</option>
+
+            </select>
+            <div style="margin-left: 8%;" *ngIf="myForm.get('englishproficiency')?.hasError('required') && isSomethingEmpty ">
+                <p class="text-danger">English Proficiency is required.</p>
+            </div>
+        </div>
+
+        <div class="col2" *ngIf="!isHideCompleteEnglishTest">
+            <p class="label-name1">Have you ever completed a english test in the last 3 years?*</p>
+            <div>
+                <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
+                  <div *ngFor="let item of items21">
+                  <label class="checkbox-label">
+                      <input formControlName="completeenglishtest" class="checkbox-third" type="checkbox"  [checked]="item.checked" (change)="handleCheckboxChange3(item)">
+                      <span class="label-checkbox" id="labelText">{{item.label}}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            <div style="margin-left: 8%;" *ngIf="isCheckFirstTime">
+                <p class="text-danger">Completed a english test is required.</p>
+            </div>
+        </div>
+    </div>
+
+</form>

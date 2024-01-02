@@ -1,0 +1,73 @@
+<app-nav></app-nav>
+
+<div class="backdiv">
+    <button class="back-button" (click)="goBack()">
+        <i class="fa fa-arrow-left"></i> Back
+      </button>
+</div>
+
+
+<div class="aftersearch" >
+
+
+    <div style="margin-top: 6%;" >
+
+    </div>
+    <div id="searchResults"  *ngIf="!isEmpty">
+        <app-aftersearchitem  *ngFor="let af of Items, let i= index"
+        [name]="af.full_name"
+        [age]="af.age"
+        [location]="af.current_residence"
+        [contactlink]="af.contactlink"
+        [resumelink]="af.link_cv"
+        [isEmpty]="isEmpty"
+        [gender]="af.gender"
+        [profession]="af.profession"
+        [year_of_experience]="af.years_of_experience"
+        [link_image]="af.image_file"
+        [isHRpage]="isHrPage"
+        [passport_country]="af.passport_country"
+        [education]="af.education"
+        >
+
+
+        </app-aftersearchitem>
+    </div>
+
+
+    <div *ngIf="isEmpty">
+
+        <p class="no-data-message">{{message}}</p>
+    </div>
+
+    <div style="width: 100%; display: flex; justify-content: center;align-items: center;">
+    <button *ngIf="!isEmpty && !isLoadingMore && showButton"   class="show-more-button styled-button" (click)="loadMoreItems()">
+        Show More
+      </button>
+    </div>
+
+      <div *ngIf="isLoadingMore && !isPageLoad">
+        <!-- Loading indicator or message while loading more items -->
+        Loading more candidates...
+      </div>
+
+      <div *ngIf="isPageLoad">
+        <!-- Loading indicator or message while loading more items -->
+        Loading candidates...
+      </div>
+
+      <div *ngIf="showMessage1">
+        <!-- Loading indicator or message while loading more items -->
+        {{message1}}
+      </div>
+
+    <div style="margin-bottom: 10%;" >
+
+    </div>
+
+   
+
+    </div>
+
+<app-home-contact-footer></app-home-contact-footer>
+    <app-footer></app-footer>

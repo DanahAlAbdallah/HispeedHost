@@ -1,44 +1,20 @@
-export class Student{
-    id:number;
-    fullName:string;
-    dateOfBirth:string;
-    passportCountry:string;
-    currentResidence:string;
-    visaStatus:string;
-    explain:string;
-    listOfQualification:string;
-    exam:string;
-    degree:string;
-    desiredCountry:string;
-    doYouhaveScholarship:boolean;
-    phoneNumber:string;
-    email:string;
-    gender:string;
-
-    constructor(
-        
-      ) {
-        this.id = 0;
-        this.fullName = "";
-        this.dateOfBirth = "";
-        this.passportCountry = "";
-        this.currentResidence = "";
-        this.visaStatus = "";
-        this.explain = "";
-        this.listOfQualification = "";
-        this.exam = "";
-        this.degree = "";
-        this.desiredCountry = "";
-        this.doYouhaveScholarship = false;
-        this.phoneNumber = "";
-        this.email = "";
-        this.gender= "";
-      }
-
-      [element: string]: any;
-
-      get(element: string) {
-          return this[element];
-      }
-
+export class Student {
+  constructor(
+    public id: number = 0,
+    public fullName: string = "",
+    public dateOfBirth: string = "",
+    public passportCountry: string = "",
+    public currentResidence: string = "",
+    public education: string = "",
+    public visaStatus: string = "",
+    public explain: string = "",
+    public exam: string = "",
+    public degree: string = "",
+    public desiredCountry: string = "",
+    public doYouHaveScholarship: boolean = false,
+    public phoneNumber: string = "",
+    public email: string = "",
+    public gender: string = "",
+    public certificate_link:string =""
+  ) {}
 }

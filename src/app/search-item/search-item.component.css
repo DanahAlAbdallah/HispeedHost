@@ -1,0 +1,108 @@
+.box2{
+    width: 100%;
+}
+
+.select2 {
+    border: none 16px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px;
+    height: 62px;
+    width: 100%;
+    padding-left: 20%;
+  }
+
+.custom-select {
+  position: relative;
+  width: 100%; /* Set the desired width */
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 20px; /* Adjust the position as needed */
+  transform: translateY(-50%);
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust the position as needed */
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none; /* Allows clicks to pass through to the select element */
+}
+
+  .primary{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .yellow-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .yellow-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; /* Adjust this value to control the distance of the underline from the text */
+    left: 0;
+    width: 100%;
+    height: 2px; /* Adjust this value to control the thickness of the underline */
+    background-color: rgb(180, 180, 180);
+  }
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/*.bounceIcon {*/
+/*  animation: bounce 1.5s alternate;*/
+/*}*/
+
+
+
+
+@media(min-width: 1400px){
+  .select2 {
+
+    padding-left: 15%;
+  }
+}
+
+
+@media (max-width: 1400px) {
+  .select2{
+    padding-left: 17%;
+  }
+}
+
+
+@media (max-width: 950px) {
+  .select2{
+    padding-left: 17%;
+  }
+}
+@media(max-width: 768px){
+  .select2{
+    padding-left: 15%;
+  }
+}
+
+@media(max-width: 410px){
+  .select2{
+    padding-left: 17%;
+  }
+}

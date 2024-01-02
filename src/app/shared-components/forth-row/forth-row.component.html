@@ -1,0 +1,33 @@
+<form class="main" [formGroup]="myForm">
+    <div class="first-row">
+        <div class="col1">
+            <p class="label-name">What is your desired country?*</p>
+            <select formControlName="desiredCountry" class="common" (change)="onFieldChange('desiredCountry', myForm.get('desiredCountry')?.value)">
+                <option value="" selected disabled>Country</option>
+                <option *ngFor="let country of countries">
+                    {{country}}
+                  </option>
+            </select>
+            <div style="margin-left: 8%;" *ngIf="myForm.get('desiredCountry')?.hasError('required') && isSomethingEmpty ">
+                <p class="text-danger">Desired country is required.</p>
+            </div>
+        </div>
+        <div class="col2" *ngIf="isShowScholar">
+            <p class="label-name1">{{checkBoxTextDesc}}</p>
+            <div>
+                <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap ">
+                  <div *ngFor="let item of items21">
+                  <label class="checkbox-label">
+                      <input formControlName="doYouHaveScholar" class="checkbox-third" type="checkbox"  [checked]="item.checked" (change)="handleCheckboxChange3(item)">
+                      <span class="label-checkbox" id="labelText">{{item.label}}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            <div style="margin-left: 8%;" *ngIf="isCheckFirstTime">
+                <p class="text-danger">{{checkBoxTextError}}</p>
+            </div>
+        </div>
+    </div>
+</form>

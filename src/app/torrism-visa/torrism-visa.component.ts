@@ -1,353 +1,190 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { ImigrationService } from '../classes/imigration.service';
+import {Component, OnInit} from '@angular/core';
 import { TourismService } from '../classes/tourism.service';
 import { TourismVisa } from '../classes/tourismvisa';
+import { FirstRow } from '../shared-components/firstrow/firstrow.component';
+import { FourRowData } from '../shared-components/forth-row/forth-row.component';
+import { RowFive } from '../shared-components/five-row/five-row.component';
+import { EmailPhoneClass } from '../form-data-shared/form-data-shared.component';
+import {ImigrationService} from "../classes/imigration.service";
+import {NavigationEnd, Router} from "@angular/router";
+import {ScrollService} from "../classes/scroll.service";
 
 @Component({
   selector: 'app-torrism-visa',
   templateUrl: './torrism-visa.component.html',
   styleUrls: ['./torrism-visa.component.css']
 })
-export class TorrismVisaComponent {
-  public tourism:TourismVisa;
+export class TorrismVisaComponent implements OnInit{
+  form_row1:FirstRow = new FirstRow();
+  form_row4:FourRowData = new FourRowData()
+  form_row5:RowFive = new RowFive()
+  isSomethingEmpty:boolean = false;
+  emailPhone:EmailPhoneClass = new EmailPhoneClass()
 
-  public isSomethingEmpty:boolean = false;
-  public isFullNameEmpty:boolean = false;
-  public isDOBEmpty = false;
-  public isEVSEmpty = false;
-  public isPassportCountryEmpty = false;
-  public isDesiredCountryEmpty = false;
-  public isVisaStatusEmpty = false;
-  public isFormSent:boolean = false;
-  public response!:any;
+  isEVSOpen:boolean = false;
+  tourism:TourismVisa |null = null
+
   public isShowModal = false;
-  public passportCountryCode:any[]=  [];
-  public currentResidenceCountries:any[]=  [];
-  public isPhoneNumberRequired:boolean = false;
-  public isEmailRequired:boolean = false;
-  public isGenderEmpty = false;
-  public isCurrentResidenceEmpty = false;
-  public isOtherVisaStatus = false;
+  isResponseReceived: boolean = false;
+  response:string = ""
 
-  public dateOfBirth: Date = new Date();
+  desiredCountries: string[] = []
+  public NotHideVisaStatus: boolean = true;
 
-  public disablebuttonModal = true;
-
-  constructor(
-    private router: Router, 
-    private route: ActivatedRoute,
-    private service:TourismService,
-    private serviceImmi:ImigrationService
-    ){
-      this.tourism = new TourismVisa();
-
-  
-          this.router.events.subscribe((event) => {
-              if (event instanceof NavigationEnd){
-                 //scroll to top
-                 window.scrollTo(0,0);
-              }
-       });
-      
+  constructor(private tourism_service:TourismService, private service:ImigrationService, private router: Router, ){
   }
+
   ngOnInit(): void {
-    this.getCurrentResidenceCountries();
-
-    this.buttonDisable();
+     this.getCountries();
   }
 
-  public items = [
-    { label: 'Work', value: 'Work', checked: false },
-    { label: 'Permanent Resident', value: 'Permanent Resident', checked: false },
-    { label: 'Student', value: 'Student', checked: false },
-    { label: 'Temporary Resident', value: 'Temporary Resident', checked: false },
-    { label: 'Other', value: 'Other', checked: false },
-
-  ];
-
-
-  public genders = [
-    { label: 'Male', value: 'Male', checked: false },
-    { label: 'Female', value: 'Female', checked: false },
-
-  ];
- 
-  hideEVSInput:boolean = false;
-  public handleCheckboxChange1(selectedItem: { label: string,value:string, checked: boolean }): void {
-    this.items.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        if(item.value != "Other"){
-          this.hideEVSInput = false;
-          this.isOtherVisaStatus = true;
-          this.tourism.explain = "disabled"
-          this.isEVSEmpty = false;
-        }else{
-          this.isOtherVisaStatus = false;
-          this.tourism.explain = ""
-          this.hideEVSInput = true;
-
-        }
-        this.tourism.visaStatus = item.value;
-        this.checkVisaStatusIsEmpty();
-      }
-    });
-  }
-  
-  
-   
-  public handleCheckboxGenderChange(selectedItem: { label: string,value:string, checked: boolean }): void {
-    this.genders.forEach(item => {
-      item.checked = item === selectedItem; // Set the selected property based on the clicked checkbox
-      if(item.checked){
-        
-        this.tourism.gender = item.value;
-        this.checkGenderIsEmpty();
-      }
-    });
+  isValidPrefix:boolean = false;
+  onValidPrefix(prefix:boolean){
+    this.isValidPrefix = prefix;
   }
 
-  public isResponseReceived: boolean = false;
+  onFirstRowChanged(updatedFormFields: FirstRow) {
+    this.form_row1 = updatedFormFields;
+  }
 
-  public submit():void{
-
-    this.checkingEmpty();
-
-    console.log(this.tourism);
-
-
-    if (!this.tourism.fullName ||
-      !this.tourism.dateOfBirth ||
-      !this.tourism.passportCountry || 
-      !this.tourism.explain||
-      !this.tourism.currentResidence||
-      !this.tourism.visaStatus ||
-      !this.tourism.desiredCountry ||
-      !this.tourism.gender||
-      (!this.tourism.phoneNumber && !this.tourism.email)) {
-      this.isSomethingEmpty = true;
-      this.isShowModal = false; 
-
-      return;
+  onFourRowChanged(updatedFormFields: FourRowData){
+    this.form_row4  = updatedFormFields;
   }
 
 
-  this.isResponseReceived = false;
-
-      this.service.addTourismVisa(this.tourism).subscribe({
-        next: (v:any) => {
-          if(v.data.response != null){
-            this.response = v.data.response; 
-          }
-        },
-        error: (e:any) => {
-          console.log(e);
-          this.response = "Something Wrong! Please Try Again." ;
-            this.isResponseReceived = true;
-
-        },
-        complete: () =>{
-         
-          this.isResponseReceived = true;
-
-        } 
-      });
-
+  onRowFiveChanged(updatedFormFields: RowFive){
+    this.form_row5  = updatedFormFields;
   }
 
-
-  public reset():void{
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.navigate(['./'], {
-      relativeTo: this.route,
-      queryParamsHandling: "merge"
-    })
+  onEvsChanged(isEVSOpen:boolean){
+    this.isEVSOpen = isEVSOpen;
   }
 
-  private checkingEmpty(){
-      const nullSafeValue = (value: any) => {
-        if (value === null) {
-            return "NULL";
-        } else if (value === "") {
-            return "EMPTY";
-        } else {
-            return value;
-        }
-    };
-    
+  onEmailPhoneRowChanged(updatedFormFields: EmailPhoneClass){
+    this.emailPhone  = updatedFormFields;
+  }
 
-    const elements = ["fullName", "dateOfBirth", "passportCountry", "visaStatus","explain",
-     "listOfQualification","exam","degree","desiredCountry","currentResidence","phoneNumber","email","gender"];
-    
-    let isSomethingEmpty = false;
-    
-    for (const element of elements) {
-        const value = nullSafeValue(this.tourism.get(element));
-        if (value === "EMPTY") {
-            switch (element) {
-                case "fullName":
-                    this.isFullNameEmpty = true;
+  onNationalityEqualToCurrentResident_HideVisaStatus(hide: boolean) {
+    this.NotHideVisaStatus = hide;
+  }
 
-                    break;
-                case "dateOfBirth":
-                    this.isDOBEmpty = true;
+  isSomethingNotValid:boolean = false;
 
-                    break;
-                case "explain":
-                    this.isEVSEmpty = true;
+  onFormValidityChanged(isValid: boolean) {
 
-                    break;
-            
-                case "passportCountry":
-                  this.isPassportCountryEmpty = true;
-
-                  break;
-               
-                case "desiredCountry":
-                  this.isDesiredCountryEmpty = true;
-
-                  break;
-                case "visaStatus":
-                  this.isVisaStatusEmpty = true;
-
-                  break;
-                  case "phoneNumber":
-                    if(this.tourism.email.length != 0){
-                      this.isPhoneNumberRequired = false;
-                      this.isEmailRequired = false;
-                    }else{
-                      this.isPhoneNumberRequired = true;
-                      this.isEmailRequired = true;
-  
-                    }
-                    break;
-                  case "email":
-                    if(this.tourism.phoneNumber.length != 0){
-                      this.isEmailRequired = false;
-                      this.isPhoneNumberRequired = false;
-  
-                    }else{
-                      this.isEmailRequired = true;
-                      this.isPhoneNumberRequired = true;
-  
-                    }
-                    break;
-                case "gender":
-                  this.isGenderEmpty = true;
-                  break;
-                  case "currentResidence":
-                    this.isCurrentResidenceEmpty = true;
-  
-                    break;
-            }
-        }
+    if (!isValid) {
+      this.isSomethingNotValid = true;
+    }else{
+      this.isSomethingNotValid = false;
     }
-    
-    return isSomethingEmpty;
   }
 
+  submit(){
+    switch(""){
+      case this.form_row1.firstName:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.lastName:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.day:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.month:
+        this.isSomethingEmpty = true;
+        break;
 
-  public checkFullNameIsEmpty(){
-     this.isFullNameEmpty = this.tourism.fullName.trim().length === 0;
-     this.buttonDisable();
-  }
+      case this.form_row1.year:
+        this.isSomethingEmpty = true;
+        break;
 
-  public checkDOBIsEmpty(){
-    const year = new Date().getFullYear() - parseInt(this.dateOfBirth.toLocaleString('en-US', { year: 'numeric' }),10);
-    this.isDOBEmpty = this.dateOfBirth.toLocaleString().trim().length === 0 || year < 18;
-    this.tourism.dateOfBirth = this.dateOfBirth.toLocaleString();
-
-    this.buttonDisable();
-
- }
-
- public checkExplainIsEmpty(){
-  this.isEVSEmpty = this.tourism.explain.trim().length === 0;
-
-  this.buttonDisable();
-
-}
-
-
-
-public checkCurrentResidenceIsEmpty(){
-  this.isCurrentResidenceEmpty = this.tourism.currentResidence.trim().length === 0;
-
-  this.buttonDisable();
-
-}
+      case this.form_row1.currentResidence:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.passportCountry:
+        this.isSomethingEmpty = true;
+        break;
 
 
-public checkPassportCountryIsEmpty(){
-  this.isPassportCountryEmpty = this.tourism.passportCountry.trim().length === 0;
+      case this.form_row4.desiredCountry:
+        this.isSomethingEmpty = true;
+        break;
 
-  this.buttonDisable();
-}
-public checkVisaStatusIsEmpty(){
-  this.isVisaStatusEmpty = this.tourism.visaStatus.trim().length === 0;
+      case this.emailPhone.email:
+        this.isSomethingEmpty = true;
+        break;
+      case this.emailPhone.phoneNumber:
+        this.isSomethingEmpty = true;
+        break;
+      default:
+        this.isSomethingEmpty = false
+    }
 
-  this.buttonDisable();
-}
+    if (this.form_row5.status == '' && this.NotHideVisaStatus == true) {
+      this.isSomethingEmpty = true;
+      return;
+    }
 
-public checkDesiredCountryIsEmpty(){
-  this.isDesiredCountryEmpty = this.tourism.desiredCountry.trim().length === 0;
+    if ((this.form_row5.explain == '' && this.isEVSOpen) || this.isSomethingEmpty) {
+      if (this.NotHideVisaStatus != true) {
+        this.isSomethingEmpty = true;
+        return;
+      }
+    }
 
-  this.buttonDisable();
-}
 
-public checkPhoneNumberIsEmpty(){
-  this.isPhoneNumberRequired = this.tourism.phoneNumber.trim().length === 0 &&  this.tourism.email.trim().length === 0;
-  this.buttonDisable();
-}
+    if(this.isSomethingNotValid ){
+      return;
+    }
 
-public checkEmailIsEmpty(){
-  this.isEmailRequired = this.tourism.email.trim().length === 0 &&  this.tourism.phoneNumber.trim().length === 0;
+    if(this.isSomethingNotValid){
+      return;
+    }
 
-  this.buttonDisable();
+    if(this.isValidPrefix){
+        return;
+    }
 
-}
+    let fullName = this.form_row1.firstName + " " + this.form_row1.lastName;
 
-  public getCurrentResidenceCountries(){
-    this.serviceImmi.loadCurrentResidenceCountries().subscribe({
-        next: (v:any) => {this.currentResidenceCountries = v; this.passportCountryCode =v;},
-        error: (e) => {console.log(e)},
-        complete: () =>{console.log("is complete")}
+    this.tourism = new TourismVisa(
+      0,
+      fullName,
+      `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
+      this.form_row1.passportCountry,
+      this.form_row1.currentResidence,
+      this.form_row5.status,
+      this.form_row5.explain,
+      this.form_row4.desiredCountry,
+      this.emailPhone.phoneNumber,
+      this.emailPhone.email,
+      this.form_row1.gender,
+
+    );
+
+    this.isShowModal = true;
+    this.tourism_service.addTourismVisa(this.tourism).subscribe({
+      next:(res:any) => {
+        this.response = "Form sent successfully";
+        this.isResponseReceived = true;
+      },
+      error:(err:any) => {
+        this.response = err;          ;
+        this.isResponseReceived = true;
+      },
+      complete:()=>{}
     });
   }
 
-  public buttonDisable(){
-    if(this.tourism.fullName.length == 0 || 
-      this.tourism.dateOfBirth.length == 0 ||
-      this.tourism.explain.length == 0 ||
-      this.tourism.desiredCountry.length == 0 ||
-      this.tourism.passportCountry.length == 0 ||
-      this.tourism.visaStatus.length == 0||
-      this.tourism.currentResidence.length == 0 ||
-      this.tourism.gender.length == 0||
-      (this.tourism.email.length == 0 && this.tourism.phoneNumber.length ==0)){
-        this.disablebuttonModal = true;
-      }
-      else{
-        this.disablebuttonModal = false;
-        this.isSomethingEmpty = false;
-      }
-  }
-
-  public checkGenderIsEmpty(){
-    this.isGenderEmpty = this.tourism.gender.trim().length === 0;
-    this.buttonDisable();
-  }
-
-  emailValue(email:string){
-    this.tourism.email = email;
-    this.checkEmailIsEmpty();
-
-  }
-
-  phoneNumberValue(phoneNumber:string){
-    this.tourism.phoneNumber = phoneNumber;
-    this.checkPhoneNumberIsEmpty();
-
+  public getCountries(){
+    this.service.loadCurrentResidenceCountries().subscribe({
+      next: (v:any) => {
+        v.forEach((b:any) => this.desiredCountries.push(b.name.common));
+        this.desiredCountries = this.desiredCountries.filter((c:any) => c !== 'Israel')
+           .sort((a:any, b:any) => a >= b ? 1 : -1);
+      },
+      error: (e) => {console.log(e)},
+      complete: () =>{console.log("is complete")}
+    });
   }
 }

@@ -1,0 +1,144 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+.aftersearch {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    flex-shrink: 0;
+    align-items: center;
+    /* justify-content: center; */
+
+    padding-top: 0%;
+    padding-left: 8%;
+    padding-right: 8%;
+
+    min-height: 100dvh;
+    overflow: auto;
+
+    /* align-items: stretch; */
+    
+    overflow-x: hidden;
+
+}
+
+/* app.component.css */
+.no-data-message {
+  font-size: large;
+  color: #00B3FF; /* Change this to your desired text color */
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Add some styling to the search results */
+.search-results {
+  margin-top: 20px; /* Add some space above the results */
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Move it slightly down for animation */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Animate the results when scrolling into view */
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.backdiv{
+    margin-top: 3%;
+    margin-left: 4%;
+}
+
+.back-button {
+    background-color: #a3a3a3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+  }
+  
+  .back-button:hover {
+    background-color: #646464;
+  }
+  
+  .fa {
+    margin-right: 5px; /* Add some space between the icon and text */
+  }
+  
+
+  /* CSS */
+  .styled-button {
+    margin-top: 3%;
+    width: 10%;
+    background: black;
+    border: none;
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    font: inherit;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: var(--font-size);
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    border-radius: 7px; /* Adjust border radius as needed */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Change text color and background color on hover */
+  .styled-button:hover {
+    background: #F8D413; /* New background color on hover */
+    color: #ffffff; /* New text color on hover */
+  }
+  
+
+  @media (max-width: 1289px) {
+    .styled-button {
+      width: 15%;
+    }
+  }
+
+
+  @media (max-width: 862px) {
+    .styled-button {
+      width: 20%;
+    }
+  }
+
+  @media (max-width: 646px) {
+    .styled-button {
+      width: 25%;
+    }
+  }
+
+
+  @media (max-width: 520px) {
+    .styled-button {
+      width: 30%;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .styled-button {
+      width: 35%;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .styled-button {
+      width: 40%;
+    }
+  }

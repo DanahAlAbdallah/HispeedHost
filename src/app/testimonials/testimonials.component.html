@@ -1,0 +1,17 @@
+<div class="main">
+
+    <div class="title-div">
+        <h1>TESTIMONIALS</h1>
+        <div class="underline_title"></div>
+    </div>
+
+    <div class="desc-div">
+        <p class="desc"> Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</p>
+    </div>
+
+    <div class="testimonials">
+        <div class="items" *ngFor="let text of texts">
+            <app-testimonials-item [text]="text"></app-testimonials-item>
+        </div>
+    </div>
+</div>

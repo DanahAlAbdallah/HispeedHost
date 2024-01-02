@@ -16,6 +16,31 @@ export class ImigrationService {
 
   constructor(private httpClient:HttpClient) { }
 
+  public addImigrationWithImage(imigration: ImmigrationData, selectedFile:File | null |undefined, imageUpload:File): Observable<ImmigrationResponse> {
+
+    const formData: FormData = new FormData();
+    if(selectedFile != null){
+      formData.append('cv', selectedFile, selectedFile.name);
+      formData.append('image', imageUpload, imageUpload.name);
+      formData.append('imigration', JSON.stringify(imigration));
+    }
+
+    const observable = this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/immigrations/add',formData);
+    return observable.pipe(
+        retry(3),
+      catchError((error: HttpErrorResponse) => {
+        let errorMsg = error.error.data.response;
+        if (errorMsg && errorMsg == "You're already applied to form.") {
+          return throwError(() => new Error(errorMsg));
+
+        }
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+     
+      })
+    );
+  }
+
+
   public addImigration(imigration: ImmigrationData, selectedFile:File | null |undefined): Observable<ImmigrationResponse> {
 
     const formData: FormData = new FormData();
@@ -26,13 +51,12 @@ export class ImigrationService {
 
     const observable = this.httpClient.post<ImmigrationResponse>(this.apiUrl+'/api/v1/immigrations/add',formData);
     return observable.pipe(
-        retry(3),
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => new Error('Something bad happened; please try again later.'));
-        })
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
     );
-  } 
-
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
@@ -40,7 +64,7 @@ export class ImigrationService {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+      return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
   public loadPassportCountryCode():Observable<any[]>{
@@ -54,7 +78,7 @@ export class ImigrationService {
                               catchError(this.handleError)
                             );
 
-    
+
   }
 
   public loadCurrentResidenceCountries():Observable<any[]>{
@@ -64,19 +88,18 @@ export class ImigrationService {
                             catchError(this.handleError)
                           );
 
-  
+
 }
 
 
 
-  public getAllHrResults(imiHrReq: ImmigrationHrRequest): Observable<any[]> {
+  public getHrResultsWithSpecificCondition(imiHrReq: ImmigrationHrRequest): Observable<any[]> {
 
 
     let params = new HttpParams();
     params = params.set('profession', imiHrReq.profession);
-    params = params.set('education', imiHrReq.education);
-    params = params.set('yearsexp', imiHrReq.yearOfExp)
     params = params.set('gender', imiHrReq.gender);
+    params = params.set('nationality', imiHrReq.nationality);
 
     return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/hr',{params}).pipe(
       retry(3),
@@ -84,5 +107,40 @@ export class ImigrationService {
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     );
-  } 
+  }
+
+  public getAllHrResults(page:number, pageSize:number): Observable<any[]> {
+
+    let params = new HttpParams();
+    params = params.set('page', page);
+    params = params.set('pageSize', pageSize);
+
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/hr/all', {params}).pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
+
+  public getAllProfessions(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/profession/all').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
+
+  public getAllYears(): Observable<any[]> {
+
+    return this.httpClient.get<any[]>(this.apiUrl+'/api/v1/immigrations/years/all').pipe(
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
 }

@@ -1,16 +1,18 @@
-<app-nav></app-nav>
+<div style="background-color: rgb(92, 91, 91);">
+    <app-nav [iconLightHome]="true"></app-nav>
 
 
-<div class="services">
+    <div class="services">
 
-    <div class="container">
-        <app-service *ngFor="let title of titles; index as i" 
-        [title]="title" [link]="links[i]" [description]="description[i]">
+        <div class="container">
+            <app-service *ngFor="let title of titles;index as i"
+                 [title]="title" [link]="links[i]" [description]="description[i]">
 
-        </app-service>
+            </app-service>
+        </div>
     </div>
+
+
+    <app-home-contact-footer></app-home-contact-footer>
+    <app-footer></app-footer>
 </div>
-
-
-
-<app-footer></app-footer>

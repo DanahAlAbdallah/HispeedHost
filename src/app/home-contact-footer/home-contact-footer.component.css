@@ -1,0 +1,88 @@
+.main{
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2% 5% 2% 5%;
+}
+
+
+.title{
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.info{
+  color: rgb(175, 175, 175);
+}
+
+.info:hover{
+    color: #F8D413;
+    cursor: pointer;
+}
+
+
+.back {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center; /* Center the content horizontally */
+  }
+
+  .white-line {
+    width: 1px;
+    height: 50px; /* Adjust the height as needed */
+    background-color: white;
+    transform: rotate(180deg); /* Rotate the line 90 degrees to make it vertical */
+  }
+
+  .back-to {
+    color: white;
+    margin-bottom: 50%;
+    transform: rotate(-90deg);
+    margin-top: 30%; /* Rotate the text -90 degrees to make it vertical */
+
+  }
+
+
+
+  .back:hover{
+    animation: moveUpDown 2s ease-in-out infinite; /* Customize duration and timing as needed */
+
+    cursor: pointer;
+  }
+
+
+  @keyframes moveUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Move up by 10 pixels */
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+
+a {
+  text-decoration: none;
+  color: rgb(175, 175, 175);
+}
+
+a:hover{
+  color: #F8D413;
+  cursor: pointer;
+}
+
+@media (max-width:500px) {
+  .main{
+    padding: 5% 5% 2% 5%;
+
+  }
+}

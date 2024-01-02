@@ -1,0 +1,30 @@
+<div class="main" id="services">
+    <div class="div_title">
+        <p class="title">OUR SERVICES</p>
+        <img class="underline_title" src="./assets/underline.png"/>
+    </div>
+
+    <div class="description">
+
+    </div>
+
+
+    <div class="services">
+        <div class="container">
+            <div class="main-second" *ngFor="let title of titles,index as i">
+                <app-service-home
+
+                    [imgUrl]="photos[i]"
+                    [title]="title"
+                    [_routelink]="links[i]"
+                    [desc]="desc[i]"
+            ></app-service-home>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+

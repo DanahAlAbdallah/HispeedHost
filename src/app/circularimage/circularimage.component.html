@@ -1,0 +1,22 @@
+<!-- circular-image-upload.component.html -->
+<mat-card class="mat-card main"   style="position: relative;">
+  <div class="circular-card">
+    <input type="file" (change)="onFileSelected($event)" id="fileInput" style="display: none" />
+    <label style="cursor: pointer;" for="fileInput">
+      <img *ngIf="imageUrl" [src]="imageUrl" class="circular-image"  />
+      <img  *ngIf="!imageUrl" src="./assets/person-fill-big.png" class="circular-image" />
+    </label>
+  </div>
+
+
+  <div style="position: absolute; bottom: -12px; left: 100%; right: -65%; top: 76%; transform: translateX(-50%);">
+    <div style=" display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background-color: black; border-radius: 50%;
+      cursor: pointer;" (click)="triggerFileInput()">
+      <img src="./assets/camera-fill.png" />
+    </div>
+  </div>
+</mat-card>
+
+
+

@@ -1,0 +1,93 @@
+
+<app-nav  ></app-nav>
+
+
+<div class="modal" id="staticBackdrop" tabindex="-1" [ngClass]="{'show': isShowModal}" role="dialog">
+  <app-modal-popup [isResponseReceived]="isResponseReceived"
+                   title="Apply Form Sent"
+                   [response]="response"
+  ></app-modal-popup>
+</div>
+
+<div class="main" >
+
+  <div style="background-color: transparent;display: flex;flex-direction: column; align-items: center; justify-content: center; margin-top: 5%;width: 100%">
+    <app-circularimage
+      [isSomethingEmpty]="isSomethingEmpty"
+      (img_profile_file)="onImageUpload($event)"
+      (isFileNotSupportedImageEvent)="onFileNotSupported($event)"
+      (isCompressing)="onImageCompressed($event)"
+    ></app-circularimage>
+
+
+    <div style="margin-top: 3%;">
+
+      <p  class="text-danger" *ngIf="imageUpload == null && isSomethingEmpty ">
+        profile img is required
+      </p>
+
+      <p class="text-danger" *ngIf="isFileNotSupportedImage">Not Supported Image format.</p>
+
+      <p class="text-danger" *ngIf="isCompressing">
+        Wait<span class="ellipsis-animation"></span>
+      </p>
+
+    </div>
+
+  </div>
+
+  <app-firstrow [formFields]="form_row1"
+                [isSomethingEmpty]="isSomethingEmpty"
+                (firstRowData)="onFirstRowChanged($event)"
+  >
+  </app-firstrow>
+
+
+  <app-second-row
+    [formFields]="form_row2"
+    [isSomethingEmpty]="isSomethingEmpty"
+    (secondRowData)="onSecondRowChanged($event)"
+    (cv_file)="onCvFileUploaded($event)"
+    (isOtherSelected)="onOtherProfessionSelected($event)"
+  ></app-second-row>
+
+
+  <app-third-row
+    [formFields]="form_row3"
+    [isSomethingEmpty]="isSomethingEmpty"
+    (thirdRowData)="onThirdRowChanged($event)"
+    [isCheckFirstTime]="isChekedFirstTime"
+    [isHideCompleteEnglishTest]="true"
+  ></app-third-row>
+
+<!--  <app-forth-row-->
+<!--    [formFields]="form_row4"-->
+<!--    [isSomethingEmpty]="isSomethingEmpty"-->
+<!--    (fourthRowData)="onFourRowChanged($event)"-->
+<!--    [countries]="desiredCountries"-->
+<!--  ></app-forth-row>-->
+
+  <app-form-data-shared
+    [isSomethingEmpty]="isSomethingEmpty"
+    (emailphoneData)="onEmailPhoneRowChanged($event)"
+    [formFields]="emailPhone"
+    (formValidityChanged)="onFormValidityChanged($event)"
+    (isValidPrefixEvent)="onValidPrefix($event)"
+
+  ></app-form-data-shared>
+
+
+  <app-show-error *ngIf="isSomethingEmpty"></app-show-error>
+
+
+  <div style="text-align: center; padding-bottom: 5%;">
+    <button (click)="submit()" class="submit">
+      Submit
+    </button>
+  </div>
+
+</div>
+
+<app-home-contact-footer></app-home-contact-footer>
+<app-footer></app-footer>
+

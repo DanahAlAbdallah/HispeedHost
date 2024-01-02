@@ -1,0 +1,63 @@
+<form [formGroup]="myForm" class="main">
+    <p>Did you have one of these exams?</p>
+
+
+  <div>
+    <div class="checkboxes1 d-flex flex-row justify-content-between flex-wrap">
+      <div class="ss" *ngFor="let item of exams; let i = index">
+        <label class="checkbox-label">
+          <input formControlName="exam" class="checkbox-third" type="checkbox" [checked]="i === selectedCheckboxIndex" (change)="handleCheckboxChange1(i)">
+          <span class="label-checkbox" id="labelText">{{item.label}}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div style="margin-left: 8%;" *ngIf="myForm.get('exam')?.hasError('required')  && isSomethingEmpty ">
+        <p class="text-danger">Exam is required.</p>
+    </div>
+
+  <div *ngIf="this.formFields?.exam != ''">
+    <input (input)="onFieldChange('degree',myForm.get('degree')?.value)" formControlName="degree" class="common" placeholder="degree" >
+    <div style="margin-left: 8%;" *ngIf="myForm.get('degree')?.hasError('required')  && isSomethingEmpty ">
+      <p class="text-danger">Degree is required.</p>
+    </div>
+  </div>
+
+
+  <div class="second-row">
+
+    <div class="row1-sec-row">
+      <div class="w-100 d-flex flex-row align-items-center justify-content-between">
+
+          <p    class="text">
+            Certificate.pdf (Optional)
+          </p>
+
+          <input id="file" class="button" type="file" accept=".pdf"
+                 (change)="handleFileInput($event)" placeholder="Upload Your Certificate">
+
+          <label class="labelUp" *ngIf="selectedFile == null" for="file">
+            <p class="text-under-label">Upload Your Certificate</p>
+          </label>
+
+          <label class="labelUp" *ngIf="selectedFile != null" for="file">
+            <p class="text-under-label">{{selectedFileName}}</p>
+          </label>
+
+        </div>
+
+
+      <div style="margin-left: 30%">
+
+        <p formControlName="filename" class="text-danger" *ngIf="myForm.get('filename')?.hasError('required') && isSomethingEmpty ">
+          cv is required
+        </p>
+
+        <p class="text-danger" *ngIf="isFileNotSupported"> Wrong file format.</p>
+      </div>
+    </div>
+
+  </div>
+</form>
