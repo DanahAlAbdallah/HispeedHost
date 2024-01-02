@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import {NavigationEnd, Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {ScrollService} from "./classes/scroll.service";
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-root',
@@ -20,17 +21,20 @@ export class AppComponent  implements OnInit {
   //   });
   // }
 
-  ngOnInit(): void {
-      //this.router.navigate(['imigration']);
-  }
-}
+  private currentSection: any;
 
-export const slideInFromTop = trigger('slideInFromTop', [
-  state('void', style({ transform: 'translateY(-100%)' })),
-  transition(':enter', [
-    animate('0.5s', style({ transform: 'translateY(0)' }))
-  ]),
-  transition(':leave', [
-    animate('0.5s', style({ transform: 'translateY(-100%)' }))
-  ])
-]);
+
+  constructor(private router: Router, private elementRef: ElementRef) { }
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+       // this.animateSections();
+      }
+    });
+  }
+
+
+ 
+
+}

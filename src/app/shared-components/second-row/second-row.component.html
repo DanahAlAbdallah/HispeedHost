@@ -1,24 +1,38 @@
 <form class="main" [formGroup]="myForm">
-    <div class="first-row">
-        <div class="col1">
-            <p class="label-name">Profession*</p>
-            <select formControlName="profession" class="common" (change)="onFieldChange('profession', myForm.get('profession')?.value)">
-                <option value="" selected disabled>Profession</option>
-                <option *ngFor="let profession of professions">
-                    {{profession}}
-                </option>
-                <option>Other</option>
-            </select>
+    <div class="first-row"  >
+      <div  [ngClass]="{
+              'col1-0': (isOtherSelectedVar || formFields?.profession == 'Other'),
+              'col1': !(isOtherSelectedVar || formFields?.profession == 'Other')
+            }"  *ngIf="!isStudentPage">
+        <p class="label-name">Profession*</p>
+        <select formControlName="profession" class="common" (change)="onFieldChange('profession', myForm.get('profession')?.value)">
+          <option value="" selected disabled>Profession</option>
+          <option *ngFor="let profession of professions">
+            {{profession}}
+          </option>
+          <option>Other</option>
+        </select>
 
 
-            <div style="margin-left: 8%;" *ngIf="myForm.get('profession')?.hasError('required') && isSomethingEmpty ">
-                <p class="text-danger">Profession is required.</p>
-            </div>
-
-
+        <div style="margin-left: 8%;" *ngIf="myForm.get('profession')?.hasError('required') && isSomethingEmpty ">
+          <p class="text-danger">Profession is required.</p>
         </div>
 
-        <div class="col1">
+        <div class="w-100" *ngIf="!isStudentPage">
+          <input *ngIf="isOtherSelectedVar || formFields?.profession == 'Other'" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)" />
+          <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required')  && isOtherSelectedVar ">
+            <p class="text-danger">Profession is required.</p>
+          </div>
+        </div>
+
+      </div>
+
+        <div
+            [ngClass]="{
+              'col1-0': (isOtherSelectedVar || formFields?.profession == 'Other') && isGreaterThan768px,
+              'col1': !(isOtherSelectedVar || formFields?.profession == 'Other') || !isGreaterThan768px
+            }"
+             *ngIf="!isStudentPage">
             <p class="label-name">Years of experience*</p>
             <!-- <select formControlName="yearofexperience"  class="common" (change)="onFieldChange('yearofexperience', myForm.get('yearofexperience')?.value)">
                 <option value="" selected disabled>0</option>
@@ -30,7 +44,12 @@
             <p class="text-danger">Year of experience is required.</p>
             </div>
         </div>
-        <div class="col1">
+        <div
+      [ngClass]="{
+          'col1-0': (isOtherSelectedVar || formFields?.profession == 'Other') && isGreaterThan768px,
+          'col1': !(isOtherSelectedVar || formFields?.profession == 'Other') || !isGreaterThan768px
+        }"
+             >
             <p class="label-name">Education*</p>
             <select formControlName="education"  class="common" (change)="onFieldChange('education', myForm.get('education')?.value)">
                 <option value="" selected disabled>Choose your education</option>
@@ -49,13 +68,8 @@
     </div>
 
 
-<div>
-  <input *ngIf="isOtherSelectedVar || formFields?.profession == 'Other'" style="margin-top: 2%;" formControlName="other" type="text" placeholder="Other Profession" class="common1" (change)="onFieldChange('other', myForm.get('other')?.value)"/>
-  <div style="margin-left: 8%;" *ngIf="myForm.get('other')?.hasError('required')  && isOtherSelectedVar ">
-    <p class="text-danger">Profession is required.</p>
-  </div>
-</div>
-    <div class="second-row">
+
+    <div class="second-row" *ngIf="!isStudentPage">
 
         <div class="row1-sec-row">
           <div class="div_text">

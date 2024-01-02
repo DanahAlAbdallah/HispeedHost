@@ -34,7 +34,7 @@ export class AllHrSearchComponent {
 
 
   page = 0; // Current page number
-  pageSize = 15; // Number of items to load per page
+  pageSize = 30; // Number of items to load per page
   isLoadingMore = false; 
   showMoreButton = false;
 

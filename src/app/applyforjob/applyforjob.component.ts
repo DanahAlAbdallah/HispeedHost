@@ -101,9 +101,14 @@ export class ApplyforjobComponent implements OnInit{
       }
     }
 
+
+
     submit(){
       switch(""){
-        case this.form_row1.fullName:
+        case this.form_row1.firstName:
+          this.isSomethingEmpty = true;
+          break;
+        case this.form_row1.lastName:
           this.isSomethingEmpty = true;
           break;
         case this.form_row1.day:
@@ -190,10 +195,13 @@ export class ApplyforjobComponent implements OnInit{
 
       if(this.isValidPrefix){
         return;
-    }
+      }
+
+      let fullName = this.form_row1.firstName + " " + this.form_row1.lastName;
+
 
       this.apply = new ApplyForJob(
-        this.form_row1.fullName,
+        fullName,
         `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
         this.form_row1.passportCountry,
         this.form_row1.currentResidence,
@@ -202,12 +210,11 @@ export class ApplyforjobComponent implements OnInit{
         this.form_row2.profession,
         this.form_row2.yearofexperience,
         this.form_row2.education,
-        "anything",
         this.form_row1.gender,
-        'whatever',
+        this.cvFile!.name,
         this.emailPhone.phoneNumber,
         this.emailPhone.email,
-        ""
+        this.imageUploadFileName
       );
 
 
@@ -219,20 +226,8 @@ export class ApplyforjobComponent implements OnInit{
             this.response = "Form sent successfully";
             this.isResponseReceived = true;
           },
-          error:(err:any) => {
-            this.response = "Something Wrong";
-            this.isResponseReceived = true;
-          },
-          complete:()=>{}
-        });
-      }else {
-        this.apply_service.insertApply(this.apply,this.cvFile).subscribe({
-          next:(res:any) => {
-            this.response = "Form sent successfully";
-            this.isResponseReceived = true;
-          },
-          error:(err:any) => {
-            this.response = "Something Wrong";
+          error: (err: any) => {
+            this.response = err;
             this.isResponseReceived = true;
           },
           complete:()=>{}

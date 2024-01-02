@@ -19,15 +19,15 @@
     justify-content: center;
 }
 
-.big_text{
-        text-align: center;
-
-    width: 60%;
-  line-height: 120%;
-    color: #ffffff;
-    font-size: 1.8vw;
-    font-weight: 400;
-    font-family: 'Roboto', sans-serif;
+.big_text {
+  text-align: center;
+  width: 60%;
+  font-size: 1.8vw;
+  color: #FFF;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 
@@ -68,7 +68,7 @@
 
 
 
-@media (max-width:700px) {
+@media (max-width:701px) {
 
     .row2{
 
@@ -77,7 +77,7 @@
 
     .big_text{
 
-        font-size: 5.5vw;
+        font-size: 2vw;
     }
 
     .row2{

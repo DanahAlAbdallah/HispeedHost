@@ -25,9 +25,15 @@ export class ApplyforjobService {
     const observable = this.httpClient.post<any>(this.apiUrl+'/api/v1/applyjob/new',formData);
     return observable.pipe(
         retry(3),
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => new Error('Something bad happened; please try again later.'));
-        })
+      catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        let errorMsg = error.error.data.response;
+        if (errorMsg && errorMsg == "You're already applied to form.") {
+          return throwError(() => new Error(errorMsg));
+
+        }
+        return throwError(() => new Error('Something bad happened, please try again later.'));
+      })
     );
   }
 
@@ -44,7 +50,14 @@ export class ApplyforjobService {
     return observable.pipe(
       retry(3),
       catchError((error: HttpErrorResponse) => {
-        return throwError(() => new Error('Something bad happened; please try again later.'));
+        console.log(error);
+
+        let errorMsg = error.error.data.response;
+        if (errorMsg && errorMsg == "You're already applied to form.") {
+          return throwError(() => new Error(errorMsg));
+
+        }
+        return throwError(() => new Error('Something bad happened, please try again later.'));
       })
     );
   }

@@ -13,58 +13,57 @@
 
 
 
-    <app-firstrow [formFields]="form_row1"
-                   [isSomethingEmpty]="isSomethingEmpty"
-                   (firstRowData)="onFirstRowChanged($event)"
-                   >
-    </app-firstrow>
+  <app-firstrow [formFields]="form_row1"
+                [isSomethingEmpty]="isSomethingEmpty"
+                (firstRowData)="onFirstRowChanged($event)"
+                (isNatioAndCurrentResidenceIsEqual)="onNationalityEqualToCurrentResident_HideVisaStatus($event)">
+  </app-firstrow>
 
-    <app-five-row
-       [formFields]="form_row5"
-       [isSomethingEmpty]="isSomethingEmpty"
-       (RowFiveData)="onRowFiveChanged($event)"
-       (isEVSOpend)="onEvsOpened($event)"
-    ></app-five-row>
-
+  <app-five-row [notHideVisaStatus]="NotHideVisaStatus"
+                [formFields]="form_row5"
+                [isSomethingEmpty]="isSomethingEmpty"
+                (RowFiveData)="onRowFiveChanged($event)"
+                (isEVSOpend)="onEvsOpened($event)"></app-five-row>
 
 
+  <app-second-row [formFields]="form_row2"
+                  [isSomethingEmpty]="isSomethingEmpty"
+                  (secondRowData)="onSecondRowChanged($event)"
+                  [isStudentPage]="true">
 
-    <app-row-seven
-        [formFields]="form_row7"
-        [isSomethingEmpty]="isSomethingEmpty"
-        (RowSevehData)="onSevenRowChanged($event)"
-        (certificate_file)="onFileUpload($event)"
-        >
+  </app-second-row>
 
-    </app-row-seven>
+  <app-row-seven [formFields]="form_row7"
+                 [isSomethingEmpty]="isSomethingEmpty"
+                 (RowSevehData)="onSevenRowChanged($event)"
+                 (certificate_file)="onFileUpload($event)">
 
-        <app-forth-row
-        [formFields]="form_row4"
-        [isSomethingEmpty]="isSomethingEmpty"
-        (fourthRowData)="onFourRowChanged($event)"
-        [isShowScholar]="true"
-        [isCheckFirstTime]="isChekedFirstTime"
-        [checkBoxTextDesc]="checkBoxTextDesc"
-        [checkBoxTextError]="checkBoxTextError"
-        [countries]="desiredCountries"
-    ></app-forth-row>
+  </app-row-seven>
 
-    <app-form-data-shared
-    [isSomethingEmpty]="isSomethingEmpty"
-    (emailphoneData)="onEmailPhoneRowChanged($event)"
-    [formFields]="emailPhone"
-    (formValidityChanged)="onFormValidityChanged($event)"
-    (isValidPrefixEvent)="onValidPrefix($event)"
-    ></app-form-data-shared>
-
-    <app-show-error *ngIf="isSomethingEmpty"></app-show-error>
+  <app-forth-row [formFields]="form_row4"
+                 [isSomethingEmpty]="isSomethingEmpty"
+                 (fourthRowData)="onFourRowChanged($event)"
+                 [isShowScholar]="true"
+                 [isCheckFirstTime]="isChekedFirstTime"
+                 [checkBoxTextDesc]="checkBoxTextDesc"
+                 [checkBoxTextError]="checkBoxTextError"
+                 [countries]="desiredCountries"></app-forth-row>
 
 
-    <div style="text-align: center; padding-bottom: 5%;">
-        <button (click)="submit()" class="submit">
-            Submit
-         </button>
-    </div>
+  <app-form-data-shared [isSomethingEmpty]="isSomethingEmpty"
+                        (emailphoneData)="onEmailPhoneRowChanged($event)"
+                        [formFields]="emailPhone"
+                        (formValidityChanged)="onFormValidityChanged($event)"
+                        (isValidPrefixEvent)="onValidPrefix($event)"></app-form-data-shared>
+
+  <app-show-error *ngIf="isSomethingEmpty"></app-show-error>
+
+
+  <div style="text-align: center; padding-bottom: 5%;">
+    <button (click)="submit()" class="submit">
+      Submit
+    </button>
+  </div>
 
 </div>
 

@@ -21,6 +21,26 @@
     width: 30%;
   }
 
+
+.fullnameDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%; /* Change this width to fill the available space */
+}
+
+.input-container {
+  width: 48%; /* Adjust width as needed */
+}
+
+.col1-0 {
+  width: 30%; /* Adjust width to fill the available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
   .col2{
     display: flex;
     flex-direction: column;
@@ -52,6 +72,7 @@
     border: 1px solid #F5F5F5;
     height: 45px;
     background-color: #F5F5F5;
+    width:100%;
 }
 
 .date{
@@ -104,6 +125,10 @@
     }
     
     .col1{
+      width: 100%;
+    }
+
+    .col1-0 {
       width: 100%;
     }
 

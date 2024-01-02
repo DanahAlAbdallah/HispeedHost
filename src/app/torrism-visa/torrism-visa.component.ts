@@ -28,7 +28,9 @@ export class TorrismVisaComponent implements OnInit{
   isResponseReceived: boolean = false;
   response:string = ""
 
-  desiredCountries:string[] = []
+  desiredCountries: string[] = []
+  public NotHideVisaStatus: boolean = true;
+
   constructor(private tourism_service:TourismService, private service:ImigrationService, private router: Router, ){
   }
 
@@ -62,6 +64,10 @@ export class TorrismVisaComponent implements OnInit{
     this.emailPhone  = updatedFormFields;
   }
 
+  onNationalityEqualToCurrentResident_HideVisaStatus(hide: boolean) {
+    this.NotHideVisaStatus = hide;
+  }
+
   isSomethingNotValid:boolean = false;
 
   onFormValidityChanged(isValid: boolean) {
@@ -75,7 +81,10 @@ export class TorrismVisaComponent implements OnInit{
 
   submit(){
     switch(""){
-      case this.form_row1.fullName:
+      case this.form_row1.firstName:
+        this.isSomethingEmpty = true;
+        break;
+      case this.form_row1.lastName:
         this.isSomethingEmpty = true;
         break;
       case this.form_row1.day:
@@ -101,10 +110,6 @@ export class TorrismVisaComponent implements OnInit{
         this.isSomethingEmpty = true;
         break;
 
-      case this.form_row5.status:
-        this.isSomethingEmpty = true;
-        break;
-
       case this.emailPhone.email:
         this.isSomethingEmpty = true;
         break;
@@ -115,10 +120,16 @@ export class TorrismVisaComponent implements OnInit{
         this.isSomethingEmpty = false
     }
 
-
-    if((this.form_row5.explain=='' && this.isEVSOpen) || this.isSomethingEmpty){
+    if (this.form_row5.status == '' && this.NotHideVisaStatus == true) {
       this.isSomethingEmpty = true;
       return;
+    }
+
+    if ((this.form_row5.explain == '' && this.isEVSOpen) || this.isSomethingEmpty) {
+      if (this.NotHideVisaStatus != true) {
+        this.isSomethingEmpty = true;
+        return;
+      }
     }
 
 
@@ -134,9 +145,11 @@ export class TorrismVisaComponent implements OnInit{
         return;
     }
 
+    let fullName = this.form_row1.firstName + " " + this.form_row1.lastName;
+
     this.tourism = new TourismVisa(
       0,
-      this.form_row1.fullName,
+      fullName,
       `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
       this.form_row1.passportCountry,
       this.form_row1.currentResidence,
@@ -156,7 +169,7 @@ export class TorrismVisaComponent implements OnInit{
         this.isResponseReceived = true;
       },
       error:(err:any) => {
-        this.response = "Something Wrong";
+        this.response = err;          ;
         this.isResponseReceived = true;
       },
       complete:()=>{}

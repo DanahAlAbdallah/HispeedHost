@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup, UntypedFormBuilder, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
@@ -6,11 +6,12 @@ import { AbstractControl, FormArray, FormGroup, UntypedFormBuilder, ValidationEr
   templateUrl: './five-row.component.html',
   styleUrls: ['./five-row.component.css']
 })
-export class FiveRowComponent {
+export class FiveRowComponent implements OnChanges {
 
   myForm: FormGroup;
   @Input() formFields?: RowFive;
-  @Input() isSomethingEmpty:boolean = false;
+  @Input() isSomethingEmpty: boolean = false;
+  @Input() notHideVisaStatus: boolean = true;
   @Output() RowFiveData = new EventEmitter<RowFive>
   @Output() isEVSOpend = new EventEmitter<boolean>
 
@@ -24,6 +25,8 @@ export class FiveRowComponent {
 
   onFieldChange(fieldName: string, value: string) {
     this.formFields![fieldName] = value;
+    console.log(this.RowFiveData);
+
     this.RowFiveData.emit(this.formFields);
   }
 
@@ -33,6 +36,16 @@ export class FiveRowComponent {
       explain: ['',Validators.required],
     });
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("wroo")
+    if (changes['notHideVisaStatus'] && changes['notHideVisaStatus'].currentValue == false) {
+      const currentValue = changes['notHideVisaStatus'].currentValue;
+      if (currentValue == false) {
+        this.onFieldChange('status', '')
+      }
+    }
   }
 
   hideEVSInput:boolean = false;
@@ -56,7 +69,6 @@ export class FiveRowComponent {
           this.hideEVSInput = true;
           this.onFieldChange("status", item.value)
           this.isEVSOpend.emit(this.hideEVSInput)
-
         }
         this.formFields!.status = item.value;
       }

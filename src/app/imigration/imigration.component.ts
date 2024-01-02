@@ -49,7 +49,8 @@ export class ImigrationComponent implements OnInit {
   response:string = ""
 
   isHoldQualification:boolean = false;
-  isOtherProfessionSelected:boolean = false;
+  isOtherProfessionSelected: boolean = false;
+  public NotHideVisaStatus: boolean = true;
 
 
   constructor(private immigration_service:ImigrationService,private router:Router, private scroll_service:ScrollService){
@@ -119,6 +120,11 @@ export class ImigrationComponent implements OnInit {
     this.isOtherProfessionSelected  = updatedFormFields;
   }
 
+
+  onNationalityEqualToCurrentResident_HideVisaStatus(hide: boolean) {
+    this.NotHideVisaStatus = hide;
+  }
+
   isSomethingNotValid:boolean = false;
 
   onFormValidityChanged(isValid: boolean) {
@@ -131,8 +137,12 @@ export class ImigrationComponent implements OnInit {
   }
 
   submit(){
-    switch(""){
-      case this.form_row1.fullName:
+    switch ("") {
+      case this.form_row1.firstName:
+        this.isSomethingEmpty = true;
+        break;
+
+      case this.form_row1.lastName:
         this.isSomethingEmpty = true;
         break;
       case this.form_row1.day:
@@ -175,10 +185,6 @@ export class ImigrationComponent implements OnInit {
         this.isSomethingEmpty = true;
         break;
 
-      case this.form_row5.status:
-        this.isSomethingEmpty = true;
-        break;
-
       case this.form_row2.file_name:
         this.isSomethingEmpty = true;
         break;
@@ -191,6 +197,7 @@ export class ImigrationComponent implements OnInit {
       case this.emailPhone.phoneNumber:
         this.isSomethingEmpty = true;
         break;
+    
       default:
         this.isSomethingEmpty = false
     }
@@ -206,10 +213,16 @@ export class ImigrationComponent implements OnInit {
       return
     }
 
-
-    if((this.form_row5.explain=='' && this.isEVSOpen) || this.isSomethingEmpty){
+    if (this.form_row5.status == '' && this.NotHideVisaStatus == true) {
       this.isSomethingEmpty = true;
       return;
+    }
+
+    if ((this.form_row5.explain == '' && this.isEVSOpen) || this.isSomethingEmpty) {
+      if (this.NotHideVisaStatus != true) {
+        this.isSomethingEmpty = true;
+        return;
+      }
     }
 
     if((this.form_row6.listTypeOfQualification=='' && this.isHoldQualification) || this.isSomethingEmpty){
@@ -245,9 +258,10 @@ export class ImigrationComponent implements OnInit {
       return;
   }
 
+    let fullName = this.form_row1.firstName + " " + this.form_row1.lastName;
     this.immigration = new ImmigrationData(
       0,
-      this.form_row1.fullName,
+      fullName,
       `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
       this.form_row1.passportCountry,
       this.form_row1.currentResidence,
@@ -263,11 +277,11 @@ export class ImigrationComponent implements OnInit {
       this.form_row2.education,
       this.form_row4.desiredCountry,
       this.form_row1.gender,
-      'whatever',
+     this.cvFile!.name,
       this.emailPhone.phoneNumber,
       this.emailPhone.email,
       this.form_row2.other,
-      ""
+      this.imageUploadFileName
     );
 
     this.isShowModal = true;
@@ -278,8 +292,8 @@ export class ImigrationComponent implements OnInit {
           this.response = "Form sent successfully";
           this.isResponseReceived = true;
         },
-        error:(err:any) => {
-          this.response = "Something Wrong";
+        error: (err: any) => {
+          this.response = err;
           this.isResponseReceived = true;
         },
         complete:()=>{}

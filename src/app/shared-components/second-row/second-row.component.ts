@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ImigrationService } from 'src/app/classes/imigration.service';
 import imageCompression from 'browser-image-compression';
@@ -16,7 +16,13 @@ export class SecondRowComponent implements OnInit {
   @Output() cv_file = new EventEmitter<File>
   @Output() img_profile_file = new EventEmitter<File>
   @Output() isOtherSelected = new EventEmitter<boolean>
+  @Input() isStudentPage: boolean = false;
+  isGreaterThan768px = window.innerWidth > 768;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isGreaterThan768px = window.innerWidth > 768;
+  }
 
   isFileNotSupported: boolean = false;
   isFileNotSupportedImage:boolean = false;

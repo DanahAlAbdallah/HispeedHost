@@ -5,6 +5,7 @@ export class Student {
     public dateOfBirth: string = "",
     public passportCountry: string = "",
     public currentResidence: string = "",
+    public education: string = "",
     public visaStatus: string = "",
     public explain: string = "",
     public exam: string = "",
@@ -13,6 +14,7 @@ export class Student {
     public doYouHaveScholarship: boolean = false,
     public phoneNumber: string = "",
     public email: string = "",
-    public gender: string = ""
+    public gender: string = "",
+    public certificate_link:string =""
   ) {}
 }

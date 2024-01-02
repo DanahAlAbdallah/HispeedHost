@@ -9,7 +9,6 @@ export class ApplyForJob{
         public profession: string,
         public yearsOfExperience: string,
         public education: string,
-        public desiredCountry: string,
         public gender: string,
         public linkCv: string,
         public phoneNumber?: string,

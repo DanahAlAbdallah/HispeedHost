@@ -14,6 +14,7 @@ export class FirstrowComponent implements OnInit {
   @Input() formFields?: FirstRow;
   @Input() isSomethingEmpty:boolean = false;
   @Output() firstRowData = new EventEmitter<FirstRow>
+  @Output() isNatioAndCurrentResidenceIsEqual = new EventEmitter <boolean>
 
   countries :any[] = []
 
@@ -24,7 +25,9 @@ export class FirstrowComponent implements OnInit {
 
   constructor(private fb: UntypedFormBuilder, private service_country:ImigrationService) {
     this.myForm  = this.fb.group({
-      fullName: ['',Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+
       day: ['',Validators.required],
       month: ['',Validators.required],
       year: ['',Validators.required ],
@@ -46,6 +49,17 @@ export class FirstrowComponent implements OnInit {
 
 
   onFieldChange(fieldName: string, value: string) {
+    if (fieldName == "passportCountry"
+      || fieldName == "currentResidence")
+    {
+      this.formFields![fieldName] = value
+
+      if (this.formFields!["passportCountry"] == this.formFields!["currentResidence"]) {
+        this.isNatioAndCurrentResidenceIsEqual.emit(false);
+      } else {
+        this.isNatioAndCurrentResidenceIsEqual.emit(true);
+      }
+    }
     this.formFields![fieldName] = value
     this.firstRowData.emit(this.formFields);
   }
@@ -67,13 +81,14 @@ export class FirstrowComponent implements OnInit {
 }
 
 export class FirstRow {
-    fullName: string = '';
-    day: string = '';
-    month: string = '';
-    year: string = '';
-    passportCountry: string = '';
-    currentResidence: string = '';
-    gender: string = '';
+  firstName: string = '';
+  lastName: string = '';
+  day: string = '';
+  month: string = '';
+  year: string = '';
+  passportCountry: string = '';
+  currentResidence: string = '';
+  gender: string = '';
 
     [key: string]: string | undefined;
 }

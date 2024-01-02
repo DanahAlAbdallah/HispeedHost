@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" class="main">
+<form [formGroup]="myForm" class="main" *ngIf="notHideVisaStatus">
     <p>Visa status in current country</p>
 <!--
     <div class="status">

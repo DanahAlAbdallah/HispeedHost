@@ -9,6 +9,7 @@ import { RowSeven } from '../shared-components/row-seven/row-seven.component';
 import { EmailPhoneClass } from '../form-data-shared/form-data-shared.component';
 import {NavigationEnd, Router} from "@angular/router";
 import {ScrollService} from "../classes/scroll.service";
+import { SecondRow } from '../shared-components/second-row/second-row.component';
 
 @Component({
   selector: 'app-studentprogram',
@@ -16,7 +17,9 @@ import {ScrollService} from "../classes/scroll.service";
   styleUrls: ['./studentprogram.component.css']
 })
 export class StudentprogramComponent implements OnInit{
-  form_row1:FirstRow = new FirstRow();
+  form_row1: FirstRow = new FirstRow();
+  form_row2: SecondRow = new SecondRow();
+
   form_row4:FourRowData = new FourRowData()
   form_row5:RowFive = new RowFive()
   form_row6:RowSix = new RowSix()
@@ -36,7 +39,9 @@ export class StudentprogramComponent implements OnInit{
   checkBoxTextDesc :string = "Do You Have a Scholarship to the Desired Country?";
   checkBoxTextError :string = "Completed a English Test is required.";
 
-  certificate_file:File | null= null;
+  certificate_file: File | null = null;
+  public NotHideVisaStatus: boolean = true;
+
 
   desiredCountries:string[] = [
     'Australia',
@@ -65,6 +70,11 @@ export class StudentprogramComponent implements OnInit{
     this.form_row1 = updatedFormFields;
   }
 
+  onSecondRowChanged(updatedFormFields: SecondRow) {
+    console.log(updatedFormFields);
+    this.form_row2 = updatedFormFields;
+  }
+
   onFourRowChanged(updatedFormFields: FourRowData){
     this.form_row4  = updatedFormFields;
   }
@@ -90,6 +100,10 @@ export class StudentprogramComponent implements OnInit{
     this.certificate_file = file;
   }
 
+  onNationalityEqualToCurrentResident_HideVisaStatus(hide: boolean) {
+    this.NotHideVisaStatus = hide;
+  }
+
   isSomethingNotValid:boolean = false;
 
     onFormValidityChanged(isValid: boolean) {
@@ -103,7 +117,11 @@ export class StudentprogramComponent implements OnInit{
 
   submit(){
     switch(""){
-      case this.form_row1.fullName:
+      case this.form_row1.firstName:
+        this.isSomethingEmpty = true;
+        break;
+
+      case this.form_row1.lastName:
         this.isSomethingEmpty = true;
         break;
       case this.form_row1.day:
@@ -129,10 +147,6 @@ export class StudentprogramComponent implements OnInit{
         this.isSomethingEmpty = true;
         break;
 
-      case this.form_row5.status:
-        this.isSomethingEmpty = true;
-        break;
-
       case this.form_row7.exam:
         this.isSomethingEmpty = true;
         break;
@@ -145,21 +159,34 @@ export class StudentprogramComponent implements OnInit{
       case this.emailPhone.phoneNumber:
         this.isSomethingEmpty = true;
         break;
+      case this.form_row2.education:
+        this.isSomethingEmpty = true;
+        break;
+
       default:
         this.isSomethingEmpty = false
     }
 
+    if(this.isSomethingNotValid && this.emailPhone.email == '' && this.emailPhone.phoneNumber == ''){
+      return;
+    }
+    
     if(!this.form_row4.temp ) {
       this.isChekedFirstTime = true;
       return
     }
 
-
-    if((this.form_row5.explain=='' && this.isEVSOpen) || this.isSomethingEmpty){
+    if (this.form_row5.status == '' && this.NotHideVisaStatus == true) {
       this.isSomethingEmpty = true;
       return;
     }
 
+    if ((this.form_row5.explain == '' && this.isEVSOpen) || this.isSomethingEmpty) {
+      if (this.NotHideVisaStatus != true) {
+        this.isSomethingEmpty = true;
+        return;
+      }
+    }
 
     if(this.isSomethingNotValid){
       return;
@@ -172,13 +199,21 @@ export class StudentprogramComponent implements OnInit{
 
     if(this.isValidPrefix){
       return;
-  }
+    }
+
+    if (this.isSomethingEmpty) {
+      return;
+    }
+
+    let fullName = this.form_row1.firstName + " " + this.form_row1.lastName;
+
     this.student = new Student(
       0,
-      this.form_row1.fullName,
+      fullName,
       `${this.form_row1.year}-${this.form_row1.month}-${this.form_row1.day}`,
       this.form_row1.passportCountry,
       this.form_row1.currentResidence,
+      this.form_row2.education,
       this.form_row5.status,
       this.form_row5.explain,
       this.form_row7.exam,
@@ -187,7 +222,8 @@ export class StudentprogramComponent implements OnInit{
       this.form_row4.doYouHaveScholar,
       this.emailPhone.phoneNumber,
       this.emailPhone.email,
-      this.form_row1.gender
+      this.form_row1.gender,
+      this.certificate_file?.name
     );
 
     this.isShowModal = true;
@@ -197,7 +233,7 @@ export class StudentprogramComponent implements OnInit{
         this.isResponseReceived = true;
       },
       error:(err:any) => {
-        this.response = "Something Wrong";
+        this.response = err;          ;
         this.isResponseReceived = true;
       },
       complete:()=>{}

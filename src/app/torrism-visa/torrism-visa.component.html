@@ -18,10 +18,13 @@
     <app-firstrow [formFields]="form_row1"
                    [isSomethingEmpty]="isSomethingEmpty"
                    (firstRowData)="onFirstRowChanged($event)"
+                   (isNatioAndCurrentResidenceIsEqual)="onNationalityEqualToCurrentResident_HideVisaStatus($event)"
+
                    >
     </app-firstrow>
 
     <app-five-row
+       [notHideVisaStatus]="NotHideVisaStatus"
        [formFields]="form_row5"
        [isSomethingEmpty]="isSomethingEmpty"
        (RowFiveData)="onRowFiveChanged($event)"
