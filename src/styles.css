@@ -57,6 +57,13 @@ body {
     padding: 100px 0;
 }
 
+.hh{
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
 .center {
     text-align: center;
 }
@@ -229,6 +236,7 @@ h5 {
     transform: translate3d(0, 100%, 0);
     
 }
+
 
 .box-header.menu-is-open {
     background-color: rgba(0, 0, 0, 0.3);
@@ -436,6 +444,7 @@ h5 {
     display: table;
     height: 100vh;
     width: 100%;
+    
 }
 
 .box-intro .table-cell {
