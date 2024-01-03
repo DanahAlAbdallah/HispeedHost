@@ -69,20 +69,26 @@ body {
     display: flex;
     flex-direction:row;
     z-index: 2;
-    background-color: #F5B700;
-    width:100;
+    /* background-color: #F5B700; */
+    width:450px;
     justify-content: end;
-    gap:5%;
+    gap:20%;
     list-style-type: none;
     color: white;
     font-size: 16px;
     padding-right: 10px;
+    align-items: center;
+    margin-top: 3%;
 }
 
 
 @media only screen and (min-width: 768px) {
     .nav-option-list {
-      display: block; /* Show the unordered list on desktop */
+      display: none; /* Show the unordered list on desktop */
+    }
+
+    .forDisplay{
+        display: block;
     }
 
     .box-primary-nav-trigger {
@@ -96,11 +102,15 @@ body {
 
   @media only screen and (max-width: 767px) {
     .nav-option-list {
-        display: none; /* Show the unordered list on desktop */
+        display: none; /* do not Show the unordered list on desktop */
       }
+
+      .forDisplay{
+        display: none;
+    }
   
       .box-primary-nav-trigger {
-        display: block; /* Hide the menu button on desktop */
+        display: block; /* show the menu button on desktop */
       }
       .box-primary-nav{
           display: block;
@@ -287,8 +297,28 @@ h5 {
 }
 
 .box-logo {
-    display: block;
+    display: flex;
     padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contact-us{
+    width:150px;
+border-radius: 20px;
+border: 1px solid white;
+display :flex;
+align-items: center;
+justify-content: center;
+padding: 10px;
+color: white;
+list-style-type: none;
+}
+
+.contact-us:hover{
+    background-color: #F5B700;
+    border: 1px solid #F5B700;
+    cursor: pointer; 
 }
 
 .box-primary-nav-trigger {
@@ -375,7 +405,7 @@ h5 {
     height: 30px;
     line-height: 30px;
     right: 10px;
-    top: 50%;
+    top: 40%;
     bottom: auto;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
