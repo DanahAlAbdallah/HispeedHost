@@ -227,6 +227,7 @@ h5 {
 .box-header.is-visible {
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
+    
 }
 
 .box-header.menu-is-open {
