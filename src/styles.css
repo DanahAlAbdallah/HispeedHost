@@ -64,6 +64,50 @@ body {
     justify-content: center;
 }
 
+
+.nav-options-list{
+    display: flex;
+    flex-direction:row;
+    z-index: 2;
+    background-color: #F5B700;
+    width:100;
+    justify-content: end;
+    gap:5%;
+    list-style-type: none;
+    color: white;
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .nav-option-list {
+      display: block; /* Show the unordered list on desktop */
+    }
+
+    .box-primary-nav-trigger {
+      display: none; /* Hide the menu button on desktop */
+    }
+    .box-primary-nav{
+        display: none;
+    }
+  }
+
+
+  @media only screen and (max-width: 767px) {
+    .nav-option-list {
+        display: none; /* Show the unordered list on desktop */
+      }
+  
+      .box-primary-nav-trigger {
+        display: block; /* Hide the menu button on desktop */
+      }
+      .box-primary-nav{
+          display: block;
+      }
+    }
+
+
 .center {
     text-align: center;
 }
