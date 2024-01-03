@@ -32,7 +32,14 @@
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/js/jquery-2.1.1.js",
+              "src/assets/js/animated-headline.js",
+              "src/assets/js/modernizr.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/menu.js",
+              "src/assets/js/isotope.pkgd.min.js",
+              "src/assets/js/bootstrap.min.js"
             ]
           },
           "configurations": {

@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:'all', component:AllHrSearchComponent},
   {path:'', component:HomeComponent},
   {path:'about', component:AboutUsComponent},
-  {path:'apply', component:ApplyforjobComponent}
+  {path:'apply', component:ApplyforjobComponent},
 ];
 
 @NgModule({

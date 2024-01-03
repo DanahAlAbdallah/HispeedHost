@@ -196,9 +196,6 @@ h5 {
     box-shadow: none;
 }
 
-
-
-
 .box-header {
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s;
@@ -434,7 +431,7 @@ h5 {
 .box-intro .table-cell {
     display: table-cell;
     text-align: center;
-    /* vertical-align: middle; */
+    vertical-align: middle;
 }
 
 .box-intro em {
@@ -560,7 +557,6 @@ b i:last-child {
 .no-js .box-words-wrapper b.is-visible {
     opacity: 1;
 }
-
 
 .box-headline.rotate-2 .box-words-wrapper {
     -webkit-perspective: 300px;
@@ -896,8 +892,8 @@ footer img {
 .top-bar {
     color: #333;
     padding: 150px 0 150px;
-    /* background: -webkit-linear-gradient( rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(../../assets/01.jpg); */
-    /* background: linear-gradient( rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(../../assets/01.jpg); */
+    background: -webkit-linear-gradient( rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(../img/01.jpg);
+    background: linear-gradient( rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(../img/01.jpg);
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;

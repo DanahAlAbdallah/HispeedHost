@@ -1,73 +1,37 @@
-
-
-<nav  class="navbar navbar-expand-lg navbar-light" [ngClass]="{'navbar-scrolled': isNavbarScrolled, 'scrolling': isScrolling}" >
-
-  <div class="container-fluid ">
-
-    <button class="navbar-toggler buttonTog border-0" [ngClass]="{'clicked': isClicked}" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarScroll" (click)="toggleNavSidebar()">
-      <!-- <span class="navbar-toggler-icon " ></span> -->
-
-      <img ngSrc="./assets/list.png" alt="Custom Icon" [ngClass]="{'c': isIconLight && isScrolling}" height="25"
-           width="25">
-    </button>
-
-    <a class="navbar-brand" href="https://hispeed-group.com/">
-      <img class="img-responsive navbar-logo" [src]="imageSource" [ngClass]="{'image-spacing': isScrolling}"  alt="img"/>
-    </a>
-
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll d-none d-lg-flex">
-
-        <li class="nav-item">
-          <a class="nav-link fw-bolder" [routerLinkActive]="'active-link'"
-           [routerLink]="['/']" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link fw-bolder" [routerLinkActive]="'active-link'"
-           [routerLink]="['/services']" [routerLinkActiveOptions]="{ exact: true }">Services</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link fw-bolder" [routerLinkActive]="'active-link'"
-          [routerLink]="['/about']" [routerLinkActiveOptions]="{ exact: true }">About</a>
-        </li>
-
-      </ul>
-    </div>
-
-
-    <div class="nav-sidebar" [ngClass]="{'active': isNavSidebarOpen}">
-      <ul style="width: 100%;" class="navbar-nav flex-column d-lg-none">
-        <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
-          <a class="nav-link fw-bolder text-left" [routerLinkActive]="'active-link-sidebar'" [routerLink]="['/']" [routerLinkActiveOptions]="{ exact: true }" (click)="setNavItemColorAndClose(isIconLight)">Home</a>
-        </li>
-
-        <li class="nav-item nav-item-with-divider" [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
-          <a  class="nav-link fw-bolder text-left" [routerLinkActive]="'active-link-sidebar'" [routerLink]="['/services']" [routerLinkActiveOptions]="{ exact: true }" (click)="setNavItemColorAndClose(isIconLight)">Services</a>
-        </li>
-
-        <li class="nav-item nav-item-with-divider " [ngClass]="{'nav-item-spacing-desktop': isIconLight}">
-          <a  class="nav-link fw-bolder text-left last-item"  [routerLinkActive]="'active-link-sidebar'" [routerLink]="['/about']" [routerLinkActiveOptions]="{ exact: true }" (click)="setNavItemColorAndClose(isIconLight)">About</a>
-        </li>
-
-
-      </ul>
-
-      <form *ngIf="isNavSidebarOpen" class="d-flex">
-          <button (click)="goToContactUsFromSideBar()" class="contactus" style="margin:0 10% 0 10%">Contact Us</button>
-
-
-      </form>
-    </div>
-
-    <div  class="div-contactius">
-      <button (click)="goToContactUs()" class="contactus">Contact Us</button>
-
-    </div>
-
+<header class="box-header">
+  <div class="box-logo">
+      <a href="index.html"><img src="./assets/icon-general-white.webp" width="80" alt="Logo" style="margin-left: 3%;margin-top: 0.8%;"></a>
   </div>
+  <!-- box-nav -->
+  <a class="box-primary-nav-trigger" href="#0">
+      <span class="box-menu-icon"></span>
+  </a>
+  <!-- box-primary-nav-trigger -->
+</header>
+<!-- end box header -->
+
+<!-- nav -->
+<nav>
+  <ul class="box-primary-nav">
+      <!-- <li class="box-label">About me</li> -->
+
+      <li><a href="indexx.html">Home</a> <i class="ion-ios-circle-filled color"></i></li>
+      <li><a href="aboutx.html">Services</a></li>
+      <li><a href="servicesx.html">About</a></li>
+      <li><a href="portfoliox.html">Contact us</a></li>
+
+
+      <li class="box-label">Follow us</li>
+
+      <li class="box-social"><a href="#0"><i class="ion-social-facebook"></i></a></li>
+      <li class="box-social"><a href="#0"><i class="ion-social-instagram-outline"></i></a></li>
+      <li class="box-social"><a href="#0"><i class="ion-social-twitter"></i></a></li>
+      <li class="box-social"><a href="#0"><i class="ion-social-dribbble"></i></a></li>
+  </ul>
 </nav>
 
 
+
+    <!-- back to top -->
+    <a href="#0" class="cd-top"><i class="ion-android-arrow-up"></i></a>
+    <!-- end back to top -->
